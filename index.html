@@ -1,13 +1,122 @@
+<!DOCTYPE html>
 <html>
 <head>
-<title>MRSK: Deploy web apps anywhere</title>
+  <meta charset="utf-8">
+  <title>MRSK: Deploy web apps anywhere</title>
 </head>
+<style>
+  html, body, div, span, applet, object, iframe,
+  h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+  a, abbr, acronym, address, big, cite, code,
+  del, dfn, em, img, ins, kbd, q, s, samp,
+  small, strike, strong, sub, sup, tt, var,
+  b, u, i, center,
+  dl, dt, dd, ol, ul, li,
+  fieldset, form, label, legend,
+  table, caption, tbody, tfoot, thead, tr, th, td,
+  article, aside, canvas, details, embed,
+  figure, figcaption, footer, header, hgroup,
+  menu, nav, output, ruby, section, summary,
+  time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+  }
+
+  body {
+    font-family: "SFMono-Regular", "Menlo", "Monaco", monospace;
+    line-height: 1.6em;
+    color: #333;
+    font-size: 16px;
+  }
+
+  body {
+    padding: 16px;
+    box-sizing: border-box;
+    max-width: 640px;
+  }
+
+  body > header {
+    margin-bottom: 1em;
+  }
+
+  main {
+    max-width: 640px;
+  }
+
+  body > footer {
+    margin-top: 4rem;
+    color: #888;
+  }
+
+  body > footer a {
+    text-decoration: none;
+    color: #888;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  h1 a, h3 a {
+    text-decoration: none;
+    color: #000;
+    font-family: "SFMono-Bold", "Menlo-Bold", "Monaco", monospace;
+  }
+
+  h1 a:hover, h3 a:hover, body > footer a:hover {
+    color: #e01246;
+  }
+
+  h2 {
+    font-size: 1.5em;
+    margin-top: 3em;
+  }
+
+  h2:first-child {
+    margin-top: 0;
+  }
+
+  h3 {
+    font-size: 1.2em;
+    margin-top: 2em;
+  }
+
+  h2 + h3 {
+    margin-top: 0;
+  }
+
+  h1, h2, h3 {
+    font-family: "SFMono-Semibold", "Menlo-Bold", "Monaco", monospace;
+    line-height: 1.4em;
+    margin-bottom: 0.5em;
+  }
+
+  p {
+    margin-bottom: 1em;
+  }
+
+  a {
+    color: #e01246;
+    font-family: "SFMono-Semibold", "Menlo-Bold", "Monaco", monospace;
+  }
+
+  hr {
+    margin-top: 4em;
+  }
+</style>
 <body>
-  <h1>MRSK: Deploy web apps anywhere</h1>
+  <header>
+    <h1><a href="/" rel="home">MRSK: Deploy web apps anywhere /a></h1>
+  </header>
+  <main>
+
+<p>MRSK is a versatile deployment system that enables the seamless deployment of web applications from bare metal to cloud VMs. The system leverages Docker technology to containerize applications, which provides consistency between environments and makes portability effortless. Furthermore, MRSK employs the dynamic reverse-proxy Traefik to manage incoming requests while new application containers are being started and old ones are being stopped. This ensures that there is zero downtime during the deployment process, making it highly reliable. The system works seamlessly across multiple hosts and utilizes SSHKit to execute commands remotely and in parallel, making the deployment process faster and more efficient. While initially built for Rails applications, MRSK is compatible with any type of web application that can be containerized using Docker.</p>
   
-  <p>MRSK deploys web apps anywhere from bare metal to cloud VMs using Docker with zero downtime. It uses the dynamic reverse-proxy Traefik to hold requests while the new application container is started and the old one is stopped. It works seamlessly across multiple hosts, using SSHKit to execute commands. It was built for Rails applications, but works with any type of web app that can be containerized with Docker.</p>
-  
-  <h2>Vision</h2>
+<h2>Vision</h2>
   
   <p>In the past decade+, there's been an explosion in commercial offerings that make deploying web apps easier. Heroku kicked it off with an incredible offering that stayed ahead of the competition seemingly forever. These days we have excellent alternatives like Fly.io and Render. And hosted Kubernetes is making things easier too on AWS, GCP, Digital Ocean, and elsewhere. But these are all offerings that have you renting computers in the cloud at a premium. If you want to run on our own hardware, or even just have a clear migration path to do so in the future, you need to carefully consider how locked in you get to these commercial platforms. Preferably before the bills swallow your business whole!</p>
 
@@ -29,5 +138,12 @@
 
   <p>Checkout <a href="https://github.com/mrsked/mrsk">Code + Documentation</a> or <a href="https://www.youtube.com/watch?v=LL1cV2FXZ5I">Introduction Screencast</a> for more.</p>
   <p><img src="images/mrsk.png" width="625" height="620"></p>
+
+  </main>
+  <footer>
+    <p>opensourced by <a href = "https://dhh.dk/"> DHH </a></p>
+
+  </footer>
+  <script>(function(){var a,b;a=function(a){var b;return b=window.onload,"function"!=typeof window.onload?window.onload=a:window.onload=function(){return b&&b(),a()}},b=function(){var a,b,c,d,e,f,g;if(document.getElementsByTagName&&String.prototype.indexOf){for(e=document.getElementsByTagName("a"),g=[],c=0,d=e.length;c<d;c++)a=e[c],f=a.getAttribute("rel"),b=f&&f.indexOf("external")>=0,a.getAttribute("href")&&b===!0?g.push(a.target="_blank"):g.push(void 0);return g}},a(b)}).call(this);</script>
 </body>
 </html>
