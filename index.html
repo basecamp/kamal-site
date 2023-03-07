@@ -1,9 +1,16 @@
 <html>
 <head>
 <title>MRSK: Deploy web apps anywhere</title>
+<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
 </head>
 <body>
-  <h1>MRSK: Deploy web apps anywhere</h1>
+  <header>
+    <h1>MRSK: Deploy web apps anywhere</h1>
+    <nav>
+      <a href="https://github.com/mrsked/mrsk">Code + Documentation</a>
+      <a href="https://www.youtube.com/watch?v=LL1cV2FXZ5I">Introduction Screencast</a>
+    </nav>
+  </header>
   
   <p>MRSK deploys web apps anywhere from bare metal to cloud VMs using Docker with zero downtime. It uses the dynamic reverse-proxy Traefik to hold requests while the new application container is started and the old one is stopped. It works seamlessly across multiple hosts, using SSHKit to execute commands. It was built for Rails applications, but works with any type of web app that can be containerized with Docker.</p>
   
@@ -11,11 +18,11 @@
   
   <p>In the past decade+, there's been an explosion in commercial offerings that make deploying web apps easier. Heroku kicked it off with an incredible offering that stayed ahead of the competition seemingly forever. These days we have excellent alternatives like Fly.io and Render. And hosted Kubernetes is making things easier too on AWS, GCP, Digital Ocean, and elsewhere. But these are all offerings that have you renting computers in the cloud at a premium. If you want to run on our own hardware, or even just have a clear migration path to do so in the future, you need to carefully consider how locked in you get to these commercial platforms. Preferably before the bills swallow your business whole!</p>
 
-<p>MRSK seeks to bring the advance in ergonomics pioneered by these commercial offerings to deploying web apps anywhere. Whether that's low-cost cloud options without the managed-service markup from the likes of Digital Ocean, Hetzner, OVH, etc, or it's your own colocated bare metal. To MRSK, it's all the same. Feed the config file a list of IP addresses with vanilla Ubuntu servers that have seen no prep beyond an added SSH key, and you'll be running in literally minutes.</p>
+  <p>MRSK seeks to bring the advance in ergonomics pioneered by these commercial offerings to deploying web apps anywhere. Whether that's low-cost cloud options without the managed-service markup from the likes of Digital Ocean, Hetzner, OVH, etc, or it's your own colocated bare metal. To MRSK, it's all the same. Feed the config file a list of IP addresses with vanilla Ubuntu servers that have seen no prep beyond an added SSH key, and you'll be running in literally minutes.</p>
 
-<p>This approach gives you enormous portability. You can have your web app deployed on several clouds at ease like this. Or you can buy the baseline with your own hardware, then deploy to a cloud before a big seasonal spike to get more capacity. When you're not locked into a single provider from a tooling perspective, there's a lot of compelling options available.</p>
+  <p>This approach gives you enormous portability. You can have your web app deployed on several clouds at ease like this. Or you can buy the baseline with your own hardware, then deploy to a cloud before a big seasonal spike to get more capacity. When you're not locked into a single provider from a tooling perspective, there's a lot of compelling options available.</p>
 
-<p>Ultimately, MRSK is meant to compress the complexity of going to production using open source tooling that isn't tied to any commercial offering. Not to zero, mind you. You're probably still better off with a fully managed service if basic Linux or Docker is still difficult, but as soon as those concepts are familiar, you'll be ready to go with MRSK.</p>
+  <p>Ultimately, MRSK is meant to compress the complexity of going to production using open source tooling that isn't tied to any commercial offering. Not to zero, mind you. You're probably still better off with a fully managed service if basic Linux or Docker is still difficult, but as soon as those concepts are familiar, you'll be ready to go with MRSK.</p>
 
   <h2>Why not just run Capistrano, Kubernetes or Docker Swarm?</h2>
   
@@ -27,7 +34,10 @@
 
   <p>Ultimately, there are a myriad of ways to deploy web apps, but this is the toolkit we're using at 37signals to bring HEY home from the cloud without losing the advantages of modern containerization tooling.</p>
 
-  <p>Checkout <a href="https://github.com/mrsked/mrsk">Code + Documentation</a> or <a href="https://www.youtube.com/watch?v=LL1cV2FXZ5I">Introduction Screencast</a> for more.</p>
   <p><img src="images/mrsk.png" width="625" height="620"></p>
+
+  <footer>
+    MRSK: Deploy web apps anywhere
+  </footer>
 </body>
 </html>
