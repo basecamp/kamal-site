@@ -1,0 +1,35 @@
+{% assign title = page.title | default: site.title | strip_html | smartify %}
+{% assign description = page.description | default: site.description | markdownify | strip_html | strip_newlines %}
+{% assign image = page.image | default: site.image | absolute_url %}
+{% assign url = page.url | absolute_url %}
+
+  <head>
+
+    <title>{{ site.title | smartify }}{% if page.title %}{{ title | prepend: ' &mdash; ' }}{% endif %}</title>
+
+    <meta charset="utf-8" />
+    <meta content="ie=edge" http-equiv="x-ua-compatible" />
+    <meta name="handheldfriendly" content="true" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <meta name="description" content="{{ description }}" />
+
+    <meta property="og:site_name" content="{{ site.title | smartify }}" />
+    <meta property="og:title" content="{{ title }}" />
+    <meta property="og:description" content="{{ description }}" />
+    <meta property="og:image" content="{{ image }}" />
+    <meta property="og:url" content="{{ url }}" />
+    <meta property="og:type" content="website" />
+
+    <meta name="twitter:title" content="{{ title }}" />
+    <meta name="twitter:description" content="{{ description }}" />
+    <meta name="twitter:image" content="{{ image }}" />
+    <meta name="twitter:image:alt" content="{{ site.title | smartify }}" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="canonical" href="{{ url }}" />
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' }}" />
+
+    <script defer src="{{ '/assets/js/script.js' }}" type="module"></script>
+    <script defer data-domain="mrsk.dev" src="https://plausible.io/js/script.js"></script>
+
+  </head>

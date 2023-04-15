@@ -1,0 +1,42 @@
+<!doctype html>
+
+<html lang="en">
+
+{% include head.html %}
+
+  <body>
+
+{% include header.html %}
+
+    <main>
+
+      <div class="page page--docs">
+        <section>
+          <aside>
+            <ul>
+
+{% assign docs = site.docs | sort:'order' %}
+
+{% for doc in docs %}
+
+  {% assign doc_title = doc.title | smartify %}
+
+              <li{% if doc.url == page.url %} class="selected"{% endif %}><a href="{{ doc.url | absolute_url }}" aria-label="{{ doc_title }}">{{ doc_title }}</a></li>
+
+{% endfor %}
+
+            </ul>
+          </aside>
+          <article>
+
+{{ content }}
+
+          </article>
+        </section>
+      </div>
+
+    </main>
+
+  </body>
+
+</html>

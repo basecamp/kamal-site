@@ -1,0 +1,18 @@
+<header class="header">
+  <nav>
+    <div>
+      <a href="{{ '/' | absolute_url }}" aria-label="MRSK">MRSK</a>
+
+{% if site.version %}
+
+      <span>{{ site.version }}</span>
+
+{% endif %}
+
+    </div>
+    <ul>
+      <li><a href="https://github.com/mrsked/mrsk" aria-label="View the source">View the source</a></li>
+      <li><a href="{{ 'docs/overview' | absolute_url }}" aria-label="Read the docs">Read the docs</a></li>
+    </ul>
+  </nav>
+</header>
