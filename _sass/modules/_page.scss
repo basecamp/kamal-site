@@ -1,0 +1,204 @@
+.page {
+
+  background: var(--color-white);
+  border-top: 3px dashed var(--color-base-darker);
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin-top: var(--space-x-large);
+  padding: var(--space-x-large) var(--space-medium);
+
+  section {
+    display: flex;
+    gap: var(--space-large);
+    margin-inline: auto;
+    width: min(100%, 24em);
+  }
+
+  aside {
+
+    display: flex;
+    flex-direction: column;
+    font-size: 50%;
+    letter-spacing: -0.01em;
+
+    ul {
+
+      display: flex;
+      flex-direction: column;
+      gap: 0.3em;
+      list-style: none;
+      padding: 0;
+
+      li {
+
+        margin: 0;
+
+        a {
+
+          border-radius: 0.3em;
+          color: var(--color-grey);
+          display: flex;
+          margin-left: -0.8em;
+          margin-right: -0.8em;
+          padding: 0.4em 0.8em 0.4em 0.8em;
+          text-decoration: none;
+          transition:
+            background var(--transition),
+            color var(--transition)
+          ;
+
+          &:hover,
+          &:focus {
+            background: var(--color-base-darker);
+          }
+
+        }
+
+        &.selected a {
+          background: var(--color-blue);
+          color: var(--color-white);
+        }
+
+      }
+
+    }
+
+  }
+
+  article {
+
+    display: flex;
+    flex-direction: column;
+    font-size: var(--font-size-x-small);
+    margin-bottom: -0.45em;
+    margin-top: -0.35em;
+
+    & > * + * {
+      margin-top: var(--flow-space, 1.4em);
+    }
+
+    & > * {
+
+      & + h1,
+      & + h2,
+      & + h3,
+      & + h4,
+      & + h5,
+      & + h6 {
+        --flow-space: 2.8em;
+      }
+
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+
+      & + * {
+        --flow-space: 0.7em;
+      }
+
+    }
+
+    h1 {
+      padding-top: 0.06em;
+    }
+
+    h2 {
+      padding-top: 0.1em;
+    }
+
+    h3 {
+      padding-top: 0.125em;
+    }
+
+    h4,
+    h5,
+    h6 {
+      padding-top: 0.175em;
+    }
+
+    hr {
+
+      --flow-space: 0;
+      height: var(--space-x-large);
+
+      & + * {
+        --flow-space: 0;
+      }
+
+      &.ornament {
+
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        margin-bottom: 2.4em;
+        margin-top: 2.4em;
+
+        &:before {
+          color: var(--color-base-darkest);
+          content: '++++';
+          font-size: var(--font-size-medium);
+          font-weight: 500;
+          letter-spacing: 0.1em;
+          line-height: 1;
+        }
+
+      }
+
+    }
+
+    .highlight {
+
+      background: var(--color-base-dark);
+      border-radius: 0.3em;
+      letter-spacing: normal;
+      line-height: 1.4;
+
+      pre {
+
+        overflow-x: auto;
+        padding: 0.6em 1.2em;
+        white-space: pre;
+
+        code {
+          font-family: var(--font-family-mono);
+          font-size: 75%;
+          font-style: normal;
+          font-weight: 400;
+        }
+
+      }
+
+    }
+
+  }
+
+  &--docs {
+
+    margin-top: var(--space-medium);
+
+    section {
+      width: min(100%, 40em);
+    }
+
+    aside {
+      flex: 2;
+    }
+
+    article {
+      flex: 7;
+    }
+
+  }
+
+  @media(min-width: 64em) {
+    padding-left: var(--space-large);
+    padding-right: var(--space-large);
+  }
+
+}
