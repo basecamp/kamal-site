@@ -1,12 +1,18 @@
-<html>
+<html lang="en" data-theme="light">
 <head>
 <title>MRSK: Deploy web apps anywhere</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.classless.min.css">
 </head>
 <body>
+  <header>
+  <hgroup>
   <h1>MRSK: Deploy web apps anywhere</h1>
   
   <p>MRSK deploys web apps anywhere from bare metal to cloud VMs using Docker with zero downtime. It uses the dynamic reverse-proxy Traefik to hold requests while the new application container is started and the old one is stopped. It works seamlessly across multiple hosts, using SSHKit to execute commands. It was built for Rails applications, but works with any type of web app that can be containerized with Docker.</p>
+  </hgroup>
+  </header>
   
+<main>
   <h2>Vision</h2>
   
   <p>In the past decade+, there's been an explosion in commercial offerings that make deploying web apps easier. Heroku kicked it off with an incredible offering that stayed ahead of the competition seemingly forever. These days we have excellent alternatives like Fly.io and Render. And hosted Kubernetes is making things easier too on AWS, GCP, Digital Ocean, and elsewhere. But these are all offerings that have you renting computers in the cloud at a premium. If you want to run on our own hardware, or even just have a clear migration path to do so in the future, you need to carefully consider how locked in you get to these commercial platforms. Preferably before the bills swallow your business whole!</p>
@@ -29,5 +35,6 @@
 
   <p>Checkout <a href="https://github.com/mrsked/mrsk">Code + Documentation</a> or <a href="https://www.youtube.com/watch?v=LL1cV2FXZ5I">Introduction Screencast</a> for more.</p>
   <p><img src="images/mrsk.png" width="625" height="620"></p>
+</main>
 </body>
 </html>
