@@ -6,7 +6,7 @@ layout: default
 
 <div class="headline">
   <header>
-    <h1>Deploy web apps anywhere</h1>
+    <h1>Deploy web apps anywhere.</h1>
     <p>From bare metal to cloud VMs using Docker,<br /> deploy web apps anywhere with zero downtime.</p>
   </header>
 </div>
@@ -54,7 +54,7 @@ gem install mrsk
 {% highlight sh %}
 alias mrsk='docker run --rm -it -v $HOME/.ssh:/root/.ssh -v /var/run/docker.sock:/var/run/docker.sock -v ${PWD}/:/workdir  ghcr.io/mrsked/mrsk'
 {% endhighlight %}
-      <p>Then, inside your app directory, run mrsk init (or mrsk init --bundle within Rails 7+ apps where you want a bin/mrsk binstub). Now edit the new file config/deploy.yml. It could look as simple as this:</p>
+      <p>Then, inside your app directory, run <code>mrsk init</code> (or <code>mrsk init --bundle</code> within Rails 7+ apps where you want a bin/mrsk binstub). Now edit the new file <code>config/deploy.yml</code>. It could look as simple as this:</p>
 {% highlight yaml %}
 service: hey
 image: 37s/hey
@@ -69,21 +69,21 @@ env:
   secret:
     - RAILS_MASTER_KEY
 {% endhighlight %}
-      <p>Then edit your .env file to add your registry password as MRSK_REGISTRY_PASSWORD (and your RAILS_MASTER_KEY for production with a Rails app).</p>
+      <p>Then edit your <code>.env</code> file to add your registry password as <code>MRSK_REGISTRY_PASSWORD</code> (and your <code>RAILS_MASTER_KEY</code> for production with a Rails app).</p>
       <p>Now you’re ready to deploy to the servers:</p>
 {% highlight sh %}
 mrsk deploy
 {% endhighlight %}
       <p>This will:</p>
       <ol>
-        <li><code>Connect to the servers</code> over SSH (using root by default, authenticated by your ssh key)</li>
+        <li>Connect to the servers over SSH (using root by default, authenticated by your ssh key)</li>
         <li>Install Docker on any server that might be missing it (using apt-get): root access is needed via ssh for this.</li>
         <li>Log into the registry both locally and remotely</li>
         <li>Build the image using the standard Dockerfile in the root of the application.</li>
         <li>Push the image to the registry.</li>
         <li>Pull the image from the registry onto the servers.</li>
         <li>Ensure Traefik is running and accepting traffic on port 80.</li>
-        <li>Ensure your app responds with 200 OK to GET /up.</li>
+        <li>Ensure your app responds with <code>200 OK</code> to <code>GET /up</code></li>
         <li>Start a new container with the version of the app that matches the current git version hash.</li>
         <li>Stop the old container running the previous version of the app.</li>
         <li>Prune unused images and stopped containers to ensure servers don’t fill up.</li>

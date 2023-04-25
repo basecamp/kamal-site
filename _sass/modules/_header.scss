@@ -2,7 +2,7 @@
 
   display: flex;
   flex-direction: column;
-  padding: var(--space-medium) var(--space-medium) 0 var(--space-medium);
+  padding: var(--space-medium);
 
   nav {
 
@@ -13,7 +13,7 @@
 
       align-items: center;
       display: flex;
-      gap: 0.4em;
+      gap: 0.3em;
 
       a {
 
@@ -32,8 +32,8 @@
 
       }
 
-      span {
-        background: var(--color-base-darker);
+      p {
+        background: var(--color-base-darkest);
         border-radius: 1.45em;
         color: rgba(var(--rgb-grey), 0.6);
         display: flex;
