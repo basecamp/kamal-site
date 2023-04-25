@@ -4,10 +4,11 @@
   flex-direction: column;
   padding-left: var(--space-medium);
   padding-right: var(--space-medium);
-  padding-top: var(--space-xx-large);
+  padding-top: var(--space-x-large);
 
   header {
 
+    align-items: center;
     display: flex;
     flex-direction: column;
     gap: 0.6em;
