@@ -92,7 +92,7 @@ h6 {
 ol,
 ul {
 
-  padding-left: 2ch;
+  padding-left: 2em;
 
   li + li {
     margin-top: var(--flow-space, 0.3em);
@@ -147,4 +147,16 @@ video {
   height: auto;
   max-width: 100%;
   width: 100%;
+}
+
+code {
+  background: var(--color-base-dark);
+  border-radius: 0.15em;
+  font-family: var(--font-family-mono);
+  font-size: 75%;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: normal;
+  line-height: 1em;
+  padding: 0.2em 0.4em;
 }

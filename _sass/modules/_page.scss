@@ -21,6 +21,7 @@
     flex-direction: column;
     font-size: 50%;
     letter-spacing: -0.01em;
+    margin-top: -0.35em;
 
     ul {
 
@@ -29,6 +30,8 @@
       gap: 0.3em;
       list-style: none;
       padding: 0;
+      position: sticky;
+      top: var(--space-x-large);
 
       li {
 
@@ -41,7 +44,7 @@
           display: flex;
           margin-left: -0.8em;
           margin-right: -0.8em;
-          padding: 0.4em 0.8em 0.4em 0.8em;
+          padding: 0.5em 0.8em 0.35em 0.8em;
           text-decoration: none;
           transition:
             background var(--transition),
@@ -71,6 +74,7 @@
     display: flex;
     flex-direction: column;
     font-size: var(--font-size-x-small);
+    letter-spacing: -0.01em;
     margin-bottom: -0.45em;
     margin-top: -0.35em;
 
@@ -152,6 +156,67 @@
 
     }
 
+      nav {
+
+        --flow-space: 3.5em;
+        display: flex;
+        gap: 1.2em;
+
+        a {
+
+          border-radius: 0.3em;
+          box-shadow:
+            0 0 0 1px rgba(var(--rgb-black), 0.075),
+            0 10px 30px -15px rgba(var(--rgb-black), 0.15),
+            0 20px 20px -30px rgba(var(--rgb-black), 0.15)
+          ;
+          flex: 1;
+          padding: 1em 1.2em 0.8em 1.2em;
+          text-decoration: none;
+          transition:
+            background var(--transition),
+            box-shadow var(--transition)
+          ;
+
+          dl {
+
+            display: flex;
+            flex-direction: column;
+            gap: 0.15em;
+
+            dt {
+              color: var(--color-grey-light);
+              font-size: var(--font-size-x-small);
+              letter-spacing: normal;
+              text-transform: uppercase;
+            }
+
+            dd {
+              color: var(--color-black);
+              font-size: var(--font-size-small);
+              font-size: 80%;
+            }
+
+          }
+
+          &:last-child {
+            text-align: right;
+          }
+
+          &:hover,
+          &:focus {
+            background: rgba(var(--rgb-base), 1);
+            box-shadow:
+              0 0 0 1px rgba(var(--rgb-black), 0.09),
+              0 10px 30px -15px rgba(var(--rgb-black), 0.18),
+              0 20px 20px -30px rgba(var(--rgb-black), 0.18)
+            ;
+          }
+
+        }
+
+      }
+
     .highlight {
 
       background: var(--color-base-dark);
@@ -166,10 +231,14 @@
         white-space: pre;
 
         code {
+          background: none;
+          border-radius: initial;
           font-family: var(--font-family-mono);
           font-size: 75%;
           font-style: normal;
           font-weight: 400;
+          line-height: inherit;
+          padding: 0;
         }
 
       }
@@ -180,10 +249,10 @@
 
   &--docs {
 
-    margin-top: var(--space-medium);
+    margin-top: 0;
 
     section {
-      width: min(100%, 40em);
+      width: min(100%, 94.5rem);
     }
 
     aside {
