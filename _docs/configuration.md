@@ -3,9 +3,9 @@ title: Configuration
 order: 6
 ---
 
-## Configuration
+# Configuration
 
-### Using .env file to load required environment variables
+## Using .env file to load required environment variables
 
 MRSK uses [dotenv](https://github.com/bkeepers/dotenv) to automatically load environment variables set in the `.env` file present in the application root. This file can be used to set variables like `MRSK_REGISTRY_PASSWORD` or database passwords. But for this reason you must ensure that .env files are not checked into Git or included in your Dockerfile! The format is just key-value like:
 
@@ -14,7 +14,7 @@ MRSK_REGISTRY_PASSWORD=pw
 DB_PASSWORD=secret123
 ```
 
-### Using a generated .env file
+## Using a generated .env file
 
 #### 1Password as a secret store
 
@@ -37,7 +37,7 @@ If you need separate env variables for different destinations, you can set them 
 
 If you are using open source secret store like bitwarden, you can create `.env.erb` as a template which looks up the secrets.
 
-You can store `SOME_SECRET` in a secure note in bitwarden vault.
+You can store `SOME_SECRET` in a secure note in bitwarden vault:
 
 ```
 $ bw list items --search SOME_SECRET | jq
@@ -65,8 +65,7 @@ $ bw list items --search SOME_SECRET | jq
 ]
 ```
 
-and extract the `id` of `SOME_SECRET` from the `json` above and use in the `erb` below.
-
+... and extract the `id` of `SOME_SECRET` from the `json` above and use in the `erb` below.
 
 Example `.env.erb` file:
 
@@ -78,8 +77,7 @@ SOME_SECRET=<%= `bw get notes 123123123-1232-4224-222f-234234234234 --session #{
 
 Then everyone deploying the app can run `mrsk envify` and mrsk will generate `.env`
 
-
-### Using another registry than Docker Hub
+## Using another registry than Docker Hub
 
 The default registry is Docker Hub, but you can change it using `registry/server`:
 
@@ -94,7 +92,7 @@ registry:
 
 A reference to secret `DOCKER_REGISTRY_TOKEN` will look for `ENV["DOCKER_REGISTRY_TOKEN"]` on the machine running MRSK.
 
-### Using a different SSH user than root
+## Using a different SSH user than root
 
 The default SSH user is root, but you can change it using `ssh/user`:
 
@@ -112,7 +110,7 @@ sudo apt install -y docker.io curl git
 sudo usermod -a -G docker ubuntu
 ```
 
-### Using a proxy SSH host
+## Using a proxy SSH host
 
 If you need to connect to server through a proxy host, you can use `ssh/proxy`:
 
@@ -135,7 +133,7 @@ ssh:
   proxy_command: aws ssm start-session --target %h --document-name AWS-StartSSHSession --parameters 'portNumber=%p' --region=us-east-1 ## ssh via aws ssm
 ```
 
-### Using env variables
+## Using env variables
 
 You can inject env variables into the app containers using `env`:
 
@@ -145,7 +143,7 @@ env:
   REDIS_URL: redis://redis1:6379/1
 ```
 
-### Using secret env variables
+## Using secret env variables
 
 If you have env variables that are secret, you can divide the `env` block into `clear` and `secret`:
 
@@ -163,9 +161,9 @@ The list of secret env variables will be expanded at run time from your local ma
 
 If the referenced secret ENVs are missing, the configuration will be halted with a `KeyError` exception.
 
-Note: Marking an ENV as secret currently only redacts its value in the output for MRSK. The ENV is still injected in the clear into the container at runtime.
+**Note:** Marking an ENV as secret currently only redacts its value in the output for MRSK. The ENV is still injected in the clear into the container at runtime.
 
-### Using volumes
+## Using volumes
 
 You can add custom volumes into the app containers using `volumes`:
 
@@ -174,13 +172,13 @@ volumes:
   - "/local/path:/container/path"
 ```
 
-### MRSK env variables
+## MRSK env variables
 
 The following env variables are set when your container runs:
 
 `MRSK_CONTAINER_NAME` : this contains the current container name and version
 
-### Using different roles for servers
+## Using different roles for servers
 
 If your application uses separate hosts for running jobs or other roles beyond the default web running, you can specify these hosts in a dedicated role with a new entrypoint command like so:
 
@@ -196,7 +194,7 @@ servers:
     cmd: bin/jobs
 ```
 
-Note: Traefik will only by default be installed and run on the servers in the `web` role (and on all servers if no roles are defined). If you need Traefik on hosts in other roles than `web`, add `traefik: true`:
+**Note:** Traefik will only by default be installed and run on the servers in the `web` role (and on all servers if no roles are defined). If you need Traefik on hosts in other roles than `web`, add `traefik: true`:
 
 ```yaml
 servers:
@@ -210,7 +208,7 @@ servers:
       - 192.168.0.4
 ```
 
-### Using container labels
+## Using container labels
 
 You can specialize the default Traefik rules by setting labels on the containers that are being started:
 
@@ -220,10 +218,9 @@ labels:
 ```
 Traefik rules are in the "service-role-destination" format. The default role will be `web` if no rule is specified. If the destination is not specified, it is not included. To give an example, the above rule would become "traefik.http.routers.hey-web.rule" if it was for the "staging" destination.
 
-Note: The backticks are needed to ensure the rule is passed in correctly and not treated as command substitution by Bash!
+**Note:** The backticks are needed to ensure the rule is passed in correctly and not treated as command substitution by Bash!
 
-This allows you to run multiple applications on the same server sharing the same Traefik instance and port.
-See https://doc.traefik.io/traefik/routing/routers/#rule for a full list of available routing rules.
+This allows you to run multiple applications on the same server sharing the same Traefik instance and port. See [doc.traefik.io](https://doc.traefik.io/traefik/routing/routers/#rule) for a full list of available routing rules.
 
 The labels can also be applied on a per-role basis:
 
@@ -241,10 +238,9 @@ servers:
       my-label: "50"
 ```
 
-### Using shell expansion
+## Using shell expansion
 
-You can use shell expansion to interpolate values from the host machine into labels and env variables with the `${}` syntax.
-Anything within the curly braces will be executed on the host machine and the result will be interpolated into the label or env variable.
+You can use shell expansion to interpolate values from the host machine into labels and env variables with the `${}` syntax. Anything within the curly braces will be executed on the host machine and the result will be interpolated into the label or env variable.
 
 ```yaml
 labels:
@@ -254,9 +250,9 @@ env:
   HOST_DEPLOYMENT_DIR: "${PWD}"
 ```
 
-Note: Any other occurrence of `$` will be escaped to prevent unwanted shell expansion!
+**Note:** Any other occurrence of `$` will be escaped to prevent unwanted shell expansion!
 
-### Using container options
+## Using container options
 
 You can specialize the options used to start containers using the `options` definitions:
 
@@ -277,7 +273,7 @@ servers:
 
 That'll start the job containers with `docker run ... --cap-add --cpu-count 4 ...`.
 
-### Configuring logging
+## Configuring logging
 
 You can configure the logging driver and options passed to Docker using `logging`:
 
@@ -291,16 +287,15 @@ logging:
 
 If nothing is configured, the default option `max-size=10m` is used for all containers. The default logging driver of Docker is `json-file`.
 
-### Using a different stop wait time
+## Using a different stop wait time
 
-On a new deploy, each old running container is gracefully shut down with a `SIGTERM`, and after a grace period of `10` seconds a `SIGKILL` is sent.
-You can configure this value via the `stop_wait_time` option:
+On a new deploy, each old running container is gracefully shut down with a `SIGTERM`, and after a grace period of `10` seconds a `SIGKILL` is sent. You can configure this value via the `stop_wait_time` option:
 
 ```yaml
 stop_wait_time: 30
 ```
 
-### Using remote builder for native multi-arch
+## Using remote builder for native multi-arch
 
 If you're developing on ARM64 (like Apple Silicon), but you want to deploy on AMD64 (x86 64-bit), you can use multi-architecture images. By default, MRSK will setup a local buildx configuration that does this through QEMU emulation. But this can be quite slow, especially on the first build.
 
@@ -316,9 +311,9 @@ builder:
     host: ssh://root@192.168.0.1
 ```
 
-Note: You must have Docker running on the remote host being used as a builder. This instance should only be shared for builds using the same registry and credentials.
+**Note:** You must have Docker running on the remote host being used as a builder. This instance should only be shared for builds using the same registry and credentials.
 
-### Using remote builder for single-arch
+## Using remote builder for single-arch
 
 If you're developing on ARM64 (like Apple Silicon), want to deploy on AMD64 (x86 64-bit), but don't need to run the image locally (or on other ARM64 hosts), you can configure a remote builder that just targets AMD64. This is a bit faster than building with multi-arch, as there's nothing to build locally.
 
@@ -329,7 +324,7 @@ builder:
     host: ssh://root@192.168.0.1
 ```
 
-### Using native builder when multi-arch isn't needed
+## Using native builder when multi-arch isn't needed
 
 If you're developing on the same architecture as the one you're deploying on, you can speed up the build by forgoing both multi-arch and remote building:
 
@@ -340,10 +335,9 @@ builder:
 
 This is also a good option if you're running MRSK from a CI server that shares architecture with the deployment servers.
 
-### Using a different Dockerfile or context when building
+## Using a different Dockerfile or context when building
 
-If you need to pass a different Dockerfile or context to the build command (e.g. if you're using a monorepo or you have
-different Dockerfiles), you can do so in the builder options:
+If you need to pass a different Dockerfile or context to the build command (e.g. if you're using a monorepo or you have different Dockerfiles), you can do so in the builder options:
 
 ```yaml
 # Use a different Dockerfile
@@ -360,7 +354,7 @@ builder:
   context: ".."
 ```
 
-### Using build secrets for new images
+## Using build secrets for new images
 
 Some images need a secret passed in during build time, like a GITHUB_TOKEN, to give access to private gem repositories. This can be done by having the secret in ENV, then referencing it in the builder configuration:
 
@@ -383,7 +377,7 @@ RUN --mount=type=secret,id=GITHUB_TOKEN \
   rm -rf /usr/local/bundle/cache
 ```
 
-### Traefik command arguments
+## Traefik command arguments
 
 Customize the Traefik command line using `args`:
 
@@ -396,7 +390,7 @@ traefik:
 
 This starts the Traefik container with `--accesslog=true --accesslog.format=json` arguments.
 
-### Traefik host port binding
+## Traefik host port binding
 
 Traefik binds to port 80 by default. Specify an alternative port using `host_port`:
 
@@ -405,25 +399,22 @@ traefik:
   host_port: 8080
 ```
 
-### Traefik version, upgrades, and custom images
+## Traefik version, upgrades, and custom images
 
 MRSK runs the traefik:v2.9 image to track Traefik 2.9.x releases.
 
-To pin Traefik to a specific version or an image published to your registry,
-specify `image`:
+To pin Traefik to a specific version or an image published to your registry, specify `image`:
 
 ```yaml
 traefik:
   image: traefik:v2.10.0-rc1
 ```
 
-This is useful for downgrading Traefik if there's an unexpected breaking
-change in a minor version release, upgrading Traefik to test forthcoming
-releases, or running your own Traefik-derived image.
+This is useful for downgrading Traefik if there's an unexpected breaking change in a minor version release, upgrading Traefik to test forthcoming releases, or running your own Traefik-derived image.
 
 MRSK has not been tested for compatibility with Traefik 3 betas. Please do!
 
-### Traefik container configuration
+## Traefik container configuration
 
 Pass additional Docker configuration for the Traefik container using `options`:
 
@@ -439,7 +430,7 @@ traefik:
 
 This starts the Traefik container with `--volume /tmp/example.json:/tmp/example.json --publish 8080:8080 --memory 512m` arguments to `docker run`.
 
-### Traefik container labels
+## Traefik container labels
 
 Add labels to Traefik Docker container.
 
@@ -455,7 +446,7 @@ traefik:
 
 This labels Traefik container with `--label traefik.http.routers.dashboard.middlewares=\"auth\"` and so on.
 
-### Traefik alternate entrypoints
+## Traefik alternate entrypoints
 
 You can configure multiple entrypoints for Traefik like so:
 
@@ -478,7 +469,7 @@ traefik:
     entrypoints.otherentrypoint.address: ':9000'
 ```
 
-### Configuring build args for new images
+## Configuring build args for new images
 
 Build arguments that aren't secret can also be configured:
 
@@ -495,7 +486,7 @@ ARG RUBY_VERSION
 FROM ruby:$RUBY_VERSION-slim as base
 ```
 
-### Using accessories for database, cache, search services
+## Using accessories for database, cache, search services
 
 You can manage your accessory services via MRSK as well. Accessories are long-lived services that your app depends on. They are not updated when you deploy.
 
@@ -550,7 +541,7 @@ Now run `mrsk accessory start mysql` to start the MySQL server on 1.1.1.3. See `
 
 Accessory images must be public or tagged in your private registry.
 
-### Using Cron
+## Using Cron
 
 You can use a specific container to run your Cron jobs:
 
@@ -565,7 +556,7 @@ servers:
 
 This assumes the Cron settings are stored in `config/crontab`.
 
-### Using audit broadcasts
+## Using audit broadcasts
 
 If you'd like to broadcast audits of deploys, rollbacks, etc to a chatroom or elsewhere, you can configure the `audit_broadcast_cmd` setting with the path to a bin file that will be passed the audit line as the first argument:
 
@@ -587,7 +578,7 @@ That'll post a line like follows to a preconfigured chatbot in Basecamp:
 [My App] [dhh] Rolled back to version d264c4e92470ad1bd18590f04466787262f605de
 ```
 
-### Custom healthcheck
+## Custom healthcheck
 
 MRSK defaults to checking the health of your application again `/up` on port 3000 up to 7 times. You can tailor the behaviour with the `healthcheck` setting:
 

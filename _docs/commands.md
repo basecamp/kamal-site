@@ -3,9 +3,9 @@ title: Commands
 order: 7
 ---
 
-## Commands
+# Commands
 
-### Running commands on servers
+## Running commands on servers
 
 You can execute one-off commands on the servers:
 
@@ -54,7 +54,7 @@ mrsk app exec -p 'bin/rails runner "puts Rails.application.config.time_zone"'
 UTC
 ```
 
-### Running interactive commands over SSH
+## Running interactive commands over SSH
 
 You can run interactive commands, like a Rails console or a bash session, on a server (default is primary, use `--hosts` to connect to another):
 
@@ -69,8 +69,7 @@ mrsk app exec -i --reuse bash
 mrsk app exec -i 'bin/rails console'
 ```
 
-
-### Running details to show state of containers
+## Running details to show state of containers
 
 You can see the state of your servers by running `mrsk details`:
 
@@ -94,7 +93,7 @@ CONTAINER ID   IMAGE                                                            
 
 You can also see just info for app containers with `mrsk app details` or just for Traefik with `mrsk traefik details`.
 
-### Running rollback to fix a bad deploy
+## Running rollback to fix a bad deploy
 
 If you've discovered a bad deploy, you can quickly rollback by reactivating the old, paused container image. You can see what old containers are available for rollback by running `mrsk app containers`. It'll give you a presentation similar to `mrsk app details`, but include all the old containers as well. Showing something like this:
 
@@ -112,8 +111,8 @@ badb1aa51db4   registry.digitalocean.com/user/app:6ef8a6a84c525b123c5245345a8483
 
 From the example above, we can see that `e5d9d7c2b898289dfbc5f7f1334140d984eedae4` was the last version, so it's available as a rollback target. We can perform this rollback by running `mrsk rollback e5d9d7c2b898289dfbc5f7f1334140d984eedae4`. That'll stop `6ef8a6a84c525b123c5245345a8483f86d05a123` and then start `e5d9d7c2b898289dfbc5f7f1334140d984eedae4`. Because the old container is still available, this is very quick. Nothing to download from the registry.
 
-Note that by default old containers are pruned after 3 days when you run `mrsk deploy`.
+**Note:** By default old containers are pruned after 3 days when you run `mrsk deploy`.
 
-### Running removal to clean up servers
+## Running removal to clean up servers
 
 If you wish to remove the entire application, including Traefik, containers, images, and registry session, you can run `mrsk remove`. This will leave the servers clean.

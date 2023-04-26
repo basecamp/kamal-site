@@ -3,6 +3,8 @@ title: Why MRSK?
 order: 4
 ---
 
+# Why MRSK?
+
 ## Why not just run Capistrano, Kubernetes or Docker Swarm?
 
 MRSK basically is Capistrano for Containers, without the need to carefully prepare servers in advance. No need to ensure that the servers have just the right version of Ruby or other dependencies you need. That all lives in the Docker image now. You can boot a brand new Ubuntu (or whatever) server, add it to the list of servers in MRSK, and it'll be auto-provisioned with Docker, and run right away. Docker's layer caching also speeds up deployments with less mucking about on the server. And the images built for MRSK can be used for CI or later introspection.

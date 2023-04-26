@@ -3,7 +3,7 @@ title: Running MRSK
 order: 5
 ---
 
-## Running MRSK from Docker
+# Running MRSK from Docker
 
 MRSK is packaged up in a Docker container similarly to [rails/docked](https://github.com/rails/docked). This will allow you to run MRSK (from your application directory) without having to install any dependencies other than Docker. Add the following alias to your profile configuration to make working with the container more convenient:
 

@@ -3,7 +3,7 @@ title: Installation
 order: 2
 ---
 
-## Installation
+# Installation
 
 If you have a Ruby environment available, you can install MRSK globally with:
 
