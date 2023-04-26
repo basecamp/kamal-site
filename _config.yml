@@ -28,3 +28,6 @@ defaults:
       type: docs
     values:
       layout: docs
+
+redirect_from:
+  json: false
