@@ -1,0 +1,44 @@
+<input class="nav-active" id="nav-active" type="checkbox" />
+
+<nav class="nav">
+  <div class="nav__toggle">
+    <label for="nav-active">
+      <span></span>
+    </label>
+  </div>
+  <div class="nav__options">
+    <ul>
+
+{% for item in site.data.nav %}
+
+  {% assign item_collection = item.collection | default: false %}
+  {% assign item_title = item.title | smartify %}
+
+      <li{% if item.url == page.url or item_collection == page.collection %} class="selected"{% endif %}>
+        <a href="{{ item.url }}"{% if item.external %} target="_blank" rel="noopener"{% endif %} aria-label="{{ item_title }}">{{ item_title }}</a>
+
+  {% if item_collection == 'docs' %}
+
+    {% assign docs = site.docs | sort: 'order' %}
+
+        <ul>
+
+    {% for doc in docs %}
+
+      {% assign doc_title = doc.title | smartify %}
+
+          <li{% if doc.url == page.url %} class="selected"{% endif %}><a href="{{ doc.url | absolute_url }}" aria-label="{{ doc_title }}">{{ doc_title }}</a></li>
+
+    {% endfor %}
+
+        </ul>
+
+  {% endif %}
+
+      </li>
+
+{% endfor %}
+
+    </ul>
+  </div>
+</nav>

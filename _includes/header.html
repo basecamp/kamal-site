@@ -1,0 +1,25 @@
+<header class="header">
+  <nav>
+    <div>
+      <a href="{{ '/' | absolute_url }}" aria-label="MRSK">MRSK</a>
+
+{% if site.version %}
+
+      <p>{{ site.version }}</p>
+
+{% endif %}
+
+    </div>
+    <ul>
+
+{% for item in site.data.nav %}
+
+  {% assign item_collection = item.collection | default: false %}
+
+      <li{% if item.url == page.url or item_collection == page.collection %} class="selected"{% endif %}><a href="{{ item.url }}"{% if item.external %} target="_blank" rel="noopener"{% endif %} aria-label="{{ item.title | smartify }}">{{ item.title | smartify }}</a></li>
+
+{% endfor %}
+
+    </ul>
+  </nav>
+</header>

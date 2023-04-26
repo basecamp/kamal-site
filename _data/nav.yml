@@ -1,0 +1,15 @@
+- title: "Read the docs"
+  url: "/docs"
+  collection: "docs"
+
+- title: "View the source"
+  url: "https://github.com/mrsked/mrsk"
+  external: true
+
+- title: "Ask question"
+  url: "https://github.com/mrsked/mrsk/discussions"
+  external: true
+
+- title: "Join the Discord"
+  url: "https://discord.gg/YgHVT7GCXS"
+  external: true

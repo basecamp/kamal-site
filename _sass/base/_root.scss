@@ -1,0 +1,47 @@
+:root {
+
+  --rgb-base: 247, 249, 251;
+  --rgb-base-dark: 241, 243, 245;
+  --rgb-base-darker: 235, 237, 239;
+  --rgb-base-darkest: 229, 231, 233;
+  --rgb-black: 0, 0, 0;
+  --rgb-white: 255, 255, 255;
+  --rgb-grey: 40, 50, 60;
+  --rgb-grey-light: 170, 180, 190;
+  --rgb-blue: 10, 130, 245;
+  --rgb-blue-dark: 4, 117, 244;
+
+  --color-base: rgb(var(--rgb-base));
+  --color-base-dark: rgb(var(--rgb-base-dark));
+  --color-base-darker: rgb(var(--rgb-base-darker));
+  --color-base-darkest: rgb(var(--rgb-base-darkest));
+  --color-black: rgb(var(--rgb-black));
+  --color-white: rgb(var(--rgb-white));
+  --color-grey: rgb(var(--rgb-grey));
+  --color-grey-light: rgb(var(--rgb-grey-light));
+  --color-blue: rgb(var(--rgb-blue));
+  --color-blue-dark: rgb(var(--rgb-blue-dark));
+
+  --font-family: 'Colfax', Sans-Serif;
+  --font-family-mono: ui-monospace, 'SFMono-Regular', SF Mono, Menlo, Consolas, Monospace;
+
+  --font-size: min(calc(1.3em + 1vw), 2.5rem);
+  --font-size-x-small: 60%;
+  --font-size-small: 75%;
+  --font-size-medium: 100%;
+  --font-size-large: 115%;
+  --font-size-x-large: 130%;
+  --font-size-xx-large: 250%;
+
+  --line-height: 1.4;
+
+  --space-small: 0.5em;
+  --space-medium: 1em;
+  --space-large: 2em;
+  --space-x-large: 3em;
+  --space-xx-large: 4em;
+
+  --transition: 0.15s cubic-bezier(0.37, 1, 0.74, 1);
+  --transition-slow: 0.3s cubic-bezier(0.37, 1, 0.74, 1);
+
+}

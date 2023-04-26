@@ -1,0 +1,104 @@
+.video {
+
+  display: flex;
+  flex-direction: column;
+  padding-left: var(--space-medium);
+  padding-right: var(--space-medium);
+  padding-top: var(--space-large);
+
+  section {
+
+    display: flex;
+    margin-inline: auto;
+    position: relative;
+    width: min(100%, 35em);
+
+    video {
+      border-radius: 0.3em;
+      display: block;
+      overflow: hidden;
+    }
+
+    button {
+
+      border-radius: 0.3em;
+      cursor: pointer;
+      height: 100%;
+      left: 0;
+      position: absolute;
+      overflow: hidden;
+      top: 0;
+      width: 100%;
+      z-index: 1;
+
+      &:before {
+        background: linear-gradient(
+          180deg,
+          rgba(var(--rgb-black), 0.2) 0,
+          rgba(var(--rgb-black), 0.7) 100%
+        );
+        border-radius: 0.3em;
+        content: '';
+        height: 100%;
+        left: 0;
+        overflow: hidden;
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        transition: opacity var(--transition-slow);
+        width: 100%;
+      }
+
+      span {
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        background: url('../images/play.svg') center center no-repeat rgba(var(--rgb-white), 0.7);
+        background-size: 0.8em 0.8em;
+        border-radius: 100%;
+        box-shadow:
+          0 20px 30px -20px rgba(var(--rgb-black), 0.3),
+          0 10px 20px -10px rgba(var(--rgb-black), 0.5)
+        ;
+        display: inline-flex;
+        height: 2.3em;
+        position: relative;
+        transition:
+          background-color var(--transition-slow),
+          transform var(--transition-slow)
+        ;
+        width: 2.3em;
+        will-change: transform;
+      }
+
+      &:focus,
+      &:hover {
+
+        &:before {
+          opacity: 0.9;
+        }
+
+        span {
+          background-color: var(--color-white);
+          transform: scale(1.04);
+        }
+
+      }
+
+    }
+
+  }
+
+  &--playing {
+
+    section button {
+      display: none;
+    }
+
+  }
+
+  @media(min-width: 64em) {
+    padding-left: var(--space-large);
+    padding-right: var(--space-large);
+  }
+
+}

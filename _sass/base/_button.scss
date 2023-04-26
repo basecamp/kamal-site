@@ -1,0 +1,25 @@
+.button {
+
+  align-items: center;
+  background: var(--color-blue);
+  border-radius: 0.3em;
+  color: var(--color-white);
+  cursor: pointer;
+  display: flex;
+  font-size: 80%;
+  font-weight: 500;
+  justify-content: center;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  padding: 1em 1.4em 0.9em 1.4em;
+  text-align: center;
+  text-decoration: none;
+  transition: background var(--transition);
+
+  &:hover,
+  &:focus {
+    background: var(--color-blue-dark);
+    color: var(--color-white);
+  }
+
+}

@@ -1,0 +1,162 @@
+html {
+  background: var(--color-base);
+  font-size: 16px;
+  min-height: -webkit-fill-available;
+}
+
+body {
+
+  align-items: stretch;
+  background: var(--color-base);
+  color: var(--color-grey);
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: var(--line-height);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: rgba(var(--rgb-black), 0);
+  text-rendering: optimizeLegibility;
+
+  @supports(-webkit-touch-callout: none) {
+    min-height: -webkit-fill-available;
+  }
+
+}
+
+::selection {
+  background: rgba(var(--rgb-blue), 0.5);
+  color: var(--color-white);
+}
+
+main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  position: relative;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+
+  font-weight: 700;
+
+  a {
+    font-weight: inherit;
+    text-decoration-thickness: 0.1em;
+  }
+
+}
+
+h1 {
+  font-size: var(--font-size-xx-large);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+h2 {
+  font-size: var(--font-size-x-large);
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: var(--font-size-large);
+  line-height: 1.2;
+}
+
+h4 {
+  font-size: var(--font-size-medium);
+  line-height: 1.2;
+}
+
+h5 {
+  font-size: var(--font-size-medium);
+  line-height: 1.2;
+}
+
+h6 {
+  font-size: var(--font-size-medium);
+  line-height: 1.2;
+}
+
+ol,
+ul {
+
+  padding-left: 2em;
+
+  li + li {
+    margin-top: var(--flow-space, 0.3em);
+  }
+
+  ol,
+  ul {
+    margin-top: var(--flow-space, 0.3em);
+  }
+
+  ul {
+    list-style: circle;
+  }
+
+}
+
+ol {
+  list-style: decimal;
+}
+
+ul {
+  list-style: disc;
+}
+
+a {
+
+  color: var(--color-blue);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-thickness: 0.09em;
+  text-underline-offset: 0.09em;
+  transition: color var(--transition);
+
+  &:hover,
+  &:focus {
+    color: var(--color-black);
+  }
+
+}
+
+em, i {
+  font-style: italic;
+}
+
+strong, b {
+  font-weight: 700;
+}
+
+img,
+source,
+video {
+  height: auto;
+  max-width: 100%;
+  width: 100%;
+}
+
+code {
+  background: var(--color-base-dark);
+  border-radius: 0.15em;
+  font-family: var(--font-family-mono);
+  font-size: 75%;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: normal;
+  line-height: 1em;
+  padding: 0.2em 0.4em;
+}

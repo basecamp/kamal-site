@@ -1,0 +1,91 @@
+<!doctype html>
+
+<html lang="en">
+
+{% include head.html %}
+
+  <body>
+
+{% include nav.html %}
+
+{% include header.html %}
+
+    <main>
+
+{% assign docs = site.docs | sort: 'order' %}
+
+{% for doc in docs %}
+
+  {% if doc.title == page.title %}
+
+    {% unless forloop.last %}
+
+      {% assign docs_index_next = forloop.index %}
+
+    {% else %}
+
+      {% assign docs_index_next = 0 %}
+
+    {% endunless %}
+
+    {% unless forloop.first %}
+
+      {% assign docs_index_prev = forloop.index | minus: 2 %}
+
+    {% else %}
+
+      {% assign docs_index_prev = forloop.rindex | minus: 1 %}
+
+    {% endunless %}
+
+  {% endif %}
+
+{% endfor %}
+
+{% assign docs_prev = docs[docs_index_prev] %}
+{% assign docs_next = docs[docs_index_next] %}
+{% assign docs_prev_title = docs_prev.title | smartify %}
+{% assign docs_next_title = docs_next.title | smartify %}
+
+      <div class="page page--docs">
+        <section>
+          <aside>
+            <ul>
+
+{% for doc in docs %}
+
+  {% assign doc_title = doc.title | smartify %}
+
+              <li{% if doc.url == page.url %} class="selected"{% endif %}><a href="{{ doc.url | absolute_url }}" aria-label="{{ doc_title }}">{{ doc_title }}</a></li>
+
+{% endfor %}
+
+            </ul>
+          </aside>
+          <article>
+
+{{ content }}
+
+            <nav>
+              <a href="{{ docs_prev.url | absolute_url }}" aria-label="{{ docs_prev_title }}">
+                <dl>
+                  <dt>Previous</dt>
+                  <dd>{{ docs_prev_title }}</dd>
+                </dl>
+              </a>
+              <a href="{{ docs_next.url | absolute_url }}" aria-label="{{ docs_next_title }}">
+                <dl>
+                  <dt>Next</dt>
+                  <dd>{{ docs_next_title }}</dd>
+                </dl>
+              </a>
+            </nav>
+          </article>
+        </section>
+      </div>
+
+    </main>
+
+  </body>
+
+</html>

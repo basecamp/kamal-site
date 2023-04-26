@@ -1,0 +1,29 @@
+title: "MRSK"
+description: "Deploy web apps anywhere"
+version: v0.11.0
+image: /assets/images/opengraph.png
+github: mrsked
+repository: mrsked/mrsk-site
+markdown: kramdown
+highlighter: rouge
+
+exclude:
+  - .jekyll-cache
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+
+sass:
+  style: compressed
+
+collections:
+  docs:
+    output: true
+    permalink: /docs/:name
+
+defaults:
+  - scope:
+      path: ""
+      type: docs
+    values:
+      layout: docs
