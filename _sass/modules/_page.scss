@@ -88,15 +88,31 @@
 
     }
 
-    h1,
+    h1 {
+
+      font-size: 180%;
+
+      & + * {
+        --flow-space: 1.4em;
+      }
+
+    }
+
     h2,
-    h3,
+    h3 {
+
+      & + * {
+        --flow-space: 0.9em;
+      }
+
+    }
+
     h4,
     h5,
     h6 {
 
       & + * {
-        --flow-space: 0.7em;
+        --flow-space: 0.4em;
       }
 
     }
@@ -106,6 +122,7 @@
     }
 
     h2 {
+      color: var(--color-blue);
       padding-top: 0.1em;
     }
 
