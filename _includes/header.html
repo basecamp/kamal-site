@@ -11,8 +11,15 @@
 
     </div>
     <ul>
-      <li><a href="{{ 'docs' | absolute_url }}" aria-label="Read the docs">Read the docs</a></li>
-      <li><a href="https://github.com/mrsked/mrsk" aria-label="View the source">View the source</a></li>
+
+{% for item in site.data.nav %}
+
+  {% assign item_collection = item.collection | default: false %}
+
+      <li{% if item.url == page.url or item_collection == page.collection %} class="selected"{% endif %}><a href="{{ item.url }}"{% if item.external %} target="_blank" rel="noopener"{% endif %} aria-label="{{ item.title | smartify }}">{{ item.title | smartify }}</a></li>
+
+{% endfor %}
+
     </ul>
   </nav>
 </header>

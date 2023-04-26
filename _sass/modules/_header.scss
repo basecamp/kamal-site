@@ -53,7 +53,7 @@
       font-size: 50%;
       letter-spacing: -0.01em;
       list-style: none;
-      margin-right: -1.3em;
+      margin-right: -1.2em;
       padding: 0;
 
       li {
@@ -66,7 +66,7 @@
           color: var(--color-blue);
           line-height: 1em;
           letter-spacing: -0.01em;
-          padding: 0.8em 1.3em 0.7em 1.3em;
+          padding: 0.8em 1.2em 0.7em 1.2em;
           text-align: center;
           text-decoration: none;
           transition:
@@ -80,6 +80,11 @@
             color: var(--color-black);
           }
 
+        }
+
+        &.selected a {
+          background: none;
+          color: var(--color-black);
         }
 
       }
