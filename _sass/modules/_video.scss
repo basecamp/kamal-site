@@ -70,8 +70,27 @@
         will-change: transform;
       }
 
-      &:focus,
-      &:hover {
+    }
+
+  }
+
+  &--playing {
+
+    section button {
+      display: none;
+    }
+
+  }
+
+  @media(min-width: 64em) {
+
+    padding-left: var(--space-large);
+    padding-right: var(--space-large);
+
+    section button {
+
+      &:hover,
+      &:focus {
 
         &:before {
           opacity: 0.9;
@@ -86,19 +105,6 @@
 
     }
 
-  }
-
-  &--playing {
-
-    section button {
-      display: none;
-    }
-
-  }
-
-  @media(min-width: 64em) {
-    padding-left: var(--space-large);
-    padding-right: var(--space-large);
   }
 
 }

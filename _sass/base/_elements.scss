@@ -118,19 +118,12 @@ ul {
 }
 
 a {
-
   color: var(--color-blue);
   font-weight: 500;
   text-decoration: underline;
   text-decoration-thickness: 0.09em;
   text-underline-offset: 0.09em;
   transition: color var(--transition);
-
-  &:hover,
-  &:focus {
-    color: var(--color-black);
-  }
-
 }
 
 em, i {
@@ -159,4 +152,17 @@ code {
   letter-spacing: normal;
   line-height: 1em;
   padding: 0.2em 0.4em;
+}
+
+@media(min-width: 64em) {
+
+  a {
+
+    &:hover,
+    &:focus {
+      color: var(--color-black);
+    }
+
+  }
+
 }

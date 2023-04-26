@@ -16,10 +16,14 @@
   text-decoration: none;
   transition: background var(--transition);
 
-  &:hover,
-  &:focus {
-    background: var(--color-blue-dark);
-    color: var(--color-white);
+  @media(min-width: 64em) {
+
+    &:hover,
+    &:focus {
+      background: var(--color-blue-dark);
+      color: var(--color-white);
+    }
+
   }
 
 }
