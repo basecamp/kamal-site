@@ -1,0 +1,31 @@
+<input class="nav-active" id="nav-active" type="checkbox" />
+
+<nav class="nav">
+  <div class="nav__toggle">
+    <label for="nav-active">
+      <span></span>
+    </label>
+  </div>
+  <div class="nav__options">
+    <ul>
+      <li>
+        <a href="{{ 'docs' | absolute_url  }}" aria-label="Read the docs">Read the docs</a>
+        <ul>
+
+{% assign docs = site.docs | sort: 'order' %}
+
+{% for doc in docs %}
+
+  {% assign doc_title = doc.title | smartify %}
+
+          <li{% if doc.url == page.url %} class="selected"{% endif %}><a href="{{ doc.url | absolute_url }}" aria-label="{{ doc_title }}">{{ doc_title }}</a></li>
+
+{% endfor %}
+
+        </ul>
+      </li>
+      <li><a href="https://github.com/mrsked/mrsk" aria-label="View the source">View the source</a></li>
+      <li><a href="{{ '/' | absolute_url  }}" aria-label="Go home">Go home</a></li>
+    </ul>
+  </div>
+</nav>

@@ -1,6 +1,6 @@
 title: "MRSK"
 description: "Deploy web apps anywhere"
-version: 0.11.0
+version: v0.11.0
 image: /assets/images/opengraph.png
 github: mrsked
 repository: mrsked/mrsk-site
