@@ -3,9 +3,9 @@
     <div>
       <a href="{{ '/' | absolute_url }}" aria-label="MRSK">MRSK</a>
 
-{% if site.version %}
+{% if site.data.github.tag_name %}
 
-      <p>{{ site.version }}</p>
+      <p>{{ site.data.github.tag_name }}</p>
 
 {% endif %}
 

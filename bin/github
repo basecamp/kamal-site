@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+
+require 'json'
+require 'net/http'
+require 'date'
+require 'yaml'
+
+response = Net::HTTP.get_response(URI('https://api.github.com/repos/mrsked/mrsk/releases/latest'))
+
+if response.code == '200'
+
+  data = JSON.parse(response.body)
+
+  tag_name = data['tag_name']
+  published_at = DateTime.strptime(data['published_at'], '%Y-%m-%dT%H:%M:%SZ')
+
+  data = {
+    'tag_name' => tag_name,
+    'published_at' => published_at.strftime('%B %d, %Y')
+  }
+
+  File.write('_data/github.yml', data.to_yaml)
+
+  puts "Tag name: #{data['tag_name']}"
+  puts "Published at: #{data['published_at']}"
+
+else
+
+  puts "Error: #{response.code} #{response.message}"
+
+end
