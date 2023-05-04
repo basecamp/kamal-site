@@ -222,6 +222,7 @@
       border-radius: 0.3em;
       letter-spacing: normal;
       line-height: 1.4;
+      position: relative;
 
       pre {
 
@@ -240,6 +241,41 @@
           padding: 0;
         }
 
+      }
+
+      button.copy {
+
+        background: var(--color-blue);
+        border-radius: 0.2em;
+        color: var(--color-white);
+        cursor: pointer;
+        font-family: var(--font-family-mono);
+        font-size: 75%;
+        font-weight: 600;
+        letter-spacing: normal;
+        line-height: inherit;
+        opacity: 0;
+        padding: 0.25em 0.6em;
+        position: absolute;
+        right: 0.8em;
+        text-transform: uppercase;
+        top: 0.8em;
+        transition:
+          background var(--transition),
+          opacity var(--transition)
+        ;
+
+        &:hover,
+        &:focus {
+          background: var(--color-blue-dark);
+          opacity: 1;
+        }
+
+      }
+
+      &:hover button,
+      &:focus button {
+        opacity: 1;
       }
 
     }
