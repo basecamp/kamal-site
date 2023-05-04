@@ -1,11 +1,11 @@
 <header class="header">
   <nav>
     <div>
-      <a href="{{ '/' | absolute_url }}" aria-label="MRSK">MRSK</a>
+      <a class="logo" href="{{ '/' | absolute_url }}" aria-label="MRSK">MRSK</a>
 
 {% if site.data.github.tag_name %}
 
-      <p>{{ site.data.github.tag_name }}</p>
+      <a class="release" href="https://github.com/mrsked/mrsk/releases" target="_blank" rel="noopener">{{ site.data.github.tag_name }}</a>
 
 {% endif %}
 
