@@ -244,11 +244,11 @@
       }
 
       button.copy {
-
         background: var(--color-blue);
         border-radius: 0.2em;
         color: var(--color-white);
         cursor: pointer;
+        display: none;
         font-family: var(--font-family-mono);
         font-size: 75%;
         font-weight: 600;
@@ -264,18 +264,6 @@
           background var(--transition),
           opacity var(--transition)
         ;
-
-        &:hover,
-        &:focus {
-          background: var(--color-blue-dark);
-          opacity: 1;
-        }
-
-      }
-
-      &:hover button,
-      &:focus button {
-        opacity: 1;
       }
 
     }
@@ -308,16 +296,41 @@
 
     }
 
-    article nav a {
+    article {
 
-      &:hover,
-      &:focus {
-        background: rgba(var(--rgb-base), 1);
-        box-shadow:
-          0 0 0 1px rgba(var(--rgb-black), 0.09),
-          0 10px 30px -15px rgba(var(--rgb-black), 0.18),
-          0 20px 20px -30px rgba(var(--rgb-black), 0.18)
-        ;
+      nav a {
+
+        &:hover,
+        &:focus {
+          background: rgba(var(--rgb-base), 1);
+          box-shadow:
+            0 0 0 1px rgba(var(--rgb-black), 0.09),
+            0 10px 30px -15px rgba(var(--rgb-black), 0.18),
+            0 20px 20px -30px rgba(var(--rgb-black), 0.18)
+          ;
+        }
+
+      }
+
+      .highlight {
+
+        button.copy {
+
+          display: flex;
+
+          &:hover,
+          &:focus {
+            background: var(--color-blue-dark);
+            opacity: 1;
+          }
+
+        }
+
+        &:hover button,
+        &:focus button {
+          opacity: 1;
+        }
+
       }
 
     }
