@@ -16,7 +16,7 @@ if response.code == '200'
 
   data = {
     'tag_name' => tag_name,
-    'published_at' => published_at.strftime('%B %d, %Y')
+    'published_at' => published_at.strftime('%B %-d, %Y')
   }
 
   File.write('_data/github.yml', data.to_yaml)
