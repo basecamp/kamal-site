@@ -1,0 +1,51 @@
+.footer {
+
+  display: flex;
+  padding: var(--space-medium);
+
+  section {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    font-size: 50%;
+    gap: 0.8em;
+    letter-spacing: -0.01em;
+  }
+
+  ul {
+
+    align-items: center;
+    display: flex;
+    gap: 0.3em;
+    padding: 0;
+
+    li {
+
+      display: flex;
+      margin: 0;
+
+      a {
+
+        display: flex;
+
+        img {
+          height: 1.5em;
+          width: auto;
+        }
+
+      }
+
+      span {
+        display: flex;
+        font-size: 75%;
+        font-style: italic;
+        letter-spacing: -0.01em;
+        margin-top: 0.3em;
+      }
+
+    }
+
+  }
+
+}

@@ -1,6 +1,7 @@
 .page {
 
   background: var(--color-white);
+  border-bottom: 3px dashed var(--color-base-darker);
   border-top: 3px dashed var(--color-base-darker);
   display: flex;
   flex: 1;
