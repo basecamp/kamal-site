@@ -7,24 +7,29 @@ order: 7
 
 ## Running commands on servers
 
-You can execute one-off commands on the servers:
+Execute a one-off command on all servers:
 
-```bash
-# Runs command on all servers
-mrsk app exec 'ruby -v'
+```console
+$ mrsk app exec 'ruby -v'
 App Host: 192.168.0.1
 ruby 3.1.3p185 (2022-11-24 revision 1a6b16756e) [x86_64-linux]
 
 App Host: 192.168.0.2
 ruby 3.1.3p185 (2022-11-24 revision 1a6b16756e) [x86_64-linux]
+```
 
-# Runs command on primary server
-mrsk app exec --primary 'cat .ruby-version'
+Execute a command on just the primary server:
+
+```console
+$ mrsk app exec --primary 'cat .ruby-version'
 App Host: 192.168.0.1
 3.1.3
+```
 
-# Runs Rails command on all servers
-mrsk app exec 'bin/rails about'
+Execute the `bin/rails` command on all servers:
+
+```console
+$ mrsk app exec 'bin/rails about'
 App Host: 192.168.0.1
 About your application's environment
 Rails version             7.1.0.alpha
@@ -48,9 +53,12 @@ Application root          /rails
 Environment               production
 Database adapter          sqlite3
 Database schema version   20221231233303
+```
 
-# Run Rails runner on primary server
-mrsk app exec -p 'bin/rails runner "puts Rails.application.config.time_zone"'
+Use the Rails runner on just the primary server:
+
+```console
+$ mrsk app exec -p 'bin/rails runner "puts Rails.application.config.time_zone"'
 UTC
 ```
 
