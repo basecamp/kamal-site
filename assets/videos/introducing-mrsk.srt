@@ -1,0 +1,1896 @@
+1
+00:00:00,000 --> 00:00:01,760
+This is David Heinemeier Hansson from
+
+2
+00:00:01,760 --> 00:00:05,280
+37signals and I'm here to show you MRSK.
+
+3
+00:00:05,280 --> 00:00:07,320
+MRSK is a new deployment tool that we've been
+
+4
+00:00:07,320 --> 00:00:10,100
+building to get us out of the cloud.
+
+5
+00:00:10,100 --> 00:00:13,740
+we are moving out of the cloud and onto our own bare metal servers,
+
+6
+00:00:13,740 --> 00:00:15,280
+and we didn't want to give up
+
+7
+00:00:15,280 --> 00:00:18,860
+all the advancements in containerization and so on,
+
+8
+00:00:18,860 --> 00:00:22,120
+and we also didn't want to run Kubernetes ourselves.
+
+9
+00:00:22,120 --> 00:00:23,900
+So this is the alternative.
+
+10
+00:00:23,900 --> 00:00:27,300
+We are slicing up our big machines with KVM,
+
+11
+00:00:27,300 --> 00:00:29,520
+then we're shoving Docker on them and we are
+
+12
+00:00:29,520 --> 00:00:32,600
+using MRSK to coordinate all our deploys.
+
+13
+00:00:32,600 --> 00:00:35,500
+We've already moved out our first application.
+
+14
+00:00:35,500 --> 00:00:37,480
+We're moving out another one today,
+
+15
+00:00:37,480 --> 00:00:40,760
+and shortly thereafter, we will be moving on to,
+
+16
+00:00:40,760 --> 00:00:43,940
+hey, the largest application that we have in the cloud,
+
+17
+00:00:43,940 --> 00:00:47,680
+it is coming out hopefully within the cycle of work.
+
+18
+00:00:47,680 --> 00:00:49,800
+Let's see exactly how long it takes.
+
+19
+00:00:49,800 --> 00:00:52,320
+There is definitely some reconfiguration to do.
+
+20
+00:00:52,320 --> 00:00:54,240
+But since these applications were all
+
+21
+00:00:54,240 --> 00:00:56,800
+built for Kubernetes in the cloud,
+
+22
+00:00:56,800 --> 00:00:59,400
+they don't need a bunch of work because we're
+
+23
+00:00:59,400 --> 00:01:02,560
+using the same underlying containerization strategy,
+
+24
+00:01:02,560 --> 00:01:04,440
+and that works very well with MRSK.
+
+25
+00:01:04,440 --> 00:01:08,640
+we can take all of that work and reposition it within MRSK,
+
+26
+00:01:08,640 --> 00:01:09,900
+and off we go.
+
+27
+00:01:09,900 --> 00:01:12,440
+In our case, that's going to end up saving us
+
+28
+00:01:12,440 --> 00:01:15,640
+about $7 million over the next five years.
+
+29
+00:01:15,640 --> 00:01:19,600
+I will have a link in the description below to that analysis,
+
+30
+00:01:19,600 --> 00:01:23,180
+to that cost breakdown so you can see exactly how it figures out.
+
+31
+00:01:23,180 --> 00:01:25,040
+but I believe that MRSK is
+
+32
+00:01:25,040 --> 00:01:28,400
+a much broader tool than just something that's going to save
+
+33
+00:01:28,400 --> 00:01:31,520
+medium to large SaaS companies like ours a bunch of money.
+
+34
+00:01:31,520 --> 00:01:33,400
+It is also something that's going to provide
+
+35
+00:01:33,400 --> 00:01:38,500
+portability and escape hatch for anyone who starts on the cloud,
+
+36
+00:01:38,500 --> 00:01:39,560
+because the cloud makes a lot of
+
+37
+00:01:39,560 --> 00:01:41,080
+sense when you're just starting out.
+
+38
+00:01:41,080 --> 00:01:44,540
+but if you don't use something like MRSK and if you somehow
+
+39
+00:01:44,540 --> 00:01:48,520
+get tied up into some proprietary functions on the cloud,
+
+40
+00:01:48,520 --> 00:01:50,720
+it can be a little tricky to get out again.
+
+41
+00:01:50,720 --> 00:01:52,600
+so MRSK is a great way to start,
+
+42
+00:01:52,600 --> 00:01:54,960
+MRSK is a great way to exit.
+
+43
+00:01:54,960 --> 00:01:56,560
+you can use MRSK for all those things,
+
+44
+00:01:56,560 --> 00:01:58,840
+and I will go through all of it in this video,
+
+45
+00:01:58,840 --> 00:02:01,080
+showing you how to deploy a application
+
+46
+00:02:01,080 --> 00:02:02,720
+to two different cloud providers.
+
+47
+00:02:02,720 --> 00:02:05,300
+we're going to use Hetzner and we're going to use a DigitalOcean,
+
+48
+00:02:05,300 --> 00:02:08,280
+but you can use any cloud provider that provides you
+
+49
+00:02:08,280 --> 00:02:12,660
+with IP addresses that run Linux on VMs underneath.
+
+50
+00:02:12,660 --> 00:02:17,080
+now, MRSK requires a bit of knowledge of both Linux and of Docker.
+
+51
+00:02:17,080 --> 00:02:19,640
+So if you're still totally new to both of those concepts,
+
+52
+00:02:19,640 --> 00:02:21,820
+I would continue to recommend that you use
+
+53
+00:02:21,820 --> 00:02:25,280
+a fully managed platform as a service provider,
+
+54
+00:02:25,280 --> 00:02:30,280
+such as Fly.io, such as Render or even good old Heroku.
+
+55
+00:02:30,280 --> 00:02:34,440
+Those platforms will allow you to get further, faster,
+
+56
+00:02:34,440 --> 00:02:37,640
+if you don't know anything about systems operations at all.
+
+57
+00:02:37,640 --> 00:02:39,240
+And then hopefully in time you'll learn
+
+58
+00:02:39,240 --> 00:02:41,960
+and then you can jump on the MRSK wagon
+
+59
+00:02:41,960 --> 00:02:43,840
+once your application takes off
+
+60
+00:02:43,840 --> 00:02:45,040
+and you need a bunch of servers
+
+61
+00:02:45,040 --> 00:02:47,520
+and you find it too expensive to continue in the cloud
+
+62
+00:02:47,520 --> 00:02:49,080
+and you wanna run in your own bare metal.
+
+63
+00:02:49,080 --> 00:02:53,340
+So with no further ado, let's jump into the demo.
+
+64
+00:02:53,340 --> 00:02:55,380
+Let's start with a basic Rails application
+
+65
+00:02:55,380 --> 00:02:58,500
+built off the latest development version of Rails.
+
+66
+00:02:58,500 --> 00:03:01,220
+that version includes a new default Dockerfile
+
+67
+00:03:01,220 --> 00:03:03,820
+that MRSK will use to create the containers
+
+68
+00:03:03,820 --> 00:03:05,780
+we're going to deploy to the servers.
+
+69
+00:03:05,780 --> 00:03:08,000
+Otherwise, it is quite standard.
+
+70
+00:03:08,000 --> 00:03:11,140
+We're just using Tailwind to make it look nice,
+
+71
+00:03:11,140 --> 00:03:14,780
+but this is the blog that I have done videos on
+
+72
+00:03:14,780 --> 00:03:16,660
+about a million times over the years.
+
+73
+00:03:16,660 --> 00:03:19,800
+The one new feature that's interesting is this /up.
+
+74
+00:03:19,800 --> 00:03:22,660
+That is a default health check that Rails will also include
+
+75
+00:03:22,660 --> 00:03:26,860
+from the next version that tells the MRSK setup
+
+76
+00:03:26,860 --> 00:03:30,860
+and container coordination when the application
+
+77
+00:03:30,860 --> 00:03:33,500
+is ready to accept requests.
+
+78
+00:03:33,500 --> 00:03:35,440
+So we're gonna use that a little bit later,
+
+79
+00:03:35,440 --> 00:03:36,460
+but let's carry on.
+
+80
+00:03:36,460 --> 00:03:40,140
+The first thing we're gonna do is we're gonna set up
+
+81
+00:03:40,140 --> 00:03:42,580
+our application on Hetzner.
+
+82
+00:03:42,580 --> 00:03:45,380
+We can do that simply by creating single VM
+
+83
+00:03:45,380 --> 00:03:48,860
+that we're gonna name ship-app-1,
+
+84
+00:03:48,860 --> 00:03:52,640
+and we're gonna create that and then grab that IP address
+
+85
+00:03:52,640 --> 00:03:53,600
+And then we're gonna set it up
+
+86
+00:03:53,600 --> 00:03:55,620
+into the MRSK configuration file.
+
+87
+00:03:55,620 --> 00:03:58,820
+the MRSK configuration file is called deploy.yaml.
+
+88
+00:03:58,820 --> 00:04:00,700
+We can copy off the basics here
+
+89
+00:04:00,700 --> 00:04:03,280
+and pop it into the conflict directory,
+
+90
+00:04:03,280 --> 00:04:05,120
+which is where it's gonna look for it by default.
+
+91
+00:04:05,120 --> 00:04:06,440
+You can change that if you want.
+
+92
+00:04:06,440 --> 00:04:08,320
+It contains these basic setups,
+
+93
+00:04:08,320 --> 00:04:10,960
+what the service is gonna be named,
+
+94
+00:04:10,960 --> 00:04:14,140
+where the image lives, how to find it, the registry.
+
+95
+00:04:14,140 --> 00:04:16,120
+I'm just using Docker Hub here.
+
+96
+00:04:16,120 --> 00:04:18,580
+And then we copy the IP address that we just set up
+
+97
+00:04:18,580 --> 00:04:21,780
+and put it into the list of servers.
+
+98
+00:04:21,780 --> 00:04:26,500
+Now, we're going to set up an environment file.
+
+99
+00:04:26,500 --> 00:04:29,260
+We're going to actually set up an environment template and use
+
+100
+00:04:29,260 --> 00:04:32,380
+this envify setup to render the templates.
+
+101
+00:04:32,380 --> 00:04:33,880
+This is how we can protect our secrets.
+
+102
+00:04:33,880 --> 00:04:35,660
+We can look them up in something like
+
+103
+00:04:35,660 --> 00:04:37,700
+1Password as I'm doing here with op.
+
+104
+00:04:37,700 --> 00:04:39,900
+After I've done that with my most registered password,
+
+105
+00:04:39,900 --> 00:04:41,160
+I'm obviously not going to show you.
+
+106
+00:04:41,160 --> 00:04:44,880
+Let's check things into Git and then we're going to deploy.
+
+107
+00:04:44,880 --> 00:04:47,740
+This is basically all we need to get off to the races.
+
+108
+00:04:47,740 --> 00:04:49,100
+We're going to deploy this quickly.
+
+109
+00:04:49,100 --> 00:04:50,900
+You're going to see I'm going to fast forward a bit.
+
+110
+00:04:50,900 --> 00:04:58,380
+we're using QEMU as emulation to build an x86 image on a Mac M2,
+
+111
+00:04:58,380 --> 00:05:00,260
+which means it takes about four minutes to build
+
+112
+00:05:00,260 --> 00:05:03,200
+that image for the first time before any of the caches are warm.
+
+113
+00:05:03,200 --> 00:05:04,580
+So I'm going to fast forward here,
+
+114
+00:05:04,580 --> 00:05:07,380
+but as you can see, things are running along.
+
+115
+00:05:07,380 --> 00:05:08,700
+We built the image,
+
+116
+00:05:08,700 --> 00:05:10,500
+we pushed the image to the registry,
+
+117
+00:05:10,500 --> 00:05:12,940
+we pulled the image down on the server.
+
+118
+00:05:12,940 --> 00:05:14,860
+Then first, we start Traefik.
+
+119
+00:05:14,860 --> 00:05:16,900
+That is the zero deployment load
+
+120
+00:05:16,900 --> 00:05:19,420
+balancer we're using to swap between versions.
+
+121
+00:05:19,420 --> 00:05:22,240
+Then we run that health check I just talked about.
+
+122
+00:05:22,240 --> 00:05:24,780
+You can see we actually have to try to run it a couple of times
+
+123
+00:05:24,780 --> 00:05:28,000
+because the container is not ready right away,
+
+124
+00:05:28,000 --> 00:05:30,380
+but it's built into MRSK to retry that
+
+125
+00:05:30,380 --> 00:05:33,340
+up to seven times with a dynamic back off.
+
+126
+00:05:33,340 --> 00:05:35,140
+Then we start the container with
+
+127
+00:05:35,140 --> 00:05:37,540
+the correct versions and we prune the old versions,
+
+128
+00:05:37,540 --> 00:05:39,700
+and now we're actually running on
+
+129
+00:05:39,700 --> 00:05:43,200
+Hestner on the single VM. Let's check that out.
+
+130
+00:05:43,200 --> 00:05:47,580
+So we grab that IP again and go to the browser and see,
+
+131
+00:05:47,580 --> 00:05:51,680
+it is up and the application is running on a fresh DB.
+
+132
+00:05:51,680 --> 00:05:54,420
+So we can create our first post here and just see
+
+133
+00:05:54,420 --> 00:05:57,260
+that everything is working as we expected it.
+
+134
+00:05:57,260 --> 00:05:58,960
+It does. we're running in the cloud.
+
+135
+00:05:58,960 --> 00:06:00,720
+This was literally all it took.
+
+136
+00:06:00,720 --> 00:06:02,300
+So let's change our application.
+
+137
+00:06:02,300 --> 00:06:05,700
+Just do a quick change to one of the templates.
+
+138
+00:06:05,700 --> 00:06:09,360
+We check that change in and then we deploy a new version.
+
+139
+00:06:09,360 --> 00:06:10,780
+Again, I'm going to fast forward a bit,
+
+140
+00:06:10,780 --> 00:06:12,580
+but as you see these things scroll by,
+
+141
+00:06:12,580 --> 00:06:15,540
+you'll see that a lot of the steps are already cached
+
+142
+00:06:15,540 --> 00:06:19,500
+and it goes much faster when you deploy the second time.
+
+143
+00:06:19,500 --> 00:06:22,180
+Now, on this step,
+
+144
+00:06:22,180 --> 00:06:25,860
+you might see an exception if you've been running Docker for a while.
+
+145
+00:06:25,860 --> 00:06:29,340
+It has an arrow on QEMU where it might run out of memory.
+
+146
+00:06:29,340 --> 00:06:31,740
+if that happens to you, just restart the Docker engine.
+
+147
+00:06:31,740 --> 00:06:33,700
+In a real production environment,
+
+148
+00:06:33,700 --> 00:06:35,600
+most of the times you will actually use
+
+149
+00:06:35,600 --> 00:06:38,480
+a remote Docker buildx setup.
+
+150
+00:06:38,480 --> 00:06:41,980
+You can designate a single server to be your build server that runs
+
+151
+00:06:41,980 --> 00:06:46,780
+x86 when you build it x86 images and it goes much faster and you have no problems.
+
+152
+00:06:46,780 --> 00:06:53,980
+But we're going to blow through here again and see that everything is basically happening as it was
+
+153
+00:06:53,980 --> 00:06:58,460
+before. We check things out, we again run the health check and see that the new version is good
+
+154
+00:06:58,460 --> 00:07:04,380
+before we switch over from the old version and now we are live with our change. Really good posts.
+
+155
+00:07:04,380 --> 00:07:11,180
+But where did the old post go? We just created a post, it was gone. Oh, that is of course because
+
+156
+00:07:11,180 --> 00:07:12,700
+because we were running SQLite.
+
+157
+00:07:12,700 --> 00:07:14,180
+That is the default for Rails.
+
+158
+00:07:14,180 --> 00:07:16,860
+So let's set up a real shared database here.
+
+159
+00:07:16,860 --> 00:07:19,580
+we're gonna set that up with another vm on Hetzner,
+
+160
+00:07:19,580 --> 00:07:22,020
+just calling it ship-db.
+
+161
+00:07:22,020 --> 00:07:23,980
+And then let's also set up another app server
+
+162
+00:07:23,980 --> 00:07:26,380
+so that we can see that there's actually two app servers
+
+163
+00:07:26,380 --> 00:07:28,540
+accessing the same database.
+
+164
+00:07:28,540 --> 00:07:30,660
+And as we're doing that, as you're using a database,
+
+165
+00:07:30,660 --> 00:07:32,420
+of course you should always use a firewall
+
+166
+00:07:32,420 --> 00:07:34,380
+so that you don't expose MySQL
+
+167
+00:07:34,380 --> 00:07:37,400
+or whatever database you're using directly to the internet.
+
+168
+00:07:37,400 --> 00:07:39,500
+So we're gonna set up that firewall here.
+
+169
+00:07:39,500 --> 00:07:40,940
+We're gonna actually set up two firewalls,
+
+170
+00:07:40,940 --> 00:07:45,620
+one firewall for the app servers that just allows SSH and port 80.
+
+171
+00:07:45,620 --> 00:07:48,100
+Then we're going to set up a second firewall for
+
+172
+00:07:48,100 --> 00:07:51,440
+the database that just allows the two app servers that we have,
+
+173
+00:07:51,440 --> 00:07:57,440
+a direct connection to MySQL on port 3306.
+
+174
+00:07:57,440 --> 00:07:59,140
+So once you have that set up, you have
+
+175
+00:07:59,140 --> 00:08:00,540
+some basic security in place.
+
+176
+00:08:00,540 --> 00:08:01,940
+So it's that everyone on the Internet
+
+177
+00:08:01,940 --> 00:08:03,180
+can't just connect to your database.
+
+178
+00:08:03,180 --> 00:08:04,780
+That is a really good habit to do.
+
+179
+00:08:04,780 --> 00:08:07,180
+You may still want to do additional things on top of that.
+
+180
+00:08:07,180 --> 00:08:09,620
+You can use an SSH bastion server.
+
+181
+00:08:09,620 --> 00:08:11,800
+MRSK allows you to do all of that stuff.
+
+182
+00:08:11,800 --> 00:08:15,240
+But now we have our firewalls,
+
+183
+00:08:15,240 --> 00:08:17,080
+and we are setting those up obviously with
+
+184
+00:08:17,080 --> 00:08:19,520
+the correct IPs for the App servers is that we
+
+185
+00:08:19,520 --> 00:08:22,260
+can actually access them from the App servers.
+
+186
+00:08:22,260 --> 00:08:24,740
+But let's also set up a load balancer.
+
+187
+00:08:24,740 --> 00:08:26,140
+Now we have two App servers,
+
+188
+00:08:26,140 --> 00:08:28,520
+we want to access those on a single IP address,
+
+189
+00:08:28,520 --> 00:08:31,160
+we can set that up and that load balancer can be
+
+190
+00:08:31,160 --> 00:08:32,780
+configured to use the same health check
+
+191
+00:08:32,780 --> 00:08:34,520
+as we're using when we're deploying.
+
+192
+00:08:34,520 --> 00:08:35,720
+It's just going to be on /op,
+
+193
+00:08:35,720 --> 00:08:38,600
+we're going to be looking for a 200 OK,
+
+194
+00:08:38,600 --> 00:08:41,300
+and we're going to name that the Ship-LB-App.
+
+195
+00:08:41,300 --> 00:08:43,740
+So now we also have the App Server running.
+
+196
+00:08:43,740 --> 00:08:46,380
+Now we need to change the configuration of our application,
+
+197
+00:08:46,380 --> 00:08:49,380
+such that we use MySQL instead of SQLite,
+
+198
+00:08:49,380 --> 00:08:51,620
+that requires us to do the change to bundle,
+
+199
+00:08:51,620 --> 00:08:53,860
+to add the MySQL gem,
+
+200
+00:08:53,860 --> 00:08:55,500
+and then change the configuration.
+
+201
+00:08:55,500 --> 00:08:58,660
+We're going to pop in the actual host here.
+
+202
+00:08:58,660 --> 00:09:00,100
+In the new configuration,
+
+203
+00:09:00,100 --> 00:09:02,040
+as you can see it in the deploy YAML,
+
+204
+00:09:02,040 --> 00:09:04,900
+it looks very much if you've used Docker compose,
+
+205
+00:09:04,900 --> 00:09:05,760
+something else like that.
+
+206
+00:09:05,760 --> 00:09:08,360
+that MRSK has a couple of extra neat little features
+
+207
+00:09:08,360 --> 00:09:11,040
+for setting things up and copying files over
+
+208
+00:09:11,040 --> 00:09:12,280
+in files and directories.
+
+209
+00:09:12,280 --> 00:09:13,840
+You can read all about that
+
+210
+00:09:13,840 --> 00:09:15,920
+on the MRSK configuration walkthrough.
+
+211
+00:09:15,920 --> 00:09:19,540
+But for our purposes here, it's just a MySQL 8 image.
+
+212
+00:09:19,540 --> 00:09:21,420
+We're running on this host that we just set up for it.
+
+213
+00:09:21,420 --> 00:09:24,520
+And through the env clear dbhost,
+
+214
+00:09:24,520 --> 00:09:25,620
+we're gonna tell the app servers
+
+215
+00:09:25,620 --> 00:09:28,360
+where that db server is running.
+
+216
+00:09:28,360 --> 00:09:31,580
+So that's the basic configuration to get things set up.
+
+217
+00:09:31,580 --> 00:09:33,520
+Oh yes, let me show you the file.
+
+218
+00:09:33,520 --> 00:09:35,280
+We're gonna set up the database with.
+
+219
+00:09:35,280 --> 00:09:36,920
+we're going to initialize it as
+
+220
+00:09:36,920 --> 00:09:40,640
+the MySQL image is booted into a container for the first time.
+
+221
+00:09:40,640 --> 00:09:42,880
+It has this neat little initialization feature
+
+222
+00:09:42,880 --> 00:09:44,960
+where you can create the database you use.
+
+223
+00:09:44,960 --> 00:09:47,660
+Then Rails, again with the next version,
+
+224
+00:09:47,660 --> 00:09:50,560
+has a Docker entry point that will set up the database for you,
+
+225
+00:09:50,560 --> 00:09:51,560
+if it doesn't exist already,
+
+226
+00:09:51,560 --> 00:09:52,600
+and if it does exist,
+
+227
+00:09:52,600 --> 00:09:55,400
+it's going to run the migrations that are pending.
+
+228
+00:09:55,400 --> 00:09:58,320
+So that is what we need for the image.
+
+229
+00:09:58,320 --> 00:10:00,640
+Now we need to again configure Rails such that
+
+230
+00:10:00,640 --> 00:10:04,000
+the database YAML file knows about the new server.
+
+231
+00:10:04,000 --> 00:10:07,160
+you see we're referencing an environment variable here,
+
+232
+00:10:07,160 --> 00:10:11,560
+db_host, and we're just using the same root password.
+
+233
+00:10:11,560 --> 00:10:14,540
+You can of course set up a dedicated user if that's what you
+
+234
+00:10:14,540 --> 00:10:18,280
+desire but we're just going to follow the basic setup here.
+
+235
+00:10:18,280 --> 00:10:23,640
+We're going to add that MySQL root password to our nth template.
+
+236
+00:10:23,640 --> 00:10:27,440
+You see I just came up with a funny little password here and we're going to run
+
+237
+00:10:27,440 --> 00:10:33,240
+MRSK nvify one more time such that template gets rendered out into .env,
+
+238
+00:10:33,240 --> 00:10:35,760
+such that the App servers actually has
+
+239
+00:10:35,760 --> 00:10:38,540
+the MySQL password available when they're going to run.
+
+240
+00:10:38,540 --> 00:10:41,320
+Let's check all that into Git and then we're ready to
+
+241
+00:10:41,320 --> 00:10:44,420
+deploy another version of this whole setup.
+
+242
+00:10:44,420 --> 00:10:45,640
+We're actually going to use setup.
+
+243
+00:10:45,640 --> 00:10:49,040
+Setup is a special version that also sets up these accessories,
+
+244
+00:10:49,040 --> 00:10:51,080
+as we call them, the database on the side.
+
+245
+00:10:51,080 --> 00:10:53,120
+You only need to do that once as you configure them.
+
+246
+00:10:53,120 --> 00:10:54,800
+So normally, we just run deploy,
+
+247
+00:10:54,800 --> 00:10:56,440
+but when you're setting up a new accessory,
+
+248
+00:10:56,440 --> 00:10:59,280
+you're going to want to run MRSK for the first time.
+
+249
+00:10:59,280 --> 00:11:02,240
+Now, we're actually all set up here to see
+
+250
+00:11:02,240 --> 00:11:05,260
+the app servers hitting our application directly,
+
+251
+00:11:05,260 --> 00:11:06,600
+and it's going to hit the application,
+
+252
+00:11:06,600 --> 00:11:09,120
+and it's going to hit it with
+
+253
+00:11:09,120 --> 00:11:12,080
+the MySQL database on the back-end.
+
+254
+00:11:12,080 --> 00:11:14,060
+We can see that it's actually being properly
+
+255
+00:11:14,060 --> 00:11:19,200
+consistent by changing the index file we were changing before,
+
+256
+00:11:19,200 --> 00:11:22,820
+and once more deploying a new version of the app,
+
+257
+00:11:22,820 --> 00:11:25,260
+says that we can see the change without
+
+258
+00:11:25,260 --> 00:11:29,320
+losing the data we had put into our database.
+
+259
+00:11:29,320 --> 00:11:32,900
+So let's reload. Super duper good posts.
+
+260
+00:11:32,900 --> 00:11:35,480
+Awesome. Here's some other commands that you can run.
+
+261
+00:11:35,480 --> 00:11:37,480
+You can run "merc details" which gives you
+
+262
+00:11:37,480 --> 00:11:40,080
+an entire outlay of all the containers that we've started,
+
+263
+00:11:40,080 --> 00:11:41,280
+their names, their ports,
+
+264
+00:11:41,280 --> 00:11:42,420
+how long they've been up.
+
+265
+00:11:42,420 --> 00:11:45,840
+That is really helpful if you want to look at rollback,
+
+266
+00:11:45,840 --> 00:11:47,000
+which we're going to do in a second.
+
+267
+00:11:47,000 --> 00:11:50,320
+Here you can see we also have access to the app logs.
+
+268
+00:11:50,320 --> 00:11:52,500
+They just show all the health checks that have been going on.
+
+269
+00:11:52,500 --> 00:11:57,080
+Not terribly interesting, but here it is for both servers.
+
+270
+00:11:57,080 --> 00:11:58,560
+You can see it pulls for both of them and
+
+271
+00:11:58,560 --> 00:12:00,240
+displays them in the same setup.
+
+272
+00:12:00,240 --> 00:12:02,120
+We can do the same thing for the accessory.
+
+273
+00:12:02,120 --> 00:12:04,220
+It just gives us the boot log for
+
+274
+00:12:04,220 --> 00:12:06,780
+the MySQL 8 database that we've started.
+
+275
+00:12:06,780 --> 00:12:09,060
+Then the same thing for Traefik.
+
+276
+00:12:09,060 --> 00:12:11,720
+See, it is just looking at the back-end here.
+
+277
+00:12:11,720 --> 00:12:13,440
+Now, let's go back to those containers.
+
+278
+00:12:13,440 --> 00:12:16,300
+let's run a MRSK app containers instead of details.
+
+279
+00:12:16,300 --> 00:12:18,160
+Now we see all the containers that have been
+
+280
+00:12:18,160 --> 00:12:20,060
+started and then stopped again,
+
+281
+00:12:20,060 --> 00:12:21,960
+because that gives us the running
+
+282
+00:12:21,960 --> 00:12:23,960
+log of all the versions that we've been deploying.
+
+283
+00:12:23,960 --> 00:12:26,440
+We can take one of those older versions and we can
+
+284
+00:12:26,440 --> 00:12:28,620
+copy the version number,
+
+285
+00:12:28,620 --> 00:12:30,960
+those version numbers are just Git hashes,
+
+286
+00:12:30,960 --> 00:12:32,240
+but these are the ones that Merce
+
+287
+00:12:32,240 --> 00:12:35,080
+uses to determine whether you're on the right version or not.
+
+288
+00:12:35,080 --> 00:12:36,940
+Then we can do a rollback.
+
+289
+00:12:36,940 --> 00:12:38,140
+When we're doing a rollback,
+
+290
+00:12:38,140 --> 00:12:41,600
+we take a container that already lives on the server,
+
+291
+00:12:41,600 --> 00:12:43,200
+and then we say,
+
+292
+00:12:43,200 --> 00:12:45,260
+"Hey, stop the one you're currently running,
+
+293
+00:12:45,260 --> 00:12:47,300
+start that old one," and it goes really fast.
+
+294
+00:12:47,300 --> 00:12:48,600
+It doesn't have to build anything.
+
+295
+00:12:48,600 --> 00:12:51,100
+It doesn't even have to turn the image into a container.
+
+296
+00:12:51,100 --> 00:12:53,040
+Container already exists, and you can see here,
+
+297
+00:12:53,040 --> 00:12:57,000
+we've rolled back to just really good posts.
+
+298
+00:12:57,000 --> 00:13:00,760
+Now let's set up this IP address we have pointed to
+
+299
+00:13:00,760 --> 00:13:03,900
+the load balancer with a real domain name,
+
+300
+00:13:03,900 --> 00:13:05,940
+and we're going to do that on cloudflare.
+
+301
+00:13:05,940 --> 00:13:07,680
+I have a root domain here,
+
+302
+00:13:07,680 --> 00:13:10,200
+exitsoftware.io, and we can set that
+
+303
+00:13:10,200 --> 00:13:12,760
+up with a new DNS record for a subdomain.
+
+304
+00:13:12,760 --> 00:13:14,760
+We're going to use ship, and we're going to point it to
+
+305
+00:13:14,760 --> 00:13:17,600
+the IP address for the load balancer we had set up on
+
+306
+00:13:17,600 --> 00:13:20,500
+heads node that hits both of these apps at the same time.
+
+307
+00:13:20,500 --> 00:13:22,320
+So with that setup,
+
+308
+00:13:22,320 --> 00:13:25,900
+jump back here and hit it right on the domain, and boom.
+
+309
+00:13:25,900 --> 00:13:27,160
+You see exactly the same.
+
+310
+00:13:27,160 --> 00:13:28,840
+You see the beautiful little lock.
+
+311
+00:13:28,840 --> 00:13:30,720
+that means that there's SSL termination
+
+312
+00:13:30,720 --> 00:13:32,440
+happening at cloudflare,
+
+313
+00:13:32,440 --> 00:13:35,160
+and now your application is protected like that.
+
+314
+00:13:35,160 --> 00:13:37,000
+If we reload here,
+
+315
+00:13:37,000 --> 00:13:39,340
+you can see that all the assets are
+
+316
+00:13:39,340 --> 00:13:42,380
+being served over HTTP3 in fact,
+
+317
+00:13:42,380 --> 00:13:44,660
+and if we dive into these assets,
+
+318
+00:13:44,660 --> 00:13:47,320
+you can also see that they're being compressed.
+
+319
+00:13:47,320 --> 00:13:49,400
+we get all these things through cloudflare,
+
+320
+00:13:49,400 --> 00:13:51,580
+which means that the application that we're running,
+
+321
+00:13:51,580 --> 00:13:52,900
+does not have to worry about it.
+
+322
+00:13:52,900 --> 00:13:54,600
+You do not have to set up Let's Encrypt,
+
+323
+00:13:54,600 --> 00:13:56,540
+or Compression, or anything else.
+
+324
+00:13:56,540 --> 00:13:58,480
+You don't even have to have Nginx in front of it.
+
+325
+00:13:58,480 --> 00:14:01,260
+We're serving these assets straight off the Puma server,
+
+326
+00:14:01,260 --> 00:14:03,660
+but we're only doing it once per unique assets,
+
+327
+00:14:03,660 --> 00:14:06,540
+and then cloudflare or any other cdn you wish to use,
+
+328
+00:14:06,540 --> 00:14:09,340
+will take over and just use that.
+
+329
+00:14:09,340 --> 00:14:11,860
+So let's now try to create
+
+330
+00:14:11,860 --> 00:14:13,860
+a new post now that we're running in production.
+
+331
+00:14:13,860 --> 00:14:16,420
+Everything is great. Whoa, no, everything is not great.
+
+332
+00:14:16,420 --> 00:14:17,560
+What is going on?
+
+333
+00:14:17,560 --> 00:14:19,800
+4.2.2 here, we're getting an error message.
+
+334
+00:14:19,800 --> 00:14:24,060
+Let's scroll down, grab the request ID from the logs,
+
+335
+00:14:24,060 --> 00:14:26,100
+and look up what's going on.
+
+336
+00:14:26,100 --> 00:14:29,320
+The app logs feature has a -g,
+
+337
+00:14:29,320 --> 00:14:31,300
+which is a grep feature and you can give it
+
+338
+00:14:31,300 --> 00:14:34,720
+that request ID and we can look up just that request.
+
+339
+00:14:34,720 --> 00:14:36,240
+We can see when we look up that request,
+
+340
+00:14:36,240 --> 00:14:39,920
+we get the entire backtrace of the problem here,
+
+341
+00:14:39,920 --> 00:14:43,040
+and if we scroll up, we can see that there's an origin mismatch.
+
+342
+00:14:43,040 --> 00:14:44,560
+That is happening because we're doing
+
+343
+00:14:44,560 --> 00:14:46,560
+SSL termination with cloudfront,
+
+344
+00:14:46,560 --> 00:14:50,600
+but then we're forwarding the request to a network load balancer on
+
+345
+00:14:50,600 --> 00:14:54,660
+Hetzner that doesn't know anything about whether this is ssl or not.
+
+346
+00:14:54,660 --> 00:14:56,840
+It doesn't forward the correct headers.
+
+347
+00:14:56,840 --> 00:14:59,200
+We actually have to do that ourselves.
+
+348
+00:14:59,200 --> 00:15:02,440
+Luckily, the next version of Rails also have all that stuff built in.
+
+349
+00:15:02,440 --> 00:15:06,640
+we can talk along this config.assumeSSL feature
+
+350
+00:15:06,640 --> 00:15:10,200
+that basically just assumes that you're set up in the way that we've been doing it here,
+
+351
+00:15:10,200 --> 00:15:14,720
+that you have an SSL terminating load balancer cdn in front of your app,
+
+352
+00:15:14,720 --> 00:15:16,120
+and that your app should just assume that
+
+353
+00:15:16,120 --> 00:15:17,880
+everything is running over HTTPS.
+
+354
+00:15:17,880 --> 00:15:20,320
+when you do it, you can also turn on forceSSL,
+
+355
+00:15:20,320 --> 00:15:22,400
+which will set everything up with
+
+356
+00:15:22,400 --> 00:15:24,240
+the strict transport security and
+
+357
+00:15:24,240 --> 00:15:27,020
+all the other goodies that you would want when SSL is on.
+
+358
+00:15:27,020 --> 00:15:29,360
+Let's check that in and then redeploy
+
+359
+00:15:29,360 --> 00:15:32,020
+everything to the servers once more.
+
+360
+00:15:32,020 --> 00:15:34,280
+Redeploy is a variation
+
+361
+00:15:34,280 --> 00:15:36,120
+of deploy that just skips a couple of things.
+
+362
+00:15:36,120 --> 00:15:37,640
+It doesn't actually check whether
+
+363
+00:15:37,640 --> 00:15:39,600
+Docker is installed on the host already,
+
+364
+00:15:39,600 --> 00:15:41,400
+it doesn't prune, doesn't do a few of
+
+365
+00:15:41,400 --> 00:15:42,600
+those setup steps that you would
+
+366
+00:15:42,600 --> 00:15:44,320
+normally do when you deploy for the first time.
+
+367
+00:15:44,320 --> 00:15:45,940
+This is very convenient when you just want
+
+368
+00:15:45,940 --> 00:15:47,460
+things to go a little faster.
+
+369
+00:15:47,460 --> 00:15:49,380
+Faster it is, you can see here we
+
+370
+00:15:49,380 --> 00:15:51,380
+finished the entire deploy in 43 seconds.
+
+371
+00:15:51,380 --> 00:15:52,840
+Even though we're going through
+
+372
+00:15:52,840 --> 00:15:56,600
+QEMU emulation here to create our containers,
+
+373
+00:15:56,600 --> 00:15:58,680
+so much of that container was just
+
+374
+00:15:58,680 --> 00:16:00,760
+kept in cache and it goes really fast.
+
+375
+00:16:00,760 --> 00:16:04,500
+Again, it goes even faster if you're using an x86 build host.
+
+376
+00:16:04,500 --> 00:16:06,800
+We're now deploying things in 20 seconds or less.
+
+377
+00:16:06,800 --> 00:16:09,500
+Sometimes, it's really neat when you are used to
+
+378
+00:16:09,500 --> 00:16:14,740
+a slow build CI process that might take several minutes.
+
+379
+00:16:14,740 --> 00:16:17,940
+All right, let's go back and actually create that post again,
+
+380
+00:16:17,940 --> 00:16:20,340
+and you can see this time it succeeded.
+
+381
+00:16:20,340 --> 00:16:23,240
+We have both of our posts running the latest,
+
+382
+00:16:23,240 --> 00:16:27,080
+really super duper good post version of the app.
+
+383
+00:16:27,080 --> 00:16:30,860
+Two apps running behind a loan balancer to a database.
+
+384
+00:16:30,860 --> 00:16:34,260
+We are running pretty sweet here for a quite realistic setup.
+
+385
+00:16:34,260 --> 00:16:35,740
+So let's do it all again.
+
+386
+00:16:35,740 --> 00:16:37,540
+This time on DigitalOcean,
+
+387
+00:16:37,540 --> 00:16:41,940
+we will set up the entire system that we just created with three VMs,
+
+388
+00:16:41,940 --> 00:16:44,660
+two for app, one for a DP.
+
+389
+00:16:44,660 --> 00:16:47,300
+We're going to set up again, including everything.
+
+390
+00:16:47,300 --> 00:16:49,480
+We're going to set it up with the firewalls,
+
+391
+00:16:49,480 --> 00:16:51,980
+we're going to set it up with the load balancer,
+
+392
+00:16:51,980 --> 00:16:56,380
+we're going to add everything up as you would in real life,
+
+393
+00:16:56,380 --> 00:16:59,700
+and you'll see just how incredibly quick it is to
+
+394
+00:16:59,700 --> 00:17:04,140
+port your system from one provider to another.
+
+395
+00:17:04,140 --> 00:17:07,100
+This is really important not just hopping back and forth
+
+396
+00:17:07,100 --> 00:17:12,660
+between cloud providers, but obviously hopping from a cloud provider to bare metal hardware
+
+397
+00:17:12,660 --> 00:17:17,980
+you own yourself once that equation makes sense to your business here.
+
+398
+00:17:17,980 --> 00:17:19,660
+so this is really the power of MRSK.
+
+399
+00:17:19,660 --> 00:17:24,220
+it gives you incredible portability, jumping back and forth between cloud providers, jumping
+
+400
+00:17:24,220 --> 00:17:27,660
+back and forth between bare metal setups that you might have yourself.
+
+401
+00:17:27,660 --> 00:17:29,480
+You're never going to be locked in.
+
+402
+00:17:29,480 --> 00:17:34,400
+this is all just running on top of docker that has been instrumented through MRSK
+
+403
+00:17:34,400 --> 00:17:39,100
+and you can run it on any set of IPs that are thrown,
+
+404
+00:17:39,100 --> 00:17:41,440
+the deploy.yaml's way.
+
+405
+00:17:41,440 --> 00:17:44,460
+So let's set up the new deploy.do.yaml.
+
+406
+00:17:44,460 --> 00:17:46,640
+This is the second deploy file,
+
+407
+00:17:46,640 --> 00:17:48,860
+and it's going to be a specialization of the first.
+
+408
+00:17:48,860 --> 00:17:51,940
+So we just need to boil it down to the things that need to
+
+409
+00:17:51,940 --> 00:17:53,340
+change and the things that need to
+
+410
+00:17:53,340 --> 00:17:55,160
+change are just the IP addresses.
+
+411
+00:17:55,160 --> 00:17:56,440
+Everything else we're going to reuse
+
+412
+00:17:56,440 --> 00:17:58,740
+the configuration form, Hetcher form.
+
+413
+00:17:58,740 --> 00:18:01,040
+We copy and paste in the app servers,
+
+414
+00:18:01,040 --> 00:18:04,220
+we copy and paste in the database server,
+
+415
+00:18:04,220 --> 00:18:07,760
+and then we're basically going to be ready to go
+
+416
+00:18:07,760 --> 00:18:10,520
+and to deploy this whole thing on DigitalOcean.
+
+417
+00:18:10,520 --> 00:18:14,100
+We use -d, that is short for destination.
+
+418
+00:18:14,100 --> 00:18:16,940
+That is what Merce calls these alternate configuration.
+
+419
+00:18:16,940 --> 00:18:18,360
+That destination could be staging,
+
+420
+00:18:18,360 --> 00:18:19,420
+it could be Beta,
+
+421
+00:18:19,420 --> 00:18:21,400
+it could be another cloud provider,
+
+422
+00:18:21,400 --> 00:18:22,940
+whatever you like to use.
+
+423
+00:18:22,940 --> 00:18:24,340
+So it's running through everything that we've
+
+424
+00:18:24,340 --> 00:18:26,160
+seen a couple of times before now,
+
+425
+00:18:26,160 --> 00:18:27,840
+and obviously I sped that up a little bit.
+
+426
+00:18:27,840 --> 00:18:29,860
+It takes a little longer when you deploy it for the first time,
+
+427
+00:18:29,860 --> 00:18:30,840
+we have to install the software,
+
+428
+00:18:30,840 --> 00:18:31,960
+but it doesn't take that long.
+
+429
+00:18:31,960 --> 00:18:33,520
+It takes just a couple of minutes.
+
+430
+00:18:33,520 --> 00:18:38,840
+Now, let's change over our ship.exit software.io to
+
+431
+00:18:38,840 --> 00:18:42,060
+run on DigitalOcean and then see if we're running there.
+
+432
+00:18:42,060 --> 00:18:44,320
+We are. We're running the same version of the app,
+
+433
+00:18:44,320 --> 00:18:46,760
+but obviously with a new database from scratch,
+
+434
+00:18:46,760 --> 00:18:48,920
+we can create our new setup here,
+
+435
+00:18:48,920 --> 00:18:50,880
+and now we're running on DigitalOcean.
+
+436
+00:18:50,880 --> 00:18:52,340
+Let me show another quick feature.
+
+437
+00:18:52,340 --> 00:18:54,960
+This is really neat. This is the audit feature.
+
+438
+00:18:54,960 --> 00:18:58,080
+It is quite nice to see what's been going on the server,
+
+439
+00:18:58,080 --> 00:18:59,680
+who's been doing what, who's been pushing
+
+440
+00:18:59,680 --> 00:19:02,100
+different versions to the application.
+
+441
+00:19:02,100 --> 00:19:03,260
+and you can see all that in here.
+
+442
+00:19:03,260 --> 00:19:05,340
+It keeps a log on each servers.
+
+443
+00:19:05,340 --> 00:19:07,540
+And there's even a bonus feature I'm not gonna show here,
+
+444
+00:19:07,540 --> 00:19:10,420
+but you can post these audit broadcasts
+
+445
+00:19:10,420 --> 00:19:13,420
+to a campfire and base camp or another chat tool
+
+446
+00:19:13,420 --> 00:19:16,800
+that you might be using and follow along as you would.
+
+447
+00:19:16,800 --> 00:19:17,640
+It's all built in.
+
+448
+00:19:17,640 --> 00:19:19,840
+In addition to that, we can individual commands,
+
+449
+00:19:19,840 --> 00:19:21,660
+executions on the servers.
+
+450
+00:19:21,660 --> 00:19:24,360
+Here we're running an execution on both of the servers
+
+451
+00:19:24,360 --> 00:19:26,900
+and we're just asking for the Rails version
+
+452
+00:19:26,900 --> 00:19:28,060
+on both of those things.
+
+453
+00:19:28,060 --> 00:19:32,020
+And you can see here we're running 7.1, the alpha version.
+
+454
+00:19:32,020 --> 00:19:34,700
+We can also start a console, and we're
+
+455
+00:19:34,700 --> 00:19:36,580
+going to start a console here on DigitalOcean.
+
+456
+00:19:36,580 --> 00:19:39,780
+It is basically going to boot up an interactive session
+
+457
+00:19:39,780 --> 00:19:42,460
+on the existing container that already runs the app.
+
+458
+00:19:42,460 --> 00:19:44,340
+If you don't use dash reuse, you will
+
+459
+00:19:44,340 --> 00:19:46,860
+start a new container, which can be helpful in some cases.
+
+460
+00:19:46,860 --> 00:19:48,740
+But here, we're just reusing the same thing.
+
+461
+00:19:48,740 --> 00:19:51,300
+And you will see we can interact with our domain model,
+
+462
+00:19:51,300 --> 00:19:52,140
+with our database.
+
+463
+00:19:52,140 --> 00:19:54,300
+We can update that domain model and the database
+
+464
+00:19:54,300 --> 00:19:55,140
+straight from here.
+
+465
+00:19:55,140 --> 00:19:58,940
+If we pop back in, boom, you can see from the console.
+
+466
+00:19:58,940 --> 00:20:04,580
+That is very helpful and makes it easy to operate your application in production.
+
+467
+00:20:04,580 --> 00:20:09,660
+So, if we cut out of that, we are basically done.
+
+468
+00:20:09,660 --> 00:20:12,820
+now we can run MRSK remove because we don't want to leave our application
+
+469
+00:20:12,820 --> 00:20:14,260
+running on these cloud hosts.
+
+470
+00:20:14,260 --> 00:20:15,500
+I'm going to take everything away.
+
+471
+00:20:15,500 --> 00:20:19,540
+There's a confirmation here when you remove the database because obviously your
+
+472
+00:20:19,540 --> 00:20:21,860
+data's going to be blown away in this instance.
+
+473
+00:20:21,860 --> 00:20:24,940
+We're going to also remove it from Digital Ocean.
+
+474
+00:20:24,940 --> 00:20:26,900
+And that is it.
+
