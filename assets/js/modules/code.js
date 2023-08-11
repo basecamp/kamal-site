@@ -21,6 +21,8 @@ function ready() {
 
       button.innerText = 'Copied';
 
+      button.blur();
+
       setTimeout(function() {
 
         button.innerText = 'Copy';
