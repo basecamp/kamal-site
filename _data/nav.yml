@@ -3,11 +3,11 @@
   collection: "docs"
 
 - title: "View the source"
-  url: "https://github.com/mrsked/mrsk"
+  url: "https://github.com/basecamp/kamal"
   external: true
 
 - title: "Ask a question"
-  url: "https://github.com/mrsked/mrsk/discussions"
+  url: "https://github.com/basecamp/kamal/discussions"
   external: true
 
 - title: "Join the Discord"

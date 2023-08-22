@@ -5,7 +5,7 @@ require 'net/http'
 require 'date'
 require 'yaml'
 
-response = Net::HTTP.get_response(URI('https://api.github.com/repos/mrsked/mrsk/releases/latest'))
+response = Net::HTTP.get_response(URI('https://api.github.com/repos/basecamp/kamal/releases/latest'))
 
 if response.code == '200'
 

@@ -1,9 +1,9 @@
-title: "MRSK"
+title: "Kamal"
 description: "Deploy web apps anywhere"
-url: https://mrsk.dev
+url: https://kamal-deploy.org
 image: /assets/images/opengraph.png
-github: mrsked
-repository: mrsked/mrsk-site
+github: basecamp
+repository: basecamp/kamal-site
 markdown: kramdown
 highlighter: rouge
 
