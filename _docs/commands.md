@@ -7,9 +7,9 @@ order: 3
 
 ## Running commands on servers
 
-Execute a one-off command on all servers:
+#### Run command on all servers
 
-```console
+```bash
 $ kamal app exec 'ruby -v'
 App Host: 192.168.0.1
 ruby 3.1.3p185 (2022-11-24 revision 1a6b16756e) [x86_64-linux]
@@ -18,17 +18,15 @@ App Host: 192.168.0.2
 ruby 3.1.3p185 (2022-11-24 revision 1a6b16756e) [x86_64-linux]
 ```
 
-Execute a command on just the primary server:
-
-```console
+#### Run command on primary server
+```bash
 $ kamal app exec --primary 'cat .ruby-version'
 App Host: 192.168.0.1
 3.1.3
 ```
 
-Execute the `bin/rails` command on all servers:
-
-```console
+#### Run Rails command on all servers
+```bash
 $ kamal app exec 'bin/rails about'
 App Host: 192.168.0.1
 About your application's environment
@@ -55,9 +53,8 @@ Database adapter          sqlite3
 Database schema version   20221231233303
 ```
 
-Use the Rails runner on just the primary server:
-
-```console
+#### Run Rails runner on primary server
+```bash
 $ kamal app exec -p 'bin/rails runner "puts Rails.application.config.time_zone"'
 UTC
 ```
@@ -76,6 +73,7 @@ kamal app exec -i --reuse bash
 # Starts a Rails console in a new container made from the most recent app image
 kamal app exec -i 'bin/rails console'
 ```
+
 
 ## Running details to show state of containers
 
