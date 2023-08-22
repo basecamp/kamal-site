@@ -125,6 +125,17 @@ From the example above, we can see that `e5d9d7c2b898289dfbc5f7f1334140d984eedae
 
 If you wish to remove the entire application, including Traefik, containers, images, and registry session, you can run `kamal remove`. This will leave the servers clean.
 
+## Rebooting Traefik
+
+If you make changes to Traefik args or labels, you'll need to reboot with:
+
+`kamal traefik reboot`
+
+In production, reboot the Traefik containers one by one with a slower but safer approach, using a rolling reboot:
+
+`kamal traefik reboot --rolling`
+
+
 ## Checking and setting the lock
 
 Commands that are unsafe to run concurrently will take a deploy lock while they run. The lock is the `kamal_lock` directory on the primary server.

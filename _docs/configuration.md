@@ -33,6 +33,8 @@ This template can safely be checked into git. Then everyone deploying the app ca
 
 If you need separate env variables for different destinations, you can set them with `.env.destination.erb` for the template, which will generate `.env.staging` when run with `kamal envify -d staging`.
 
+**Note:** If you utilize biometrics with 1Password you can remove the `session_token` related parts in the example and just call `op read op://Vault/Docker Hub/password -n`.
+
 #### Bitwarden as a secret store
 
 If you are using open source secret store like bitwarden, you can create `.env.erb` as a template which looks up the secrets.
@@ -67,6 +69,7 @@ $ bw list items --search SOME_SECRET | jq
 
 ... and extract the `id` of `SOME_SECRET` from the `json` above and use in the `erb` below.
 
+
 Example `.env.erb` file:
 
 ```erb
@@ -76,6 +79,7 @@ SOME_SECRET=<%= `bw get notes 123123123-1232-4224-222f-234234234234 --session #{
 ```
 
 Then everyone deploying the app can run `kamal envify` and kamal will generate `.env`
+
 
 ## Using another registry than Docker Hub
 
@@ -92,6 +96,19 @@ registry:
 
 A reference to secret `DOCKER_REGISTRY_TOKEN` will look for `ENV["DOCKER_REGISTRY_TOKEN"]` on the machine running Kamal.
 
+### Using AWS ECR as the container registry
+
+AWS ECR's access token is only valid for 12hrs. In order to not have to manually regenerate the token every time, you can use ERB in the `deploy.yml` file to shell out to the `aws` cli command, and obtain the token:
+
+```yaml
+registry:
+  server: <your aws account id>.dkr.ecr.<your aws region id>.amazonaws.com
+  username: AWS
+  password: <%= %x(aws ecr get-login-password) %>
+```
+
+You will need to have the `aws` CLI installed locally for this to work.
+
 ## Using a different SSH user than root
 
 The default SSH user is root, but you can change it using `ssh/user`:
@@ -101,13 +118,13 @@ ssh:
   user: app
 ```
 
-If you are using non-root user, you need to bootstrap your servers manually, before using them with Kamal. On Ubuntu, you'd do:
+If you are using non-root user (`app` as above example), you need to bootstrap your servers manually, before using them with Kamal. On Ubuntu, you'd do:
 
 ```bash
 sudo apt update
 sudo apt upgrade -y
 sudo apt install -y docker.io curl git
-sudo usermod -a -G docker ubuntu
+sudo usermod -a -G docker app
 ```
 
 ## Using a proxy SSH host
@@ -132,6 +149,15 @@ Also if you need specific proxy command to connect to the server:
 ssh:
   proxy_command: aws ssm start-session --target %h --document-name AWS-StartSSHSession --parameters 'portNumber=%p' --region=us-east-1 ## ssh via aws ssm
 ```
+
+## Using a different SSH log level
+
+```yaml
+ssh:
+  log_level: debug
+```
+
+Valid levels are `debug`, `info`, `warn`, `error` and `fatal` (default).
 
 ## Using env variables
 
@@ -162,6 +188,12 @@ The list of secret env variables will be expanded at run time from your local ma
 If the referenced secret ENVs are missing, the configuration will be halted with a `KeyError` exception.
 
 **Note:** Marking an ENV as secret currently only redacts its value in the output for Kamal. The ENV is still injected in the clear into the container at runtime.
+
+## Using Kamal env variables
+
+The following env variables are set when your container runs:
+
+`KAMAL_CONTAINER_NAME` : this contains the current container name and version
 
 ## Using volumes
 
@@ -198,12 +230,6 @@ and then it will mount the volume ...
 ```
 docker run ... --volume $PWD/kamal-demo-db/data:/var/lib/mysql
 ```
-
-## Kamal env variables
-
-The following env variables are set when your container runs:
-
-`KAMAL_CONTAINER_NAME` : this contains the current container name and version
 
 ## Using different roles for servers
 
@@ -243,7 +269,7 @@ You can specialize the default Traefik rules by setting labels on the containers
 labels:
   traefik.http.routers.hey-web.rule: Host(`app.hey.com`)
 ```
-Traefik rules are in the "service-role-destination" format. The default role will be `web` if no rule is specified. If the destination is not specified, it is not included. To give an example, the above rule would become "traefik.http.routers.hey-web.rule" if it was for the "staging" destination.
+Traefik rules are in the "service-role-destination" format. The default role will be `web` if no rule is specified. If the destination is not specified, it is not included. To give an example, the above rule would become "traefik.http.routers.hey-web-staging.rule" if it was for the "staging" destination.
 
 **Note:** The backticks are needed to ensure the rule is passed in correctly and not treated as command substitution by Bash!
 
@@ -299,6 +325,16 @@ servers:
 ```
 
 That'll start the job containers with `docker run ... --cap-add --cpu-count 4 ...`.
+
+## Setting a minimum version
+
+You can set the minimum Kamal version with:
+
+```yaml
+minimum_version: 0.13.3
+```
+
+**Note:** versions <= 0.13.2 will ignore this setting.
 
 ## Configuring logging
 
@@ -380,6 +416,37 @@ builder:
   dockerfile: "../Dockerfile.xyz"
   context: ".."
 ```
+
+## Using multistage builder cache
+
+Docker multistage build cache can singlehandedly speed up your builds by a lot. Currently Kamal only supports using the GHA cache or the Registry cache:
+
+```yaml
+# Using GHA cache
+builder:
+  cache:
+    type: gha
+
+# Using Registry cache
+builder:
+  cache:
+    type: registry
+
+# Using Registry cache with different cache image
+builder:
+  cache:
+    type: registry
+    # default image name is <image>-build-cache
+    image: application-cache-image
+
+# Using Registry cache with additinonal cache-to options
+builder:
+  cache:
+    type: registry
+    options: mode=max,image-manifest=true,oci-mediatypes=true
+```
+
+For further insights into build cache optimization, check out documentation on Docker's official website: https://docs.docker.com/build/cache/.
 
 ## Using build secrets for new images
 
@@ -583,39 +650,40 @@ servers:
 
 This assumes the Cron settings are stored in `config/crontab`.
 
-## Using audit broadcasts
+## Healthcheck
 
-If you'd like to broadcast audits of deploys, rollbacks, etc to a chatroom or elsewhere, you can configure the `audit_broadcast_cmd` setting with the path to a bin file that will be passed the audit line as the first argument:
+Kamal uses Docker healthchecks to check the health of your application during deployment. Traefik uses this same healthcheck status to determine when a container is ready to receive traffic.
 
-```yaml
-audit_broadcast_cmd:
-  bin/audit_broadcast
-```
-
-The broadcast command could look something like:
-
-```bash
-#!/usr/bin/env bash
-curl -q -d content="[My App] ${1}" https://3.basecamp.com/XXXXX/integrations/XXXXX/buckets/XXXXX/chats/XXXXX/lines
-```
-
-That'll post a line like follows to a preconfigured chatbot in Basecamp:
-
-```
-[My App] [dhh] Rolled back to version d264c4e92470ad1bd18590f04466787262f605de
-```
-
-## Custom healthcheck
-
-Kamal defaults to checking the health of your application again `/up` on port 3000 up to 7 times. You can tailor the behaviour with the `healthcheck` setting:
+The healthcheck defaults to testing the HTTP response to the path `/up` on port 3000, up to 7 times. You can tailor this behaviour with the `healthcheck` setting:
 
 ```yaml
 healthcheck:
   path: /healthz
   port: 4000
   max_attempts: 7
+  interval: 20s
 ```
 
 This will ensure your application is configured with a traefik label for the healthcheck against `/healthz` and that the pre-deploy healthcheck that Kamal performs is done against the same path on port 4000.
 
-The healthcheck also allows for an optional `max_attempts` setting, which will attempt the healthcheck up to the specified number of times before failing the deploy. This is useful for applications that take a while to start up. The default is 7.
+You can also specify a custom healthcheck command, which is useful for non-HTTP services:
+
+```yaml
+healthcheck:
+  cmd: /bin/check_health
+```
+
+The top-level healthcheck configuration applies to all services that use Traefik, by default. You can also specialize the configuration at the role level:
+
+```yaml
+servers:
+  job:
+    hosts: ...
+    cmd: bin/jobs
+    healthcheck:
+      cmd: bin/check
+```
+
+The healthcheck allows for an optional `max_attempts` setting, which will attempt the healthcheck up to the specified number of times before failing the deploy. This is useful for applications that take a while to start up. The default is 7.
+
+The HTTP health checks assume that the `curl` command is available inside the container. If that's not the case, use the healthcheck's `cmd` option to specify an alternative check that the container supports.
