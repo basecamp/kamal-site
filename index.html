@@ -22,7 +22,7 @@ layout: default
 </div -->
 
 <div class="intro">
-  <article>
+  <article>    
     <p>Kamal uses the dynamic reverse-proxy Traefik to hold requests, while the new app container is started and the old one is stopped — working seamlessly across multiple hosts, using SSHKit to execute commands. Originally built for Rails apps, Kamal will work with any type of web app that can be containerized with Docker.</p>
     <ul>
       <li><a href="{{ 'docs/overview' | absolute_url }}" class="button" aria-label="Read the docs">Read the docs</a></li>
@@ -39,6 +39,7 @@ layout: default
       <p>Kamal seeks to bring the advance in ergonomics pioneered by these commercial offerings to deploying web apps anywhere. Whether that’s low-cost cloud options without the managed-service markup from the likes of Digital Ocean, Hetzner, OVH, etc, or it’s your own colocated bare metal. To Kamal, it’s all the same. Feed the config file a list of IP addresses with vanilla Ubuntu servers that have seen no prep beyond an added SSH key, and you’ll be running in literally minutes.</p>
       <p>This approach gives you enormous portability. You can have your web app deployed on several clouds at ease like this. Or you can buy the baseline with your own hardware, then deploy to a cloud before a big seasonal spike to get more capacity. When you’re not locked into a single provider from a tooling perspective, there are a lot of compelling options available.</p>
       <p>Ultimately, Kamal is meant to compress the complexity of going to production using open source tooling that isn’t tied to any commercial offering. Not to zero, mind you. You’re probably still better off with a fully managed service if basic Linux or Docker is still difficult, but as soon as those concepts are familiar, you’ll be ready to go with Kamal.</p>
+
       <hr class="ornament" />
       <h3>Why not just run Capistrano, Kubernetes or Docker Swarm?</h3>
       <p>Kamal basically is Capistrano for Containers, without the need to carefully prepare servers in advance. No need to ensure that the servers have just the right version of Ruby or other dependencies you need. That all lives in the Docker image now. You can boot a brand new Ubuntu (or whatever) server, add it to the list of servers in Kamal, and it’ll be auto-provisioned with Docker, and run right away. Docker’s layer caching also speeds up deployments with less mucking about on the server. And the images built for Kamal can be used for CI or later introspection.</p>
@@ -90,6 +91,11 @@ kamal deploy
         <li>Prune unused images and stopped containers to ensure servers don’t fill up.</li>
       </ol>
       <p>Voila! All the servers are now serving the app on port 80. If you’re just running a single server, you’re ready to go. If you’re running multiple servers, you need to put a load balancer in front of them.</p>
+      
+      <hr class="ornament" />
+      <h3>Name</h3>
+      <p>Kamal is named after <a href="https://exploration.marinersmuseum.org/object/kamal/">the ancient Arab navigational tool</a> used by sailors to keep course by determining their latitude via the North Star. (Kamal was formerly known as MRSK).</p>
+      
     </article>
   </section>
 </div>
