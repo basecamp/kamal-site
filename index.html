@@ -25,7 +25,7 @@ layout: default
   <article>    
     <p>Kamal uses the dynamic reverse-proxy Traefik to hold requests, while the new app container is started and the old one is stopped — working seamlessly across multiple hosts, using SSHKit to execute commands. Originally built for Rails apps, Kamal will work with any type of web app that can be containerized with Docker.</p>
     <ul>
-      <li><a href="{{ 'docs/overview' | absolute_url }}" class="button" aria-label="Read the docs">Read the docs</a></li>
+      <li><a href="{{ 'docs/installation' | absolute_url }}" class="button" aria-label="Read the docs">Read the docs</a></li>
       <li><a href="https://github.com/basecamp/kamal" class="button" aria-label="View the source">View the source</a></li>
     </ul>
   </article>
@@ -40,57 +40,12 @@ layout: default
       <p>This approach gives you enormous portability. You can have your web app deployed on several clouds at ease like this. Or you can buy the baseline with your own hardware, then deploy to a cloud before a big seasonal spike to get more capacity. When you’re not locked into a single provider from a tooling perspective, there are a lot of compelling options available.</p>
       <p>Ultimately, Kamal is meant to compress the complexity of going to production using open source tooling that isn’t tied to any commercial offering. Not to zero, mind you. You’re probably still better off with a fully managed service if basic Linux or Docker is still difficult, but as soon as those concepts are familiar, you’ll be ready to go with Kamal.</p>
 
-      <hr class="ornament" />
+      <hr class="ornament">
       <h3>Why not just run Capistrano, Kubernetes or Docker Swarm?</h3>
       <p>Kamal basically is Capistrano for Containers, without the need to carefully prepare servers in advance. No need to ensure that the servers have just the right version of Ruby or other dependencies you need. That all lives in the Docker image now. You can boot a brand new Ubuntu (or whatever) server, add it to the list of servers in Kamal, and it’ll be auto-provisioned with Docker, and run right away. Docker’s layer caching also speeds up deployments with less mucking about on the server. And the images built for Kamal can be used for CI or later introspection.</p>
       <p>Kubernetes is a beast. Running it yourself on your own hardware is not for the faint of heart. It’s a fine option if you want to run on someone else’s platform, either transparently <a href="https://thenewstack.io/render-cloud-deployment-with-less-engineering/">like Render</a> or explicitly on AWS/GCP, but if you’d like the freedom to move between cloud and your own hardware, or even mix the two, Kamal is much simpler. You can see everything that’s going on, it’s just basic Docker commands being called.</p>
       <p>Docker Swarm is much simpler than Kubernetes, but it’s still built on the same declarative model that uses state reconciliation. Kamal is intentionally designed around imperative commands, like Capistrano.</p>
-      <p>Ultimately, there are a myriad of ways to deploy web apps, but this is the toolkit we’re using at <a href="https://37signals.com">37signals</a> to bring <a href="https://www.hey.com">HEY</a> <a href="https://world.hey.com/dhh/why-we-re-leaving-the-cloud-654b47e0">home from the cloud</a> without losing the advantages of modern containerization tooling.</p>
-      <hr class="ornament" />
-      <h3>Installation</h3>
-      <p>If you have a Ruby environment available, you can install Kamal globally with:</p>
-{% highlight sh %}
-gem install kamal
-{% endhighlight %}
-      <p>… otherwise, you can run a dockerized version via an alias (add this to your .bashrc or similar to simplify re-use):</p>
-{% highlight sh %}
-alias kamal='docker run --rm -it -v $HOME/.ssh:/root/.ssh -v /var/run/docker.sock:/var/run/docker.sock -v ${PWD}/:/workdir  ghcr.io/basecamp/kamal'
-{% endhighlight %}
-      <p>Then, inside your app directory, run <code>kamal init</code> (or <code>kamal init --bundle</code> within Rails 7+ apps where you want a bin/kamal binstub). Now edit the new file <code>config/deploy.yml</code>. It could look as simple as this:</p>
-{% highlight yaml %}
-service: hey
-image: 37s/hey
-servers:
-  - 192.168.0.1
-  - 192.168.0.2
-registry:
-  username: registry-user-name
-  password:
-    - KAMAL_REGISTRY_PASSWORD
-env:
-  secret:
-    - RAILS_MASTER_KEY
-{% endhighlight %}
-      <p>Then edit your <code>.env</code> file to add your registry password as <code>KAMAL_REGISTRY_PASSWORD</code> (and your <code>RAILS_MASTER_KEY</code> for production with a Rails app).</p>
-      <p>Now you’re ready to deploy to the servers:</p>
-{% highlight sh %}
-kamal deploy
-{% endhighlight %}
-      <p>This will:</p>
-      <ol>
-        <li>Connect to the servers over SSH (using root by default, authenticated by your ssh key)</li>
-        <li>Install Docker on any server that might be missing it (using apt-get): root access is needed via ssh for this.</li>
-        <li>Log into the registry both locally and remotely</li>
-        <li>Build the image using the standard Dockerfile in the root of the application.</li>
-        <li>Push the image to the registry.</li>
-        <li>Pull the image from the registry onto the servers.</li>
-        <li>Ensure Traefik is running and accepting traffic on port 80.</li>
-        <li>Ensure your app responds with <code>200 OK</code> to <code>GET /up</code>.</li>
-        <li>Start a new container with the version of the app that matches the current git version hash.</li>
-        <li>Stop the old container running the previous version of the app.</li>
-        <li>Prune unused images and stopped containers to ensure servers don’t fill up.</li>
-      </ol>
-      <p>Voila! All the servers are now serving the app on port 80. If you’re just running a single server, you’re ready to go. If you’re running multiple servers, you need to put a load balancer in front of them.</p>
+      <p>Ultimately, there are a myriad of ways to deploy web apps, but this is the toolkit we’ve used at <a href="https://37signals.com">37signals</a> to bring <a href="https://www.hey.com">HEY</a> and all our other formerly cloud-hosted applications <a href="https://world.hey.com/dhh/we-have-left-the-cloud-251760fb">home to our own hardware</a> – without losing the advantages of modern containerization tooling.</p>
       
       <hr class="ornament" />
       <h3>Name</h3>

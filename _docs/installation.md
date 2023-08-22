@@ -1,6 +1,6 @@
 ---
 title: Installation
-order: 2
+order: 1
 ---
 
 # Installation
@@ -11,10 +11,10 @@ If you have a Ruby environment available, you can install Kamal globally with:
 gem install kamal
 ```
 
-... otherwise, you can run a dockerized version via an alias (add this to your .bashrc or similar to simplify re-use):
+...otherwise, you can run a dockerized version via an alias (add this to your .bashrc or similar to simplify re-use):
 
 ```sh
-alias kamal='docker run --rm -it -v $HOME/.ssh:/root/.ssh -v /var/run/docker.sock:/var/run/docker.sock -v ${PWD}/:/workdir  ghcr.io/basecamp/kamal'
+alias kamal="docker run -it --rm -v '${PWD}:/workdir' -v '${SSH_AUTH_SOCK}:/ssh-agent' -v /var/run/docker.sock:/var/run/docker.sock -e 'SSH_AUTH_SOCK=/ssh-agent' ghcr.io/basecamp/kamal:latest"
 ```
 
 Then, inside your app directory, run `kamal init` (or `kamal init --bundle` within Rails 7+ apps where you want a bin/kamal binstub). Now edit the new file `config/deploy.yml`. It could look as simple as this:
@@ -51,9 +51,27 @@ This will:
 5. Push the image to the registry.
 6. Pull the image from the registry onto the servers.
 7. Ensure Traefik is running and accepting traffic on port 80.
-8. Ensure your app responds with `200 OK` to `GET /up`.
+8. Ensure your app responds with `200 OK` to `GET /up` (you must have curl installed inside your app image!).
 9. Start a new container with the version of the app that matches the current git version hash.
 10. Stop the old container running the previous version of the app.
 11. Prune unused images and stopped containers to ensure servers don't fill up.
 
 Voila! All the servers are now serving the app on port 80. If you're just running a single server, you're ready to go. If you're running multiple servers, you need to put a load balancer in front of them. For subsequent deploys, or if your servers already have Docker and curl installed, you can just run `kamal deploy`.
+
+### Rails <7 usage
+
+Kamal is not needed to be in your application Gemfile to be used. However, if you want to guarantee specific Kamal version in your CI/CD workflows, you can create a separate Gemfile for Kamal, for example, `gemfile/kamal.gemfile`:
+
+```ruby
+source 'https://rubygems.org'
+
+gem 'kamal', '~> 0.14'
+```
+
+Bundle with `BUNDLE_GEMFILE=gemfiles/kamal.gemfile bundle`.
+
+After this Kamal can be used for deployment:
+
+```sh
+BUNDLE_GEMFILE=gemfiles/kamal.gemfile bundle exec kamal deploy
+```
