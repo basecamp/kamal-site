@@ -650,7 +650,7 @@ servers:
 
 This assumes the Cron settings are stored in `config/crontab`.
 
-## Healthcheck
+## Using a custom healthcheck
 
 Kamal uses Docker healthchecks to check the health of your application during deployment. Traefik uses this same healthcheck status to determine when a container is ready to receive traffic.
 
@@ -687,3 +687,35 @@ servers:
 The healthcheck allows for an optional `max_attempts` setting, which will attempt the healthcheck up to the specified number of times before failing the deploy. This is useful for applications that take a while to start up. The default is 7.
 
 The HTTP health checks assume that the `curl` command is available inside the container. If that's not the case, use the healthcheck's `cmd` option to specify an alternative check that the container supports.
+
+## Using rolling deployments
+
+When deploying to large numbers of hosts, you might prefer not to restart your services on every host at the same time.
+
+Kamal's default is to boot new containers on all hosts in parallel. But you can control this by configuring `boot/limit` and `boot/wait` as options:
+
+```yaml
+service: myservice
+
+boot:
+  limit: 10 # Can also specify as a percentage of total hosts, such as "25%"
+  wait: 2
+```
+
+When `limit` is specified, containers will be booted on, at most, `limit` hosts at once. Kamal will pause for `wait` seconds between batches.
+
+These settings only apply when booting containers (using `kamal deploy`, or `kamal app boot`). For other commands, Kamal continues to run commands in parallel across all hosts.
+
+## Using custom SSH connection management
+
+Creating SSH connections concurrently can be an issue when deploying to many servers. By default Kamal will limit concurrent connection starts to 30 at a time.
+
+It also sets a long idle timeout of 900 seconds on connections to prevent re-connection storms after a long idle period, like building an image or waiting for CI.
+
+You can configure both of these settings:
+
+```yaml
+sshkit:
+  max_concurrent_starts: 10
+  pool_idle_timeout: 300
+```
