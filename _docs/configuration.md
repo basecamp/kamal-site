@@ -169,6 +169,13 @@ env:
   REDIS_URL: redis://redis1:6379/1
 ```
 
+You don't need to provide their values in here. If you set them on server - then just provide empty values. And these will be passed in runtime (via Docker's `-e` argument)
+
+```yaml
+env:
+  DATABASE_URL:
+```
+
 ## Using secret env variables
 
 If you have env variables that are secret, you can divide the `env` block into `clear` and `secret`:
