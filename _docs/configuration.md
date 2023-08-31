@@ -208,7 +208,7 @@ volumes:
 
 Directories act in a similar way to volumes except it will create a corresponding directory on the host before mounting the volume:
 
-e.g. 
+e.g.
 
 ```yaml
 service: kamal-demo
@@ -687,6 +687,28 @@ servers:
 The healthcheck allows for an optional `max_attempts` setting, which will attempt the healthcheck up to the specified number of times before failing the deploy. This is useful for applications that take a while to start up. The default is 7.
 
 The HTTP health checks assume that the `curl` command is available inside the container. If that's not the case, use the healthcheck's `cmd` option to specify an alternative check that the container supports.
+
+#### Zero-downtime deploy with cord files
+
+We need to stop Traefik from sending requests to old containers before stopping them, otherwise we could get errors. We do this with a cord file.
+
+The file is created in a directory on the host and the directory is mounted into the container. The healthcheck is modified to check for the file.
+
+When we want to shut down the container we first delete the cord file, then wait for container to become unhealthy.
+
+By default the directory is mounted to `/tmp/kamal-cord`. You can change the location with
+
+```
+healthcheck:
+  cord: /var/run/kamal-cord
+```
+
+Or disable the cord (and lose the zero-downtime guarantee) with:
+
+```
+healthcheck:
+  cord: false
+```
 
 ## Using rolling deployments
 
