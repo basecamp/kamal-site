@@ -688,6 +688,17 @@ The healthcheck allows for an optional `max_attempts` setting, which will attemp
 
 The HTTP health checks assume that the `curl` command is available inside the container. If that's not the case, use the healthcheck's `cmd` option to specify an alternative check that the container supports.
 
+## Healthcheck and multiple apps
+
+Healthcheck is binding containers port to server's port. When running multiple applications on the same server and deploying them in parallel you should specify different port for each application.
+
+```yaml
+healthcheck:
+  exposed_port: 4000 # 3999 is the default one
+```
+
+This allows you to run multiple applications on the same server sharing the same Traefik instance and port
+
 ## Using rolling deployments
 
 When deploying to large numbers of hosts, you might prefer not to restart your services on every host at the same time.
