@@ -11,10 +11,16 @@ If you have a Ruby environment available, you can install Kamal globally with:
 gem install kamal
 ```
 
-...otherwise, you can run a dockerized version via an alias (add this to your .bashrc or similar to simplify re-use):
+...otherwise, you can run a dockerized version via an alias to simplify re-use:
 
+For `bash`, add this to your `.bashrc`:
 ```sh
 alias kamal="docker run -it --rm -v '${PWD}:/workdir' -v '${SSH_AUTH_SOCK}:/ssh-agent' -v /var/run/docker.sock:/var/run/docker.sock -e 'SSH_AUTH_SOCK=/ssh-agent' ghcr.io/basecamp/kamal:latest"
+```
+
+For `zsh`, add this to your `.zshrc`:
+```sh
+alias kamal='docker run -it --rm -v ${PWD}:/workdir -v ${SSH_AUTH_SOCK}:/ssh-agent -v /var/run/docker.sock:/var/run/docker.sock -e SSH_AUTH_SOCK=/ssh-agent ghcr.io/basecamp/kamal:latest'
 ```
 
 Then, inside your app directory, run `kamal init` (or `kamal init --bundle` within Rails 7+ apps where you want a bin/kamal binstub). Now edit the new file `config/deploy.yml`. It could look as simple as this:
