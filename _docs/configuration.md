@@ -490,6 +490,12 @@ traefik:
   host_port: 8080
 ```
 
+Alternatively, set `publish` to `false` to prevent binding to a host port. This can be useful if you are running Traefik behind a reverse proxy, for example:
+```yaml
+traefik:
+  publish: false
+```
+
 ## Traefik version, upgrades, and custom images
 
 Kamal runs the traefik:v2.9 image to track Traefik 2.9.x releases.
