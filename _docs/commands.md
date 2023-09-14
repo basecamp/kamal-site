@@ -7,7 +7,7 @@ order: 3
 
 ## Pushing environment files to the servers
 
-Before you can deploy, you'll need to push env files to the servers. The will then be
+Before you can deploy, you'll need to push env files to the servers. They will then be
 included in the docker run commands.
 
 You can do this by running:
