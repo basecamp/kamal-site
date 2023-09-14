@@ -688,6 +688,8 @@ The healthcheck allows for an optional `max_attempts` setting, which will attemp
 
 The HTTP health checks assume that the `curl` command is available inside the container. If that's not the case, use the healthcheck's `cmd` option to specify an alternative check that the container supports.
 
+When starting container healthcheck by default will only show last 50 lines. That might be not enough when something goes wrong - so you can add `log_lines` params and specify larger number if required.
+
 ## Using rolling deployments
 
 When deploying to large numbers of hosts, you might prefer not to restart your services on every host at the same time.
