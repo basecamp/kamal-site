@@ -60,7 +60,7 @@ Voila! All the servers are now serving the app on port 80. If you're just runnin
 
 ### Rails <7 usage
 
-Kamal is not needed to be in your application Gemfile to be used. However, if you want to guarantee specific Kamal version in your CI/CD workflows, you can create a separate Gemfile for Kamal, for example, `gemfile/kamal.gemfile`:
+Kamal is not needed to be in your application Gemfile to be used. However, if you want to guarantee specific Kamal version in your CI/CD workflows, you can create a separate Gemfile for Kamal, for example, `gemfiles/kamal.gemfile`:
 
 ```ruby
 source 'https://rubygems.org'
