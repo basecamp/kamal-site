@@ -293,14 +293,11 @@ servers:
 
 ## Using shell expansion
 
-You can use shell expansion to interpolate values from the host machine into labels and env variables with the `${}` syntax. Anything within the curly braces will be executed on the host machine and the result will be interpolated into the label or env variable.
+You can use shell expansion to interpolate values from the host machine into labels with the `${}` syntax. Anything within the curly braces will be executed on the host machine and the result will be interpolated into the label.
 
 ```yaml
 labels:
   host-machine: "${cat /etc/hostname}"
-
-env:
-  HOST_DEPLOYMENT_DIR: "${PWD}"
 ```
 
 **Note:** Any other occurrence of `$` will be escaped to prevent unwanted shell expansion!
@@ -491,6 +488,12 @@ Traefik binds to port 80 by default. Specify an alternative port using `host_por
 ```yaml
 traefik:
   host_port: 8080
+```
+
+Alternatively, set `publish` to `false` to prevent binding to a host port. This can be useful if you are running Traefik behind a reverse proxy, for example:
+```yaml
+traefik:
+  publish: false
 ```
 
 ## Traefik version, upgrades, and custom images
@@ -688,6 +691,8 @@ The healthcheck allows for an optional `max_attempts` setting, which will attemp
 
 The HTTP health checks assume that the `curl` command is available inside the container. If that's not the case, use the healthcheck's `cmd` option to specify an alternative check that the container supports.
 
+When starting container healthcheck by default will only show last 50 lines. That might be not enough when something goes wrong - so you can add `log_lines` params and specify larger number if required.
+
 #### Zero-downtime deploy with cord files
 
 We need to stop Traefik from sending requests to old containers before stopping them, otherwise we could get errors. We do this with a cord file.
@@ -709,6 +714,17 @@ Or disable the cord (and lose the zero-downtime guarantee) with:
 healthcheck:
   cord: false
 ```
+
+#### Custom port for the healthcheck with multiple apps
+
+Healthcheck is binding containers port to server's port. When running multiple applications on the same server and deploying them in parallel you should specify different port for each application.
+
+```yaml
+healthcheck:
+  exposed_port: 4000 # 3999 is the default one
+```
+
+This allows you to run multiple applications on the same server sharing the same Traefik instance and port
 
 ## Using rolling deployments
 
