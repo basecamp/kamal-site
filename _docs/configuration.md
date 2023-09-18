@@ -688,7 +688,7 @@ The healthcheck allows for an optional `max_attempts` setting, which will attemp
 
 The HTTP health checks assume that the `curl` command is available inside the container. If that's not the case, use the healthcheck's `cmd` option to specify an alternative check that the container supports.
 
-## Healthcheck and multiple apps
+## Ung a custom port for the healthcheck with multiple apps
 
 Healthcheck is binding containers port to server's port. When running multiple applications on the same server and deploying them in parallel you should specify different port for each application.
 
