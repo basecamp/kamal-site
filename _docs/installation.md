@@ -58,21 +58,3 @@ This will:
 12. Prune unused images and stopped containers to ensure servers don't fill up.
 
 Voila! All the servers are now serving the app on port 80. If you're just running a single server, you're ready to go. If you're running multiple servers, you need to put a load balancer in front of them. For subsequent deploys, or if your servers already have Docker and curl installed, you can just run `kamal deploy`.
-
-### Rails <7 usage
-
-Kamal is not needed to be in your application Gemfile to be used. However, if you want to guarantee specific Kamal version in your CI/CD workflows, you can create a separate Gemfile for Kamal, for example, `gemfiles/kamal.gemfile`:
-
-```ruby
-source 'https://rubygems.org'
-
-gem 'kamal', '~> 0.14'
-```
-
-Bundle with `BUNDLE_GEMFILE=gemfiles/kamal.gemfile bundle`.
-
-After this Kamal can be used for deployment:
-
-```sh
-BUNDLE_GEMFILE=gemfiles/kamal.gemfile bundle exec kamal deploy
-```
