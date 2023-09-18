@@ -50,11 +50,12 @@ This will:
 4. Build the image using the standard Dockerfile in the root of the application.
 5. Push the image to the registry.
 6. Pull the image from the registry onto the servers.
-7. Ensure Traefik is running and accepting traffic on port 80.
-8. Ensure your app responds with `200 OK` to `GET /up` (you must have curl installed inside your app image!).
-9. Start a new container with the version of the app that matches the current git version hash.
-10. Stop the old container running the previous version of the app.
-11. Prune unused images and stopped containers to ensure servers don't fill up.
+7. Push the ENV variables from .env onto the servers.
+8. Ensure Traefik is running and accepting traffic on port 80.
+9. Ensure your app responds with `200 OK` to `GET /up` (you must have curl installed inside your app image!).
+10. Start a new container with the version of the app that matches the current git version hash.
+11. Stop the old container running the previous version of the app.
+12. Prune unused images and stopped containers to ensure servers don't fill up.
 
 Voila! All the servers are now serving the app on port 80. If you're just running a single server, you're ready to go. If you're running multiple servers, you need to put a load balancer in front of them. For subsequent deploys, or if your servers already have Docker and curl installed, you can just run `kamal deploy`.
 
