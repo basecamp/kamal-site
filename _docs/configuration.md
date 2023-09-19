@@ -695,7 +695,29 @@ The HTTP health checks assume that the `curl` command is available inside the co
 
 When starting container healthcheck by default will only show last 50 lines. That might be not enough when something goes wrong - so you can add `log_lines` params and specify larger number if required.
 
-## Using a custom port for the healthcheck with multiple apps
+#### Zero-downtime deploy with cord files
+
+We need to stop Traefik from sending requests to old containers before stopping them, otherwise we could get errors. We do this with a cord file.
+
+The file is created in a directory on the host and the directory is mounted into the container. The healthcheck is modified to check for the file.
+
+When we want to shut down the container we first delete the cord file, then wait for container to become unhealthy.
+
+By default the directory is mounted to `/tmp/kamal-cord`. You can change the location with
+
+```
+healthcheck:
+  cord: /var/run/kamal-cord
+```
+
+Or disable the cord (and lose the zero-downtime guarantee) with:
+
+```
+healthcheck:
+  cord: false
+```
+
+#### Custom port for the healthcheck with multiple apps
 
 Healthcheck is binding containers port to server's port. When running multiple applications on the same server and deploying them in parallel you should specify different port for each application.
 
