@@ -169,6 +169,8 @@ env:
   REDIS_URL: redis://redis1:6379/1
 ```
 
+**Note:** Before you can start the containers you need to push the env variables up to the servers.
+
 ## Using secret env variables
 
 If you have env variables that are secret, you can divide the `env` block into `clear` and `secret`:
