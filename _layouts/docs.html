@@ -12,51 +12,139 @@
 
     <main>
 
-{% assign docs = site.docs | sort: 'order' %}
+{% assign docs = site.data.docs %}
 
 {% for doc in docs %}
 
-  {% if doc.title == page.title %}
+  {% assign sections = doc.sections %}
 
-    {% unless forloop.last %}
+  {% if page.url contains doc.url and sections %}
 
-      {% assign docs_index_next = forloop.index %}
+    {% assign doc_index = forloop.index0 %}
 
-    {% else %}
+    {% for section in sections %}
 
-      {% assign docs_index_next = 0 %}
+      {% if page.url contains section.url %}
 
-    {% endunless %}
+        {% unless forloop.first %}
+
+          {% assign docs_prev_index = forloop.index0 | minus: 1 %}
+          {% assign docs_prev = sections[docs_prev_index] %}
+
+        {% else %}
+
+          {% assign docs_prev_index = doc_index | minus: 1 %}
+          {% assign docs_prev = docs[docs_prev_index] %}
+
+        {% endunless %}
+
+        {% assign docs_prev_title = docs_prev.title | smartify %}
+        {% assign docs_prev_url = docs_prev.url %}
+
+        {% unless forloop.last %}
+
+          {% assign docs_next_index = forloop.index0 | plus: 1 %}
+          {% assign docs_next = sections[docs_next_index] %}
+
+        {% else %}
+
+          {% assign docs_next_index = doc_index | plus: 1 %}
+          {% assign docs_next = docs[docs_next_index] %}
+
+        {% endunless %}
+
+        {% assign docs_next_title = docs_next.title | smartify %}
+        {% assign docs_next_url = docs_next.url %}
+
+      {% endif %}
+
+    {% endfor %}
+
+  {% elsif page.url contains doc.url %}
 
     {% unless forloop.first %}
 
-      {% assign docs_index_prev = forloop.index | minus: 2 %}
+      {% assign docs_prev_index = forloop.index | minus: 2 %}
 
     {% else %}
 
-      {% assign docs_index_prev = forloop.rindex | minus: 1 %}
+      {% assign docs_prev_index = forloop.rindex | minus: 1 %}
 
     {% endunless %}
+
+    {% assign docs_prev = docs[docs_prev_index] %}
+    {% assign docs_prev_title = docs_prev.title | smartify %}
+    {% assign docs_prev_url = docs_prev.url %}
+
+    {% unless forloop.last %}
+
+      {% assign docs_next_index = forloop.index %}
+
+    {% else %}
+
+      {% assign docs_next_index = 0 %}
+
+    {% endunless %}
+
+    {% assign docs_next = docs[docs_next_index] %}
+    {% assign docs_next_title = docs_next.title | smartify %}
+    {% assign docs_next_url = docs_next.url %}
 
   {% endif %}
 
 {% endfor %}
 
-{% assign docs_prev = docs[docs_index_prev] %}
-{% assign docs_next = docs[docs_index_next] %}
-{% assign docs_prev_title = docs_prev.title | smartify %}
-{% assign docs_next_title = docs_next.title | smartify %}
-
       <div class="page page--docs">
-        <section>
+        <div class="page__content">
           <aside>
             <ul>
 
-{% for doc in docs %}
+{% for doc in site.data.docs %}
 
   {% assign doc_title = doc.title | smartify %}
+  {% assign doc_url = doc.url %}
+  {% assign doc_sections = doc.sections %}
 
-              <li{% if doc.url == page.url %} class="selected"{% endif %}><a href="{{ doc.url | absolute_url }}" aria-label="{{ doc_title }}">{{ doc_title }}</a></li>
+  {% if doc_sections and doc.index == false %}
+
+    {% assign section_first = doc_sections | first %}
+    {% assign section_url = section_first.url %}
+
+  {% else %}
+
+    {% assign section_url = null %}
+
+  {% endif %}
+
+              <li{% if page.url contains doc_url %} class="selected"{% endif %}>
+                <a href="{{ section_url | default: doc_url | absolute_url }}" aria-label="{{ doc_title }}">{{ doc_title }}</a>
+
+  {% if page.url contains doc_url and doc_sections %}
+
+                <ul class="sections">
+
+    {% for section in doc_sections %}
+
+      {% assign section_title = section.title | smartify %}
+      {% assign section_url = section.url %}
+
+                  <li{% if section_url contains page.url %} class="selected"{% endif %}><a href="{{ section_url | absolute_url }}" aria-label="{{ section_title }}">{{ section_title }}</a></li>
+
+      {% if section_url contains page.url %}
+
+        {% assign breadcrumb_doc_title = doc_title %}
+        {% assign breadcrumb_doc_url = doc.url %}
+        {% assign breadcrumb_section_title = section_title %}
+
+      {% endif %}
+
+    {% endfor %}
+
+                </ul>
+
+  {% endif %}
+
+              </li>
 
 {% endfor %}
 
@@ -64,16 +152,27 @@
           </aside>
           <article>
 
+{% if breadcrumb_doc_title and breadcrumb_doc_url %}
+
+            <div class="page__breadcrumb">
+              <ul>
+                <li><a href="{{ breadcrumb_doc_url | absolute_url }}" aria-label="{{ breadcrumb_doc_title }}">{{ breadcrumb_doc_title }}</a></li>
+                <li><a href="{{ page.url | absolute_url }}" aria-label="{{ breadcrumb_section_title }}">{{ breadcrumb_section_title }}</a></li>
+              </ul>
+            </div>
+
+{% endif %}
+
 {{ content }}
 
             <nav>
-              <a href="{{ docs_prev.url | absolute_url }}" aria-label="{{ docs_prev_title }}">
+              <a href="{{ docs_prev_url | absolute_url }}" aria-label="{{ docs_prev_title }}">
                 <dl>
                   <dt>Previous</dt>
                   <dd>{{ docs_prev_title }}</dd>
                 </dl>
               </a>
-              <a href="{{ docs_next.url | absolute_url }}" aria-label="{{ docs_next_title }}">
+              <a href="{{ docs_next_url | absolute_url }}" aria-label="{{ docs_next_title }}">
                 <dl>
                   <dt>Next</dt>
                   <dd>{{ docs_next_title }}</dd>
@@ -81,7 +180,7 @@
               </a>
             </nav>
           </article>
-        </section>
+        </div>
       </div>
 
     </main>
