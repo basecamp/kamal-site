@@ -1,0 +1,151 @@
+- title: "Installation"
+  url: /docs/installation/
+
+- title: "Configuration"
+  url: /docs/configuration/
+  index: false
+  sections:
+    - title: "Using .env file to load required environment variables"
+      url: /docs/configuration/using-env-file-to-load-required-environment-variables/
+
+    - title: "Using a generated .env file"
+      url: /docs/configuration/using-a-generated-env-file/
+
+    - title: "Configuring the run directory"
+      url: /docs/configuration/configuring-the-run-directory/
+
+    - title: "Using another registry than Docker Hub"
+      url: /docs/configuration/using-another-registry-than-docker-hub/
+
+    - title: "Using a different SSH user than root"
+      url: /docs/configuration/using-a-different-ssh-user-than-root/
+
+    - title: "Using a proxy SSH host"
+      url: /docs/configuration/using-a-proxy-ssh-host/
+
+    - title: "Using a different SSH log level"
+      url: /docs/configuration/using-a-different-ssh-log-level/
+
+    - title: "Using env variables"
+      url: /docs/configuration/using-env-variables/
+
+    - title: " Using secret env variables"
+      url: /docs/configuration/using-secret-env-variables/
+
+    - title: "Using Kamal env variables"
+      url: /docs/configuration/using-kamal-env-variables/
+
+    - title: "Using volumes"
+      url: /docs/configuration/using-volumes/
+
+    - title: " Using directories"
+      url: /docs/configuration/using-directories/
+
+    - title: "Using different roles for servers"
+      url: /docs/configuration/using-different-roles-for-servers/
+
+    - title: "Using container labels"
+      url: /docs/configuration/using-container-labels/
+
+    - title: "Using shell expansion"
+      url: /docs/configuration/using-shell-expansion/
+
+    - title: " Using container options"
+      url: /docs/configuration/using-container-options/
+
+    - title: "Setting a minimum version"
+      url: /docs/configuration/setting-a-minimum-version/
+
+    - title: "Configuring logging"
+      url: /docs/configuration/configuring-logging/
+
+    - title: "Using a different stop wait time"
+      url: /docs/configuration/using-a-different-stop-wait-time/
+
+    - title: "Using remote builder for native multi-arch"
+      url: /docs/configuration/using-remote-builder-for-native-multi-arch/
+
+    - title: "Using remote builder for single-arch"
+      url: /docs/configuration/using-remote-builder-for-single-arch/
+
+    - title: "Using native builder when multi-arch isn't needed"
+      url: /docs/configuration/using-native-builder-when-multi-arch-isnt-needed/
+
+    - title: "Using a different Dockerfile or context when building"
+      url: /docs/configuration/using-a-different-dockerfile-or-context-when-building/
+
+    - title: "Using multistage builder cache"
+      url: /docs/configuration/using-multistage-builder-cache/
+
+    - title: "Using build secrets for new images"
+      url: /docs/configuration/using-build-secrets-for-new-images/
+
+    - title: "Traefik command arguments"
+      url: /docs/configuration/traefik-command-arguments/
+
+    - title: "Traefik host port binding"
+      url: /docs/configuration/traefik-host-port-binding/
+
+    - title: "Traefik version, upgrades, and custom images"
+      url: /docs/configuration/traefik-version-upgrades-and-custom-images/
+
+    - title: "Traefik container configuration"
+      url: /docs/configuration/traefik-container-configuration/
+
+    - title: "Traefik container labels"
+      url: /docs/configuration/traefik-container-labels/
+
+    - title: "Traefik alternate entrypoints"
+      url: /docs/configuration/traefik-alternate-entrypoints/
+
+    - title: "Configuring build args for new images"
+      url: /docs/configuration/configuring-build-args-for-new-images/
+
+    - title: "Using accessories for database, cache, search services"
+      url: /docs/configuration/using-accessories-for-database-cache-search-services/
+
+    - title: "Using Cron"
+      url: /docs/configuration/using-cron/
+
+    - title: "Using a custom healthcheck"
+      url: /docs/configuration/using-a-custom-healthcheck/
+
+    - title: "Using rolling deployments"
+      url: /docs/configuration/using-rolling-deployments/
+
+    - title: "Using custom SSH connection management"
+      url: /docs/configuration/using-custom-ssh-connection-management/
+
+    - title: "Serving old and new assets during deployments"
+      url: /docs/configuration/serving-old-and-new-assets-during-deployments/
+
+- title: "Commands"
+  url: /docs/commands/
+  index: false
+  sections:
+    - title: "Pushing environment files to the servers"
+      url: /docs/commands/pushing-environment-files-to-the-servers/
+
+    - title: "Running commands on servers"
+      url: /docs/commands/running-commands-on-servers/
+
+    - title: "Running interactive commands over SSH"
+      url: /docs/commands/running-interactive-commands-over-ssh/
+
+    - title: "Running details to show state of containers"
+      url: /docs/commands/running-details-to-show-state-of-containers/
+
+    - title: "Running rollback to fix a bad deploy"
+      url: /docs/commands/running-rollback-to-fix-a-bad-deploy/
+
+    - title: "Running removal to clean up servers"
+      url: /docs/commands/running-removal-to-clean-up-servers/
+
+    - title: "Rebooting Traefik"
+      url: /docs/commands/rebooting-traefik/
+
+    - title: "Checking and setting the lock"
+      url: /docs/commands/checking-and-setting-the-lock/
+
+- title: "Hooks"
+  url: /docs/hooks/
