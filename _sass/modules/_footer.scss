@@ -3,45 +3,47 @@
   display: flex;
   padding: var(--space-medium);
 
-  section {
+  div {
+
     align-items: center;
     display: flex;
     flex: 1;
     flex-direction: column;
-    font-size: 50%;
+    font-size: var(--font-size-xx-small);
     gap: 0.8em;
     letter-spacing: -0.01em;
-  }
 
-  ul {
+    ul {
 
-    align-items: center;
-    display: flex;
-    gap: 0.3em;
-    padding: 0;
-
-    li {
-
+      align-items: center;
       display: flex;
-      margin: 0;
+      gap: 0.3em;
+      padding: 0;
 
-      a {
+      li {
 
         display: flex;
+        margin: 0;
 
-        img {
-          height: 1.5em;
-          width: auto;
+        a {
+
+          display: flex;
+
+          img {
+            height: 1.5em;
+            width: auto;
+          }
+
         }
 
-      }
+        span {
+          display: flex;
+          font-size: var(--font-size-small);
+          font-style: italic;
+          letter-spacing: -0.01em;
+          margin-top: 0.3em;
+        }
 
-      span {
-        display: flex;
-        font-size: 75%;
-        font-style: italic;
-        letter-spacing: -0.01em;
-        margin-top: 0.3em;
       }
 
     }

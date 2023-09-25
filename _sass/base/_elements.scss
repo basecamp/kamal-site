@@ -2,6 +2,7 @@ html {
   background: var(--color-base);
   font-size: 16px;
   min-height: -webkit-fill-available;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -53,13 +54,13 @@ h6 {
 
   a {
     font-weight: inherit;
-    text-decoration-thickness: 0.1em;
+    text-decoration: none;
   }
 
 }
 
 h1 {
-  font-size: var(--font-size-xx-large);
+  font-size: var(--font-size-xxx-large);
   letter-spacing: -0.03em;
   line-height: 1;
 }
@@ -96,12 +97,12 @@ ul {
   padding-left: 2em;
 
   li + li {
-    margin-top: var(--flow-space, 0.3em);
+    margin-top: var(--flow-space, 0.5em);
   }
 
   ol,
   ul {
-    margin-top: var(--flow-space, 0.3em);
+    margin-top: var(--flow-space, 0.5em);
   }
 
   ul {
@@ -147,7 +148,7 @@ code {
   background: var(--color-base-dark);
   border-radius: 0.15em;
   font-family: var(--font-family-mono);
-  font-size: 75%;
+  font-size: var(--font-size-small);
   font-style: normal;
   font-weight: 400;
   letter-spacing: normal;
@@ -155,12 +156,12 @@ code {
   padding: 0.2em 0.4em;
 }
 
-@media(min-width: 64em) {
+@media(hover: hover) {
 
   a {
 
-    &:hover,
-    &:focus {
+    &:focus,
+    &:hover {
       color: var(--color-black);
     }
 

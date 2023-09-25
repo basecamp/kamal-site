@@ -17,7 +17,7 @@
     text-align: center;
 
     h1 {
-      font-size: 180%;
+      font-size: var(--font-size-xx-large);
     }
 
     br {
@@ -35,7 +35,7 @@
     header {
 
       h1 {
-        font-size: var(--font-size-xx-large);
+        font-size: var(--font-size-xxx-large);
       }
 
       br {
