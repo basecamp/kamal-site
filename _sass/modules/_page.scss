@@ -63,6 +63,8 @@
     flex-direction: column;
     font-size: var(--font-size-x-small);
     letter-spacing: -0.01em;
+    margin-bottom: -0.5em;
+    margin-top: -0.5em;
 
     ul {
 
@@ -150,6 +152,7 @@
     font-size: var(--font-size-x-small);
     letter-spacing: -0.01em;
     margin-bottom: -0.45em;
+    margin-top: -0.5em;
 
     & > * + * {
       margin-top: var(--flow-space, 1.4em);
@@ -171,7 +174,7 @@
     h1 {
 
       font-size: var(--font-size-xx-large);
-      margin-top: -0.0475em;
+      padding-top: 0.08em;
 
       & + * {
         --flow-space: 1.4em;
@@ -188,20 +191,6 @@
 
     }
 
-    h4,
-    h5,
-    h6 {
-
-      & + * {
-        --flow-space: 0.4em;
-      }
-
-    }
-
-    h1 {
-      padding-top: 0.06em;
-    }
-
     h2 {
       color: var(--color-blue);
       padding-top: 0.1em;
@@ -214,7 +203,13 @@
     h4,
     h5,
     h6 {
+
       padding-top: 0.175em;
+
+      & + * {
+        --flow-space: 0.4em;
+      }
+
     }
 
     hr {
