@@ -6,7 +6,7 @@
   padding-right: var(--space-medium);
   padding-top: var(--space-large);
 
-  section {
+  &__content {
 
     display: flex;
     margin-inline: auto;
@@ -76,21 +76,18 @@
 
   &--playing {
 
-    section button {
+    .video__content button {
       display: none;
     }
 
   }
 
-  @media(min-width: 64em) {
+  @media(hover: hover) {
 
-    padding-left: var(--space-large);
-    padding-right: var(--space-large);
+    &__content button {
 
-    section button {
-
-      &:hover,
-      &:focus {
+      &:focus,
+      &:hover {
 
         &:before {
           opacity: 0.9;
@@ -105,6 +102,11 @@
 
     }
 
+  }
+
+  @media(min-width: 64em) {
+    padding-left: var(--space-large);
+    padding-right: var(--space-large);
   }
 
 }

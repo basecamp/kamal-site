@@ -6,7 +6,7 @@
   padding-right: var(--space-medium);
   padding-top: var(--space-large);
 
-  article {
+  &__content {
 
     display: flex;
     flex-direction: column;

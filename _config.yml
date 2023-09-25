@@ -16,15 +16,15 @@ exclude:
 sass:
   style: compressed
 
-collections:
-  docs:
-    output: true
-    permalink: /docs/:name
-
 defaults:
   - scope:
       path: ""
-      type: docs
+      type: pages
+    values:
+      layout: default
+  - scope:
+      path: docs
+      type: pages
     values:
       layout: docs
 

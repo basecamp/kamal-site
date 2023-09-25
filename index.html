@@ -1,7 +1,6 @@
 ---
 title: "Deploy web apps anywhere"
 description: "From bare metal to cloud VMs using Docker, deploy web apps anywhere with zero downtime."
-layout: default
 ---
 
 <div class="headline">
@@ -11,28 +10,27 @@ layout: default
   </header>
 </div>
 
-
 <div class="video">
-  <section>
-    <video poster="{{ '/assets/videos/kamal-1-0-poster.webp' | absolute_url }}" src="https://d3uge1suktrt9o.cloudfront.net/kamal-screencast.mp4" type="video/mp4" width="100%" data-event="Introducing Kamal" playsinline></video>
+  <div class="video__content">
+    <video poster="{{ '/assets/videos/kamal-1-0-poster.webp' | absolute_url }}" src="https://d3uge1suktrt9o.cloudfront.net/kamal-screencast.mp4" preload="none" data-event="Introducing Kamal" playsinline></video>
     <button>
       <span></span>
     </button>
-  </section>
+  </div>
 </div>
 
 <div class="intro">
-  <article>    
+  <div class="intro__content">
     <p>Kamal offers zero-downtime deploys, rolling restarts, asset bridging, remote builds, accessory service management, and everything else you need to deploy and manage your web app in production with Docker. Originally built for Rails apps, Kamal will work with any type of web app that can be containerized.</p>
     <ul>
-      <li><a href="{{ 'docs/installation' | absolute_url }}" class="button" aria-label="Read the docs">Read the docs</a></li>
+      <li><a href="{{ '/docs/' | absolute_url }}" class="button" aria-label="Read the docs">Read the docs</a></li>
       <li><a href="https://github.com/basecamp/kamal" class="button" aria-label="View the source">View the source</a></li>
     </ul>
-  </article>
+  </div>
 </div>
 
 <div class="page">
-  <section>
+  <div class="page__content">
     <article>
       <h3>Vision</h3>
       <p>In the past decade+, there’s been an explosion in commercial offerings that make deploying web apps easier. Heroku kicked it off with an incredible offering that stayed ahead of the competition seemingly forever. These days we have excellent alternatives like Fly.io and Render. And hosted Kubernetes is making things easier too on AWS, GCP, Digital Ocean, and elsewhere. But these are all offerings that have you renting computers in the cloud at a premium. If you want to run on your own hardware, or even just have a clear migration path to do so in the future, you need to carefully consider how locked in you get to these commercial platforms. Preferably before the bills swallow your business whole!</p>
@@ -45,13 +43,18 @@ layout: default
       <p>Kamal basically is Capistrano for Containers, without the need to carefully prepare servers in advance. No need to ensure that the servers have just the right version of Ruby or other dependencies you need. That all lives in the Docker image now. You can boot a brand new Ubuntu (or whatever) server, add it to the list of servers in Kamal, and it’ll be auto-provisioned with Docker, and run right away. Docker’s layer caching also speeds up deployments with less mucking about on the server. And the images built for Kamal can be used for CI or later introspection.</p>
       <p>Kubernetes is a beast. Running it yourself on your own hardware is not for the faint of heart. It’s a fine option if you want to run on someone else’s platform, either transparently <a href="https://thenewstack.io/render-cloud-deployment-with-less-engineering/">like Render</a> or explicitly on AWS/GCP, but if you’d like the freedom to move between cloud and your own hardware, or even mix the two, Kamal is much simpler. You can see everything that’s going on, it’s just basic Docker commands being called.</p>
       <p>Docker Swarm is much simpler than Kubernetes, but it’s still built on the same declarative model that uses state reconciliation. Kamal is intentionally designed around imperative commands, like Capistrano.</p>
-      <p>Ultimately, there are a myriad of ways to deploy web apps, but this is the toolkit we’ve used at <a href="https://37signals.com">37signals</a> to bring <a href="https://www.hey.com">HEY</a> and all our other formerly cloud-hosted applications <a href="https://world.hey.com/dhh/we-have-left-the-cloud-251760fb">home to our own hardware</a> – without losing the advantages of modern containerization tooling.</p>
-      
-      <hr class="ornament" />
+      <p>Ultimately, there are a myriad of ways to deploy web apps, but this is the toolkit we’ve used at <a href="https://37signals.com">37signals</a> to bring <a href="https://www.hey.com">HEY</a> and all our other formerly cloud-hosted applications <a href="https://world.hey.com/dhh/we-have-left-the-cloud-251760fb">home to our own hardware</a> — without losing the advantages of modern containerization tooling.</p>
+
+      <hr class="ornament">
       <h3>Name</h3>
       <p>Kamal is named after <a href="https://exploration.marinersmuseum.org/object/kamal/">the ancient Arab navigational tool</a> used by sailors to keep course by determining their latitude via the Pole Star. (Kamal was formerly known as MRSK).</p>
-      <br>
-      <img src="{{ '/assets/images/kamal.png' | absolute_url }}">
+
+      <figure>
+        <picture>
+          <source type="image/webp" srcset="{{ '/assets/images/kamal.webp' | absolute_url }}">
+          <img src="{{ '/assets/images/kamal.png' | absolute_url }}" alt="{{ video.title | smartify }}" alt="Kamal">
+        </picture>
+      </figure>
     </article>
-  </section>
+  </div>
 </div>

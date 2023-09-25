@@ -1,15 +1,14 @@
 - title: "Documentation"
-  url: "/docs/installation"
-  collection: "docs"
+  url: /docs/
 
 - title: "Source code"
-  url: "https://github.com/basecamp/kamal"
+  url: https://github.com/basecamp/kamal
   external: true
 
 - title: "Help"
-  url: "https://github.com/basecamp/kamal/discussions"
+  url: https://github.com/basecamp/kamal/discussions
   external: true
 
 - title: "Discord"
-  url: "https://discord.gg/YgHVT7GCXS"
+  url: https://discord.gg/YgHVT7GCXS
   external: true
