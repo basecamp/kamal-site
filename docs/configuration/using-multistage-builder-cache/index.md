@@ -24,7 +24,7 @@ builder:
     # default image name is <image>-build-cache
     image: application-cache-image
 
-# Using Registry cache with additinonal cache-to options
+# Using Registry cache with additional cache-to options
 builder:
   cache:
     type: registry
