@@ -1,6 +1,5 @@
 ---
 title: Hooks
-order: 4
 ---
 
 # Hooks
