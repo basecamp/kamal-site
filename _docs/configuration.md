@@ -120,6 +120,37 @@ registry:
 
 You will need to have the `aws` CLI installed locally for this to work.
 
+### Using GCP Artifact Registry as the container registry
+
+To sign into Artifact Registry, you would need to [create a service account](https://cloud.google.com/iam/docs/service-accounts-create#creating) and set up [roles and permissions](https://cloud.google.com/artifact-registry/docs/access-control#permissions). Normally, assigning a `roles/artifactregistry.writer` role should be sufficient.
+
+Once the service account is ready, you need to generate and download a JSON key, base64 encode it and add to `.env`:
+
+```bash
+echo "KAMAL_REGISTRY_PASSWORD=$(base64 -i /path/to/key.json)" >> .env
+```
+
+Use the env variable as `password` along with `_json_key_base64` as `username`. 
+
+You would also need to specify the `image` and `server` variables based on your repo project and location. Here's the final configuration:
+
+```yaml
+image: <your gcp project id>/<artifact registry repo name>/<desired image name>
+registry:
+  server: <your registry region>-docker.pkg.dev
+  username: _json_key_base64
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+```
+
+### Validating the registry configuration
+
+After you're done with the custom setup, use this to ensure your configuration is correct:
+
+```bash
+kamal registry login
+```
+
 ## Using a different SSH user than root
 
 The default SSH user is root, but you can change it using `ssh/user`:
