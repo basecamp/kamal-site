@@ -579,6 +579,47 @@ traefik:
     entrypoints.otherentrypoint.address: ':9000'
 ```
 
+## Generate SSL certificates with Letsencrypt
+
+You can use Traefik to generate SSL certificates automatically with [Letsencrypt](https://letsencrypt.org/):
+
+```yaml
+# Deploy to these servers.
+servers:
+  web:
+    hosts:
+      - 192.168.0.1
+    labels:
+      traefik.http.routers.hey-web.entrypoints: websecure
+      traefik.http.routers.hey-web.rule: Host(`example.com`)
+      traefik.http.routers.hey-web.tls.certresolver: letsencrypt
+
+# Configure custom arguments for Traefik
+traefik:
+  options:
+    publish:
+      - "443:443"
+    volume:
+      - "/letsencrypt/acme.json:/letsencrypt/acme.json"
+  args:
+    entryPoints.web.address: ":80"
+    entryPoints.websecure.address: ":443"
+    entryPoints.web.http.redirections.entryPoint.to: websecure
+    entryPoints.web.http.redirections.entryPoint.scheme: https
+    entryPoints.web.http.redirections.entrypoint.permanent: true
+    certificatesResolvers.letsencrypt.acme.email: "example@hey.com"
+    certificatesResolvers.letsencrypt.acme.storage: "/letsencrypt/acme.json"
+    certificatesResolvers.letsencrypt.acme.httpchallenge: true
+    certificatesResolvers.letsencrypt.acme.httpchallenge.entrypoint: web
+```
+
+Also, create the `acme.json` file and give it correct permissions on each hosts:
+```bash
+$ mkdir -p /letsencrypt && touch /letsencrypt/acme.json && chmod 600 /letsencrypt/acme.json
+```
+
+Now you can access your app throught `https`.
+
 ## Configuring build args for new images
 
 Build arguments that aren't secret can also be configured:
