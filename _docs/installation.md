@@ -11,10 +11,16 @@ If you have a Ruby environment available, you can install Kamal globally with:
 gem install kamal
 ```
 
-...otherwise, you can run a dockerized version via an alias (add this to your .bashrc or similar to simplify re-use). On macOS, use:
+...otherwise, you can run a dockerized version via an alias (add this to your `~/.bashrc` or similar to simplify re-use). On macOS, use:
 
 ```sh
 alias kamal='docker run -it --rm -v "${PWD}:/workdir" -v "/run/host-services/ssh-auth.sock:/run/host-services/ssh-auth.sock" -e SSH_AUTH_SOCK="/run/host-services/ssh-auth.sock" -v /var/run/docker.sock:/var/run/docker.sock ghcr.io/basecamp/kamal:latest'
+```
+
+On Linux, use:
+
+```sh
+alias kamal='docker run -it --rm -v "${PWD}:/workdir" -v "${SSH_AUTH_SOCK}:/ssh-agent" -v /var/run/docker.sock:/var/run/docker.sock -e "SSH_AUTH_SOCK=/ssh-agent" ghcr.io/basecamp/kamal:latest'
 ```
 
 Then, inside your app directory, run `kamal init`. Now edit the new file `config/deploy.yml`. It could look as simple as this:
