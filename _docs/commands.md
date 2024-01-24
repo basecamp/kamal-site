@@ -5,6 +5,15 @@ order: 3
 
 # Commands
 
+## Deploy a new version
+
+Deploy app to servers:
+```bash
+$ kamal deploy
+```
+
+It will build and push a new image before deploying it.
+
 ## Pushing environment files to the servers
 
 Before you can deploy, you'll need to push env files to the servers. They will then be

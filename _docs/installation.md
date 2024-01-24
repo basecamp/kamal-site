@@ -8,7 +8,7 @@ order: 1
 If you have a Ruby environment available, you can install Kamal globally with:
 
 ```sh
-gem install kamal
+$ gem install kamal
 ```
 
 ...otherwise, you can run a dockerized version via an alias (add this to your `~/.bashrc` or similar to simplify re-use). On macOS, use:
@@ -34,18 +34,18 @@ servers:
 registry:
   username: registry-user-name
   password:
-    - KAMAL_REGISTRY_PASSWORD
+    - KAMAL_REGISTRY_TOKEN
 env:
   secret:
     - RAILS_MASTER_KEY
 ```
 
-Then edit your `.env` file to add your registry password as `KAMAL_REGISTRY_PASSWORD` (and your `RAILS_MASTER_KEY` for production with a Rails app).
+Then edit your `.env` file to add your registry password as `KAMAL_REGISTRY_TOKEN` (and your `RAILS_MASTER_KEY` for production with a Rails app).
 
 Now you're ready to deploy to the servers:
 
 ```
-kamal setup
+$ kamal setup
 ```
 
 This will:
