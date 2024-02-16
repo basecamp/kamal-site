@@ -647,7 +647,7 @@ The hosts that the accessories will run on can be specified by hosts or roles:
       - jobs
 ```
 
-Now run `kamal accessory start mysql` to start the MySQL server on 1.1.1.3. See `kamal accessory` for all the commands possible.
+Now run `kamal accessory boot mysql` to start the MySQL server on 1.1.1.3. See `kamal accessory` for all the commands possible.
 
 Accessory images must be public or tagged in your private registry.
 
