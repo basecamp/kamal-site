@@ -436,6 +436,16 @@ builder:
     host: ssh://root@192.168.0.1
 ```
 
+## Using local builder for single-arch
+
+If you're developing on multiple architectures, always deploy on a specific architecture(e.g. AMD64), and want to build locally, you can configure a remote builder without a host. Kamal will build the image using a local buildx instance.
+
+```yaml
+builder:
+  remote:
+    arch: amd64
+```
+
 ## Using native builder when multi-arch isn't needed
 
 If you're developing on the same architecture as the one you're deploying on, you can speed up the build by forgoing both multi-arch and remote building:
