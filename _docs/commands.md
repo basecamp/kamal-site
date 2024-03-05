@@ -90,7 +90,7 @@ kamal app exec -i 'bin/rails console'
 
 ## Running details to show state of containers
 
-You can see the state of your servers by running `kamal details`:
+You can see the state of your servers by running `kamal details -q`:
 
 ```
 Traefik Host: 192.168.0.1
@@ -114,7 +114,7 @@ You can also see just info for app containers with `kamal app details` or just f
 
 ## Running rollback to fix a bad deploy
 
-If you've discovered a bad deploy, you can quickly rollback by reactivating the old, paused container image. You can see what old containers are available for rollback by running `kamal app containers`. It'll give you a presentation similar to `kamal app details`, but include all the old containers as well. Showing something like this:
+If you've discovered a bad deploy, you can quickly rollback by reactivating the old, paused container image. You can see what old containers are available for rollback by running `kamal app containers -q`. It'll give you a presentation similar to `kamal app details`, but include all the old containers as well. Showing something like this:
 
 ```
 App Host: 192.168.0.1
