@@ -64,7 +64,7 @@
           </aside>
           <article>
 
-{{ content }}
+{% include anchor_headings.html html=content anchorBody="#" %}
 
             <nav>
               <a href="{{ docs_prev.url | absolute_url }}" aria-label="{{ docs_prev_title }}">
