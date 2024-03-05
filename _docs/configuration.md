@@ -169,6 +169,15 @@ sudo apt install -y docker.io curl git
 sudo usermod -a -G docker app
 ```
 
+## Using a different SSH port
+
+The default SSH port is 22, but you can change it using `ssh/port`:
+
+```yaml
+ssh:
+  port: 2222
+```
+
 ## Using a proxy SSH host
 
 If you need to connect to server through a proxy host, you can use `ssh/proxy`:
