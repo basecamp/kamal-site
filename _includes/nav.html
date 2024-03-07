@@ -52,14 +52,6 @@
 
               <li{% if section_url contains page.url %} class="selected"{% endif %}><a href="{{ section_url | absolute_url }}" aria-label="{{ section_title }}">{{ section_title }}</a></li>
 
-          {% if section_url contains page.url %}
-
-            {% assign breadcrumb_doc_title = doc_title %}
-            {% assign breadcrumb_doc_url = doc.url %}
-            {% assign breadcrumb_section_title = section_title %}
-
-          {% endif %}
-
         {% endfor %}
 
             </ul>

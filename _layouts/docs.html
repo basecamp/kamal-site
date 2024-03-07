@@ -99,7 +99,7 @@
           <aside>
             <ul>
 
-{% for doc in site.data.docs %}
+{% for doc in docs %}
 
   {% assign doc_title = doc.title | smartify %}
   {% assign doc_url = doc.url %}
@@ -130,14 +130,6 @@
 
                   <li{% if section_url contains page.url %} class="selected"{% endif %}><a href="{{ section_url | absolute_url }}" aria-label="{{ section_title }}">{{ section_title }}</a></li>
 
-      {% if section_url contains page.url %}
-
-        {% assign breadcrumb_doc_title = doc_title %}
-        {% assign breadcrumb_doc_url = doc.url %}
-        {% assign breadcrumb_section_title = section_title %}
-
-      {% endif %}
-
     {% endfor %}
 
                 </ul>
@@ -151,17 +143,6 @@
             </ul>
           </aside>
           <article>
-
-{% if breadcrumb_doc_title and breadcrumb_doc_url %}
-
-            <div class="page__breadcrumb">
-              <ul>
-                <li><a href="{{ breadcrumb_doc_url | absolute_url }}" aria-label="{{ breadcrumb_doc_title }}">{{ breadcrumb_doc_title }}</a></li>
-                <li><a href="{{ page.url | absolute_url }}" aria-label="{{ breadcrumb_section_title }}">{{ breadcrumb_section_title }}</a></li>
-              </ul>
-            </div>
-
-{% endif %}
 
 {{ content }}
 
