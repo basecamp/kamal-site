@@ -6,6 +6,7 @@ github: basecamp
 repository: basecamp/kamal-site
 markdown: kramdown
 highlighter: rouge
+permalink: pretty
 
 exclude:
   - .jekyll-cache
