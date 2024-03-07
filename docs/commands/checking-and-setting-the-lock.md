@@ -8,9 +8,8 @@ Commands that are unsafe to run concurrently will take a deploy lock while they 
 
 You can check the lock status with:
 
-```
-kamal lock status
-
+```bash
+$ kamal lock status
 Locked by: AN Other at 2023-03-24 09:49:03 UTC
 Version: 77f45c0686811c68989d6576748475a60bf53fc2
 Message: Automatic deploy lock
@@ -18,10 +17,10 @@ Message: Automatic deploy lock
 
 You can also manually acquire and release the lock:
 
-```
+```bash
 kamal lock acquire -m "Doing maintanence"
 ```
 
-```
+```bash
 kamal lock release
 ```
