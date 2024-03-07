@@ -17,8 +17,7 @@ servers:
       - 192.168.0.4
     cmd: bin/jobs
     options:
-      cap-add: true
-      cpu-count: 4
+      cpus: 4
 ```
 
-That'll start the job containers with `docker run ... --cap-add --cpu-count 4 ...`.
+That'll start the job containers with `docker run ... --cpus 4 ...`.
