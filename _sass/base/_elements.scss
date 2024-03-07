@@ -3,6 +3,7 @@ html {
   font-size: 16px;
   min-height: -webkit-fill-available;
   scroll-behavior: smooth;
+  scroll-padding-top: 1.4em;
 }
 
 body {
@@ -63,7 +64,7 @@ h6 {
 h1 {
   font-size: var(--font-size-xxx-large);
   letter-spacing: -0.03em;
-  line-height: 1;
+  line-height: 1.1;
 }
 
 h2 {
