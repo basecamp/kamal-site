@@ -5,28 +5,18 @@
   url: /docs/configuration/
   index: false
   sections:
-    - title: "Using .env file to load required environment variables"
-      url: /docs/configuration/using-env-file-to-load-required-environment-variables/
-    - title: "Using a generated .env file"
-      url: /docs/configuration/using-a-generated-env-file/
+    - title: "Environment Variables"
+      url: /docs/configuration/environment-variables/
+    - title: "SSH"
+      url: /docs/configuration/ssh/
+    - title: "Builders"
+      url: /docs/configuration/builders/
+    - title: "Traefik"
+      url: /docs/configuration/traefik/
     - title: "Configuring the run directory"
       url: /docs/configuration/configuring-the-run-directory/
     - title: "Using another registry than Docker Hub"
       url: /docs/configuration/using-another-registry-than-docker-hub/
-    - title: "Using a different SSH user than root"
-      url: /docs/configuration/using-a-different-ssh-user-than-root/
-    - title: "Using a different SSH port"
-      url: /docs/configuration/using-a-different-ssh-port/
-    - title: "Using a proxy SSH host"
-      url: /docs/configuration/using-a-proxy-ssh-host/
-    - title: "Using a different SSH log level"
-      url: /docs/configuration/using-a-different-ssh-log-level/
-    - title: "Using env variables"
-      url: /docs/configuration/using-env-variables/
-    - title: " Using secret env variables"
-      url: /docs/configuration/using-secret-env-variables/
-    - title: "Using Kamal env variables"
-      url: /docs/configuration/using-kamal-env-variables/
     - title: "Using volumes"
       url: /docs/configuration/using-volumes/
     - title: " Using directories"
@@ -45,30 +35,6 @@
       url: /docs/configuration/configuring-logging/
     - title: "Using a different stop wait time"
       url: /docs/configuration/using-a-different-stop-wait-time/
-    - title: "Using remote builder for native multi-arch"
-      url: /docs/configuration/using-remote-builder-for-native-multi-arch/
-    - title: "Using remote builder for single-arch"
-      url: /docs/configuration/using-remote-builder-for-single-arch/
-    - title: "Using native builder when multi-arch isn't needed"
-      url: /docs/configuration/using-native-builder-when-multi-arch-isnt-needed/
-    - title: "Using a different Dockerfile or context when building"
-      url: /docs/configuration/using-a-different-dockerfile-or-context-when-building/
-    - title: "Using multistage builder cache"
-      url: /docs/configuration/using-multistage-builder-cache/
-    - title: "Using build secrets for new images"
-      url: /docs/configuration/using-build-secrets-for-new-images/
-    - title: "Traefik command arguments"
-      url: /docs/configuration/traefik-command-arguments/
-    - title: "Traefik host port binding"
-      url: /docs/configuration/traefik-host-port-binding/
-    - title: "Traefik version, upgrades, and custom images"
-      url: /docs/configuration/traefik-version-upgrades-and-custom-images/
-    - title: "Traefik container configuration"
-      url: /docs/configuration/traefik-container-configuration/
-    - title: "Traefik container labels"
-      url: /docs/configuration/traefik-container-labels/
-    - title: "Traefik alternate entrypoints"
-      url: /docs/configuration/traefik-alternate-entrypoints/
     - title: "Configuring build args for new images"
       url: /docs/configuration/configuring-build-args-for-new-images/
     - title: "Using accessories for database, cache, search services"
