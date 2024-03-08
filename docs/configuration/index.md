@@ -1,3 +1,3 @@
 ---
-redirect_to: /docs/configuration/using-env-file-to-load-required-environment-variables/
+redirect_to: /docs/configuration/environment-variables/
 ---
