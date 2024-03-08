@@ -1,10 +1,21 @@
 ---
-title: Using a generated .env file
+title: Environment Variables
 ---
 
-# Using a generated .env file
+# Environment Variables
 
-## [1Password as a secret store](#1password-as-a-secret-store)
+## [Using .env file to load required environment variables](#using-env-file-to-load-required-environment-variables)
+
+Kamal uses [dotenv](https://github.com/bkeepers/dotenv) to automatically load environment variables set in the `.env` file present in the application root. This file can be used to set variables like `KAMAL_REGISTRY_PASSWORD` or database passwords. But for this reason you must ensure that .env files are not checked into Git or included in your Dockerfile! The format is just key-value like:
+
+```bash
+KAMAL_REGISTRY_PASSWORD=pw
+DB_PASSWORD=secret123
+```
+
+## [Using a generated .env file](#using-a-generated-env-file)
+
+### [1Password as a secret store](#1password-as-a-secret-store)
 
 If you're using a centralized secret store, like 1Password, you can create `.env.erb` as a template which looks up the secrets. Example of a .env.erb file:
 
@@ -23,7 +34,7 @@ If you need separate env variables for different destinations, you can set them 
 
 **Note:** If you utilize biometrics with 1Password you can remove the `session_token` related parts in the example and just call `op read op://Vault/Docker Hub/password -n`.
 
-## [Bitwarden as a secret store](#bitwarden-as-a-secret-store)
+### [Bitwarden as a secret store](#bitwarden-as-a-secret-store)
 
 If you are using open source secret store like bitwarden, you can create `.env.erb` as a template which looks up the secrets.
 
@@ -66,3 +77,41 @@ SOME_SECRET=<%= `bw get notes 123123123-1232-4224-222f-234234234234 --session #{
 ```
 
 Then everyone deploying the app can run `kamal envify` and kamal will generate `.env`
+
+## [Using env variables](#using-env-variables)
+
+You can inject env variables into the app containers using `env`:
+
+```yaml
+env:
+  DATABASE_URL: mysql2://db1/hey_production/
+  REDIS_URL: redis://redis1:6379/1
+```
+
+**Note:** Before you can start the containers you need to push the env variables up to the servers.
+
+## [Using secret env variables](#using-secret-env-variables)
+
+If you have env variables that are secret, you can divide the `env` block into `clear` and `secret`:
+
+```yaml
+env:
+  clear:
+    DATABASE_URL: mysql2://db1/hey_production/
+    REDIS_URL: redis://redis1:6379/1
+  secret:
+    - DATABASE_PASSWORD
+    - REDIS_PASSWORD
+```
+
+The list of secret env variables will be expanded at run time from your local machine. So a reference to a secret `DATABASE_PASSWORD` will look for `ENV["DATABASE_PASSWORD"]` on the machine running Kamal. Just like with build secrets.
+
+If the referenced secret ENVs are missing, the configuration will be halted with a `KeyError` exception.
+
+**Note:** Marking an ENV as secret currently only redacts its value in the output for Kamal. The ENV is still injected in the clear into the container at runtime.
+
+## [Using Kamal env variables](#using-kamal-env-variables)
+
+The following env variables are set when your container runs:
+
+`KAMAL_CONTAINER_NAME`: this contains the current container name and version
