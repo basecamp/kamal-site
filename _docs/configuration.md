@@ -706,6 +706,20 @@ Now run `kamal accessory boot mysql` to start the MySQL server on 1.1.1.3. See `
 
 Accessory images must be public or tagged in your private registry.
 
+### Note on accessories and security
+
+Please note that, by default, Kamal exposes your accessories through a public IP. Therefore, you should secure them with a firewall or passwords. If your hosting provider supports private networking, you can expose services using a private IP, making them accessible only from within the same network:
+
+```yaml
+  redis:
+    image: redis:latest
+    roles:
+      - web
+    port: "192.168.1.100:36379:6379" # where 192.168.1.100 is the private IP of the server
+    volumes:
+      - /var/lib/redis:/data
+```
+
 ## Using Cron
 
 You can use a specific container to run your Cron jobs:
