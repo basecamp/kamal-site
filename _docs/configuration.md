@@ -406,6 +406,8 @@ logging:
     awslogs-region: "eu-central-2"
 servers:
   web:
+    hosts:
+      - 192.168.0.1
     logging:
       options:
         awslogs-group: "my-app-web"
