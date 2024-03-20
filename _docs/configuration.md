@@ -397,6 +397,20 @@ logging:
     awslogs-group: "my-app"
 ```
 
+You may also configure logging per role, settings per role will inherit global logging settings.
+
+```yaml
+logging:
+  driver: awslogs
+  options:
+    awslogs-region: "eu-central-2"
+servers:
+  web:
+    logging:
+      options:
+        awslogs-group: "my-app-web"
+```
+
 If nothing is configured, the default option `max-size=10m` is used for all containers. The default logging driver of Docker is `json-file`.
 
 ## Using a different stop wait time
