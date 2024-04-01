@@ -26,18 +26,21 @@ firing a JSON webhook. These variables include:
 - `KAMAL_DESTINATION` - optional: destination, e.g. "staging"
 - `KAMAL_ROLE` - optional: role targeted, e.g. "web"
 
-There are four hooks:
+There are five hooks:
 
-1. pre-connect
+1. docker-setup
+Run once Docker is installed on a server but before taking any application-specific actions. Designed for performing any necessary configuration of Docker itself.
+
+2. pre-connect
 Called before taking the deploy lock. For checks that need to run before connecting to remote hosts - e.g. DNS warming.
 
-2. pre-build
+3. pre-build
 Used for pre-build checks - e.g. there are no uncommitted changes or that CI has passed.
 
-3. pre-deploy
+4. pre-deploy
 For final checks before deploying, e.g. checking CI completed
 
-3. post-deploy - run after a deploy, redeploy or rollback.
+5. post-deploy - run after a deploy, redeploy or rollback.
 This hook is also passed a `KAMAL_RUNTIME` env variable set to the total seconds the deploy took.
 
 This could be used to broadcast a deployment message, or register the new version with an APM.
