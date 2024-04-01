@@ -17,10 +17,6 @@
       url: /docs/configuration/configuring-the-run-directory/
     - title: "Using another registry than Docker Hub"
       url: /docs/configuration/using-another-registry-than-docker-hub/
-    - title: "Using volumes"
-      url: /docs/configuration/using-volumes/
-    - title: " Using directories"
-      url: /docs/configuration/using-directories/
     - title: "Using different roles for servers"
       url: /docs/configuration/using-different-roles-for-servers/
     - title: "Using container labels"
@@ -37,8 +33,8 @@
       url: /docs/configuration/using-a-different-stop-wait-time/
     - title: "Configuring build args for new images"
       url: /docs/configuration/configuring-build-args-for-new-images/
-    - title: "Using accessories for database, cache, search services"
-      url: /docs/configuration/using-accessories-for-database-cache-search-services/
+    - title: "Accessories"
+      url: /docs/configuration/accessories/
     - title: "Using Cron"
       url: /docs/configuration/using-cron/
     - title: "Using a custom healthcheck"

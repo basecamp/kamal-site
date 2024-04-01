@@ -2,7 +2,9 @@
 title: Using accessories for database, cache, search services
 ---
 
-# Using accessories for database, cache, search services
+# Accessories
+
+## [Using accessories for database, cache, search services](#using-accessories-for-database-cache-search-services)
 
 You can manage your accessory services via Kamal as well. Accessories are long-lived services that your app depends on. They are not updated when you deploy.
 
@@ -57,7 +59,43 @@ Now run `kamal accessory boot mysql` to start the MySQL server on 1.1.1.3. See `
 
 Accessory images must be public or tagged in your private registry.
 
-### Note on accessories and security
+## [Using directories](#using-directories)
+
+Directories act in a similar way to volumes except it will create a corresponding directory on the host before mounting the volume:
+
+e.g.
+
+```yaml
+service: kamal-demo
+accessories:
+  db:
+    # ...
+    directories:
+      - data:/var/lib/mysql
+```
+
+will run `mkdir` first ...
+
+```
+Running /usr/bin/env mkdir -p $PWD/kamal-demo-db/data
+```
+
+and then it will mount the volume ...
+
+```
+docker run ... --volume $PWD/kamal-demo-db/data:/var/lib/mysql
+```
+
+## [Using volumes](#using-volumes)
+
+You can add custom volumes into the app containers using `volumes`:
+
+```yaml
+volumes:
+  - "/local/path:/container/path"
+```
+
+## [Security](#security)
 
 Please note that, by default, Kamal exposes your accessories through a public IP. Therefore, you should secure them with a firewall or passwords. If your hosting provider supports private networking, you can expose services using a private IP, making them accessible only from within the same network:
 
@@ -70,18 +108,3 @@ Please note that, by default, Kamal exposes your accessories through a public IP
     volumes:
       - /var/lib/redis:/data
 ```
-
-## Using Cron
-
-You can use a specific container to run your Cron jobs:
-
-```yaml
-servers:
-  cron:
-    hosts:
-      - 192.168.0.1
-    cmd:
-      bash -c "cat config/crontab | crontab - && cron -f"
-```
-
-This assumes the Cron settings are stored in `config/crontab`.
