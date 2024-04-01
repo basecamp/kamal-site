@@ -24,6 +24,9 @@ If the script returns a non-zero exit code the command will be aborted.
 - `KAMAL_DESTINATION` — *Optional:* Destination, e.g. "staging"
 - `KAMAL_ROLE` — *Optional:* Role targeted, e.g. "web"
 
+## [docker-setup](#docker-setup)
+Run once Docker is installed on a server but before taking any application-specific actions. Designed for performing any necessary configuration of Docker itself.
+
 ## [pre-connect](#pre-connect)
 
 Called before taking the deploy lock. For checks that need to run before connecting to remote hosts, e.g. DNS warming.
