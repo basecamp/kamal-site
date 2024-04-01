@@ -15,57 +15,53 @@
       url: /docs/configuration/traefik/
     - title: "Configuring the run directory"
       url: /docs/configuration/configuring-the-run-directory/
-    - title: "Using another registry than Docker Hub"
-      url: /docs/configuration/using-another-registry-than-docker-hub/
-    - title: "Using different roles for servers"
-      url: /docs/configuration/using-different-roles-for-servers/
-    - title: "Using container labels"
-      url: /docs/configuration/using-container-labels/
-    - title: "Using shell expansion"
-      url: /docs/configuration/using-shell-expansion/
-    - title: " Using container options"
-      url: /docs/configuration/using-container-options/
-    - title: "Setting a minimum version"
-      url: /docs/configuration/setting-a-minimum-version/
+    - title: "Docker Registries"
+      url: /docs/configuration/docker-registries/
+    - title: "Server Roles"
+      url: /docs/configuration/server-roles/
+    - title: "Container labels"
+      url: /docs/configuration/container-labels/
+    - title: "Container options"
+      url: /docs/configuration/container-options/
+    - title: "Minimum version"
+      url: /docs/configuration/minimum-version/
     - title: "Configuring logging"
       url: /docs/configuration/configuring-logging/
-    - title: "Using a different stop wait time"
-      url: /docs/configuration/using-a-different-stop-wait-time/
-    - title: "Configuring build args for new images"
-      url: /docs/configuration/configuring-build-args-for-new-images/
+    - title: "Stop wait time"
+      url: /docs/configuration/stop-wait-time/
     - title: "Accessories"
       url: /docs/configuration/accessories/
-    - title: "Using Cron"
-      url: /docs/configuration/using-cron/
-    - title: "Using a custom healthcheck"
-      url: /docs/configuration/using-a-custom-healthcheck/
-    - title: "Using rolling deployments"
-      url: /docs/configuration/using-rolling-deployments/
-    - title: "Using custom SSH connection management"
-      url: /docs/configuration/using-custom-ssh-connection-management/
-    - title: "Serving old and new assets during deployments"
-      url: /docs/configuration/serving-old-and-new-assets-during-deployments/
+    - title: "Cron"
+      url: /docs/configuration/cron/
+    - title: "Healthchecks"
+      url: /docs/configuration/healthchecks/
+    - title: "Rolling deployments"
+      url: /docs/configuration/rolling-deployments/
+    - title: "SSH connection management"
+      url: /docs/configuration/ssh-connection-management/
+    - title: "Asset bridging"
+      url: /docs/configuration/asset-bridging/
 
 - title: "Commands"
   url: /docs/commands/
   index: false
   sections:
-    - title: "Pushing environment files to the servers"
-      url: /docs/commands/pushing-environment-files-to-the-servers/
     - title: "Running commands on servers"
       url: /docs/commands/running-commands-on-servers/
     - title: "Running interactive commands over SSH"
       url: /docs/commands/running-interactive-commands-over-ssh/
-    - title: "Running details to show state of containers"
-      url: /docs/commands/running-details-to-show-state-of-containers/
-    - title: "Running rollback to fix a bad deploy"
-      url: /docs/commands/running-rollback-to-fix-a-bad-deploy/
-    - title: "Running removal to clean up servers"
-      url: /docs/commands/running-removal-to-clean-up-servers/
+    - title: "Container details"
+      url: /docs/commands/container-details/
+    - title: "Rollback"
+      url: /docs/commands/rollback/
+    - title: "Removing Kamal"
+      url: /docs/commands/removing-kamal/
     - title: "Rebooting Traefik"
       url: /docs/commands/rebooting-traefik/
-    - title: "Checking and setting the lock"
-      url: /docs/commands/checking-and-setting-the-lock/
+    - title: "Environment files"
+      url: /docs/commands/environment-files/
+    - title: "Locks"
+      url: /docs/commands/locks/
 
 - title: "Hooks"
   url: /docs/hooks/

@@ -1,8 +1,8 @@
 ---
-title: Pushing environment files to the servers
+title: Environment files
 ---
 
-# Pushing environment files to the servers
+# Environment files
 
 Before you can deploy, you'll need to push env files to the servers. They will then be included in the docker run commands.
 

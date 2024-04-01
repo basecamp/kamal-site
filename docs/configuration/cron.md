@@ -1,8 +1,8 @@
 ---
-title: Using Cron
+title: Cron
 ---
 
-# Using Cron
+# Cron
 
 You can use a specific container to run your Cron jobs:
 

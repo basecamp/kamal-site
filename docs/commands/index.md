@@ -1,3 +1,3 @@
 ---
-redirect_to: /docs/commands/pushing-environment-files-to-the-servers/
+redirect_to: /docs/commands/running-commands-on-servers/
 ---

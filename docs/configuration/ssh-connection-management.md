@@ -1,8 +1,8 @@
 ---
-title: Using custom SSH connection management
+title: SSH connection management
 ---
 
-# Using custom SSH connection management
+# SSH connection management
 
 Creating SSH connections concurrently can be an issue when deploying to many servers. By default Kamal will limit concurrent connection starts to 30 at a time.
 

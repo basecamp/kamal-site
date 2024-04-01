@@ -1,8 +1,8 @@
 ---
-title: Using another registry than Docker Hub
+title: Docker Registries
 ---
 
-# Using another registry than Docker Hub
+# Docker Registries
 
 The default registry is Docker Hub, but you can change it using `registry/server`:
 

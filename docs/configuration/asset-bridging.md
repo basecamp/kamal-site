@@ -1,8 +1,8 @@
 ---
-title: Serving old and new assets during deployments
+title: Asset bridging
 ---
 
-# Serving old and new assets during deployments
+# Asset bridging
 
 If there are changes to CSS or JS files, we may get requests for the old versions on the new container and vice-versa.
 

@@ -1,8 +1,8 @@
 ---
-title: Checking and setting the lock
+title: Locks
 ---
 
-# Checking and setting the lock
+# Locks
 
 Commands that are unsafe to run concurrently will take a deploy lock while they run. The lock is the `kamal_lock` directory on the primary server.
 

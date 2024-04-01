@@ -1,8 +1,8 @@
 ---
-title: Using different roles for servers
+title: Server Roles
 ---
 
-# Using different roles for servers
+# Server Roles
 
 If your application uses separate hosts for running jobs or other roles beyond the default web running, you can specify these hosts in a dedicated role with a new entrypoint command like so:
 

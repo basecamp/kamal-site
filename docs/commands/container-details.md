@@ -1,8 +1,8 @@
 ---
-title: Running details to show state of containers
+title: Container details
 ---
 
-# Running details to show state of containers
+# Container details
 
 You can see the state of your servers by running `kamal details -q`:
 

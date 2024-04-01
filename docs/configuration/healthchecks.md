@@ -1,8 +1,8 @@
 ---
-title: Using a custom healthcheck
+title: Healthchecks
 ---
 
-# Using a custom healthcheck
+# Healthchecks
 
 Kamal uses Docker healthchecks to check the health of your application during deployment. Traefik uses this same healthcheck status to determine when a container is ready to receive traffic.
 

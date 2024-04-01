@@ -1,8 +1,8 @@
 ---
-title: Using container options
+title: Container options
 ---
 
-# Using container options
+# Container options
 
 You can specialize the options used to start containers using the `options` definitions:
 

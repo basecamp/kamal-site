@@ -1,8 +1,8 @@
 ---
-title: Setting a minimum version
+title: Minimum version
 ---
 
-# Setting a minimum version
+# Minimum version
 
 You can set the minimum Kamal version with:
 

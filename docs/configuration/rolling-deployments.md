@@ -1,8 +1,8 @@
 ---
-title: Using rolling deployments
+title: Rolling deployments
 ---
 
-# Using rolling deployments
+# Rolling deployments
 
 When deploying to large numbers of hosts, you might prefer not to restart your services on every host at the same time.
 
