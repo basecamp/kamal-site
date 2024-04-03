@@ -7,7 +7,8 @@
   --rgb-black: 0, 0, 0;
   --rgb-white: 255, 255, 255;
   --rgb-grey: 40, 50, 60;
-  --rgb-grey-light: 170, 180, 190;
+  --rgb-grey-light: 105, 115, 125;
+  --rgb-grey-lighter: 170, 180, 190;
   --rgb-blue: 10, 130, 245;
   --rgb-blue-dark: 4, 117, 244;
 
@@ -19,6 +20,7 @@
   --color-white: rgb(var(--rgb-white));
   --color-grey: rgb(var(--rgb-grey));
   --color-grey-light: rgb(var(--rgb-grey-light));
+  --color-grey-lighter: rgb(var(--rgb-grey-lighter));
   --color-blue: rgb(var(--rgb-blue));
   --color-blue-dark: rgb(var(--rgb-blue-dark));
 
@@ -26,12 +28,14 @@
   --font-family-mono: ui-monospace, 'SFMono-Regular', SF Mono, Menlo, Consolas, Monospace;
 
   --font-size: min(calc(1.3em + 1vw), 2.5rem);
+  --font-size-xx-small: 50%;
   --font-size-x-small: 60%;
   --font-size-small: 75%;
   --font-size-medium: 100%;
   --font-size-large: 115%;
-  --font-size-x-large: 130%;
-  --font-size-xx-large: 250%;
+  --font-size-x-large: 135%;
+  --font-size-xx-large: 180%;
+  --font-size-xxx-large: 250%;
 
   --line-height: 1.4;
 

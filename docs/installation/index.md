@@ -1,6 +1,5 @@
 ---
 title: Installation
-order: 1
 ---
 
 # Installation
@@ -11,7 +10,9 @@ If you have a Ruby environment available, you can install Kamal globally with:
 gem install kamal
 ```
 
-...otherwise, you can run a dockerized version via an alias (add this to your `~/.bashrc` or similar to simplify re-use). On macOS, use:
+Otherwise, you can run a dockerized version via an alias (add this to your `~/.bashrc` or similar to simplify re-use).
+
+On macOS, use:
 
 ```sh
 alias kamal='docker run -it --rm -v "${PWD}:/workdir" -v "/run/host-services/ssh-auth.sock:/run/host-services/ssh-auth.sock" -e SSH_AUTH_SOCK="/run/host-services/ssh-auth.sock" -v /var/run/docker.sock:/var/run/docker.sock ghcr.io/basecamp/kamal:latest'
@@ -50,9 +51,9 @@ kamal setup
 
 This will:
 
-1. Connect to the servers over SSH (using root by default, authenticated by your ssh key)
+1. Connect to the servers over SSH (using root by default, authenticated by your ssh key).
 2. Install Docker and curl on any server that might be missing it (using apt-get): root access is needed via ssh for this.
-3. Log into the registry both locally and remotely
+3. Log into the registry both locally and remotely.
 4. Build the image using the standard Dockerfile in the root of the application.
 5. Push the image to the registry.
 6. Pull the image from the registry onto the servers.
