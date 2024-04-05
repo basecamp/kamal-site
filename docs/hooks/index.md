@@ -24,38 +24,13 @@ If the script returns a non-zero exit code the command will be aborted.
 - `KAMAL_DESTINATION` — *Optional:* Destination, e.g. "staging"
 - `KAMAL_ROLE` — *Optional:* Role targeted, e.g. "web"
 
-## [docker-setup](#docker-setup)
-Run once Docker is installed on a server but before taking any application-specific actions. Designed for performing any necessary configuration of Docker itself.
+The available hooks are
+- [docker-setup](../docker-setup)
+- [pre-connect](../pre-connect)
+- [pre-build](../pre-build)
+- [pre-deploy](../pre-deploy)
+- [post-deploy](../post-deploy)
+- [pre-traefik-reboot](../pre-traefik-reboot)
+- [post-traefik-reboot](../post-traefik-reboot)
 
-## [pre-connect](#pre-connect)
-
-Called before taking the deploy lock. For checks that need to run before connecting to remote hosts, e.g. DNS warming.
-
-## [pre-build](#pre-build)
-
-Used for pre-build checks, e.g. there are no uncommitted changes or that CI has passed.
-
-## [pre-deploy](#pre-deploy)
-
-For final checks before deploying, e.g. checking CI completed.
-
-## [post-deploy](#post-deploy)
-
-Run after a deploy, redeploy or rollback. This hook is also passed a `KAMAL_RUNTIME` env variable set to the total seconds the deploy took.
-
-This could be used to broadcast a deployment message, or register the new version with an APM.
-
-The command could look something like:
-
-```bash
-#!/usr/bin/env bash
-curl -q -d content="[My App] ${KAMAL_PERFORMER} Rolled back to version ${KAMAL_VERSION}" https://3.basecamp.com/XXXXX/integrations/XXXXX/buckets/XXXXX/chats/XXXXX/lines
-```
-
-That will post a line like the following to a preconfigured chatbot in Basecamp:
-
-```
-[My App] [dhh] Rolled back to version d264c4e92470ad1bd18590f04466787262f605de
-```
-
-Set `--skip_hooks` to avoid running the hooks.
+You can pass `--skip_hooks` to avoid running the hooks.
