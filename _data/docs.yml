@@ -44,24 +44,54 @@
 
 - title: "Commands"
   url: /docs/commands/
-  index: false
+  index: true
   sections:
+    - title: "kamal accessory"
+      url: /docs/commands/accessory/
+    - title: "kamal app"
+      url: /docs/commands/app/
+    - title: "kamal audit"
+      url: /docs/commands/audit/
+    - title: "kamal build"
+      url: /docs/commands/build/
+    - title: "kamal config"
+      url: /docs/commands/config/
+    - title: "kamal deploy"
+      url: /docs/commands/deploy/
+    - title: "kamal details"
+      url: /docs/commands/details/
+    - title: "kamal env"
+      url: /docs/commands/env/
+    - title: "kamal envify"
+      url: /docs/commands/envify/
+    - title: "kamal healthcheck"
+      url: /docs/commands/healthcheck/
+    - title: "kamal help"
+      url: /docs/commands/help/
+    - title: "kamal init"
+      url: /docs/commands/init/
+    - title: "kamal lock"
+      url: /docs/commands/lock/
+    - title: "kamal prune"
+      url: /docs/commands/prune/
+    - title: "kamal redeploy"
+      url: /docs/commands/redeploy/
+    - title: "kamal registry"
+      url: /docs/commands/registry/
+    - title: "kamal remove"
+      url: /docs/commands/remove/
+    - title: "kamal rollback"
+      url: /docs/commands/rollback/
+    - title: "kamal server"
+      url: /docs/commands/server/
+    - title: "kamal setup"
+      url: /docs/commands/setup/
+    - title: "kamal traefik"
+      url: /docs/commands/traefik/
+    - title: "kamal version"
+      url: /docs/commands/version/
     - title: "Running commands on servers"
       url: /docs/commands/running-commands-on-servers/
-    - title: "Running interactive commands over SSH"
-      url: /docs/commands/running-interactive-commands-over-ssh/
-    - title: "Container details"
-      url: /docs/commands/container-details/
-    - title: "Rollback"
-      url: /docs/commands/rollback/
-    - title: "Removing Kamal"
-      url: /docs/commands/removing-kamal/
-    - title: "Rebooting Traefik"
-      url: /docs/commands/rebooting-traefik/
-    - title: "Environment files"
-      url: /docs/commands/environment-files/
-    - title: "Locks"
-      url: /docs/commands/locks/
 
 - title: "Hooks"
   url: /docs/hooks/

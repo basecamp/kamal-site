@@ -17,7 +17,7 @@
   {% assign item_title = item.title | smartify %}
   {% assign item_url = item.url %}
 
-      <li{% if page.url contains item_url %} class="selected"{% endif %}><a href="{{ item_url }}"{% if item.external %} target="_blank" rel="noopener"{% endif %} aria-label="{{ item_title }}">{{ item_title }}</a></li>
+      <li{% if page.url == item_url %} class="selected"{% endif %}><a href="{{ item_url }}"{% if item.external %} target="_blank" rel="noopener"{% endif %} aria-label="{{ item_title }}">{{ item_title }}</a></li>
 
 {% endfor %}
 

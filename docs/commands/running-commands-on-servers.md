@@ -58,3 +58,26 @@ Database schema version   20221231233303
 $ kamal app exec -p 'bin/rails runner "puts Rails.application.config.time_zone"'
 UTC
 ```
+
+## [Run interactive commands over SSH](#run-interactive-commands-over-ssh)
+
+You can run interactive commands, like a Rails console or a bash session, on a server (default is primary, use `--hosts` to connect to another).
+
+Start a bash session in a new container made from the most recent app image:
+
+```bash
+kamal app exec -i bash
+```
+
+Start a bash session in the currently running container for the app:
+
+```bash
+kamal app exec -i --reuse bash
+```
+
+Start a Rails console in a new container made from the most recent app image:
+
+```bash
+kamal app exec -i 'bin/rails console'
+```
+
