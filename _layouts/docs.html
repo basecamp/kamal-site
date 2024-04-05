@@ -128,7 +128,7 @@
       {% assign section_title = section.title | smartify %}
       {% assign section_url = section.url %}
 
-                  <li{% if section_url contains page.url %} class="selected"{% endif %}><a href="{{ section_url | absolute_url }}" aria-label="{{ section_title }}">{{ section_title }}</a></li>
+                  <li{% if section_url == page.url %} class="selected"{% endif %}><a href="{{ section_url | absolute_url }}" aria-label="{{ section_title }}">{{ section_title }}</a></li>
 
     {% endfor %}
 

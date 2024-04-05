@@ -1,13 +1,13 @@
 ---
-title: Commands
+title: Help
 ---
 
-# Commands
+# kamal help
 
-You can view all of the commands by running `kamal --help`
+Displays help messages. Run `kamal help [command]` for details on a specific command.
 
 ```
-$ kamal --help
+$ kamal help
 Commands:
   kamal accessory           # Manage accessories (db/redis/search)
   kamal app                 # Manage application
@@ -45,4 +45,3 @@ Options:
   -H, [--skip-hooks]                                 # Don't run hooks
                                                      # Default: false
 ```
-
