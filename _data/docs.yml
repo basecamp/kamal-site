@@ -44,8 +44,10 @@
 
 - title: "Commands"
   url: /docs/commands/
-  index: true
+  index: false
   sections:
+    - title: "View all commands"
+      url: /docs/commands/view-all-commands/
     - title: "kamal accessory"
       url: /docs/commands/accessory/
     - title: "kamal app"
@@ -95,8 +97,10 @@
 
 - title: "Hooks"
   url: /docs/hooks/
-  index: true
+  index: false
   sections:
+    - title: "Hooks overview"
+      url: /docs/hooks/hooks-overview/
     - title: docker-setup
       url: /docs/hooks/docker-setup/
     - title: pre-connect
