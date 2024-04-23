@@ -15,7 +15,7 @@
   {% assign item_url = item.url %}
 
       <li{% if page.url contains item_url %} class="selected"{% endif %}>
-        <a href="{{ item_url }}"{% if item.external %} target="_blank" rel="noopener"{% endif %} aria-label="{{ item_title }}">{{ item_title }}</a>
+        <a href="{{ item_url | absolute_url }}"{% if item.external %} target="_blank" rel="noopener"{% endif %} aria-label="{{ item_title }}">{{ item_title }}</a>
 
   {% if item_url == '/docs/' %}
 
@@ -29,17 +29,16 @@
 
       {% if doc_sections and doc.index == false %}
 
-        {% assign section_first = doc_sections | first %}
-        {% assign section_url = section_first.url %}
+        {% assign section_url = doc_sections.first.url %}
 
       {% else %}
 
-        {% assign section_url = null %}
+        {% assign section_url = doc_url %}
 
       {% endif %}
 
           <li{% if page.url contains doc_url %} class="selected"{% endif %}>
-            <a href="{{ section_url | default: doc_url | absolute_url }}" aria-label="{{ doc_title }}">{{ doc_title }}</a>
+            <a href="{{ section_url | absolute_url }}" aria-label="{{ doc_title }}">{{ doc_title }}</a>
 
       {% if page.url contains doc_url and doc_sections %}
 
@@ -48,9 +47,8 @@
         {% for section in doc_sections %}
 
           {% assign section_title = section.title | smartify %}
-          {% assign section_url = section.url %}
 
-              <li{% if section_url contains page.url %} class="selected"{% endif %}><a href="{{ section_url | absolute_url }}" aria-label="{{ section_title }}">{{ section_title }}</a></li>
+              <li{% if section.url contains page.url %} class="selected"{% endif %}><a href="{{ section.url | absolute_url }}" aria-label="{{ section_title }}">{{ section_title }}</a></li>
 
         {% endfor %}
 
