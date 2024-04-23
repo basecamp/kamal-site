@@ -4,8 +4,7 @@ title: Envify
 
 # kamal envify
 
-Creates `.env` by evaluating `.env.erb` (or `.env.staging.erb` -> `.env.staging` when using -d staging) and push env files to the servers containing
-runtime secrets.
+Creates `.env` by evaluating `.env.erb` (or `.env.staging.erb` -> `.env.staging` when using -d staging) and push env files to the servers containing runtime secrets.
 
 You can use this to manage secrets externally from your repository. `.env` is used for both build and runtime secrets.
 

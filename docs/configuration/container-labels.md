@@ -28,6 +28,7 @@ servers:
 ```
 
 ## [Traefik Labels](#traefik-labels)
+
 You can use labels to specialize the default Traefik rules:
 
 ```yaml
@@ -50,4 +51,3 @@ labels:
 ```
 
 **Note:** Any other occurrence of `$` will be escaped to prevent unwanted shell expansion!
-

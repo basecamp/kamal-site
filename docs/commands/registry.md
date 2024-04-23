@@ -26,4 +26,3 @@ $ kamal registry logout
   INFO [8488da90] Finished in 0.179 seconds with exit status 0 (successful).
   INFO [d096054d] Finished in 0.183 seconds with exit status 0 (successful).
 ```
-

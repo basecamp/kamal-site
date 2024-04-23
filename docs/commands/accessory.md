@@ -6,7 +6,7 @@ title: Accessory
 
 Accessories are long-lived services that your app depends on. They are not updated when you deploy.
 
-They are not proxied, so rebooting will have a small period of downtime. You can map volumes from the host server into your container for persistance across reboots.
+They are not proxied, so rebooting will have a small period of downtime. You can map volumes from the host server into your container for persistence across reboots.
 
 Run `kamal accessory` to view and manage your accessories.
 

@@ -159,4 +159,3 @@ This build argument can then be used in the Dockerfile:
 ARG RUBY_VERSION
 FROM ruby:$RUBY_VERSION-slim as base
 ```
-

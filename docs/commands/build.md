@@ -4,8 +4,7 @@ title: Build
 
 # kamal build
 
-Build your app images and push them to your servers. These commands are called indirectly
-by `kamal deploy` and `kamal redeploy`.
+Build your app images and push them to your servers. These commands are called indirectly by `kamal deploy` and `kamal redeploy`.
 
 ```bash
 $ kamal build
@@ -137,4 +136,3 @@ Running the pre-build hook...
   INFO [ad386911] Finished in 0.502 seconds with exit status 0 (successful).
 Releasing the deploy lock...
 ```
-

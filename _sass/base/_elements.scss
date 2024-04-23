@@ -120,11 +120,13 @@ a {
   transition: color var(--transition);
 }
 
-em, i {
+em,
+i {
   font-style: italic;
 }
 
-strong, b {
+strong,
+b {
   font-weight: 700;
 }
 

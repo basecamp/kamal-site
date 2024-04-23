@@ -80,4 +80,3 @@ Start a Rails console in a new container made from the most recent app image:
 ```bash
 kamal app exec -i 'bin/rails console'
 ```
-
