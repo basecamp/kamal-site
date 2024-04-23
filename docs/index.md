@@ -1,3 +1,4 @@
 ---
-redirect_to: /docs/installation/
+redirect_to:
+  - /docs/installation/
 ---

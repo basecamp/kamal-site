@@ -1,3 +1,4 @@
 ---
-redirect_to: /docs/configuration/environment-variables/
+redirect_to:
+  - /docs/configuration/environment-variables/
 ---
