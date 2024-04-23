@@ -101,17 +101,17 @@
   sections:
     - title: "Hooks overview"
       url: /docs/hooks/hooks-overview/
-    - title: docker-setup
+    - title: "docker-setup"
       url: /docs/hooks/docker-setup/
-    - title: pre-connect
+    - title: "pre-connect"
       url: /docs/hooks/pre-connect/
-    - title: pre-build
+    - title: "pre-build"
       url: /docs/hooks/pre-build/
-    - title: pre-deploy
+    - title: "pre-deploy"
       url: /docs/hooks/pre-deploy/
-    - title: post-deploy
+    - title: "post-deploy"
       url: /docs/hooks/post-deploy/
-    - title: pre-traefik-reboot
+    - title: "pre-traefik-reboot"
       url: /docs/hooks/pre-traefik-reboot/
-    - title: post-traefik-reboot
+    - title: "post-traefik-reboot"
       url: /docs/hooks/post-traefik-reboot/
