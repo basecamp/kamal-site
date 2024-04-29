@@ -6,7 +6,7 @@ title: Server
 
 You can run `kamal server bootstrap` to setup docker on your hosts.
 
-It will check if docker is installed and if not it will attempt to install it via https://get.docker.com/.
+It will check if docker is installed and if not it will attempt to install it via [get.docker.com](https://get.docker.com/).
 
 ```bash
 $ kamal server
