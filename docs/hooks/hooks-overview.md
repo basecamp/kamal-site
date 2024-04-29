@@ -26,12 +26,12 @@ If the script returns a non-zero exit code the command will be aborted.
 
 The available hooks are:
 
-- [docker-setup](docker-setup)
-- [pre-connect](pre-connect)
-- [pre-build](pre-build)
-- [pre-deploy](pre-deploy)
-- [post-deploy](post-deploy)
-- [pre-traefik-reboot](pre-traefik-reboot)
-- [post-traefik-reboot](post-traefik-reboot)
+- [docker-setup](../docker-setup)
+- [pre-connect](../pre-connect)
+- [pre-build](../pre-build)
+- [pre-deploy](../pre-deploy)
+- [post-deploy](../post-deploy)
+- [pre-traefik-reboot](../pre-traefik-reboot)
+- [post-traefik-reboot](../post-traefik-reboot)
 
 You can pass `--skip_hooks` to avoid running the hooks.
