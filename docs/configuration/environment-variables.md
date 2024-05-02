@@ -110,6 +110,15 @@ If the referenced secret ENVs are missing, the configuration will be halted with
 
 **Note:** Marking an ENV as secret currently only redacts its value in the output for Kamal. The ENV is still injected in the clear into the container at runtime.
 
+## [Injecting env variables from the host](#injecting-env-variables-from-the-host)
+
+You can inject variables from the deploy host with the ${} syntax:
+
+```yaml
+env:
+  DATACENTER: "${DATACENTER}"
+```
+
 ## [Using Kamal env variables](#using-kamal-env-variables)
 
 The following env variables are set when your container runs:
