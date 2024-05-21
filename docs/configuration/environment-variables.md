@@ -121,6 +121,7 @@ env:
 
 ## [Using Kamal env variables](#using-kamal-env-variables)
 
-The following env variables are set when your container runs:
+The following env variables are set in your container when it runs:
 
-`KAMAL_CONTAINER_NAME`: this contains the current container name and version
+- `KAMAL_CONTAINER_NAME`: the name of the container
+- `KAMAL_VERSION`: the current app version
