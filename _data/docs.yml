@@ -66,8 +66,6 @@
       url: /docs/commands/env/
     - title: "kamal envify"
       url: /docs/commands/envify/
-    - title: "kamal healthcheck"
-      url: /docs/commands/healthcheck/
     - title: "kamal help"
       url: /docs/commands/help/
     - title: "kamal init"

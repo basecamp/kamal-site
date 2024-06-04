@@ -18,7 +18,6 @@ Commands:
   kamal details             # Show details about all containers
   kamal env                 # Manage environment files
   kamal envify              # Create .env by evaluating .env.erb (or .env.staging.erb -> .env.staging when using -d staging)
-  kamal healthcheck         # Healthcheck application
   kamal help [COMMAND]      # Describe available commands or one specific command
   kamal init                # Create config stub in config/deploy.yml and env stub in .env
   kamal lock                # Manage the deploy lock
