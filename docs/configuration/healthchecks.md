@@ -16,8 +16,6 @@ healthcheck:
   interval: 20s
 ```
 
-This will ensure your application is configured with a traefik label for the healthcheck against `/healthz` and that the pre-deploy healthcheck that Kamal performs is done against the same path on port 4000.
-
 You can also specify a custom healthcheck command, which is useful for non-HTTP services:
 
 ```yaml
