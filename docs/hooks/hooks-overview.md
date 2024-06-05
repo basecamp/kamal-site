@@ -35,3 +35,5 @@ The available hooks are:
 - [post-traefik-reboot](../post-traefik-reboot)
 
 You can pass `--skip_hooks` to avoid running the hooks.
+
+**Note:** The hook filename must be the hook name without any extension. For example, the [pre-deploy](../pre-deploy) hook should be named "pre-deploy" (without any file extension such as .sh or .rb).
