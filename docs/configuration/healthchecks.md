@@ -14,6 +14,7 @@ healthcheck:
   port: 4000
   max_attempts: 7
   interval: 20s
+  log_lines: 100
 ```
 
 You can also specify a custom healthcheck command, which is useful for non-HTTP services:
@@ -38,7 +39,7 @@ The healthcheck allows for an optional `max_attempts` setting, which will attemp
 
 The HTTP health checks assume that the `curl` command is available inside the container. If that's not the case, use the healthcheck's `cmd` option to specify an alternative check that the container supports.
 
-When starting container healthcheck by default will only show last 50 lines. That might be not enough when something goes wrong - so you can add `log_lines` params and specify larger number if required.
+When starting the container healthcheck by default it only shows the last 50 lines. That might not be enough when something goes wrong - so you can add a `log_lines` setting and specify a larger number if required.
 
 ## [Zero-downtime deploy with cord files](#zero-downtime-deploy-with-cord-files)
 
