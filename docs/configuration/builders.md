@@ -1,161 +1,124 @@
 ---
-title: Builders
+title: Builder
 ---
 
-# Builders
+# Builder
 
-## [Using remote builder for native multi-arch](#using-remote-builder-for-native-multi-arch)
 
-If you're developing on ARM64 (like Apple Silicon), but you want to deploy on AMD64 (x86 64-bit), you can use multi-architecture images. By default, Kamal will setup a local buildx configuration that does this through QEMU emulation. But this can be quite slow, especially on the first build.
+The builder configuration controls how the application is built with `docker build` or `docker buildx build`
 
-If you want to speed up this process by using a remote AMD64 host to natively build the AMD64 part of the image, while natively building the ARM64 part locally, you can do so using builder options:
+If no configuration is specified, Kamal will:
+1. Create a buildx context called `kamal-<service>-multiarch`
+2. Use `docker buildx build` to build a multiarch image for linux/amd64,linux/arm64 with that context
 
+See [Builder examples](/docs/configuration/builder-examples/) for more information
+
+## [Builder options](#builder-options)
+
+Options go under the builder key in the root configuration.
 ```yaml
 builder:
-  local:
-    arch: arm64
-    host: unix:///Users/<%= `whoami`.strip %>/.docker/run/docker.sock
-  remote:
-    arch: amd64
-    host: ssh://root@192.168.0.1
 ```
+## [Multiarch](#multiarch)
 
-**Note:** You must have Docker running on the remote host being used as a builder. This instance should only be shared for builds using the same registry and credentials.
-
-## [Using remote builder for single-arch](#using-remote-builder-for-single-arch)
-
-If you're developing on ARM64 (like Apple Silicon), want to deploy on AMD64 (x86 64-bit), but don't need to run the image locally (or on other ARM64 hosts), you can configure a remote builder that just targets AMD64. This is a bit faster than building with multi-arch, as there's nothing to build locally.
-
+Enables multiarch builds, defaults to `true`
 ```yaml
-builder:
-  remote:
-    arch: amd64
-    host: ssh://root@192.168.0.1
-```
-
-## [Using local builder for single-arch](#using-local-builder-for-single-arch)##
-
-If you're developing on multiple architectures, always deploy on a specific architecture(e.g. AMD64), and want to build locally, you can configure a remote builder without a host. Kamal will build the image using a local buildx instance.
-
-```yaml
-builder:
-  remote:
-    arch: amd64
-```
-
-## [Using native builder when multi-arch isn't needed](#using-native-builder-when-multi-arch-isnt-needed)
-
-If you're developing on the same architecture as the one you're deploying on, you can speed up the build by forgoing both multi-arch and remote building:
-
-```yaml
-builder:
   multiarch: false
 ```
+## [Local configuration](#local-configuration)
 
-This is also a good option if you're running Kamal from a CI server that shares architecture with the deployment servers.
+The build configuration for local builds, only used if multiarch is enabled (the default)
 
-## [Using a different Dockerfile or context when building](#using-a-different-dockerfile-or-context-when-building)
-
-If you need to pass a different Dockerfile or context to the build command (e.g. if you're using a monorepo or you have different Dockerfiles), you can do so in the builder options:
-
+If there is no remote configuration, by default we build for amd64 and arm64.
+If you only want to build for one architecture, you can specify it here.
+The docker socket is optional and uses the default docker host socket when not specified
 ```yaml
-# Use a different Dockerfile
-builder:
-  dockerfile: Dockerfile.xyz
-
-# Set context
-builder:
-  context: ".."
-
-# Set Dockerfile and context
-builder:
-  dockerfile: "../Dockerfile.xyz"
-  context: ".."
+  local:
+    arch: amd64
+    host: /var/run/docker.sock
 ```
+## [Remote configuration](#remote-configuration)
 
-## [Using multistage builder cache](#using-multistage-builder-cache)
-
-Docker multistage build cache can singlehandedly speed up your builds by a lot. Currently Kamal only supports using the GHA cache or the Registry cache:
-
+The build configuration for remote builds, also only used if multiarch is enabled.
+The arch is required and can be either amd64 or arm64.
 ```yaml
-# Using GHA cache
-builder:
-  cache:
-    type: gha
+  remote:
+    arch: arm64
+    host: ssh://docker@docker-builder
+```
+## [Builder cache](#builder-cache)
 
-# Using Registry cache
-builder:
+The type must be either 'gha' or 'registry'
+
+The image is only used for registry cache
+```yaml
   cache:
     type: registry
+    options: mode=max
+    image: kamal-app-build-cache
+```
+## [Build context](#build-context)
 
-# Using Registry cache with different cache image
-builder:
-  cache:
-    type: registry
-    # default image name is <image>-build-cache
-    image: application-cache-image
+If this is not set, then a local git clone of the repo is used.
+This ensures a clean build with no uncommitted changes.
 
-# Using Registry cache with additional cache-to options
-builder:
-  cache:
-    type: registry
-    options: mode=max,image-manifest=true,oci-mediatypes=true
+To use the local checkout instead you can set the context to `.`, or a path to another directory.
+```yaml
+  context: .
+```
+## [Dockerfile](#dockerfile)
+
+The Dockerfile to use for building, defaults to `Dockerfile`
+```yaml
+  dockerfile: Dockerfile.production
+```
+## [Build target](#build-target)
+
+If not set, then the default target is used
+```yaml
+  target: production
+```
+## [Build Arguments](#build-arguments)
+
+Any additional build arguments, passed to `docker build` with `--build-arg <key>=<value>`
+```yaml
+  args:
+    ENVIRONMENT: production
+```
+## [Referencing build arguments](#referencing-build-arguments)
+
+```shell
+ARG RUBY_VERSION
+FROM ruby:$RUBY_VERSION-slim as base
 ```
 
-### [GHA cache configuration](#gha-cache-configuration)
+## [Build secrets](#build-secrets)
 
-To make it work on the GitHub action workflow you need to setup the buildx and expose [authentication configuration for the cache](https://docs.docker.com/build/cache/backends/gha/#authentication).
-
-Example setup (in .github/workflows/sample-ci.yml):
+Values are read from the environment.
 
 ```yaml
-- name: Set up Docker Buildx for cache
-  uses: docker/setup-buildx-action@v3
-
-- name: Expose GitHub Runtime for cache
-  uses: crazy-max/ghaction-github-runtime@v3
-```
-
-When setup correctly you should see the cache entry/entries on the GHA workflow actions cache section.
-
-For further insights into build cache optimization, check out documentation on Docker's official website: https://docs.docker.com/build/cache/.
-
-## [Using build secrets for new images](#using-build-secrets-for-new-images)
-
-Some images need a secret passed in during build time, like a GITHUB_TOKEN, to give access to private gem repositories. This can be done by having the secret in ENV, then referencing it in the builder configuration:
-
-```yaml
-builder:
   secrets:
-    - GITHUB_TOKEN
+    - SECRET1
+    - SECRET2
 ```
+## [Referencing Build Secrets](#referencing-build-secrets)
 
-This build secret can then be referenced in the Dockerfile:
-
-```dockerfile
+```shell
 # Copy Gemfiles
 COPY Gemfile Gemfile.lock ./
 
-# Install dependencies, including private repositories via access token (then remove bundle cache with exposed GITHUB_TOKEN)
+# Install dependencies, including private repositories via access token
+# Then remove bundle cache with exposed GITHUB_TOKEN)
 RUN --mount=type=secret,id=GITHUB_TOKEN \
   BUNDLE_GITHUB__COM=x-access-token:$(cat /run/secrets/GITHUB_TOKEN) \
   bundle install && \
   rm -rf /usr/local/bundle/cache
 ```
 
-## [Configuring build args for new images](#configuring-build-args-for-new-images)
 
-Build arguments that aren't secret can also be configured:
+## [SSH](#ssh)
 
+SSH agent socket or keys to expose to the build
 ```yaml
-builder:
-  args:
-    RUBY_VERSION: 3.2.0
-```
-
-This build argument can then be used in the Dockerfile:
-
-```
-ARG RUBY_VERSION
-FROM ruby:$RUBY_VERSION-slim as base
+  ssh: default=$SSH_AUTH_SOCK
 ```

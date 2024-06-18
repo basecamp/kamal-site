@@ -1,64 +1,58 @@
 ---
-title: SSH
+title: SSH configuration
 ---
 
-# SSH
+# SSH configuration
 
-## [Using a different SSH user than root](#using-a-different-ssh-user-than-root)
 
-The default SSH user is root, but you can change it using `ssh/user`:
+Kamal uses SSH to connect run commands on your hosts.
+By default it will attempt to connect to the root user on port 22
 
-```yaml
-ssh:
-  user: app
-```
+If you are using non-root user, you may need to bootstrap your servers manually, before using them with Kamal. On Ubuntu, you’d do:
 
-If you are using non-root user (`app` as above example), you need to bootstrap your servers manually, before using them with Kamal. On Ubuntu, you'd do:
-
-```bash
+```shell
 sudo apt update
 sudo apt upgrade -y
 sudo apt install -y docker.io curl git
 sudo usermod -a -G docker app
 ```
 
-## [Using a different SSH port](#using-a-different-ssh-port)
 
-The default SSH port is 22, but you can change it using `ssh/port`:
+## [SSH options](#ssh-options)
 
+The options are specified under the ssh key in the configuration file.
 ```yaml
 ssh:
-  port: 2222
 ```
+## [The SSH user](#the-ssh-user)
 
-## [Using a proxy SSH host](#using-a-proxy-ssh-host)
-
-If you need to connect to server through a proxy host, you can use `ssh/proxy`:
+Defaults to `root`
 
 ```yaml
-ssh:
-  proxy: "192.168.0.1" # defaults to root as the user
+  user: app
 ```
+## [The SSH port](#the-ssh-port)
 
-Or with specific user:
-
+Defaults to 22
 ```yaml
-ssh:
-  proxy: "app@192.168.0.1"
+  port: "2222"
 ```
+## [Proxy host](#proxy-host)
 
-Also if you need specific proxy command to connect to the server:
-
+Specified in the form <host> or <user>@<host>
 ```yaml
-ssh:
-  proxy_command: aws ssm start-session --target %h --document-name AWS-StartSSHSession --parameters 'portNumber=%p' --region=us-east-1 ## ssh via aws ssm
+  proxy: root@proxy-host
 ```
+## [Proxy command](#proxy-command)
 
-## [Using a different SSH log level](#using-a-different-ssh-log-level)
-
+A custom proxy command, required for older versions of SSH
 ```yaml
-ssh:
+  proxy_command: "ssh -W %h:%p user@proxy"
+```
+## [Log level](#log-level)
+
+Defaults to `fatal`. Set this to debug if you are having
+ SSH connection issues.
+```yaml
   log_level: debug
 ```
-
-Valid levels are `debug`, `info`, `warn`, `error` and `fatal` (default).

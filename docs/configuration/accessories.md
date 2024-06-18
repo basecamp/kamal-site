@@ -1,110 +1,108 @@
 ---
-title: Using accessories for database, cache, search services
+title: Accessories
 ---
 
 # Accessories
 
-## [Using accessories for database, cache, search services](#using-accessories-for-database-cache-search-services)
 
-You can manage your accessory services via Kamal as well. Accessories are long-lived services that your app depends on. They are not updated when you deploy.
+Accessories can be booted on a single host, a list of hosts, or on specific roles.
+The hosts do not need to be defined in the Kamal servers configuration.
 
+Accessories are managed separately from the main service - they are not updated
+when you deploy and they do not have zero-downtime deployments.
+
+Run `kamal accessory boot <accessory>` to boot an accessory.
+See `kamal accessory --help` for more information.
+
+## [Configuring accessories](#configuring-accessories)
+
+First define the accessory in the `accessories`
 ```yaml
 accessories:
   mysql:
-    image: mysql:5.7
-    host: 1.1.1.3
-    port: 3306
-    env:
-      clear:
-        MYSQL_ROOT_HOST: '%'
-      secret:
-        - MYSQL_ROOT_PASSWORD
-    volumes:
-      - /var/lib/mysql:/var/lib/mysql
-    options:
-      cpus: 4
-      memory: "2GB"
-  redis:
-    image: redis:latest
-    roles:
-      - web
-    port: "36379:6379"
-    volumes:
-      - /var/lib/redis:/data
-  internal-example:
-    image: registry.digitalocean.com/user/otherservice:latest
-    host: 1.1.1.5
-    port: 44444
 ```
+## [Service name](#service-name)
 
-The hosts that the accessories will run on can be specified by hosts or roles:
-
+This is used in the service label and defaults to `<service>-<accessory>`
+where `<service>` is the main service name from the root configuration
 ```yaml
-  # Single host
-  mysql:
-    host: 1.1.1.1
-  # Multiple hosts
-  redis:
+    service: mysql
+```
+## [Image](#image)
+
+The Docker image to use, prefix with a registry if not using Docker hub
+```yaml
+    image: mysql:8.0
+```
+## [Accessory hosts](#accessory-hosts)
+
+Specify one  of `host`, `hosts` or `roles`
+```yaml
+    host: mysql-db1
     hosts:
-      - 1.1.1.1
-      - 1.1.1.2
-  # By role
-  monitoring:
+      - mysql-db1
+      - mysql-db2
     roles:
-      - web
-      - jobs
+      - mysql
 ```
+## [Custom command](#custom-command)
 
-Now run `kamal accessory boot mysql` to start the MySQL server on 1.1.1.3. See `kamal accessory` for all the commands possible.
-
-Accessory images must be public or tagged in your private registry.
-
-## [Using directories](#using-directories)
-
-Directories act in a similar way to volumes except it will create a corresponding directory on the host before mounting the volume:
-
-e.g.
-
+You can set a custom command to run in the container, if you do not want to use the default
 ```yaml
-service: kamal-demo
-accessories:
-  db:
-    # ...
+    cmd: "bin/mysqld"
+```
+## [Port mappings](#port-mappings)
+
+See https://docs.docker.com/network/, especially note the warning about the security
+implications of exposing ports publicly.
+```yaml
+    port: "127.0.0.1:3306:3306"
+```
+## [Labels](#labels)
+```yaml
+    labels:
+      app: myapp
+```
+## [Options](#options)
+These are passed to the Docker run command in the form `--<name> <value>`
+```yaml
+    options:
+      restart: always
+      cpus: 2
+```
+## [Environment variables](#environment-variables)
+See [Environment variables](../environment-variables) for more information
+```yaml
+    env:
+      ...
+```
+## [Copying files](#copying-files)
+
+You can specify files to mount into the container.
+The format is `local:remote` where `local` is the path to the file on the local machine
+and `remote` is the path to the file in the container.
+
+They will be uploaded from the local repo to the host and then mounted.
+
+ERB files will be evaluated before being copied.
+```yaml
+    files:
+      - config/my.cnf.erb:/etc/mysql/my.cnf
+      - config/myoptions.cnf:/etc/mysql/myoptions.cnf
+```
+## [Directories](#directories)
+
+You can specify directories to mount into the container. They will be created on the host
+before being mounted
+```yaml
     directories:
-      - data:/var/lib/mysql
+      - mysql-logs:/var/log/mysql
 ```
+## [Volumes](#volumes)
 
-will run `mkdir` first ...
-
-```
-Running /usr/bin/env mkdir -p $PWD/kamal-demo-db/data
-```
-
-and then it will mount the volume ...
-
-```
-docker run ... --volume $PWD/kamal-demo-db/data:/var/lib/mysql
-```
-
-## [Using volumes](#using-volumes)
-
-You can add custom volumes into the app containers using `volumes`:
-
+Any other volumes to mount, in addition to the files and directories.
+They are not created or copied before mounting
 ```yaml
-volumes:
-  - "/local/path:/container/path"
-```
-
-## [Security](#security)
-
-Please note that, by default, Kamal exposes your accessories through a public IP. Therefore, you should secure them with a firewall or passwords. If your hosting provider supports private networking, you can expose services using a private IP, making them accessible only from within the same network:
-
-```yaml
-  redis:
-    image: redis:latest
-    roles:
-      - web
-    port: "192.168.1.100:36379:6379" # where 192.168.1.100 is the private IP of the server
     volumes:
-      - /var/lib/redis:/data
+      - /path/to/mysql-logs:/var/log/mysql
 ```

@@ -1,74 +1,73 @@
 ---
-title: Healthchecks
+title: Healthcheck configuration
 ---
 
-# Healthchecks
+# Healthcheck configuration
 
-Kamal uses Docker healthchecks to check the health of your application during deployment. Traefik uses this same healthcheck status to determine when a container is ready to receive traffic.
 
-The healthcheck defaults to testing the HTTP response to the path `/up` on port 3000, up to 7 times. You can tailor this behaviour with the `healthcheck` setting:
+On roles that are running Traefik, Kamal will supply a default healthcheck to `docker run`.
+For other roles, by default no healthcheck is supplied.
 
+If no healthcheck is supplied and the image does not define one, they we wait for the container
+to reach a running state and then pause for the readiness delay.
+
+The default healthcheck is `curl -f http://localhost:<port>/<path>`, so it assumes that `curl`
+is available within the container.
+
+## [Healthcheck options](#healthcheck-options)
+
+These go under the `healthcheck` key in the root or role configuration.
 ```yaml
 healthcheck:
-  path: /healthz
-  port: 4000
-  max_attempts: 7
-  interval: 20s
 ```
+## [Command](#command)
 
-You can also specify a custom healthcheck command, which is useful for non-HTTP services:
-
+The command to run, defaults to `curl -f http://localhost:<port>/<path>` on roles running Traefik
 ```yaml
-healthcheck:
-  cmd: /bin/check_health
+  cmd: "curl -f http://localhost"
 ```
+## [Interval](#interval)
 
-The top-level healthcheck configuration applies to all services that use Traefik, by default. You can also specialize the configuration at the role level:
-
+The Docker healthcheck interval, defaults to `1s`
 ```yaml
-servers:
-  job:
-    hosts: ...
-    cmd: bin/jobs
-    healthcheck:
-      cmd: bin/check
+  interval: 10s
 ```
+## [Max attempts](#max-attempts)
 
-The healthcheck allows for an optional `max_attempts` setting, which will attempt the healthcheck up to the specified number of times before failing the deploy. This is useful for applications that take a while to start up. The default is 7.
-
-The HTTP health checks assume that the `curl` command is available inside the container. If that's not the case, use the healthcheck's `cmd` option to specify an alternative check that the container supports.
-
-When starting container healthcheck by default will only show last 50 lines. That might be not enough when something goes wrong - so you can add `log_lines` params and specify larger number if required.
-
-## [Zero-downtime deploy with cord files](#zero-downtime-deploy-with-cord-files)
-
-We need to stop Traefik from sending requests to old containers before stopping them, otherwise we could get errors. We do this with a cord file.
-
-The file is created in a directory on the host and the directory is mounted into the container. The healthcheck is modified to check for the file.
-
-When we want to shut down the container we first delete the cord file, then wait for container to become unhealthy.
-
-By default the directory is mounted to `/tmp/kamal-cord`. You can change the location with
-
-```
-healthcheck:
-  cord: /var/run/kamal-cord
-```
-
-Or disable the cord (and lose the zero-downtime guarantee) with:
-
-```
-healthcheck:
-  cord: false
-```
-
-## [Custom port for the healthcheck with multiple apps](#custom-port-for-the-healthcheck-with-multiple-apps)
-
-Healthcheck is binding containers port to server's port. When running multiple applications on the same server and deploying them in parallel you should specify different port for each application.
-
+The maximum number of times we poll the container to see if it is healthy, defaults to `7`
+Each check is separated by an increasing interval starting with 1 second.
 ```yaml
-healthcheck:
-  exposed_port: 4000 # 3999 is the default one
+  max_attempts: 3
 ```
+## [Port](#port)
 
-This allows you to run multiple applications on the same server sharing the same Traefik instance and port
+The port to use in the healthcheck, defaults to `3000`
+```yaml
+  port: "80"
+```
+## [Path](#path)
+
+The path to use in the healthcheck, defaults to `/up`
+```yaml
+  path: /health
+```
+## [Cords for zero-downtime deployments](#cords-for-zero-downtime-deployments)
+
+The cord file is used for zero-downtime deployments. The healthcheck is augmented with a check
+for the existance of the file. This allows us to delete the file and force the container to
+become unhealthy, causing Traefik to stop routing traffic to it.
+
+Kamal mounts a volume at this location and creates the file before starting the container.
+You can set the value to `false` to disable the cord file, but this loses the zero-downtime
+guarantee.
+
+The default value is `/tmp/kamal-cord`
+```yaml
+  cord: /cord
+```
+## [Log lines](#log-lines)
+
+Number of lines to log from the container when the healthcheck fails, defaults to `50`
+```yaml
+  log_lines: 100
+```
