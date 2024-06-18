@@ -5,42 +5,34 @@
   url: /docs/configuration/
   index: false
   sections:
-    - title: "Environment Variables"
-      url: /docs/configuration/environment-variables/
-    - title: "SSH"
-      url: /docs/configuration/ssh/
-    - title: "Builders"
-      url: /docs/configuration/builders/
-    - title: "Traefik"
-      url: /docs/configuration/traefik/
-    - title: "Configuring the run directory"
-      url: /docs/configuration/configuring-the-run-directory/
-    - title: "Docker Registries"
-      url: /docs/configuration/docker-registries/
-    - title: "Server Roles"
-      url: /docs/configuration/server-roles/
-    - title: "Container labels"
-      url: /docs/configuration/container-labels/
-    - title: "Container options"
-      url: /docs/configuration/container-options/
-    - title: "Minimum version"
-      url: /docs/configuration/minimum-version/
-    - title: "Configuring logging"
-      url: /docs/configuration/configuring-logging/
-    - title: "Stop wait time"
-      url: /docs/configuration/stop-wait-time/
+    - title: "Configuration overview"
+      url: /docs/configuration/configuration-overview/
     - title: "Accessories"
       url: /docs/configuration/accessories/
-    - title: "Cron"
-      url: /docs/configuration/cron/
+    - title: "Booting"
+      url: /docs/configuration/booting/
+    - title: "Builders"
+      url: /docs/configuration/builders/
+    - title: "Builder examples"
+      url: /docs/configuration/builder-examples/
+    - title: "Docker registry"
+      url: /docs/configuration/docker-registry/
+    - title: "Environment variables"
+      url: /docs/configuration/environment-variables/
     - title: "Healthchecks"
       url: /docs/configuration/healthchecks/
-    - title: "Rolling deployments"
-      url: /docs/configuration/rolling-deployments/
-    - title: "SSH connection management"
-      url: /docs/configuration/ssh-connection-management/
-    - title: "Asset bridging"
-      url: /docs/configuration/asset-bridging/
+    - title: "Logging"
+      url: /docs/configuration/logging/
+    - title: "Roles"
+      url: /docs/configuration/roles/
+    - title: "Servers"
+      url: /docs/configuration/servers/
+    - title: "SSH"
+      url: /docs/configuration/ssh/
+    - title: "SSHKit"
+      url: /docs/configuration/sshkit/
+    - title: "Traefik"
+      url: /docs/configuration/traefik/
 
 - title: "Commands"
   url: /docs/commands/
