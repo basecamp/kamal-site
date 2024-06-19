@@ -43,6 +43,12 @@ env:
 
 Then edit your `.env` file to add your registry password as `KAMAL_REGISTRY_PASSWORD` (and your `RAILS_MASTER_KEY` for production with a Rails app).
 
+Push your env configuration with:
+
+```
+kamal env push
+```
+
 Now you're ready to deploy to the servers:
 
 ```
