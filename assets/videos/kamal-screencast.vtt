@@ -1,0 +1,1229 @@
+WEBVTT
+
+00:00.000 --> 00:03.320
+Kamal is a tool for deploying your web applications anywhere.
+
+00:03.320 --> 00:06.040
+Whether you're using Cloud VMs or your own hardware,
+
+00:06.040 --> 00:09.960
+Kamal makes it really easy to deploy new versions of your applications.
+
+00:09.960 --> 00:13.400
+It has built-in zero downtime deploys,
+
+00:13.400 --> 00:15.280
+it can do rolling restarts,
+
+00:15.280 --> 00:17.320
+it even does asset bridging,
+
+00:17.320 --> 00:22.760
+and all sorts of other fancy things that you need to deploy a modern web application.
+
+00:22.760 --> 00:28.120
+Kamal was originally built for our move out of the Cloud at 37signals.
+
+00:28.160 --> 00:32.080
+We moved Hay.com and a bunch of other applications out of the Cloud
+
+00:32.080 --> 00:34.560
+and onto our own hardware.
+
+00:34.560 --> 00:36.280
+But it works just as well,
+
+00:36.280 --> 00:40.360
+even if you're just getting started and you want to get started with those Cloud VMs.
+
+00:40.360 --> 00:44.720
+You can use any Cloud VM provider and retain the same toolkit,
+
+00:44.720 --> 00:47.240
+whether you're jumping from one provider to another,
+
+00:47.240 --> 00:50.240
+or if you're ready to move on to your own hardware.
+
+00:50.240 --> 00:55.880
+It is much easier to have an exit strategy if you're using a tool like Kamal.
+
+00:55.920 --> 01:00.360
+In our case, that meant saving a whole lot of money moving out of the Cloud.
+
+01:00.360 --> 01:04.880
+But the key point with Kamal is really to have the flexibility
+
+01:04.880 --> 01:09.320
+that a simple tool that doesn't require a PhD in Kubernetes
+
+01:09.320 --> 01:13.680
+will allow you to do the basic work of getting your application updated.
+
+01:13.680 --> 01:19.200
+Kamal is built on top of Docker and SSH and a bit of Ruby to tie it all together.
+
+01:19.200 --> 01:20.800
+It is not a complicated tool.
+
+01:20.800 --> 01:24.560
+You can read through the source and understand what is going on.
+
+01:24.560 --> 01:26.560
+Yet it is really everything you need.
+
+01:26.560 --> 01:30.520
+We're deploying seven applications using Kamal at 37signals at the moment
+
+01:30.520 --> 01:35.920
+and converting all our legacy Capistrano applications to Kamal in the near future.
+
+01:35.920 --> 01:38.440
+So let me show you how it all works with a quick demo
+
+01:38.440 --> 01:43.200
+where we will build a basic block and deploy it to two different Cloud providers.
+
+01:45.120 --> 01:50.920
+We're going to build our basic block on top of Rails 7.1 with MySQL and Tailwind.
+
+01:50.920 --> 01:54.680
+We're going to go into this jump and we're going to generate a basic scaffold here.
+
+01:54.680 --> 02:00.000
+It's just going to have a title and a content to set up a interface that we can use.
+
+02:00.000 --> 02:02.520
+Let's get the database created and migrated
+
+02:02.520 --> 02:06.640
+so that this is added and ready to go all just locally at the moment.
+
+02:06.640 --> 02:10.240
+We're going to assign this to the root of the application
+
+02:10.240 --> 02:14.480
+so that we can access it directly on port 3000.
+
+02:14.480 --> 02:18.200
+Let's create a quick post here to see that everything is working locally.
+
+02:18.200 --> 02:19.960
+You can see that it is.
+
+02:20.000 --> 02:21.720
+This is basically all we needed.
+
+02:21.720 --> 02:27.320
+Oh, yeah, we have this slash up where we will point our load balances to
+
+02:27.320 --> 02:32.080
+that will return a green color and the error code 200 okay, if everything is going fine.
+
+02:32.080 --> 02:35.760
+This is what the load balancer can use when we are deploying new versions
+
+02:35.760 --> 02:40.800
+to know that everything is running with the latest version and safe to switch over.
+
+02:40.800 --> 02:46.360
+So we will set up a set of VMs here on Hetzner.
+
+02:46.360 --> 02:47.720
+We're going to use three of them.
+
+02:47.720 --> 02:52.240
+We're going to use one for the database and two for app servers.
+
+02:52.240 --> 02:56.360
+You can see we'll just create three of the same basic VMs here.
+
+02:56.360 --> 03:00.240
+Set them up, get them generated on Hetzner.
+
+03:00.240 --> 03:03.480
+As you can see, we have three IP addresses right here
+
+03:03.480 --> 03:09.840
+that's going to be ready to use in our configuration file for Kamal.
+
+03:09.840 --> 03:13.320
+We're also going to set up a load balancer between the two app servers
+
+03:13.320 --> 03:16.800
+so that we can point a single domain to a single IP.
+
+03:16.840 --> 03:19.560
+It's going to check on that up that I just showed you before
+
+03:19.560 --> 03:22.560
+to make sure that everything is up and available.
+
+03:22.560 --> 03:25.280
+And now we're going to initialize Kamal.
+
+03:25.280 --> 03:30.920
+Kamal can either be installed from Ruby gem or tied up to a Docker command.
+
+03:30.920 --> 03:32.840
+Here we're using the Ruby gem.
+
+03:32.840 --> 03:34.720
+It's generating a handful of files,
+
+03:34.720 --> 03:39.400
+mainly the config slash deploy YAML, which is the one we're going to change.
+
+03:39.400 --> 03:43.800
+The end file, which is where we're going to store our environment variables and tokens.
+
+03:43.800 --> 03:48.000
+And finally, a set of hooks that I'm going to show you at the end of this video.
+
+03:48.000 --> 03:51.240
+So if we take a look at this deploy YAML file, you can see here,
+
+03:51.240 --> 03:54.880
+there is a service declaration, images, servers, registry,
+
+03:54.880 --> 03:57.040
+all the things you need to tell Kamal,
+
+03:57.040 --> 03:59.680
+where are you hosting your containers
+
+03:59.680 --> 04:02.760
+and where do you deploy your applications to.
+
+04:02.760 --> 04:05.280
+So if we change that out to be a blog
+
+04:05.280 --> 04:09.480
+and we have my username against Docker Hub, we have a place to put it.
+
+04:09.480 --> 04:12.800
+We're going to take some of these commented out sections
+
+04:12.800 --> 04:17.240
+and stick them into the real deploy YAML configuration here.
+
+04:17.240 --> 04:19.480
+There's going to be a Rails master key secret.
+
+04:19.480 --> 04:20.720
+If you use a different framework,
+
+04:20.720 --> 04:23.840
+you might have another type of secret that you need to inject.
+
+04:23.840 --> 04:26.800
+All these secrets are coming from the dot end file,
+
+04:26.800 --> 04:30.000
+which is where we're going to set them up in just a second.
+
+04:30.000 --> 04:34.120
+And then we have a clear environment variable with the DB host
+
+04:34.120 --> 04:38.800
+that we will use to point the application servers to the database.
+
+04:38.800 --> 04:41.800
+We also have that root password for MySQL as we're setting it up.
+
+04:41.800 --> 04:44.840
+We're just going to use a standard MySQL 8 image
+
+04:44.840 --> 04:48.120
+that can be auto configured on boot.
+
+04:48.120 --> 04:50.560
+It has a description here where you can see
+
+04:50.560 --> 04:54.200
+that we could import a production config file.
+
+04:54.200 --> 04:55.240
+We're not going to even bother with that.
+
+04:55.240 --> 04:56.440
+We're just going to keep the defaults.
+
+04:56.440 --> 05:00.520
+But what we are going to bother with is putting in our IP addresses
+
+05:00.520 --> 05:02.320
+for the two app servers
+
+05:02.320 --> 05:05.360
+and then putting in the IP address for the database.
+
+05:05.360 --> 05:06.960
+As you can see, it needs to go in two places.
+
+05:06.960 --> 05:09.480
+It both needs to be inside of Kamal.
+
+05:09.520 --> 05:12.640
+So Kamal knows where to deploy the database accessory
+
+05:12.640 --> 05:15.920
+and it needs to be injected into the application VM
+
+05:15.920 --> 05:19.560
+so that they know where to access that database.
+
+05:19.560 --> 05:23.800
+All right, we are also going to bootstrap this new database
+
+05:23.800 --> 05:25.760
+with production.sql.
+
+05:25.760 --> 05:28.600
+This is a file we can generate inside of our application
+
+05:28.600 --> 05:29.640
+and change it there.
+
+05:29.640 --> 05:34.320
+For now, all we need to do is actually just create the database itself.
+
+05:34.320 --> 05:36.800
+It's going to be blog underscore production,
+
+05:36.800 --> 05:39.360
+matching the Rails defaults.
+
+05:39.360 --> 05:42.720
+The MySQL 8 database, when it's booted,
+
+05:42.720 --> 05:46.880
+will run these files just once to initialize the database
+
+05:46.880 --> 05:49.640
+and then we can run our migrations
+
+05:49.640 --> 05:53.000
+to add the tables that we need for the database itself.
+
+05:53.000 --> 05:56.040
+All right, we also need to configure the production settings
+
+05:56.040 --> 05:58.280
+for the database in Rails.
+
+05:58.280 --> 06:01.520
+We're going to point it to that DB host
+
+06:01.520 --> 06:05.040
+and we're going to reference the password we had.
+
+06:05.040 --> 06:06.960
+Then we're going to jump into the .n file,
+
+06:06.960 --> 06:08.920
+which is where we're going to set up the tokens that we need.
+
+06:08.920 --> 06:11.720
+We have the Rails master key that I just copied over
+
+06:11.720 --> 06:14.320
+from the config slash master key.
+
+06:14.320 --> 06:15.680
+We're going to put that in here
+
+06:15.680 --> 06:18.160
+and then we're also going to add a root password
+
+06:18.160 --> 06:21.240
+that's just auto-generated for MySQL
+
+06:21.240 --> 06:23.760
+that is going to be both the password used to bootstrap
+
+06:23.760 --> 06:27.520
+the MySQL instance that we set up under accessories
+
+06:27.520 --> 06:30.400
+and it's also going to be the password we give to Rails
+
+06:30.400 --> 06:31.920
+so that it has access to it.
+
+06:31.920 --> 06:33.520
+And then finally, you have to change
+
+06:33.520 --> 06:35.840
+the Kamal registry password.
+
+06:35.840 --> 06:38.080
+I'm not going to post my password token in here,
+
+06:38.080 --> 06:39.120
+but you have to change that.
+
+06:39.120 --> 06:42.520
+If you use Docker hub, you can generate a token
+
+06:42.520 --> 06:43.600
+and put it in there,
+
+06:43.600 --> 06:46.120
+the same with any other registered that you use.
+
+06:46.120 --> 06:49.280
+Just make sure, of course, that after you've updated this,
+
+06:49.280 --> 06:52.040
+you make sure that you have a Docker ignore file
+
+06:52.040 --> 06:55.800
+where you are ignoring the .env file.
+
+06:55.800 --> 06:58.000
+You do not want to check those tokens
+
+06:58.000 --> 07:00.280
+into your version control system.
+
+07:00.280 --> 07:03.080
+So in Docker ignore and in git ignore,
+
+07:03.080 --> 07:06.720
+we make sure that the environment file is ignored.
+
+07:09.240 --> 07:11.640
+Instead of having a straight .n file,
+
+07:11.640 --> 07:14.560
+you'd also have a .n template.
+
+07:14.560 --> 07:18.200
+Here's an example of using one password as the secret store
+
+07:18.200 --> 07:21.200
+and then you can use the command Kamal nvfi
+
+07:21.200 --> 07:23.840
+to take that template that you can check into
+
+07:24.720 --> 07:28.000
+version repository and generate the .n file
+
+07:28.000 --> 07:30.000
+that you actually use to deploy.
+
+07:30.000 --> 07:34.320
+These .n files are pushed to the servers as part of setup,
+
+07:34.320 --> 07:35.720
+but then if you change them into future,
+
+07:35.720 --> 07:38.960
+you have to do Kamal nv push
+
+07:38.960 --> 07:42.040
+to push the new nvs to the different servers.
+
+07:42.040 --> 07:44.800
+What's nice about that is that not everyone on your team
+
+07:44.800 --> 07:46.720
+might need to have access to these tokens
+
+07:46.720 --> 07:50.620
+and you can therefore just update the environment files
+
+07:50.620 --> 07:53.320
+from the machine that does have access when you need to.
+
+07:56.440 --> 07:58.880
+But let one final thing before we start deploying here,
+
+07:58.880 --> 08:03.240
+we just need to hop into the Rails production configuration
+
+08:03.240 --> 08:06.480
+where by default Rails 7.1 at least at the moment
+
+08:06.480 --> 08:08.640
+has force SSL on.
+
+08:08.640 --> 08:10.960
+We're gonna deploy without SSL for a moment
+
+08:10.960 --> 08:12.880
+while I show you just how the basic works
+
+08:12.880 --> 08:15.440
+and then we're gonna turn it back on a little later.
+
+08:15.440 --> 08:17.100
+So let's turn that off and then we can check
+
+08:17.100 --> 08:21.360
+the whole repository into git and we can do our setup.
+
+08:21.360 --> 08:24.000
+So as you can see here, Kamal is doing the setup
+
+08:24.000 --> 08:26.760
+against these IP addresses on the app servers
+
+08:26.760 --> 08:29.320
+and on the database servers that we configured.
+
+08:29.320 --> 08:32.400
+It's ensuring that Docker has been installed.
+
+08:32.400 --> 08:33.720
+In this case, it has not been installed
+
+08:33.720 --> 08:35.120
+because these are fresh VMs,
+
+08:35.120 --> 08:38.160
+so it will install Docker on those machines
+
+08:38.160 --> 08:39.600
+and after it's done installing,
+
+08:39.600 --> 08:41.800
+it'll proceed with the rest of the deploy.
+
+08:41.800 --> 08:44.440
+I've sped this up somewhat in the first deploy,
+
+08:44.440 --> 08:49.440
+we are using Docker locally to build with Quemu.
+
+08:49.680 --> 08:53.800
+This means that we're using a Apple Silicon chip
+
+08:53.800 --> 08:56.320
+to build for Intel that takes a little while.
+
+08:56.320 --> 08:57.920
+In fact, I think in this case,
+
+08:57.920 --> 09:00.840
+it takes about four minutes the very first time you do it
+
+09:00.840 --> 09:03.000
+when the caches are cold.
+
+09:03.000 --> 09:05.840
+But after the caches are hot, it goes much, much faster
+
+09:05.840 --> 09:09.640
+and in production, you can actually use a remote built
+
+09:09.640 --> 09:13.480
+instance on an Intel machine, so it goes at full speed.
+
+09:13.480 --> 09:16.680
+We're doing deploys at 37signals in between 20,
+
+09:16.680 --> 09:19.320
+30 or 40 seconds to get everything set up.
+
+09:19.320 --> 09:21.400
+As you can see here too, when we are deploying,
+
+09:21.400 --> 09:23.440
+we're doing all these retries to make sure
+
+09:23.440 --> 09:27.080
+that the container is actually ready to serve traffic.
+
+09:27.080 --> 09:29.960
+We have a whole little dance with a chord file
+
+09:29.960 --> 09:34.400
+and so forth to ensure that zero downtime deploys
+
+09:34.400 --> 09:36.880
+are successful every time and that we never lose
+
+09:36.880 --> 09:38.920
+a request to a 500.
+
+09:40.640 --> 09:42.680
+All right, now we have set everything up
+
+09:42.680 --> 09:44.600
+and we have our load balancer ready.
+
+09:44.600 --> 09:48.680
+We can hit that load balancer and create a new post
+
+09:48.680 --> 09:52.360
+on the application actually running on Hetzner,
+
+09:52.360 --> 09:54.880
+the three reamps we have set up too for the app
+
+09:54.880 --> 09:56.400
+and one for the database.
+
+09:56.400 --> 09:58.480
+And as you can see here, when we create one,
+
+09:58.480 --> 10:00.480
+it has been successfully created.
+
+10:00.480 --> 10:01.640
+Go back and see the index.
+
+10:01.640 --> 10:04.200
+Everything is working in production.
+
+10:04.200 --> 10:07.240
+Of course, as you can see up there, it is saying not secure.
+
+10:07.240 --> 10:09.080
+We're not running on SSL yet.
+
+10:09.080 --> 10:12.200
+We are just running over HTTP, hitting that load balancer
+
+10:12.200 --> 10:14.400
+that then hits the app servers.
+
+10:14.400 --> 10:16.720
+If we make a change to the app, just a simple change here.
+
+10:16.720 --> 10:18.840
+We check that in to get once more
+
+10:18.840 --> 10:21.520
+and then we deploy a second time.
+
+10:21.560 --> 10:22.600
+This goes much faster.
+
+10:22.600 --> 10:23.760
+I've still sped it up here,
+
+10:23.760 --> 10:26.320
+but it is quicker to do it the second time around.
+
+10:26.320 --> 10:28.440
+You can see it took just over a minute
+
+10:28.440 --> 10:31.880
+and this is still running through that Qemu emulation.
+
+10:31.880 --> 10:34.920
+If you run with a matching chipset,
+
+10:34.920 --> 10:36.960
+it again goes much, much faster.
+
+10:36.960 --> 10:39.520
+We can reload here and see really good posts.
+
+10:39.520 --> 10:41.560
+We made the update to our application.
+
+10:41.560 --> 10:44.400
+This is the basic workflow of Kamal.
+
+10:44.400 --> 10:46.200
+You make a change to your application.
+
+10:46.200 --> 10:48.320
+You push it out, it gets updated.
+
+10:48.320 --> 10:51.280
+No downtime, everything is ready to go.
+
+10:51.280 --> 10:53.360
+Now let's add SSL to the equation.
+
+10:53.360 --> 10:55.640
+We are going to add a subdomain
+
+10:55.640 --> 10:58.840
+onto this exit software that IO domain I have.
+
+10:58.840 --> 11:02.840
+We're gonna point that to the load balancer under blog.
+
+11:02.840 --> 11:05.520
+Let's access that and you see it's exactly the same thing.
+
+11:05.520 --> 11:08.800
+Let's create a new post here and see if it works.
+
+11:08.800 --> 11:10.120
+Oh, it did not work.
+
+11:10.120 --> 11:11.160
+What is going on?
+
+11:11.160 --> 11:13.680
+Let's see what that error is generating.
+
+11:13.680 --> 11:16.920
+If we look at the inspector, we see it's a 422,
+
+11:16.920 --> 11:18.160
+unprocessable entity.
+
+11:18.160 --> 11:21.200
+Let's copy the request ID, then hop into Kamal.
+
+11:21.200 --> 11:22.960
+Search for that request ID
+
+11:22.960 --> 11:25.960
+and we will find the error code for that.
+
+11:25.960 --> 11:28.760
+So we can use Kamal also to inspect the logs
+
+11:28.760 --> 11:32.200
+that are just being logged through the normal Docker setup
+
+11:32.200 --> 11:33.800
+when you have something happening right away.
+
+11:33.800 --> 11:34.840
+As you can see right here,
+
+11:34.840 --> 11:38.000
+we completed a 422 unprocessable entity.
+
+11:38.000 --> 11:39.000
+And why is that?
+
+11:39.000 --> 11:42.560
+It is because we are submitting from HTTPS,
+
+11:42.560 --> 11:45.040
+but Rails thinks we are on HTTP
+
+11:45.040 --> 11:47.160
+and therefore there is a mismatch.
+
+11:47.160 --> 11:49.080
+So let's hop back into that production,
+
+11:49.120 --> 11:51.600
+RB file to update the configuration.
+
+11:51.600 --> 11:53.120
+This was the one we changed before.
+
+11:53.120 --> 11:55.800
+We are going to force SSL on this time,
+
+11:55.800 --> 11:57.000
+now that we have a proper domain
+
+11:57.000 --> 11:59.560
+that has an SSL certificate associated with it.
+
+11:59.560 --> 12:01.960
+And we're also gonna turn on assume SSL.
+
+12:01.960 --> 12:06.480
+This is a setting needed because the load balancer
+
+12:06.480 --> 12:09.200
+that we're using on Hetzner is not configured for SSL,
+
+12:09.200 --> 12:12.160
+but the Cloudflare setup we are using
+
+12:12.160 --> 12:13.600
+is configured for SSL.
+
+12:13.600 --> 12:14.880
+You of course can also set up
+
+12:14.880 --> 12:16.560
+that you have full SSL termination
+
+12:16.560 --> 12:20.200
+between your CDN, Cloudflare, and your backend.
+
+12:20.200 --> 12:21.440
+But in this simple example,
+
+12:21.440 --> 12:24.000
+we're just gonna do it like this.
+
+12:24.000 --> 12:25.280
+So now that we have these set up,
+
+12:25.280 --> 12:27.880
+we will submit once again and we'll do redeploy.
+
+12:27.880 --> 12:29.680
+That's a shorter path when you don't need
+
+12:29.680 --> 12:31.720
+a little bit of housekeeping than we normally have.
+
+12:31.720 --> 12:33.600
+It goes even quicker than it did
+
+12:33.600 --> 12:35.800
+before shaving off about seven seconds
+
+12:35.800 --> 12:37.600
+from the deploy we had before.
+
+12:37.600 --> 12:41.320
+And now we are live, can try to post again and it'll work.
+
+12:41.320 --> 12:43.680
+Great, we have fixed the error.
+
+12:43.680 --> 12:45.840
+It has to quick turn around and we can make a fix
+
+12:45.840 --> 12:48.040
+and we can push it out right away.
+
+12:48.040 --> 12:50.200
+All right, now let's set ourselves up
+
+12:50.200 --> 12:51.920
+with our second data center.
+
+12:51.920 --> 12:54.560
+We're gonna use a digital ocean for this.
+
+12:54.560 --> 12:56.960
+We're gonna set up exactly the same configuration
+
+12:56.960 --> 12:58.200
+as we had on Hetzner.
+
+12:58.200 --> 13:02.320
+There's gonna be three machines, block app one, two,
+
+13:02.320 --> 13:04.120
+and the DP server.
+
+13:04.120 --> 13:05.320
+They're gonna be set up in the same way.
+
+13:05.320 --> 13:08.760
+We're just waiting here to get some IP addresses
+
+13:08.760 --> 13:11.360
+that we can associate with the load balancer.
+
+13:11.360 --> 13:13.160
+And then we can paste those IP addresses
+
+13:13.160 --> 13:14.880
+into a new configuration file
+
+13:14.920 --> 13:18.160
+that we're gonna create as a second destination,
+
+13:18.160 --> 13:20.600
+which is a term that Kamal uses
+
+13:20.600 --> 13:22.680
+for allowing you to deploy in two different places.
+
+13:22.680 --> 13:25.400
+It's gonna be deploy.do.yaml.
+
+13:25.400 --> 13:30.000
+We're gonna paste in the standard deploy.yaml file
+
+13:30.000 --> 13:33.640
+and we're gonna pare it down to just the points of difference,
+
+13:33.640 --> 13:35.600
+which is really the IP addresses
+
+13:35.600 --> 13:38.760
+as they are different between the two deployments.
+
+13:38.760 --> 13:40.280
+As you can see here, we need nothing else
+
+13:40.280 --> 13:43.240
+because it will inherit from the deploy.yaml file.
+
+13:43.240 --> 13:45.120
+So all the other configurations will be shared
+
+13:45.120 --> 13:47.680
+between the two destinations.
+
+13:48.720 --> 13:50.880
+And that means we are basically ready to go
+
+13:50.880 --> 13:53.160
+after we've copied in the IP addresses
+
+13:53.160 --> 13:55.480
+for the database and the application.
+
+13:55.480 --> 14:00.480
+And once that's done, we can add the destination to git
+
+14:00.520 --> 14:04.760
+and then we can deploy with std.do.
+
+14:04.760 --> 14:08.120
+So that means that we're using the do destination file,
+
+14:08.120 --> 14:12.400
+which we'll just look for config slash deploy.do.yaml
+
+14:12.440 --> 14:15.360
+and merge that into the basic deploy.yaml.
+
+14:15.360 --> 14:17.960
+And as you can see, we're going through the same rhythm here
+
+14:17.960 --> 14:21.400
+in installing Docker since it was not already on the machines,
+
+14:21.400 --> 14:24.840
+then doing the full deploy and an entire deploy
+
+14:24.840 --> 14:28.640
+because our local Docker cache for building the app image
+
+14:28.640 --> 14:31.280
+was hot, it takes just two minutes.
+
+14:31.280 --> 14:33.880
+So in two minutes, we have moved from Hetzner
+
+14:33.880 --> 14:37.440
+to digital ocean and are now deployed
+
+14:37.440 --> 14:40.000
+in two different data centers at the same time.
+
+14:40.000 --> 14:42.120
+This is the magic of Kamal.
+
+14:42.120 --> 14:43.720
+It is giving you an exit strategy,
+
+14:43.720 --> 14:48.160
+an easy move strategy from one deployment type to another
+
+14:48.160 --> 14:50.520
+without any reconfiguration beyond throwing
+
+14:50.520 --> 14:52.680
+in a couple of IP addresses.
+
+14:54.760 --> 14:55.760
+Great, as you can see here,
+
+14:55.760 --> 14:58.160
+the load balancer has also picked up a change.
+
+14:58.160 --> 15:01.160
+We're going to point our domain to the new setup.
+
+15:01.160 --> 15:04.480
+And as you can see, it is exactly the same as it was before.
+
+15:04.480 --> 15:05.800
+It's just running a new data center
+
+15:05.800 --> 15:07.580
+on a new database, of course.
+
+15:09.280 --> 15:11.640
+Here we have some other details that we can look into,
+
+15:11.680 --> 15:15.160
+Kamal commands that we can inspect our setup with.
+
+15:15.160 --> 15:16.640
+There's Kamal details,
+
+15:16.640 --> 15:19.720
+which will give us just a basic outline
+
+15:19.720 --> 15:21.240
+of what's running where.
+
+15:21.240 --> 15:24.240
+You can see we have the traffic load balancers
+
+15:24.240 --> 15:26.400
+that we're using for the zero downtime deploy.
+
+15:26.400 --> 15:28.160
+It's running on its own setup.
+
+15:28.160 --> 15:30.240
+And then we have the app servers
+
+15:30.240 --> 15:32.400
+and the database accessory.
+
+15:32.400 --> 15:36.280
+We can also run that against the digital ocean destination
+
+15:36.280 --> 15:38.400
+and see we have the same things running
+
+15:38.400 --> 15:39.960
+just on different IP addresses.
+
+15:39.960 --> 15:41.560
+It is the same configuration.
+
+15:42.800 --> 15:45.400
+A different thing we can run here is an audit.
+
+15:45.400 --> 15:48.800
+The audit is here run against the digital ocean deploy.
+
+15:48.800 --> 15:50.360
+And you can see exactly what happened.
+
+15:50.360 --> 15:52.600
+Who pushed what when?
+
+15:52.600 --> 15:54.040
+You see we're pushing those end files
+
+15:54.040 --> 15:55.520
+onto the servers for the first time.
+
+15:55.520 --> 15:58.040
+We're pulling down the image with a given version.
+
+15:58.040 --> 15:59.880
+We're tagging that as the latest image
+
+15:59.880 --> 16:02.520
+and we're booting the app version that fits with it.
+
+16:02.520 --> 16:04.600
+And then we're cleaning up after ourselves,
+
+16:04.600 --> 16:06.600
+taking away old containers, old images
+
+16:06.600 --> 16:07.960
+that are no longer needed.
+
+16:08.960 --> 16:12.200
+We can also run commands on these servers.
+
+16:12.200 --> 16:14.680
+Here is an example of running the Rails runner
+
+16:14.680 --> 16:16.640
+just to output the Rails version
+
+16:16.640 --> 16:18.520
+on the original Hester installation.
+
+16:18.520 --> 16:22.160
+You see we're running version seven one beta one.
+
+16:22.160 --> 16:23.840
+In addition to running full commands,
+
+16:23.840 --> 16:27.600
+we can run interactive commands like a Rails console.
+
+16:27.600 --> 16:30.400
+This is starting the Rails console on the digital ocean side.
+
+16:30.400 --> 16:32.320
+And we can interact without the main model
+
+16:32.320 --> 16:35.680
+like we would the Rails console in any other context.
+
+16:35.720 --> 16:37.320
+So here if we load the first post
+
+16:37.320 --> 16:39.960
+and we update that post from the console,
+
+16:39.960 --> 16:42.040
+you see we go back to the deployment,
+
+16:42.040 --> 16:44.760
+see the old value, then we can reload
+
+16:44.760 --> 16:46.760
+and there we go from the console.
+
+16:46.760 --> 16:51.040
+This is how you can act with a production app
+
+16:51.040 --> 16:54.120
+to solve issues and introspect errors
+
+16:54.120 --> 16:56.800
+in your domain model and in your database.
+
+16:58.600 --> 17:03.040
+Now let's hop back to that installation we had on Hester
+
+17:03.040 --> 17:05.760
+and then let's look at the containers
+
+17:05.760 --> 17:07.920
+we deployed to that installation.
+
+17:07.920 --> 17:10.960
+There's a variety of different updates we've done here
+
+17:10.960 --> 17:11.920
+since we changed the app.
+
+17:11.920 --> 17:14.240
+We will take the oldest version that we did
+
+17:14.240 --> 17:17.040
+and then we will roll back to that old version.
+
+17:17.040 --> 17:18.080
+When you do a rollback,
+
+17:18.080 --> 17:20.760
+you don't need to build the application again
+
+17:20.760 --> 17:23.760
+and therefore you can see it could happen in just 20 seconds
+
+17:23.760 --> 17:25.880
+between doing the zero downtime deploy.
+
+17:25.880 --> 17:28.320
+And now if we go back here, it won't be really good posts.
+
+17:28.320 --> 17:31.600
+It'll just be posts as the original set
+
+17:31.600 --> 17:33.680
+of the application was.
+
+17:33.680 --> 17:35.160
+So that is the rollbacks.
+
+17:35.160 --> 17:36.560
+We also have these hooks.
+
+17:36.560 --> 17:39.880
+So you can hook into the lifecycle of Kamal.
+
+17:39.880 --> 17:44.880
+We have a post deploy, pre-built, pre-connect, pre-deploy.
+
+17:44.880 --> 17:48.680
+On the post deploy is a hook that we often use
+
+17:48.680 --> 17:51.160
+to pipe something into chat.
+
+17:51.160 --> 17:53.720
+For example, in Basecamp or another chat system,
+
+17:53.720 --> 17:56.280
+you can call in with Curl or something else
+
+17:56.280 --> 18:00.120
+and you get all these values to give information
+
+18:00.160 --> 18:03.360
+to the rest of the team that something has been deployed.
+
+18:03.360 --> 18:05.160
+If you look at the pre-built here,
+
+18:05.160 --> 18:09.240
+this is a set of preconditions
+
+18:09.240 --> 18:12.120
+that we want to apply before we build a new image.
+
+18:12.120 --> 18:13.440
+We wanna make sure, for example,
+
+18:13.440 --> 18:14.680
+that there's a clean checkout
+
+18:14.680 --> 18:16.840
+and remote is configured.
+
+18:16.840 --> 18:18.640
+You can put in whatever you want here
+
+18:18.640 --> 18:22.720
+and Kamal will fail to do the build
+
+18:22.720 --> 18:24.240
+and therefore do the deploy
+
+18:24.240 --> 18:27.640
+unless all these preconditions have been satisfied.
+
+18:27.640 --> 18:29.280
+All right, we are basically done.
+
+18:29.320 --> 18:33.680
+We can therefore proceed to remove the full Kamal installation
+
+18:33.680 --> 18:35.160
+first here on Hetzner.
+
+18:35.160 --> 18:39.560
+It's going to remove all the application data
+
+18:39.560 --> 18:41.680
+and all the images that are on the server.
+
+18:41.680 --> 18:42.960
+Let's remove all of those
+
+18:42.960 --> 18:45.160
+and then let's also remove the database
+
+18:45.160 --> 18:47.800
+and we will have cleaned up fully after ourselves
+
+18:47.800 --> 18:51.760
+and these IP addresses will be gone
+
+18:51.760 --> 18:54.960
+or scrubbed down to just a Docker installation.
+
+18:54.960 --> 18:57.640
+We're removing it here from due to solution as well.
+
+18:57.640 --> 18:58.760
+And that is it.
+
+18:58.760 --> 19:00.600
+This is a quick tour of Kamal
+
+19:00.600 --> 19:03.080
+deploying a small but real application
+
+19:03.080 --> 19:06.160
+to two different data centers, two different cloud providers.
+
+19:06.160 --> 19:08.400
+And it is just as easy to deploy this
+
+19:08.400 --> 19:11.720
+to your own hardware if you feel up for that.
+
