@@ -25,6 +25,13 @@
     margin-bottom: -0.5em;
     margin-top: -0.5em;
 
+    div {
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: var(--space-large);
+    }
+
     form.search {
       margin: 0 -0.8em 1.4em -0.8em;
     }
@@ -38,8 +45,6 @@
       letter-spacing: -0.01em;
       list-style: none;
       padding: 0;
-      position: sticky;
-      top: var(--space-x-large);
 
       li {
 
