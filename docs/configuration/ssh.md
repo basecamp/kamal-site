@@ -56,3 +56,26 @@ Defaults to `fatal`. Set this to debug if you are having
 ```yaml
   log_level: debug
 ```
+## [Keys Only](#keys-only)
+
+Set to true to use only private keys from keys and key_data parameters, 
+even if ssh-agent offers more identities. This option is intended for 
+situations where ssh-agent offers many different identites or you have 
+a need to overwrite all identites and force a single one.
+```yaml
+  keys_only: false
+```
+## [Keys](#keys)
+
+An array of file names of private keys to use for publickey
+and hostbased authentication
+```yaml
+  keys: [ "~/.ssh/id.pem" ]
+```
+## [Key Data](#key-data)
+
+An array of strings, with each element of the array being
+a raw private key in PEM format.
+```yaml
+  key_data: [ "-----BEGIN OPENSSH PRIVATE KEY-----" ]
+```
