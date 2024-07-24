@@ -91,3 +91,20 @@
   }
 
 }
+
+ul#search-results {
+  list-style: none;
+  padding-left: 0;
+
+  li {
+    margin-top: 1.5em;
+
+    p {
+      margin-top: 0.2em;
+    }
+
+    .section {
+      color: var(--color-grey-light);
+    }
+  }
+}
