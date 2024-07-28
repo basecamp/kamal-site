@@ -152,6 +152,8 @@
 
 {{ content }}
 
+{% unless page.nav == false %}
+
             <nav>
               <a href="{{ docs_prev.url | absolute_url }}" aria-label="{{ docs_prev_title }}">
                 <dl>
@@ -166,6 +168,9 @@
                 </dl>
               </a>
             </nav>
+
+{% endunless %}
+
           </article>
         </div>
       </div>
