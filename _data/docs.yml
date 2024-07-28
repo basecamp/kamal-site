@@ -14,7 +14,7 @@
     - title: "Builders"
       url: /docs/configuration/builders/
     - title: "Builder examples"
-      url: /docs/configuration/builders/
+      url: /docs/configuration/builder-examples/
     - title: "Cron"
       url: /docs/configuration/cron/
     - title: "Docker registry"
