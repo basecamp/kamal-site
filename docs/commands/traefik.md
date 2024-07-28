@@ -20,6 +20,6 @@ Commands:
   kamal traefik stop            # Stop existing Traefik container on servers
 ```
 
-When you want to upgrade Traefik, or change it's configuration, you can call `kamal traefik reboot`. This is cause a small outage on each server and will prompt for confirmation.
+When you want to upgrade Traefik, or change it's configuration, you can call `kamal traefik reboot`. This is going to cause a small outage on each server and will prompt for confirmation.
 
 You can use a rolling reboot with `kamal traefik reboot --rolling` to avoid restarting on all servers simultaneously.
