@@ -33,7 +33,7 @@ builder:
     host: ssh://root@192.168.0.1
 ```
 
-## [Using local builder for single-arch](#using-local-builder-for-single-arch)##
+## [Using local builder for single-arch](#using-local-builder-for-single-arch)
 
 If you're developing on multiple architectures, always deploy on a specific architecture(e.g. AMD64), and want to build locally, you can configure a remote builder without a host. Kamal will build the image using a local buildx instance.
 
