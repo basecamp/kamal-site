@@ -1,6 +1,7 @@
 ---
 title: Search Results
 nav: false
+search: false
 ---
 
 <h1 id="search-query">Search results for <mark></mark></h1>
