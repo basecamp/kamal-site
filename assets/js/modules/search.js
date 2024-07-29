@@ -37,7 +37,9 @@ function ready() {
     var params = new URLSearchParams(window.location.search.substring(1));
 
     if(params.has(variable)) {
+
       return decodeURIComponent(params.get(variable).replace(/\+/g, '%20'));
+
     }
 
     return null;
@@ -51,9 +53,7 @@ function ready() {
     var idx = lunr(function() {
 
       this.field('id');
-      this.field('title', {
-        boost: 10
-      });
+      this.field('title', { boost: 10 });
       this.field('author');
       this.field('section');
       this.field('content');
@@ -67,6 +67,7 @@ function ready() {
           'content': window.store[key].content
         });
       }
+
     });
 
     var results = idx.search(searchTerm);
