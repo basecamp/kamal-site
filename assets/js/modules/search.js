@@ -55,8 +55,6 @@ function ready() {
 
   if(searchTerm) {
 
-    document.getElementById('search-box').setAttribute('value', searchTerm);
-
     var idx = lunr(function() {
 
       this.field('id');
