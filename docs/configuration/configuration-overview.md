@@ -7,13 +7,24 @@ title: Kamal Configuration
 
 Configuration is read from the `config/deploy.yml`
 
+
+## [Destinations](#destinations)
+
 When running commands, you can specify a destination with the `-d` flag,
 e.g. `kamal deploy -d staging`
 
 In this case the configuration will also be read from `config/deploy.staging.yml`
 and merged with the base configuration.
 
-The available configuration options are explained below.
+## [Extensions](#extensions)
+
+Kamal will not accept unrecognized keys in the configuration file.
+
+However, you might want to declare a configuration block using YAML anchors
+and aliases to avoid repetition.
+
+You can use prefix a configuration section with `x-` to indicate that it is an
+extension. Kamal will ignore the extension and not raise an error.
 
 ## [The service name](#the-service-name)
 This is a required value. It is used as the container name prefix.
