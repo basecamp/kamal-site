@@ -34,20 +34,13 @@ function ready() {
 
   function getQuery(variable) {
 
-    var query = window.location.search.substring(1);
-    var vars = query.split('&');
+    var params = new URLSearchParams(window.location.search.substring(1));
 
-    for(var i = 0; i < vars.length; i++) {
-
-      var pair = vars[i].split('=');
-
-      if(pair[0] === variable) {
-
-        return decodeURIComponent(pair[1].replace(/\+/g, '%20'));
-
-      }
-
+    if(params.has(variable)) {
+      return decodeURIComponent(params.get(variable).replace(/\+/g, '%20'));
     }
+
+    return null;
 
   }
 
