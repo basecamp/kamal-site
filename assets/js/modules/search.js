@@ -50,6 +50,14 @@ function ready() {
 
   if(searchTerm) {
 
+    var searchBoxes = document.querySelectorAll('.search-box');
+
+    searchBoxes.forEach(searchBox => {
+
+      searchBox.setAttribute('value', searchTerm);
+
+    });
+
     var idx = lunr(function() {
 
       this.field('id');
