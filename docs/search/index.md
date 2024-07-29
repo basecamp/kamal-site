@@ -3,7 +3,7 @@ title: Search Results
 nav: false
 ---
 
-<h1 id="search-query"></h1>
+<h1 id="search-query">Search results for <mark></mark></h1>
 
 <div id="search-results"></div>
 

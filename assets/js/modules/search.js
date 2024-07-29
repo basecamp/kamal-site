@@ -4,7 +4,7 @@ function ready() {
 
     var searchResults = document.getElementById('search-results');
 
-    document.getElementById('search-query').innerHTML = 'Search results for <mark>' + searchTerm + '</mark>';
+    document.querySelector('#search-query mark').textContent = searchTerm;
 
     var appendString = '';
 
