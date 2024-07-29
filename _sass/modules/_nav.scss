@@ -120,8 +120,12 @@
   &__options {
 
     display: none;
-    margin-top: -0.5em;
+    flex-direction: column;
     padding: 0 var(--space-medium) var(--space-medium) var(--space-medium);
+
+    form.search {
+      margin-bottom: 1.4em;
+    }
 
     ul {
 

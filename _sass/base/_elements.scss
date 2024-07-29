@@ -117,7 +117,10 @@ a {
   text-decoration: underline;
   text-decoration-thickness: 0.09em;
   text-underline-offset: 0.09em;
-  transition: color var(--transition);
+  transition:
+    color var(--transition),
+    text-decoration-color var(--transition)
+  ;
 }
 
 em,
