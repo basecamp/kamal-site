@@ -6,6 +6,8 @@ title: Build
 
 Build your app images and push them to your servers. These commands are called indirectly by `kamal deploy` and `kamal redeploy`.
 
+Kamal will, by default, only build files that you have committed to git. It's possible to configure kamal to use the current context (instead of a git archive of HEAD) by settings the [build context](https://kamal-deploy.org/docs/configuration/builders/#build-context).
+
 ```bash
 $ kamal build
 Commands:
