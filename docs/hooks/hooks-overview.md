@@ -32,8 +32,8 @@ The available hooks are:
 - [pre-build](../pre-build)
 - [pre-deploy](../pre-deploy)
 - [post-deploy](../post-deploy)
-- [pre-traefik-reboot](../pre-traefik-reboot)
-- [post-traefik-reboot](../post-traefik-reboot)
+- [pre-proxy-reboot](../pre-proxy-reboot)
+- [post-proxy-reboot](../post-proxy-reboot)
 
 You can pass `--skip_hooks` to avoid running the hooks.
 

@@ -107,7 +107,7 @@
       url: /docs/hooks/pre-deploy/
     - title: "post-deploy"
       url: /docs/hooks/post-deploy/
-    - title: "pre-traefik-reboot"
-      url: /docs/hooks/pre-traefik-reboot/
-    - title: "post-traefik-reboot"
-      url: /docs/hooks/post-traefik-reboot/
+    - title: "pre-proxy-reboot"
+      url: /docs/hooks/pre-proxy-reboot/
+    - title: "post-proxy-reboot"
+      url: /docs/hooks/post-proxy-reboot/
