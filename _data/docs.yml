@@ -9,6 +9,8 @@
       url: /docs/configuration/configuration-overview/
     - title: "Accessories"
       url: /docs/configuration/accessories/
+    - title: "Aliases"
+      url: /v1/docs/configuration/accessories/
     - title: "Booting"
       url: /docs/configuration/booting/
     - title: "Builders"
