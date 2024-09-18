@@ -1,0 +1,14 @@
+- title: "Documentation"
+  url: /docs/
+
+- title: "Source code"
+  url: https://github.com/basecamp/kamal/tree/1-9-stable
+  external: true
+
+- title: "Help"
+  url: https://github.com/basecamp/kamal/discussions
+  external: true
+
+- title: "Discord"
+  url: https://discord.gg/YgHVT7GCXS
+  external: true

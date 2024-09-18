@@ -1,0 +1,28 @@
+---
+title: App
+---
+
+# kamal app
+
+Run `kamal app` to manage your running apps.
+
+To deploy new versions of the app, see `kamal deploy` and `kamal rollback`.
+
+You can use `kamal app exec` to [run commands on servers](../running-commands-on-servers).
+
+```
+$ kamal app
+Commands:
+  kamal app boot              # Boot app on servers (or reboot app if already running)
+  kamal app containers        # Show app containers on servers
+  kamal app details           # Show details about app containers
+  kamal app exec [CMD]        # Execute a custom command on servers (use --help to show options)
+  kamal app help [COMMAND]    # Describe subcommands or one specific subcommand
+  kamal app images            # Show app images on servers
+  kamal app logs              # Show log lines from app on servers (use --help to show options)
+  kamal app remove            # Remove app containers and images from servers
+  kamal app stale_containers  # Detect app stale containers
+  kamal app start             # Start existing app container on servers
+  kamal app stop              # Stop app container on servers
+  kamal app version           # Show app version currently running on servers
+```

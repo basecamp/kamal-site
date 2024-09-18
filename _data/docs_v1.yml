@@ -1,0 +1,109 @@
+- title: "Installation"
+  url: /v1/docs/installation/
+
+- title: "Configuration"
+  url: /v1/docs/configuration/
+  index: false
+  sections:
+    - title: "Configuration overview"
+      url: /v1/docs/configuration/configuration-overview/
+    - title: "Accessories"
+      url: /v1/docs/configuration/accessories/
+    - title: "Booting"
+      url: /v1/docs/configuration/booting/
+    - title: "Builders"
+      url: /v1/docs/configuration/builders/
+    - title: "Builder examples"
+      url: /v1/docs/configuration/builder-examples/
+    - title: "Cron"
+      url: /v1/docs/configuration/cron/
+    - title: "Docker registry"
+      url: /v1/docs/configuration/docker-registry/
+    - title: "Environment variables"
+      url: /v1/docs/configuration/environment-variables/
+    - title: "Healthchecks"
+      url: /v1/docs/configuration/healthchecks/
+    - title: "Logging"
+      url: /v1/docs/configuration/logging/
+    - title: "Roles"
+      url: /v1/docs/configuration/roles/
+    - title: "Servers"
+      url: /v1/docs/configuration/servers/
+    - title: "SSH"
+      url: /v1/docs/configuration/ssh/
+    - title: "SSHKit"
+      url: /v1/docs/configuration/sshkit/
+    - title: "Traefik"
+      url: /v1/docs/configuration/traefik/
+
+- title: "Commands"
+  url: /v1/docs/commands/
+  index: false
+  sections:
+    - title: "View all commands"
+      url: /v1/docs/commands/view-all-commands/
+    - title: "kamal accessory"
+      url: /v1/docs/commands/accessory/
+    - title: "kamal app"
+      url: /v1/docs/commands/app/
+    - title: "kamal audit"
+      url: /v1/docs/commands/audit/
+    - title: "kamal build"
+      url: /v1/docs/commands/build/
+    - title: "kamal config"
+      url: /v1/docs/commands/config/
+    - title: "kamal deploy"
+      url: /v1/docs/commands/deploy/
+    - title: "kamal details"
+      url: /v1/docs/commands/details/
+    - title: "kamal env"
+      url: /v1/docs/commands/env/
+    - title: "kamal envify"
+      url: /v1/docs/commands/envify/
+    - title: "kamal help"
+      url: /v1/docs/commands/help/
+    - title: "kamal init"
+      url: /v1/docs/commands/init/
+    - title: "kamal lock"
+      url: /v1/docs/commands/lock/
+    - title: "kamal prune"
+      url: /v1/docs/commands/prune/
+    - title: "kamal redeploy"
+      url: /v1/docs/commands/redeploy/
+    - title: "kamal registry"
+      url: /v1/docs/commands/registry/
+    - title: "kamal remove"
+      url: /v1/docs/commands/remove/
+    - title: "kamal rollback"
+      url: /v1/docs/commands/rollback/
+    - title: "kamal server"
+      url: /v1/docs/commands/server/
+    - title: "kamal setup"
+      url: /v1/docs/commands/setup/
+    - title: "kamal traefik"
+      url: /v1/docs/commands/traefik/
+    - title: "kamal version"
+      url: /v1/docs/commands/version/
+    - title: "Running commands on servers"
+      url: /v1/docs/commands/running-commands-on-servers/
+
+- title: "Hooks"
+  url: /v1/docs/hooks/
+  index: false
+  sections:
+    - title: "Hooks overview"
+      url: /v1/docs/hooks/hooks-overview/
+    - title: "docker-setup"
+      url: /v1/docs/hooks/docker-setup/
+    - title: "pre-connect"
+      url: /v1/docs/hooks/pre-connect/
+    - title: "pre-build"
+      url: /v1/docs/hooks/pre-build/
+    - title: "pre-deploy"
+      url: /v1/docs/hooks/pre-deploy/
+    - title: "post-deploy"
+      url: /v1/docs/hooks/post-deploy/
+    - title: "pre-traefik-reboot"
+      url: /v1/docs/hooks/pre-traefik-reboot/
+    - title: "post-traefik-reboot"
+      url: /v1/docs/hooks/post-traefik-reboot/
