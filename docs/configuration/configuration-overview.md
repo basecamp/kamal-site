@@ -125,6 +125,7 @@ minimum_version: 1.3.0
 ## [Readiness delay](#readiness-delay)
 
 Seconds to wait for a container to boot after is running, default 7
+
 This only applies to containers that do not run a proxy or specify a healthcheck
 ```yaml
 readiness_delay: 4
