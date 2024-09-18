@@ -11,16 +11,14 @@ $ kamal config
 ---
 :roles:
 - web
-- workers
 :hosts:
-- server1
-- server2
-- server3
-:primary_host: server1
-:version: 75bf6fa40b975cbd8aec05abf7164e0982f185ac
+- vm1
+- vm2
+:primary_host: vm1
+:version: 505f4f60089b262c693885596fbd768a6ab663e9
 :repository: registry:4443/app
-:absolute_image: registry:4443/app:75bf6fa40b975cbd8aec05abf7164e0982f185ac
-:service_with_version: app-75bf6fa40b975cbd8aec05abf7164e0982f185ac
+:absolute_image: registry:4443/app:505f4f60089b262c693885596fbd768a6ab663e9
+:service_with_version: app-505f4f60089b262c693885596fbd768a6ab663e9
 :volume_args: []
 :ssh_options:
   :user: root
@@ -30,9 +28,10 @@ $ kamal config
   :log_level: :fatal
 :sshkit: {}
 :builder:
-  multiarch: false
+  driver: docker
+  arch: arm64
   args:
-    COMMIT_SHA: 75bf6fa40b975cbd8aec05abf7164e0982f185ac
+    COMMIT_SHA: 505f4f60089b262c693885596fbd768a6ab663e9
 :accessories:
   busybox:
     service: custom-busybox
@@ -44,12 +43,4 @@ $ kamal config
 :logging:
 - "--log-opt"
 - max-size="10m"
-:healthcheck:
-  path: "/up"
-  port: 3000
-  max_attempts: 7
-  exposed_port: 3999
-  cord: "/tmp/kamal-cord"
-  log_lines: 50
-  cmd: wget -qO- http://localhost > /dev/null || exit 1
 ```
