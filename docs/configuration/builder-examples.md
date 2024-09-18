@@ -4,55 +4,44 @@ title: Builder examples
 
 # Builder examples
 
-## [Using remote builder for native multi-arch](#using-remote-builder-for-native-multi-arch)
+## [Using remote builder for single-arch](#using-remote-builder-for-single-arch)
 
-If you're developing on ARM64 (like Apple Silicon), but you want to deploy on AMD64 (x86 64-bit), you can use multi-architecture images. By default, Kamal will setup a local buildx configuration that does this through QEMU emulation. But this can be quite slow, especially on the first build.
+If you're developing on ARM64 (like Apple Silicon), but you want to deploy on AMD64 (x86 64-bit), by default, Kamal will setup a local buildx configuration that does this through QEMU emulation. But this can be quite slow, especially on the first build.
 
-If you want to speed up this process by using a remote AMD64 host to natively build the AMD64 part of the image, while natively building the ARM64 part locally, you can do so using builder options:
+If you want to speed up this process by using a remote AMD64 host to natively build the AMD64 part of the image, you can set a remote builder:
 
 ```yaml
 builder:
-  local:
-    arch: arm64
-    host: unix:///Users/<%= `whoami`.strip %>/.docker/run/docker.sock
-  remote:
-    arch: amd64
-    host: ssh://root@192.168.0.1
+  arch: amd64
+  remote: ssh://root@192.168.0.1
 ```
+
+Kamal will use the remote to build when deploying from an ARM64 machine, or build locally when deploying from an AMD64 machine.
 
 **Note:** You must have Docker running on the remote host being used as a builder. This instance should only be shared for builds using the same registry and credentials.
 
-## [Using remote builder for single-arch](#using-remote-builder-for-single-arch)
+## [Using remote builder for single-arch](#using-remote-builder-for-native-multi-arch)
 
-If you're developing on ARM64 (like Apple Silicon), want to deploy on AMD64 (x86 64-bit), but don't need to run the image locally (or on other ARM64 hosts), you can configure a remote builder that just targets AMD64. This is a bit faster than building with multi-arch, as there's nothing to build locally.
+You can also build a multi-arch image. If a remote is set, Kamal will build the deployment arch locally and the other arch remotely.
+
+So if you're developing on ARM64 (like Apple Silicon), it will build the ARM64 arch locally and the AMD64 arch remotely.
 
 ```yaml
 builder:
-  remote:
-    arch: amd64
-    host: ssh://root@192.168.0.1
+  arch:
+    - amd64
+    - arm64
+  remote: ssh://root@192.168.0.1
 ```
 
 ## [Using local builder for single-arch](#using-local-builder-for-single-arch)
 
-If you're developing on multiple architectures, always deploy on a specific architecture(e.g. AMD64), and want to build locally, you can configure a remote builder without a host. Kamal will build the image using a local buildx instance.
+If you always want to build locally for a single arch, Kamal will build the image using a local buildx instance.
 
 ```yaml
 builder:
-  remote:
-    arch: amd64
+  arch: amd64
 ```
-
-## [Using native builder when multi-arch isn't needed](#using-native-builder-when-multi-arch-isnt-needed)
-
-If you're developing on the same architecture as the one you're deploying on, you can speed up the build by forgoing both multi-arch and remote building:
-
-```yaml
-builder:
-  multiarch: false
-```
-
-This is also a good option if you're running Kamal from a CI server that shares architecture with the deployment servers.
 
 ## [Using a different Dockerfile or context when building](#using-a-different-dockerfile-or-context-when-building)
 
@@ -122,7 +111,7 @@ For further insights into build cache optimization, check out documentation on D
 
 ## [Using build secrets for new images](#using-build-secrets-for-new-images)
 
-Some images need a secret passed in during build time, like a GITHUB_TOKEN, to give access to private gem repositories. This can be done by having the secret in ENV, then referencing it in the builder configuration:
+Some images need a secret passed in during build time, like a GITHUB_TOKEN, to give access to private gem repositories. This can be done by setting the secret in .kamal/secrets, then referencing it in the builder configuration:
 
 ```yaml
 builder:

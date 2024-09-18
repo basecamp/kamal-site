@@ -33,7 +33,7 @@ You can set tags on the hosts for custom env variables (see [Environment variabl
 
 When there are other options to set, the list of hosts goes under the `hosts` key
 
-By default only the primary role uses Traefik, but you can set `traefik` to change
+By default only the primary role uses a proxy, but you can set `proxy` to change
 it.
 
 You can also set a custom cmd to run in the container, and overwrite other settings
@@ -43,13 +43,11 @@ from the root configuration.
     hosts:
       - 172.1.0.3
       - 172.1.0.4: experiment1
-    traefik: true
+    proxy: true
     cmd: "bin/jobs"
     options:
       memory: 2g
       cpus: 4
-    healthcheck:
-      ...
     logging:
       ...
     labels:
@@ -57,5 +55,4 @@ from the root configuration.
     env:
       ...
     asset_path: /public
-
 ```

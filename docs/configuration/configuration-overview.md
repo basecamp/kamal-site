@@ -131,9 +131,16 @@ minimum_version: 1.3.0
 ## [Readiness delay](#readiness-delay)
 
 Seconds to wait for a container to boot after is running, default 7
-This only applies to containers that do not specify a healthcheck
+This only applies to containers that do not run a proxy or specify a healthcheck
 ```yaml
 readiness_delay: 4
+```
+## [Readiness timeout](#readiness-timeout)
+
+How long to wait for a container to become ready, default 30
+This only applies to containers that do not run a proxy
+```yaml
+readiness_timeout: 4
 ```
 ## [Run directory](#run-directory)
 
@@ -162,11 +169,11 @@ Additionals services to run in Docker, see [Accessories](../accessories)
 accessories:
   ...
 ```
-## [Traefik](#traefik)
+## [Proxy](#proxy)
 
-The Traefik proxy is used for zero-downtime deployments, see [Traefik](../traefik)
+Configuration for kamal-proxy, see [Proxy](../proxy)
 ```yaml
-traefik:
+proxy:
   ...
 ```
 ## [SSHKit](#sshkit)
@@ -183,17 +190,17 @@ See [Booting](../booting)
 boot:
   ...
 ```
-## [Healthcheck](#healthcheck)
-
-Configuring healthcheck commands, intervals and timeouts, see [Healthchecks](../healthchecks)
-```yaml
-healthcheck:
-  ...
-```
 ## [Logging](#logging)
 
 Docker logging configuration, see [Logging](../logging)
 ```yaml
 logging:
+  ...
+```
+## [Aliases](#aliases)
+
+Alias configuration, see [Aliases](../aliases)
+```yaml
+aliases:
   ...
 ```

@@ -21,10 +21,10 @@
       url: /docs/configuration/docker-registry/
     - title: "Environment variables"
       url: /docs/configuration/environment-variables/
-    - title: "Healthchecks"
-      url: /docs/configuration/healthchecks/
     - title: "Logging"
       url: /docs/configuration/logging/
+    - title: "Proxy"
+      url: /docs/configuration/proxy/
     - title: "Roles"
       url: /docs/configuration/roles/
     - title: "Servers"
@@ -33,8 +33,6 @@
       url: /docs/configuration/ssh/
     - title: "SSHKit"
       url: /docs/configuration/sshkit/
-    - title: "Traefik"
-      url: /docs/configuration/traefik/
 
 - title: "Commands"
   url: /docs/commands/
