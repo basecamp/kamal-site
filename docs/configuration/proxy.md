@@ -47,17 +47,11 @@ Defaults to false
 ```yaml
   ssl: true
 ```
-## [Deploy timeout](#deploy-timeout)
-
-How long to wait for the app to boot when deploying, defaults to 30 seconds
-```yaml
-  deploy_timeout: 10s
-```
 ## [Response timeout](#response-timeout)
 
-How long to wait for requests to complete before timing out, defaults to 10 seconds
+How long to wait for requests to complete before timing out, defaults to 30 seconds
 ```yaml
-  response_timeout: 30s
+  response_timeout: 10s
 ```
 ## [Healthcheck](#healthcheck)
 

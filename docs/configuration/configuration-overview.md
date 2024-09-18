@@ -83,7 +83,7 @@ volume containing both sets of files.
 This requires that file names change when the contents change
 (e.g. by including a hash of the contents in the name).
 
-## [To configure this, set the path to the assets:](#to-configure-this,-set-the-path-to-the-assets:)
+To configure this, set the path to the assets:
 ```yaml
 asset_path: /path/to/assets
 ```
@@ -110,12 +110,6 @@ Whether roles with no servers are allowed. Defaults to `false`.
 ```yaml
 allow_empty_roles: false
 ```
-## [Stop wait time](#stop-wait-time)
-
-How long we wait for a container to stop before killing it, defaults to 30 seconds
-```yaml
-stop_wait_time: 60
-```
 ## [Retain containers](#retain-containers)
 
 How many old containers and images we retain, defaults to 5
@@ -135,12 +129,17 @@ This only applies to containers that do not run a proxy or specify a healthcheck
 ```yaml
 readiness_delay: 4
 ```
-## [Readiness timeout](#readiness-timeout)
+## [Deploy timeout](#deploy-timeout)
 
 How long to wait for a container to become ready, default 30
-This only applies to containers that do not run a proxy
 ```yaml
-readiness_timeout: 4
+deploy_timeout: 10
+```
+## [Drain timeout](#drain-timeout)
+
+How long to wait for a containers to drain, default 30
+```yaml
+drain_timeout: 10
 ```
 ## [Run directory](#run-directory)
 
