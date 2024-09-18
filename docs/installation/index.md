@@ -43,7 +43,7 @@ env:
     - RAILS_MASTER_KEY
 ```
 
-Then edit your `.kamal/secrets` file to read your registry password as `KAMAL_REGISTRY_PASSWORD` (and your `RAILS_MASTER_KEY` for production with a Rails app).
+Set your `KAMAL_REGISTRY_PASSWORD` in your environment and edit your `.kamal/secrets` file to read it it (and your `RAILS_MASTER_KEY` for production with a Rails app).
 
 ```yaml
 KAMAL_REGISTRY_PASSWORD=$KAMAL_REGISTRY_PASSWORD
