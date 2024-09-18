@@ -10,7 +10,7 @@
     - title: "Accessories"
       url: /docs/configuration/accessories/
     - title: "Aliases"
-      url: /v1/docs/configuration/accessories/
+      url: /docs/configuration/aliases/
     - title: "Booting"
       url: /docs/configuration/booting/
     - title: "Builders"
@@ -56,16 +56,16 @@
       url: /docs/commands/deploy/
     - title: "kamal details"
       url: /docs/commands/details/
-    - title: "kamal env"
-      url: /docs/commands/env/
-    - title: "kamal envify"
-      url: /docs/commands/envify/
+    - title: "kamal docs"
+      url: /docs/commands/docs/
     - title: "kamal help"
       url: /docs/commands/help/
     - title: "kamal init"
       url: /docs/commands/init/
     - title: "kamal lock"
       url: /docs/commands/lock/
+    - title: "kamal proxy"
+      url: /docs/commands/proxy/
     - title: "kamal prune"
       url: /docs/commands/prune/
     - title: "kamal redeploy"
@@ -76,12 +76,16 @@
       url: /docs/commands/remove/
     - title: "kamal rollback"
       url: /docs/commands/rollback/
+    - title: "kamal secrets"
+      url: /docs/commands/secrets/
     - title: "kamal server"
       url: /docs/commands/server/
     - title: "kamal setup"
       url: /docs/commands/setup/
     - title: "kamal traefik"
       url: /docs/commands/traefik/
+    - title: "kamal upgrade"
+      url: /docs/commands/upgrade/
     - title: "kamal version"
       url: /docs/commands/version/
     - title: "Running commands on servers"
