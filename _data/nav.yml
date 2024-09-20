@@ -1,9 +1,9 @@
 - title: "Documentation"
   url: /docs/
   options:
-  - title: "Kamal V2 docs"
+  - title: "Version 2.0.0"
     url: /docs/
-  - title: "Kamal V1 docs"
+  - title: "Version 1.8.3"
     url: /v1/docs/
 
 - title: "Source code"

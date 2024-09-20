@@ -111,3 +111,20 @@
       url: /docs/hooks/pre-proxy-reboot/
     - title: "post-proxy-reboot"
       url: /docs/hooks/post-proxy-reboot/
+
+- title: "Upgrade Guide"
+  url: /docs/upgrading/
+  index: false
+  sections:
+    - title: "Overview"
+      url: /docs/upgrading/overview/
+    - title: "Proxy Changes"
+      url: /docs/upgrading/proxy-changes/
+    - title: "Network Changes"
+      url: /docs/upgrading/network-changes/
+    - title: "Configuration Changes"
+      url: /docs/upgrading/configuration-changes/
+    - title: "Secrets Changes"
+      url: /docs/upgrading/secrets-changes/
+    - title: "What's New"
+      url: /docs/upgrading/whats-new/

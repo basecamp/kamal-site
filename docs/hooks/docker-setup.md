@@ -1,5 +1,5 @@
 ---
-title: pre-connect
+title: docker-setup
 ---
 
 # docker-setup hook
