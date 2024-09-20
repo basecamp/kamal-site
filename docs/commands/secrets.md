@@ -16,7 +16,7 @@ Use these to read secrets from common password managers (currently 1Password, La
 
 The helpers will handle signing in, asking for passwords and efficiently fetching the secrets:
 
-These are designed to be used with command interpolation in `.kamal/secrets`
+These are designed to be used with [command substitution](https://github.com/bkeepers/dotenv?tab=readme-ov-file#command-substitution) in `.kamal/secrets`
 
 ```
 # .kamal/secrets

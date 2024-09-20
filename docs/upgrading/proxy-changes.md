@@ -4,11 +4,9 @@ title: Replacing Traefik with kamal-proxy
 
 # Proxy changes
 
-Kamal uses a proxy for gapless deployments.
+In Kamal 1, we used [Traefik](https://traefik.io/traefik) to enable gapless deployments.
 
-In Kamal 1, we used [Traefik](https://traefik.io/traefik), but for version 2, we are using a [kamal-proxy](https://github.com/basecamp/kamal-proxy).
-
-It is a custom proxy called built specifically for Kamal.
+For version 2, we are using [kamal-proxy](https://github.com/basecamp/kamal-proxy), a custom proxy called built specifically for Kamal.
 
 ## [Why we are dropping Traefik](#dropping-traefik)
 
@@ -20,45 +18,51 @@ This means that we need to ask Traefik to do things, and then poll it to see whe
 
 ### Labels
 
-We used Traefik's [Docker provider](https://doc.traefik.io/traefik/providers/docker/). It involves adding labels to
-containers, which Traefik uses to configure itself.
+We used Traefik's Docker provider. It requires adding labels to containers, which Traefik uses to configure itself.
 
-It is flexible and there are a lot of options for things you can do with the labels. But it makes the configuration
-complicated and requires that you understand Traefik's general purpose configuration even to accomplish simple tasks.
+It is flexible and there are a lot of options for things you can do with the labels. But it requires that you
+understand and use Traefik's [general purpose configuration](https://doc.traefik.io/traefik/providers/docker/)
+even to accomplish simple tasks.
 
 Container labels are immutable, so you can't tell Traefik to stop routing requests. To successfully drain containers,
-we had to resort to modifying healthchecks so we could force the container's into an unhealthy state.
+we had to resort to modifying healthchecks to force the container's into an unhealthy state.
 
 ### Overly flexible
 
-Using Traefik labels, it is possible to to a lot of things. Kamal's users had used that to get it to do things
-it was not initially designed to do, like Let's Encrypt integration, or running multiple application on one server.
+Using Traefik labels, it is possible to get Kamal to do things it was not initially designed to do, like integrating Let's Encrypt,
+or running multiple application on one server.
 
-Doing this was complicated and error prone though, and we wanted to provide simpler built solutions for those common requirements.
+These use cases were unsupported and error prone though, and we wanted to provide simpler built solutions for those common requirements.
 
 ### Hard to understand errors
 
 Traefik has its own domain language - Routers, Services, Endpoints. So if it failed the errors would be in that
-language and disconnected from what Kamal was doing making it tricky to diagnose failures.
+language and disconnected from what Kamal was doing. This made it tricky to diagnose failures.
 
 ### Other options
 
 There are other proxies available, and Traefik has other configuration options, such as the file provider.
 
-However as we looked at how we want to evolve Kamal it became clear that building our own proxy would give us
-the control we needed to efficiently build and develop those new features.
+However to evolve Kamal it became clear that building our own proxy would give us the control we needed to efficiently
+build and develop new features.
 
-We want an imperative tool that has a 1-1 mapping between kamal commands and proxy commands. We want to tell the
-proxy what to do, and have it do what we asked and return when its done. If it fails the failure should be clear.
+We wanted:
+- An imperative proxy - i.e no polling
+- A 1-1 mapping between kamal commands and proxy commands.
+- Clear error messages
+- Support for new commands
+- Deploy-time rather than boot-time config, so we can change it without restarting
+
+It was clear that we to get this we'd need to build the proxy ourselves.
 
 ## [kamal-proxy](#kamal-proxy)
 
 [kamal-proxy](https://github.com/basecamp/kamal-proxy) is written in Go.
 
-It has minimal configuration so that we can run multiple application against a single proxy without configuration
+It has minimal configuration so that we can run multiple applications against a single proxy without configuration
 clashes.
 
-Instead configuration (timeouts, logging, buffering etc) is supplied via commands at deploy time and only applies to
+Configuration (timeouts, logging, buffering etc) is supplied via commands at deploy time and only applies to
 the application being deployed.
 
 It uses blocking commands, so when you deploy the command will respond when the deployment is complete.

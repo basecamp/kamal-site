@@ -2,6 +2,6 @@
 title: post-proxy-reboot
 ---
 
-# post-proxy-reboot hook
+# Hooks: post-proxy-reboot
 
 Runs after rebooting the kamal-proxy container, see [pre-proxy-reboot](../pre-proxy-reboot) for details.

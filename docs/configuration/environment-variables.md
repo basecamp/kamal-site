@@ -4,7 +4,9 @@ title: Environment variables
 
 # Environment variables
 
-Environment variables can be set directly in the Kamal configuration or read from .kamal/secrets.
+
+Environment variables can be set directly in the Kamal configuration or
+read from .kamal/secrets.
 
 ## [Reading environment variables from the configuration](#reading-environment-variables-from-the-configuration)
 
@@ -16,13 +18,16 @@ env:
   DATABASE_HOST: mysql-db1
   DATABASE_PORT: 3306
 ```
-## [Using .kamal/secrets file to load required environment variables](#using-kamal-secrets)
+## [Secrets](#secrets)
 
-Kamal uses dotenv to automatically load environment variables set in the .kamal/secrets file.
+Kamal uses dotenv to automatically load environment variables set in the `.kamal/secrets` file.
 
-If you are using destinations, secrets will be read from .kamal/secrets-<DESTINATION>.
+If you are using destinations, secrets will instead be read from `.kamal/secrets-<DESTINATION>` if
+it exists.
 
-This file can be used to set variables like KAMAL_REGISTRY_PASSWORD or database passwords.
+Common secrets across all destinations can be set in `.kamal/secrets-common`.
+
+This file can be used to set variables like `KAMAL_REGISTRY_PASSWORD` or database passwords.
 You can use variable or command substitution in the secrets file.
 
 ```
@@ -40,7 +45,7 @@ DB_PASSWORD=$(kamal secrets extract DB_PASSWORD $SECRETS)
 
 If you store secrets directly in .kamal/secrets, ensure that it is not checked into version control.
 
-To pass the secrets to the application you should list them under the `secret` key. When you do this the
+To pass the secrets you should list them under the `secret` key. When you do this the
 other variables need to be moved under the `clear` key.
 
 Unlike clear values, secrets are not passed directly to the container,

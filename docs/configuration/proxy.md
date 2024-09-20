@@ -14,6 +14,12 @@ options that are set when deploying the application, not when booting the proxy
 
 They are application specific, so are not shared when multiple applications
 run on the same proxy.
+
+The proxy is enabled by default on the primary role, but can be disabled by
+setting `proxy: false`.
+
+It is disabled by default on all other roles, but can be enabled by setting
+`proxy: true`, or providing a proxy configuration.
 ```yaml
 proxy:
 ```
@@ -51,7 +57,7 @@ Defaults to false
 
 How long to wait for requests to complete before timing out, defaults to 30 seconds
 ```yaml
-  response_timeout: 10s
+  response_timeout: 10
 ```
 ## [Healthcheck](#healthcheck)
 
@@ -98,7 +104,7 @@ By default, Cache-Control, Last-Modified and User-Agent request headers are logg
 ```
 ## [Forward headers](#forward-headers)
 
-Whether to forward the X-Forwarded-For and X-Forwarded-Proto headers (defaults to false)
+Whether to forward the X-Forwarded-For and X-Forwarded-Proto headers.
 
 If you are behind a trusted proxy, you can set this to true to forward the headers.
 

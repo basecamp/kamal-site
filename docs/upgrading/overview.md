@@ -1,5 +1,5 @@
 ---
-title: Kamal 2: Upgrade Guide
+title: "Kamal 2: Upgrade Guide"
 ---
 
 # Kamal 2: Upgrade Guide

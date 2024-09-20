@@ -82,8 +82,6 @@
       url: /docs/commands/server/
     - title: "kamal setup"
       url: /docs/commands/setup/
-    - title: "kamal traefik"
-      url: /docs/commands/traefik/
     - title: "kamal upgrade"
       url: /docs/commands/upgrade/
     - title: "kamal version"
@@ -126,5 +124,3 @@
       url: /docs/upgrading/configuration-changes/
     - title: "Secrets Changes"
       url: /docs/upgrading/secrets-changes/
-    - title: "What's New"
-      url: /docs/upgrading/whats-new/

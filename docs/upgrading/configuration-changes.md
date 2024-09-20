@@ -60,25 +60,24 @@ images.
 ## [Traefik -> Proxy](#traefik-to-proxy)
 
 The `traefik` configuration is no longer valid. Instead you can configure kamal-proxy under
-`proxy`.
+[proxy](../../configuration/proxy).
 
-If you were using custom Traefik labels or args, see the proxy configuration for converting those
-over.
+If you were using custom Traefik labels or args, see the proxy configuration whether you can convert them.
 
 kamal-proxy supports common requirements such as buffering, max request/response sizes, and forwarding
 headers, but it is not the full breadth of everything Traefik can do.
 
 If you don't see something you need, you can raise an issue and we'll look into it, but we don't promise
-to support everything.
-
-You might need to run Traefik or another proxy elsewhere in your stack to achieve what you want.
+to support everything - you might need to run Traefik or another proxy elsewhere in your stack to achieve what you want.
 
 ## [Healthchecks](#healthchecks)
 
 The healthcheck section has been removed.
 
+### Proxy roles
+
 For roles running with a proxy, the healthchecks are performed externally by kamal-proxy, not via
-internal Docker healthchecks. You can configure the them under the [proxy section](../../configuration/proxy#healthcheck).
+internal Docker healthchecks. You can configure the them under [proxy/healthcheck](../../configuration/proxy#healthcheck).
 
 ```
 proxy:
@@ -87,6 +86,8 @@ proxy:
     interval: 2
     timeout: 2
 ```
+
+### Non-proxy roles
 
 For roles that do not run the proxy, you can set a custom docker healthcheck via the [options](../../configuration/roles#custom-role-configuration).
 
@@ -104,6 +105,8 @@ For those containers, Kamal will wait for the `healthy` status if they have a he
 
 You can set a `readiness_delay` which is used when we see the `running` status. We'll wait
 that long and confirm the container is still running before continuing.
+
+### All roles
 
 There are two timeouts you can set at the root of the config that are used across all roles
 whether they use a proxy or not.

@@ -44,7 +44,9 @@ Additional labels to add to the container
 labels:
   my-label: my-value
 ```
-## [Additional volumes to mount into the container](#additional-volumes-to-mount-into-the-container)
+## [Volumes](#volumes)
+
+Additional volumes to mount into the container
 ```yaml
 volumes:
   - /path/on/host:/path/in/container:ro
@@ -70,7 +72,7 @@ See [Environment variables](../environment-variables)
 env:
   ...
 ```
-## [Asset Bridging](#asset-bridging)
+## [Asset Path](#asset-path)
 
 Used for asset bridging across deployments, default to `nil`
 
@@ -87,7 +89,9 @@ To configure this, set the path to the assets:
 ```yaml
 asset_path: /path/to/assets
 ```
-## [Path to hooks, defaults to `.kamal/hooks`](#path-to-hooks,-defaults-to-`.kamal/hooks`)
+## [Hooks path](#hooks-path)
+
+Path to hooks, defaults to `.kamal/hooks`
 See [Hooks](/docs/hooks) for more information
 ```yaml
 hooks_path: /user_home/kamal/hooks
@@ -98,7 +102,7 @@ Whether deployments require a destination to be specified, defaults to `false`
 ```yaml
 require_destination: true
 ```
-## [The primary role](#the-primary-role)
+## [Primary role](#primary-role)
 
 This defaults to `web`, but if you have no web role, you can change this
 ```yaml

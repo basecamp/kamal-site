@@ -4,17 +4,21 @@ title: Secrets
 
 # Secrets Changes
 
-You should move your secrets from `.env`/`.env.rb` to `.kamal/secrets.`
+Secrets have moved from `.env`/`.env.rb` to `.kamal/secrets.`
 
-If you are using destinations, secrets will be read from `.kamal/secrets-<DESTINATION>`.
+If you are using destinations, secrets will be read from `.kamal/secrets-<DESTINATION>` first or
+`.kamal/secrets` if it is not found.
 
-## Interpolating secrets
+## [Interpolating secrets](#interpolating-secrets)
 
-The `kamal envify` and `kamal env` commands have been removed - secrets will be loaded on demand for
-each command that needs them.
+The `kamal envify` and `kamal env` commands have been removed and secrets no longer have a separate lifecycle.
 
-If you were generating secrets with `kamal envify` you can instead use dotenv's command and variable
-interpolation.
+If you were generating secrets with `kamal envify` you can instead use dotenv's
+[command](https://github.com/bkeepers/dotenv?tab=readme-ov-file#command-substitution) and
+[variable](https://github.com/bkeepers/dotenv?tab=readme-ov-file#variable-substitution)
+substitution.
+
+The substitution will be performed on demand when running kamal commands that needs them.
 
 ```
 # .kamal/secrets
@@ -26,11 +30,11 @@ SECRET_FROM_COMMAND=$(op read ...)
 See [here](../configuration/environment-variables#using-kamal-secrets) for more details
 
 
-## Referring to environment variables in deploy.yml
+## [Environment variables in deploy.yml](#environment-variables-in-deployyml)
 
 In Kamal 1, `.env` was loaded into the environment, so you could refer to
 values from it via ERB in `deploy.yml`. This is no longer the case in Kamal 2.
-Values from `.kamal/secrets` are not loaded either
+Values from `.kamal/secrets` are not loaded either.
 
 Kamal 1:
 
