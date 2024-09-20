@@ -116,11 +116,11 @@
   sections:
     - title: "Overview"
       url: /docs/upgrading/overview/
-    - title: "Proxy Changes"
+    - title: "Proxy changes"
       url: /docs/upgrading/proxy-changes/
-    - title: "Network Changes"
+    - title: "Network changes"
       url: /docs/upgrading/network-changes/
-    - title: "Configuration Changes"
+    - title: "Configuration changes"
       url: /docs/upgrading/configuration-changes/
-    - title: "Secrets Changes"
+    - title: "Secrets changes"
       url: /docs/upgrading/secrets-changes/

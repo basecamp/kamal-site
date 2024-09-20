@@ -15,8 +15,7 @@ There are some significant differences between Kamal 1 and Kamal 2.
 
 ### Upgrade to Kamal 1.9.x
 
-If you are planning to do in-place upgrades of servers, you should
-first upgrade to Kamal 1.9, as it has support for downgrading.
+If you are planning to do in-place upgrades of servers, you should first upgrade to Kamal 1.9, as it has support for downgrading.
 
 If using gem directly, you can run:
 
@@ -44,7 +43,7 @@ You can test whether the new configuration is valid by running:
 $ kamal config
 ```
 
-If you have multiple destinations, you should test each ones configuration
+If you have multiple destinations, you should test each ones configuration:
 
 ```bash
 $ kamal config -d staging
@@ -80,8 +79,7 @@ The `kamal upgrade` command will:
 
 ### Avoiding downtime
 
-If you are running your application on multiple servers, and want to avoid downtime
-you can do a rolling upgrade:
+If you are running your application on multiple servers, and want to avoid downtime you can do a rolling upgrade:
 
 ```
 $ kamal upgrade --rolling [-d <DESTINATION>]
@@ -95,8 +93,7 @@ Alternatively you can run the command host by host:
 $ kamal upgrade -h 127.0.0.1[,127.0.0.2]
 ```
 
-You could additionally use the [pre-proxy-reboot](../hooks/pre-proxy-reboot.md) and [post-proxy-reboot](../hooks/post-proxy-reboot.md) hooks to manually
-remove your server from upstream load balancers, to ensure no requests are dropped during the upgrade process.
+You could additionally use the [pre-proxy-reboot](../hooks/pre-proxy-reboot.md) and [post-proxy-reboot](../hooks/post-proxy-reboot.md) hooks to manually remove your server from upstream load balancers, to ensure no requests are dropped during the upgrade process.
 
 ### Downgrading
 
@@ -106,6 +103,4 @@ If you want to reverse your changes and go back to Kamal 1.9.
 2. Confirm you are running Kamal 1.9, by running `kamal version`
 3. Run the `kamal downgrade` command. It has the same options as `kamal upgrade` and will reverse the process
 
-
 The upgrade and downgrade commands can be re-run against servers that have already been upgraded or downgraded.
-
