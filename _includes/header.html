@@ -1,22 +1,51 @@
+{% if page.version == 'v1' %}
+
+  {% assign github_tag_name = site.data.github.v1.tag_name %}
+
+{% else %}
+
+  {% assign github_tag_name = site.data.github.tag_name %}
+
+{% endif %}
+
 <header class="header">
   <nav>
     <div>
       <a class="logo" href="{{ '/' | absolute_url }}" aria-label="Kamal">Kamal</a>
-
-{% if site.data.github.tag_name %}
-
-      <a class="release" href="https://github.com/basecamp/kamal/releases" target="_blank" rel="noopener">{{ site.data.github.tag_name }}</a>
-
-{% endif %}
-
+      <a class="release" href="https://github.com/basecamp/kamal/releases" target="_blank" rel="noopener">{{ github_tag_name }}</a>
     </div>
     <ul>
 
 {% for item in site.data.nav %}
 
   {% assign item_title = item.title | smartify %}
+  {% assign item_options = item.options %}
 
-      <li{% if item.url == page.url %} class="selected"{% endif %}><a href="{{ item.url | absolute_url }}"{% if item.external %} target="_blank" rel="noopener"{% endif %} aria-label="{{ item_title }}">{{ item_title }}</a></li>
+      <li>
+        <a href="{{ item.url | absolute_url }}"{% if item.external %} target="_blank" rel="noopener"{% endif %} aria-label="{{ item_title }}">{{ item_title }}</a>
+
+  {% if item_options %}
+
+        <ol>
+
+    {% for option in item_options %}
+
+      {% assign option_title = option.title | smartify %}
+      {% assign option_url = option.url | absolute_url %}
+
+      {% assign page_url = page.url | absolute_url %}
+
+          <li{% if page_url contains option_url %} class="selected"{% endif %}>
+            <a href="{{ option_url }}"{% if option.external %} target="_blank" rel="noopener"{% endif %} aria-label="{{ option_title }}">{{ option_title }}</a>
+          </li>
+
+    {% endfor %}
+
+        </ol>
+
+  {% endif %}
+
+      </li>
 
 {% endfor %}
 
