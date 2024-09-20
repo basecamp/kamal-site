@@ -6,10 +6,9 @@ title: Lock
 
 Manage deployment locks.
 
-Commands that are unsafe to run concurrently will take a lock while they run. The lock is an atomically created directory in the `.kamal` directory
-on the primary server.
+Commands that are unsafe to run concurrently will take a lock while they run. The lock is an atomically created directory in the `.kamal` directory on the primary server.
 
-You can manage them directly - for example clearing a leftover lock from a failed command or preventing deployments during a maintanence window.
+You can manage them directly — for example clearing a leftover lock from a failed command or preventing deployments during a maintenance window.
 
 ```
 $ kamal lock

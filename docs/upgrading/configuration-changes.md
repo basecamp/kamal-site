@@ -1,5 +1,5 @@
 ---
-title: Configuration Changes
+title: Configuration changes
 ---
 
 # Configuration changes
