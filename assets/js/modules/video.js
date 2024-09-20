@@ -2,26 +2,26 @@ function ready() {
 
   document.querySelectorAll('.video').forEach(video => {
 
-    var video_element = video.querySelector('video');
-    var video_event = video_element.dataset.event;
+    var videoElement = video.querySelector('video');
+    var videoEvent = videoElement.dataset.event;
 
     video.querySelector('button').addEventListener('click', function() {
 
-      if(video_element.paused) {
+      if(videoElement.paused) {
 
-        video_element.play();
+        videoElement.play();
 
       } else {
 
-        video_element.pause();
+        videoElement.pause();
 
       }
 
     });
 
-    video_element.addEventListener('play', (e) => {
+    videoElement.addEventListener('play', (e) => {
 
-      if(window.plausible && video_event && e.target.currentTime == 0) plausible('Video Start', {props: {title: video_event}});
+      if(window.plausible && videoEvent && e.target.currentTime == 0) plausible('Video Start', {props: {title: videoEvent}});
 
       video.classList.add('video--playing');
 
@@ -29,9 +29,9 @@ function ready() {
 
     });
 
-    video_element.addEventListener('ended', (e) => {
+    videoElement.addEventListener('ended', (e) => {
 
-      if(window.plausible && video_event) plausible('Video Finish', {props: {title: video_event}});
+      if(window.plausible && videoEvent) plausible('Video Finish', {props: {title: videoEvent}});
 
       video.classList.remove('video--playing');
 
