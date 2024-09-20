@@ -1,21 +1,14 @@
 - title: "Documentation"
   url: /docs/
   options:
-  - title: "V2 Documentation"
+  - title: "Kamal V2 docs"
     url: /docs/
-  - title: "V1 Documentation"
+  - title: "Kamal V1 docs"
     url: /v1/docs/
 
 - title: "Source code"
   url: https://github.com/basecamp/kamal
   external: true
-  options:
-  - title: "V2 Source code"
-    url: https://github.com/basecamp/kamal
-    external: true
-  - title: "V1 Source code"
-    url: https://github.com/basecamp/kamal/tree/1-9-stable
-    external: true
 
 - title: "Help"
   url: https://github.com/basecamp/kamal/discussions
