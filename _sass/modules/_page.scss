@@ -219,6 +219,7 @@
 
       a {
 
+        background: var(--color-white);
         border-radius: 0.3em;
         box-shadow:
           0 0 0 1px rgba(var(--rgb-black), 0.075),
@@ -247,7 +248,7 @@
           }
 
           dd {
-            color: var(--color-black);
+            color: var(--color-grey);
             font-size: 85%;
           }
 
@@ -339,6 +340,7 @@
           &:focus,
           &:hover {
             color: var(--color-grey);
+            text-decoration: underline;
           }
 
         }
@@ -362,7 +364,7 @@
 
         &:focus,
         &:hover {
-          background: rgba(var(--rgb-base), 1);
+          background: var(--color-base);
           box-shadow:
             0 0 0 1px rgba(var(--rgb-black), 0.09),
             0 10px 30px -15px rgba(var(--rgb-black), 0.18),
