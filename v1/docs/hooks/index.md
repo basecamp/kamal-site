@@ -1,5 +1,5 @@
 ---
 search: false
 redirect_to:
-  - /docs/hooks/hooks-overview/
+  - /v1/docs/hooks/hooks-overview/
 ---

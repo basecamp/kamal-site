@@ -1,5 +1,5 @@
 ---
 search: false
 redirect_to:
-  - /docs/commands/view-all-commands/
+  - /v1/docs/commands/view-all-commands/
 ---
