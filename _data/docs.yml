@@ -82,8 +82,6 @@
       url: /docs/commands/server/
     - title: "kamal setup"
       url: /docs/commands/setup/
-    - title: "kamal traefik"
-      url: /docs/commands/traefik/
     - title: "kamal upgrade"
       url: /docs/commands/upgrade/
     - title: "kamal version"
