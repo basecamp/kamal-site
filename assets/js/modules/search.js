@@ -84,6 +84,28 @@ function ready() {
 
   }
 
+  document.querySelectorAll('.search').forEach(form => {
+
+    var searchInput = form.querySelector('input');
+
+    form.addEventListener('submit', e => {
+
+      e.preventDefault();
+
+      var searchValue = searchInput.value.trim();
+
+      if(searchValue) {
+
+        searchInput.value = searchValue;
+
+        form.submit();
+
+      }
+
+    });
+
+  });
+
 }
 
 export { ready };
