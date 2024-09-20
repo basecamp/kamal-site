@@ -5,8 +5,8 @@
   url: /v1/docs/configuration/
   index: false
   sections:
-    - title: "Configuration overview"
-      url: /v1/docs/configuration/configuration-overview/
+    - title: "Overview"
+      url: /v1/docs/configuration/overview/
     - title: "Accessories"
       url: /v1/docs/configuration/accessories/
     - title: "Booting"
@@ -91,8 +91,8 @@
   url: /v1/docs/hooks/
   index: false
   sections:
-    - title: "Hooks overview"
-      url: /v1/docs/hooks/hooks-overview/
+    - title: "Overview"
+      url: /v1/docs/hooks/overview/
     - title: "docker-setup"
       url: /v1/docs/hooks/docker-setup/
     - title: "pre-connect"

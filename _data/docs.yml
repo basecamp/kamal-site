@@ -5,8 +5,8 @@
   url: /docs/configuration/
   index: false
   sections:
-    - title: "Configuration overview"
-      url: /docs/configuration/configuration-overview/
+    - title: "Overview"
+      url: /docs/configuration/overview/
     - title: "Accessories"
       url: /docs/configuration/accessories/
     - title: "Aliases"
@@ -93,8 +93,8 @@
   url: /docs/hooks/
   index: false
   sections:
-    - title: "Hooks overview"
-      url: /docs/hooks/hooks-overview/
+    - title: "Overview"
+      url: /docs/hooks/overview/
     - title: "docker-setup"
       url: /docs/hooks/docker-setup/
     - title: "pre-connect"
