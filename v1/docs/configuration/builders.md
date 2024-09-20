@@ -86,7 +86,7 @@ If not set, then the default target is used:
   target: production
 ```
 
-## [Build Arguments](#build-arguments)
+## [Build arguments](#build-arguments)
 
 Any additional build arguments, passed to `docker build` with `--build-arg <key>=<value>`:
 
@@ -112,7 +112,7 @@ Values are read from the environment:
     - SECRET2
 ```
 
-## [Referencing Build Secrets](#referencing-build-secrets)
+## [Referencing build secrets](#referencing-build-secrets)
 
 ```shell
 # Copy Gemfiles

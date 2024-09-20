@@ -8,7 +8,7 @@ Manage your environment files.
 
 `kamal env push` uses secrets configuration in `config/deploy.yml` and env variables from `.env` to create and push env files to your hosts. Those files are passed to containers when they are booted.
 
-See also [`kamal envify`](../envify)
+See also [`kamal envify`](../envify).
 
 Example:
 
