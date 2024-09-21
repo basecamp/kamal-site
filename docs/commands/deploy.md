@@ -6,7 +6,7 @@ title: Deploy
 
 Build and deploy your app to all servers. By default it will build the currently checked out version of the app.
 
-Kamal will use the kamal-proxy to seamlessly move requests from the old version of the app to new without downtime.
+Kamal will use [kamal-proxy](https://github.com/basecamp/kamal-proxy) to seamlessly move requests from the old version of the app to new without downtime.
 
 The deployment process is:
 1. Login into the docker registry locally and on all servers

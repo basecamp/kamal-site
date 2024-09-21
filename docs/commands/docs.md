@@ -4,4 +4,4 @@ title: Help
 
 # kamal docs
 
-Outputs configuration documentation
+Outputs configuration documentation.

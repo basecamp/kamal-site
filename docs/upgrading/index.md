@@ -1,5 +1,5 @@
 ---
 search: false
 redirect_to:
-  - /docs/configuration/overview/
+  - /docs/upgrading/overview/
 ---

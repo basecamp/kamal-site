@@ -5,8 +5,8 @@
   url: /docs/configuration/
   index: false
   sections:
-    - title: "Configuration overview"
-      url: /docs/configuration/configuration-overview/
+    - title: "Overview"
+      url: /docs/configuration/overview/
     - title: "Accessories"
       url: /docs/configuration/accessories/
     - title: "Aliases"
@@ -93,8 +93,8 @@
   url: /docs/hooks/
   index: false
   sections:
-    - title: "Hooks overview"
-      url: /docs/hooks/hooks-overview/
+    - title: "Overview"
+      url: /docs/hooks/overview/
     - title: "docker-setup"
       url: /docs/hooks/docker-setup/
     - title: "pre-connect"
@@ -109,3 +109,18 @@
       url: /docs/hooks/pre-proxy-reboot/
     - title: "post-proxy-reboot"
       url: /docs/hooks/post-proxy-reboot/
+
+- title: "Upgrade Guide"
+  url: /docs/upgrading/
+  index: false
+  sections:
+    - title: "Overview"
+      url: /docs/upgrading/overview/
+    - title: "Proxy changes"
+      url: /docs/upgrading/proxy-changes/
+    - title: "Network changes"
+      url: /docs/upgrading/network-changes/
+    - title: "Configuration changes"
+      url: /docs/upgrading/configuration-changes/
+    - title: "Secrets changes"
+      url: /docs/upgrading/secrets-changes/

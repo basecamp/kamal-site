@@ -4,7 +4,7 @@ title: kamal rollback
 
 # kamal rollback
 
-You can rollback a deployment with `kamal rollback`
+You can rollback a deployment with `kamal rollback`.
 
 If you've discovered a bad deploy, you can quickly rollback to a previous image. You can see what old containers are available for rollback by running `kamal app containers -q`. It'll give you a presentation similar to `kamal app details`, but include all the old containers as well.
 

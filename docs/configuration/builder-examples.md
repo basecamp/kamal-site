@@ -22,7 +22,7 @@ Kamal will use the remote to build when deploying from an ARM64 machine, or buil
 
 ## [Using remote builder for single-arch](#using-remote-builder-for-native-multi-arch)
 
-You can also build a multi-arch image. If a remote is set, Kamal will build the deployment arch locally and the other arch remotely.
+You can also build a multi-arch image. If a remote is set, Kamal will build the arch matching your deployment server locally and the other arch remotely.
 
 So if you're developing on ARM64 (like Apple Silicon), it will build the ARM64 arch locally and the AMD64 arch remotely.
 
@@ -64,7 +64,7 @@ builder:
 
 ## [Using multistage builder cache](#using-multistage-builder-cache)
 
-Docker multistage build cache can singlehandedly speed up your builds by a lot. Currently Kamal only supports using the GHA cache or the Registry cache:
+Docker multistage build cache can speed up your builds. Currently Kamal only supports using the GHA cache or the Registry cache:
 
 ```yaml
 # Using GHA cache
@@ -111,9 +111,17 @@ For further insights into build cache optimization, check out documentation on D
 
 ## [Using build secrets for new images](#using-build-secrets-for-new-images)
 
-Some images need a secret passed in during build time, like a GITHUB_TOKEN, to give access to private gem repositories. This can be done by setting the secret in .kamal/secrets, then referencing it in the builder configuration:
+Some images need a secret passed in during build time, like a GITHUB_TOKEN, to give access to private gem repositories. This can be done by setting the secret in `.kamal/secrets`, then referencing it in the builder configuration:
+
+```bash
+# .kamal/secrets
+
+GITHUB_TOKEN=$(gh config get -h github.com oauth_token)
+```
 
 ```yaml
+# config/deploy.yml
+
 builder:
   secrets:
     - GITHUB_TOKEN

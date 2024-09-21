@@ -2,7 +2,7 @@
 title: pre-proxy-reboot
 ---
 
-# pre-proxy-reboot hook
+# Hooks: pre-proxy-reboot
 
 Run before rebooting the kamal-proxy container, when you call `kamal proxy reboot`.
 
