@@ -50,6 +50,13 @@ Defaults to false:
   ssl: true
 ```
 
+In the scenario where Let's Encrypt is not an option, or you already have your own certificates from a different Certificate Authority, you can configure kamal-proxy to load the certificate and the corresponding private key from disk:
+
+```yaml
+  ssl_certificate_path: /data/cert/foo.example.com/fullchain.pem
+  ssl_private_key_path: /data/cert/foo.example.com/privkey.pem
+```
+
 ## [Response timeout](#response-timeout)
 
 How long to wait for requests to complete before timing out, defaults to 30 seconds:
