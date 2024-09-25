@@ -11,6 +11,8 @@ There are some significant differences between Kamal 1 and Kamal 2.
 - There are some backward incompatible [configuration changes](../configuration-changes)
 - How we pass secrets to containers [has changed](../secrets-changes)
 
+If you want to continue using Traefik you can run it as an accessory, see [here](../continuing-to-use-traefik) for more details.
+
 ## [Upgrade steps](#upgrade-steps)
 
 ### Upgrade to Kamal 1.9.x

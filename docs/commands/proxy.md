@@ -10,6 +10,7 @@ Kamal uses [kamal-proxy](https://github.com/basecamp/kamal-proxy) to proxy reque
 $ kamal proxy
 Commands:
   kamal proxy boot            # Boot proxy on servers
+  kamal proxy boot_config <set|get|reset>  # Mange kamal-proxy boot configuration
   kamal proxy details         # Show details about proxy container from servers
   kamal proxy help [COMMAND]  # Describe subcommands or one specific subcommand
   kamal proxy logs            # Show log lines from proxy on servers
@@ -25,3 +26,28 @@ When you want to upgrade kamal-proxy, you can call `kamal proxy reboot`. This is
 You can use a rolling reboot with `kamal proxy reboot --rolling` to avoid restarting on all servers simultaneously.
 
 You can also use [pre-proxy-reboot](../hooks/pre-proxy-reboot) and [post-proxy-reboot](../hooks/post-proxy-reboot) hooks to remove and add the servers to upstream load balancers as you reboot them.
+
+## Boot configuration
+
+You can manage boot configuration for kamal-proxy with `kamal proxy boot_config`
+
+```
+$ kamal proxy boot_config --help
+Usage:
+  kamal proxy boot_config <set|get|clear>
+
+Options:
+      [--publish], [--no-publish], [--skip-publish]   # Publish the proxy ports on the host
+                                                      # Default: true
+      [--http-port=N]                                 # HTTP port to publish on the host
+                                                      # Default: 80
+      [--https-port=N]                                # HTTPS port to publish on the host
+                                                      # Default: 443
+      [--docker-options=option=value option2=value2]  # Docker options to pass to the proxy container
+```
+
+When set the config will be stored on the server the proxy runs on.
+
+If you are running more than one application on a single server, there is only one proxy and the boot config is shared, so you'll need to manage the it centrally.
+
+The configuration will be loaded at boot time, when calling `kamal proxy boot` or `kamal proxy reboot`.

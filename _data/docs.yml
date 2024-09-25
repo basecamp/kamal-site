@@ -124,3 +124,5 @@
       url: /docs/upgrading/configuration-changes/
     - title: "Secrets changes"
       url: /docs/upgrading/secrets-changes/
+    - title: "Continuing to use Traefik"
+      url: /docs/upgrading/continuing-to-use-traefik/
