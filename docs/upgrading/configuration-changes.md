@@ -2,7 +2,7 @@
 title: Configuration changes
 ---
 
-# Configuration changes
+# Kamal 2: Configuration changes
 
 ## [Builder](#builder)
 

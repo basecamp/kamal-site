@@ -1,8 +1,8 @@
 ---
-title: Replacing Traefik with kamal-proxy
+title: Proxy Changes
 ---
 
-# Proxy changes
+# Kamal 2: Proxy Changes
 
 In Kamal 1, we used [Traefik](https://traefik.io/traefik) to enable gapless deployments.
 

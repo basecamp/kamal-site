@@ -2,7 +2,7 @@
 title: Secrets changes
 ---
 
-# Secrets changes
+# Kamal 2: Secrets changes
 
 Secrets have moved from `.env`/`.env.rb` to `.kamal/secrets.`
 

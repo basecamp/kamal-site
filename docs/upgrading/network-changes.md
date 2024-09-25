@@ -2,7 +2,7 @@
 title: Network changes
 ---
 
-# Network changes
+# Kamal 2: Network changes
 
 `kamal-proxy` needs a stable hostname for the container that it is routing to. This is so that it can identify and route traffic to the container across restarts.
 
