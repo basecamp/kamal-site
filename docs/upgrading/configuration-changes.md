@@ -80,6 +80,8 @@ proxy:
     timeout: 2
 ```
 
+Please note the default port for healthcheck is changed from `3000` to `80`. You might need to change this port back to `3000` if you are upgrading from v1.
+
 ### Non-proxy roles
 
 For roles that do not run the proxy, you can set a custom docker healthcheck via the [options](../../configuration/roles#custom-role-configuration).
