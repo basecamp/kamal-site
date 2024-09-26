@@ -4,6 +4,8 @@ title: Running commands on servers
 
 # Running commands on servers
 
+You can use [aliases](../../configuration/aliases) for common commands.
+
 ## [Run command on all servers](#run-command-on-all-servers)
 
 ```bash

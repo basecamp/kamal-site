@@ -10,14 +10,14 @@
     flex: 1;
     flex-direction: column;
     font-size: var(--font-size-xx-small);
-    gap: 0.8em;
+    gap: var(--space-medium);
     letter-spacing: -0.01em;
 
     ul {
 
       align-items: center;
       display: flex;
-      gap: 0.3em;
+      gap: var(--space-medium);
       padding: 0;
 
       li {
@@ -30,7 +30,7 @@
           display: flex;
 
           img {
-            height: 1.5em;
+            height: 1.75em;
             width: auto;
           }
 

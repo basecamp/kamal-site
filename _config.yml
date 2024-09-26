@@ -32,6 +32,13 @@ defaults:
     values:
       layout: docs
       search: true
+  - scope:
+      path: v1/docs
+      type: pages
+    values:
+      layout: docs
+      search: true
+      version: v1
 
 redirect_from:
   json: false

@@ -10,7 +10,7 @@
   --rgb-grey-light: 105, 115, 125;
   --rgb-grey-lighter: 170, 180, 190;
   --rgb-blue: 9, 113, 213;
-  --rgb-blue-dark: 4, 117, 244;
+  --rgb-blue-light: 24, 128, 228;
 
   --color-base: rgb(var(--rgb-base));
   --color-base-dark: rgb(var(--rgb-base-dark));
@@ -22,7 +22,7 @@
   --color-grey-light: rgb(var(--rgb-grey-light));
   --color-grey-lighter: rgb(var(--rgb-grey-lighter));
   --color-blue: rgb(var(--rgb-blue));
-  --color-blue-dark: rgb(var(--rgb-blue-dark));
+  --color-blue-light: rgb(var(--rgb-blue-light));
 
   --font-family: 'Colfax', Sans-Serif;
   --font-family-mono: ui-monospace, 'SFMono-Regular', SF Mono, Menlo, Consolas, Monospace;
@@ -45,7 +45,7 @@
   --space-x-large: 3em;
   --space-xx-large: 4em;
 
-  --transition: 0.15s cubic-bezier(0.37, 1, 0.74, 1);
-  --transition-slow: 0.3s cubic-bezier(0.37, 1, 0.74, 1);
+  --transition: 0.15s ease;
+  --transition-slow: 0.3s ease;
 
 }

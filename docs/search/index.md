@@ -13,12 +13,14 @@ search: false
 {% assign pages = site.pages | where: 'search', true %}
 {% for page in pages %}
   {% if page.path contains 'docs/' %}
-    "{{ page.url | slugify }}": {
-      "title": "{{ page.title | smartify | xml_escape }}",
-      "content": {{ page.content | markdownify | strip_html | strip_newlines | jsonify }},
-      "section": "{{ page.url }}".split("/").filter(element => element !== "").slice(1).join("/"),
-      "url": "{{ page.url | xml_escape }}"
-    }{% unless forloop.last %},{% endunless %}
+    {% unless page.path contains 'v1/' %}
+      "{{ page.url | slugify }}": {
+        "title": "{{ page.title | smartify | xml_escape }}",
+        "content": {{ page.content | markdownify | strip_html | strip_newlines | jsonify }},
+        "section": "{{ page.url }}".split("/").filter(element => element !== "").slice(1).join("/"),
+        "url": "{{ page.url | xml_escape }}"
+      }{% unless forloop.last %},{% endunless %}
+    {% endunless %}
   {% endif %}
 {% endfor %}
   };

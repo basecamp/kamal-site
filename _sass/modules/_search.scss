@@ -16,7 +16,7 @@
 
     appearance: none;
     border: none;
-    color: var(--color-black);
+    color: var(--color-grey);
     flex: 1;
     line-height: 1.3em;
     padding: 0.6em 0.8em 0.5em 0.8em;
@@ -151,8 +151,8 @@
 
       &:focus,
       &:hover {
-        color: var(--color-black);
-        text-decoration-color: var(--color-black);
+        color: var(--color-grey);
+        text-decoration-color: var(--color-grey);
       }
 
     }
@@ -161,7 +161,7 @@
 
       &:focus,
       &:hover {
-        color: var(--color-black);
+        color: var(--color-grey);
       }
 
     }

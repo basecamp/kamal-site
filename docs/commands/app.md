@@ -16,7 +16,7 @@ Commands:
   kamal app boot              # Boot app on servers (or reboot app if already running)
   kamal app containers        # Show app containers on servers
   kamal app details           # Show details about app containers
-  kamal app exec [CMD]        # Execute a custom command on servers (use --help to show options)
+  kamal app exec [CMD]        # Execute a custom command on servers within the app container (use --help to show options)
   kamal app help [COMMAND]    # Describe subcommands or one specific subcommand
   kamal app images            # Show app images on servers
   kamal app logs              # Show log lines from app on servers (use --help to show options)

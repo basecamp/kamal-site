@@ -2,6 +2,6 @@
 title: pre-deploy
 ---
 
-# pre-deploy hook
+# Hooks: pre-deploy
 
 For final checks before deploying, e.g. checking CI completed.

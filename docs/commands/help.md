@@ -8,7 +8,6 @@ Displays help messages. Run `kamal help [command]` for details on a specific com
 
 ```
 $ kamal help
-Commands:
   kamal accessory           # Manage accessories (db/redis/search)
   kamal app                 # Manage application
   kamal audit               # Show audit log from servers
@@ -16,19 +15,20 @@ Commands:
   kamal config              # Show combined config (including secrets!)
   kamal deploy              # Deploy app to servers
   kamal details             # Show details about all containers
-  kamal env                 # Manage environment files
-  kamal envify              # Create .env by evaluating .env.erb (or .env.staging.erb -> .env.staging when using -d staging)
+  kamal docs [SECTION]      # Show Kamal configuration documentation
   kamal help [COMMAND]      # Describe available commands or one specific command
   kamal init                # Create config stub in config/deploy.yml and env stub in .env
   kamal lock                # Manage the deploy lock
+  kamal proxy               # Manage kamal-proxy
   kamal prune               # Prune old application images and containers
-  kamal redeploy            # Deploy app to servers without bootstrapping servers, starting Traefik, pruning, and registry login
+  kamal redeploy            # Deploy app to servers without bootstrapping servers, starting kamal-proxy, pruning, and registry login
   kamal registry            # Login and -out of the image registry
-  kamal remove              # Remove Traefik, app, accessories, and registry session from servers
+  kamal remove              # Remove kamal-proxy, app, accessories, and registry session from servers
   kamal rollback [VERSION]  # Rollback app to VERSION
+  kamal secrets             # Helpers for extracting secrets
   kamal server              # Bootstrap servers with curl and Docker
   kamal setup               # Setup all accessories, push the env, and deploy app to servers
-  kamal traefik             # Manage Traefik load balancer
+  kamal upgrade             # Upgrade from Kamal 1.x to 2.0
   kamal version             # Show Kamal version
 
 Options:

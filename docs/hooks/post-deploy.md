@@ -2,7 +2,7 @@
 title: post-deploy
 ---
 
-# post-deploy hook
+# Hooks: post-deploy
 
 Run after a deploy, redeploy or rollback. This hook is also passed a `KAMAL_RUNTIME` env variable set to the total seconds the deploy took.
 
