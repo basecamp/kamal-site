@@ -33,7 +33,7 @@ KAMAL_REGISTRY_PASSWORD=$KAMAL_REGISTRY_PASSWORD
 RAILS_MASTER_KEY=$(cat config/master.key)
 ```
 
-You can also use [secret helpers](../commands/secrets) for some common password managers.
+You can also use [secret helpers](../../commands/secrets) for some common password managers.
 
 ```
 SECRETS=$(kamal secrets fetch ...)
