@@ -72,12 +72,19 @@ The healthcheck section has been removed.
 
 For roles running with a proxy, the healthchecks are performed externally by kamal-proxy, not via internal Docker healthchecks. You can configure the them under [proxy/healthcheck](../../configuration/proxy#healthcheck).
 
-```
+```yaml
 proxy:
   healthcheck:
     path: /health
     interval: 2
     timeout: 2
+```
+
+Please note that the healthchecks will use the `app_port` setting which defaults to port 80. Previously healthchecks defaulted to port 3000. You can change this back with:
+
+```yaml
+proxy:
+  app_port: 3000
 ```
 
 ### Non-proxy roles
