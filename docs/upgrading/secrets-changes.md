@@ -6,7 +6,7 @@ title: Secrets changes
 
 Secrets have moved from `.env`/`.env.rb` to `.kamal/secrets.`
 
-If you are using destinations, secrets will be read from `.kamal/secrets-<DESTINATION>` first or `.kamal/secrets` if it is not found.
+If you are using destinations, secrets will be read from `.kamal/secrets.<DESTINATION>` first or `.kamal/secrets` if it is not found.
 
 ## [Interpolating secrets](#interpolating-secrets)
 

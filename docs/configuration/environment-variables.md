@@ -22,7 +22,7 @@ env:
 
 Kamal uses dotenv to automatically load environment variables set in the `.kamal/secrets` file.
 
-If you are using destinations, secrets will instead be read from `.kamal/secrets-<DESTINATION>` if it exists.
+If you are using destinations, secrets will instead be read from `.kamal/secrets.<DESTINATION>` if it exists.
 
 Common secrets across all destinations can be set in `.kamal/secrets-common`.
 
