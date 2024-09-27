@@ -29,7 +29,7 @@ KAMAL_REGISTRY_PASSWORD=pw
 DB_PASSWORD=secret123
 ```
 
-See [Envify](/docs/commands/envify/) for how to use generated .env files.
+See [Envify](../../commands/envify/) for how to use generated .env files.
 
 To pass the secrets you should list them under the `secret` key. When you do this the other variables need to be moved under the `clear` key.
 

@@ -6,7 +6,7 @@ title: Configuration changes
 
 ## [Builder](#builder)
 
-The [builder configuration](../configuration/builders) has been simplified.
+The [builder configuration](../../configuration/builders) has been simplified.
 
 ### Arch
 
