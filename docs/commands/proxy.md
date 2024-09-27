@@ -25,7 +25,7 @@ When you want to upgrade kamal-proxy, you can call `kamal proxy reboot`. This is
 
 You can use a rolling reboot with `kamal proxy reboot --rolling` to avoid restarting on all servers simultaneously.
 
-You can also use [pre-proxy-reboot](../hooks/pre-proxy-reboot) and [post-proxy-reboot](../hooks/post-proxy-reboot) hooks to remove and add the servers to upstream load balancers as you reboot them.
+You can also use [pre-proxy-reboot](../../hooks/pre-proxy-reboot) and [post-proxy-reboot](../../hooks/post-proxy-reboot) hooks to remove and add the servers to upstream load balancers as you reboot them.
 
 ## Boot configuration
 
