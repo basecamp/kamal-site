@@ -22,7 +22,7 @@ env:
 
 Kamal uses dotenv to automatically load environment variables set in the `.kamal/secrets` file.
 
-If you are using destinations, secrets will instead be read from `.kamal/secrets-<DESTINATION>` if it exists.
+If you are using destinations, secrets will instead be read from `.kamal/secrets.<DESTINATION>` if it exists.
 
 Common secrets across all destinations can be set in `.kamal/secrets-common`.
 
@@ -33,7 +33,7 @@ KAMAL_REGISTRY_PASSWORD=$KAMAL_REGISTRY_PASSWORD
 RAILS_MASTER_KEY=$(cat config/master.key)
 ```
 
-You can also use [secret helpers](../commands/secrets) for some common password managers.
+You can also use [secret helpers](../../commands/secrets) for some common password managers.
 
 ```
 SECRETS=$(kamal secrets fetch ...)
