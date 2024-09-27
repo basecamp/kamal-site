@@ -4,9 +4,9 @@ title: Secrets changes
 
 # Kamal 2: Secrets changes
 
-Secrets have moved from `.env`/`.env.rb` to `.kamal/secrets.`
+Secrets have moved from `.env`/`.env.rb` to `.kamal/secrets`.
 
-If you are using destinations, secrets will be read from `.kamal/secrets-<DESTINATION>` first or `.kamal/secrets` if it is not found.
+If you are using destinations, secrets will be read from `.kamal/secrets.<DESTINATION>` first or `.kamal/secrets` if it is not found.
 
 ## [Interpolating secrets](#interpolating-secrets)
 
@@ -23,7 +23,7 @@ SECRET_FROM_ENV=$SECRET_FROM_ENV
 SECRET_FROM_COMMAND=$(op read ...)
 ```
 
-See [here](../configuration/environment-variables#using-kamal-secrets) for more details
+See [here](../configuration/environment-variables#secrets) for more details
 
 ## [Environment variables in deploy.yml](#environment-variables-in-deployyml)
 
