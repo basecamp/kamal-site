@@ -80,7 +80,7 @@ proxy:
     timeout: 2
 ```
 
-Please note that the healthchecks will use the app_port setting which defaults to port 80. Previously healthchecks defaulted to port 3000. You can change this back with:
+Please note that the healthchecks will use the `app_port` setting which defaults to port 80. Previously healthchecks defaulted to port 3000. You can change this back with:
 
 ```yaml
 proxy:
