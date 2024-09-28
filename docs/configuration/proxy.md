@@ -27,6 +27,11 @@ If no hosts are set, then all requests will be forwarded, except for matching re
 ```yaml
   host: foo.example.com
 ```
+If multiple hosts are needed, these can be specified by comma separating the hosts.
+
+```yaml
+  host: foo.example.com,bar.example.com
+```
 
 ## [App port](#app-port)
 
