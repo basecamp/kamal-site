@@ -7,7 +7,7 @@ title: Installation
 If you have a Ruby environment available, you can install Kamal globally with:
 
 ```sh
-gem install kamal
+$ gem install kamal
 ```
 
 Otherwise, you can run a dockerized version via an alias (add this to your `~/.bashrc` or similar to simplify re-use).
@@ -45,8 +45,8 @@ Then edit your `.env` file to add your registry password as `KAMAL_REGISTRY_PASS
 
 Now you're ready to deploy to the servers:
 
-```
-kamal setup
+```sh
+$ kamal setup
 ```
 
 This will:

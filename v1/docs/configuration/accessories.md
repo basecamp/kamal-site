@@ -120,5 +120,6 @@ Any other volumes to mount, in addition to the files and directories. They are n
 
 ```yaml
     volumes:
-      - /path/to/mysql-logs:/var/log/mysql
+      - /path/to/mysql-logs:/var/log/mysql # Local volume
+      - "data:/container/path" # Named volume
 ```

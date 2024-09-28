@@ -118,7 +118,7 @@ Example setup (in .github/workflows/sample-ci.yml):
 
 When setup correctly you should see the cache entry/entries on the GHA workflow actions cache section.
 
-For further insights into build cache optimization, check out documentation on Docker's official website: https://docs.docker.com/build/cache/.
+For further insights into build cache optimization, check out documentation on Docker's official website: [https://docs.docker.com/build/cache/](https://docs.docker.com/build/cache/).
 
 ## [Using build secrets for new images](#using-build-secrets-for-new-images)
 
