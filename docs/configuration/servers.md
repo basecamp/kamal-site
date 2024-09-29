@@ -6,7 +6,7 @@ title: Servers
 
 Servers are split into different roles, with each role having its own configuration.
 
-For simpler deployments though where all servers are identical, you can just specify a list of servers. They will be implicitly assigned to the `web` role.
+For simpler deployments, though, where all servers are identical, you can just specify a list of servers. They will be implicitly assigned to the `web` role.
 
 ```yaml
 servers:
@@ -28,7 +28,7 @@ servers:
 
 ## [Roles](#roles)
 
-For more complex deployments (e.g. if you are running job hosts), you can specify roles, and configure each separately (see [Roles](../roles)):
+For more complex deployments (e.g., if you are running job hosts), you can specify roles and configure each separately (see [Roles](../roles)):
 
 ```yaml
 servers:

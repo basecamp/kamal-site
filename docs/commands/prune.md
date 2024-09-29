@@ -8,7 +8,7 @@ Prune old containers and images.
 
 Kamal keeps the last 5 deployed containers and the images they are using. Pruning deletes all older containers and images.
 
-```
+```bash
 $ kamal help prune
 Commands:
   kamal prune all             # Prune unused images and stopped containers

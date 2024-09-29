@@ -4,7 +4,7 @@ title: Roles
 
 # Roles
 
-Roles are used to configure different types of servers in the deployment. The most common use for this is to run a web servers and job servers.
+Roles are used to configure different types of servers in the deployment. The most common use for this is to run web servers and job servers.
 
 Kamal expects there to be a `web` role, unless you set a different `primary_role` in the root configuration.
 
@@ -18,7 +18,7 @@ servers:
 
 ## [Simple role configuration](#simple-role-configuration)
 
-This can be a list of hosts, if you don't need custom configuration for the role.
+This can be a list of hosts if you don't need custom configuration for the role.
 
 You can set tags on the hosts for custom env variables (see [Environment variables](../environment-variables)):
 
@@ -33,13 +33,13 @@ You can set tags on the hosts for custom env variables (see [Environment variabl
 
 When there are other options to set, the list of hosts goes under the `hosts` key.
 
-By default only the primary role uses a proxy.
+By default, only the primary role uses a proxy.
 
-For other roles, you can set it to `proxy: true` enable it and inherit the root proxy configuration or provide a map of options to override the root configuration.
+For other roles, you can set it to `proxy: true` to enable it and inherit the root proxy configuration or provide a map of options to override the root configuration.
 
 For the primary role, you can set `proxy: false` to disable the proxy.
 
-You can also set a custom cmd to run in the container, and overwrite other settings from the root configuration.
+You can also set a custom `cmd` to run in the container and overwrite other settings from the root configuration.
 
 ```yaml
   workers:

@@ -6,7 +6,7 @@ title: Builder examples
 
 ## [Using remote builder for single-arch](#using-remote-builder-for-single-arch)
 
-If you're developing on ARM64 (like Apple Silicon), but you want to deploy on AMD64 (x86 64-bit), by default, Kamal will setup a local buildx configuration that does this through QEMU emulation. But this can be quite slow, especially on the first build.
+If you're developing on ARM64 (like Apple Silicon), but you want to deploy on AMD64 (x86 64-bit), by default, Kamal will set up a local buildx configuration that does this through QEMU emulation. However, this can be quite slow, especially on the first build.
 
 If you want to speed up this process by using a remote AMD64 host to natively build the AMD64 part of the image, you can set a remote builder:
 
@@ -20,11 +20,11 @@ Kamal will use the remote to build when deploying from an ARM64 machine, or buil
 
 **Note:** You must have Docker running on the remote host being used as a builder. This instance should only be shared for builds using the same registry and credentials.
 
-## [Using remote builder for single-arch](#using-remote-builder-for-native-multi-arch)
+## [Using remote builder for multi-arch](#using-remote-builder-for-native-multi-arch)
 
-You can also build a multi-arch image. If a remote is set, Kamal will build the arch matching your deployment server locally and the other arch remotely.
+You can also build a multi-arch image. If a remote is set, Kamal will build the architecture matching your deployment server locally and the other architecture remotely.
 
-So if you're developing on ARM64 (like Apple Silicon), it will build the ARM64 arch locally and the AMD64 arch remotely.
+So if you're developing on ARM64 (like Apple Silicon), it will build the ARM64 architecture locally and the AMD64 architecture remotely.
 
 ```yaml
 builder:
@@ -36,7 +36,7 @@ builder:
 
 ## [Using local builder for single-arch](#using-local-builder-for-single-arch)
 
-If you always want to build locally for a single arch, Kamal will build the image using a local buildx instance.
+If you always want to build locally for a single architecture, Kamal will build the image using a local buildx instance.
 
 ```yaml
 builder:
@@ -45,7 +45,7 @@ builder:
 
 ## [Using a different Dockerfile or context when building](#using-a-different-dockerfile-or-context-when-building)
 
-If you need to pass a different Dockerfile or context to the build command (e.g. if you're using a monorepo or you have different Dockerfiles), you can do so in the builder options:
+If you need to pass a different Dockerfile or context to the build command (e.g., if you're using a monorepo or you have different Dockerfiles), you can do so in the builder options:
 
 ```yaml
 # Use a different Dockerfile
@@ -64,7 +64,7 @@ builder:
 
 ## [Using multistage builder cache](#using-multistage-builder-cache)
 
-Docker multistage build cache can speed up your builds. Currently Kamal only supports using the GHA cache or the Registry cache:
+Docker multistage build cache can speed up your builds. Currently, Kamal only supports using the GHA cache or the Registry cache:
 
 ```yaml
 # Using GHA cache
@@ -93,7 +93,7 @@ builder:
 
 ### [GHA cache configuration](#gha-cache-configuration)
 
-To make it work on the GitHub action workflow you need to setup the buildx and expose [authentication configuration for the cache](https://docs.docker.com/build/cache/backends/gha/#authentication).
+To make it work on the GitHub action workflow, you need to set up the buildx and expose [authentication configuration for the cache](https://docs.docker.com/build/cache/backends/gha/#authentication).
 
 Example setup (in .github/workflows/sample-ci.yml):
 
@@ -105,9 +105,9 @@ Example setup (in .github/workflows/sample-ci.yml):
   uses: crazy-max/ghaction-github-runtime@v3
 ```
 
-When setup correctly you should see the cache entry/entries on the GHA workflow actions cache section.
+When set up correctly, you should see the cache entry/entries on the GHA workflow actions cache section.
 
-For further insights into build cache optimization, check out documentation on Docker's official website: https://docs.docker.com/build/cache/.
+For further insights into build cache optimization, check out the documentation on Docker's official website: https://docs.docker.com/build/cache/.
 
 ## [Using build secrets for new images](#using-build-secrets-for-new-images)
 
@@ -152,7 +152,7 @@ builder:
 
 This build argument can then be used in the Dockerfile:
 
-```
+```dockerfile
 ARG RUBY_VERSION
 FROM ruby:$RUBY_VERSION-slim as base
 ```

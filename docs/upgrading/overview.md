@@ -6,12 +6,12 @@ title: "Kamal 2: Upgrade Guide"
 
 There are some significant differences between Kamal 1 and Kamal 2.
 
-- The Traefik proxy has been [replaced by kamal-proxy](../proxy-changes)
-- Kamal will run all containers in a [custom docker network](../network-changes)
-- There are some backward incompatible [configuration changes](../configuration-changes)
-- How we pass secrets to containers [has changed](../secrets-changes)
+- The Traefik proxy has been [replaced by kamal-proxy](../proxy-changes).
+- Kamal will run all containers in a [custom Docker network](../network-changes).
+- There are some backward-incompatible [configuration changes](../configuration-changes).
+- How we pass secrets to containers [has changed](../secrets-changes).
 
-If you want to continue using Traefik you can run it as an accessory, see [here](../continuing-to-use-traefik) for more details.
+If you want to continue using Traefik, you can run it as an accessory; see [here](../continuing-to-use-traefik) for more details.
 
 ## [Upgrade steps](#upgrade-steps)
 
@@ -19,9 +19,9 @@ If you want to continue using Traefik you can run it as an accessory, see [here]
 
 If you are planning to do in-place upgrades of servers, you should first upgrade to Kamal 1.9, as it has support for downgrading.
 
-If using gem directly, you can run:
+If using the gem directly, you can run:
 
-```
+```bash
 gem install kamal --version 1.9.0
 ```
 
@@ -31,7 +31,7 @@ Confirm you can deploy your application with Kamal 1.9.
 
 If using the gem directly, run:
 
-```
+```bash
 gem install kamal
 ```
 
@@ -58,7 +58,7 @@ Follow the steps [here](../secrets-changes).
 
 ## [In-place upgrades](#in-place-upgrades)
 
-**Warning: Test this in a non-production environment first, if possible**
+**Warning: Test this in a non-production environment first, if possible.**
 
 ### Upgrading
 
@@ -72,26 +72,26 @@ You'll need to do this separately for each destination.
 
 The `kamal upgrade` command will:
 
-1. Stop and remove the Traefik proxy
-2. Create a `kamal` docker network, if one doesn't exist
-3. Start a `kamal-proxy` container in the new network
-4. Reboot the current deployed version of the app container in the new network
-5. Tell `kamal-proxy` to send traffic to it
-6. Reboot all accessories in the new network
+1. Stop and remove the Traefik proxy.
+2. Create a `kamal` Docker network if one doesn't exist.
+3. Start a `kamal-proxy` container in the new network.
+4. Reboot the currently deployed version of the app container in the new network.
+5. Tell `kamal-proxy` to send traffic to it.
+6. Reboot all accessories in the new network.
 
 ### Avoiding downtime
 
-If you are running your application on multiple servers, and want to avoid downtime you can do a rolling upgrade:
+If you are running your application on multiple servers and want to avoid downtime, you can do a rolling upgrade:
 
-```
+```bash
 $ kamal upgrade --rolling [-d <DESTINATION>]
 ```
 
 This will follow the same steps as above, but host by host.
 
-Alternatively you can run the command host by host:
+Alternatively, you can run the command host by host:
 
-```
+```bash
 $ kamal upgrade -h 127.0.0.1[,127.0.0.2]
 ```
 
@@ -99,10 +99,10 @@ You could additionally use the [pre-proxy-reboot](../hooks/pre-proxy-reboot.md) 
 
 ### Downgrading
 
-If you want to reverse your changes and go back to Kamal 1.9.
+If you want to reverse your changes and go back to Kamal 1.9:
 
 1. Uninstall Kamal 2.0.
-2. Confirm you are running Kamal 1.9, by running `kamal version`
-3. Run the `kamal downgrade` command. It has the same options as `kamal upgrade` and will reverse the process
+2. Confirm you are running Kamal 1.9 by running `kamal version`.
+3. Run the `kamal downgrade` command. It has the same options as `kamal upgrade` and will reverse the process.
 
 The upgrade and downgrade commands can be re-run against servers that have already been upgraded or downgraded.

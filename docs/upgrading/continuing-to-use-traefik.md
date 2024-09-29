@@ -12,8 +12,8 @@ You can run it as a Kamal accessory, and route requests through it and then on t
 
 We'll need to change kamal-proxy's default boot config so that:
 
-1. It doesn't publish ports on the host
-1. It adds the labels Traefik needs to route requests to it
+1. It doesn't publish ports on the host.
+2. It adds the labels Traefik needs to route requests to it.
 
 Add a [pre-deploy hook](../../hooks/pre-deploy) for Traefik to pick up:
 
@@ -47,7 +47,7 @@ accessories:
 
 ## Running with Traefik
 
-When you call `kamal setup`, it will boot the Traefik accessory, call the pre-deploy hook to update kamal-proxy's boot config and then boot kamal-proxy and the app.
+When you call `kamal setup`, it will boot the Traefik accessory, call the pre-deploy hook to update kamal-proxy's boot config, and then boot kamal-proxy and the app.
 
 Requests will flow from Traefik to kamal-proxy to your app.
 
@@ -63,6 +63,6 @@ CONTAINER ID   IMAGE                                                            
 
 If you are already running kamal-proxy, you'll need to:
 
-1. Manually run the `kamal proxy boot_config set` command from the deploy hook
-2. Run `kamal proxy reboot` to pick up those boot config changes
-3. Run `kamal accessory boot traefik` to start Traefik
+1. Manually run the `kamal proxy boot_config set` command from the deploy hook.
+2. Run `kamal proxy reboot` to pick up those boot config changes.
+3. Run `kamal accessory boot traefik` to start Traefik.

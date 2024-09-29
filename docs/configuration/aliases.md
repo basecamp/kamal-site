@@ -29,7 +29,7 @@ kamal console
 
 Aliases are defined in the root config under the alias key.
 
-Each alias is named and can only contain lowercase letters, numbers, dashes and underscores:
+Each alias is named and can only contain lowercase letters, numbers, dashes, and underscores:
 
 ```yaml
 aliases:

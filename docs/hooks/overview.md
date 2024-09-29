@@ -10,20 +10,20 @@ Hooks should be stored in the **.kamal/hooks** folder. Running `kamal init` will
 
 You can change their location by setting `hooks_path` in the configuration file.
 
-If the script returns a non-zero exit code the command will be aborted.
+If the script returns a non-zero exit code, the command will be aborted.
 
-`KAMAL_*` environment variables are available to the hooks command for fine-grained audit reporting, e.g. for triggering deployment reports or firing a JSON webhook. These variables include:
+`KAMAL_*` environment variables are available to the hooks command for fine-grained audit reporting, e.g., for triggering deployment reports or firing a JSON webhook. These variables include:
 
-- `KAMAL_RECORDED_AT` — UTC timestamp in ISO 8601 format, e.g. `2023-04-14T17:07:31Z`
+- `KAMAL_RECORDED_AT` — UTC timestamp in ISO 8601 format, e.g., `2023-04-14T17:07:31Z`
 - `KAMAL_PERFORMER` — The local user performing the command (from `whoami`)
-- `KAMAL_SERVICE` — The service name, e.g. app
-- `KAMAL_SERVICE_VERSION` — An abbreviated service and version for use in messages, e.g. app@150b24f
+- `KAMAL_SERVICE` — The service name, e.g., app
+- `KAMAL_SERVICE_VERSION` — An abbreviated service and version for use in messages, e.g., app@150b24f
 - `KAMAL_VERSION` — The full version being deployed
 - `KAMAL_HOSTS` — A comma-separated list of the hosts targeted by the command
 - `KAMAL_COMMAND` — The command we are running
-- `KAMAL_SUBCOMMAND` — *Optional:* The subcommand we are running
-- `KAMAL_DESTINATION` — *Optional:* Destination, e.g. "staging"
-- `KAMAL_ROLE` — *Optional:* Role targeted, e.g. "web"
+- `KAMAL_SUBCOMMAND` — _Optional:_ The subcommand we are running
+- `KAMAL_DESTINATION` — _Optional:_ Destination, e.g., "staging"
+- `KAMAL_ROLE` — _Optional:_ Role targeted, e.g., "web"
 
 The available hooks are:
 

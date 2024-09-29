@@ -6,7 +6,7 @@ title: Installation
 
 If you have a Ruby environment available, you can install Kamal globally with:
 
-```sh
+```shell
 gem install kamal
 ```
 
@@ -14,13 +14,13 @@ Otherwise, you can run a dockerized version via an alias (add this to your `~/.b
 
 On macOS, use:
 
-```sh
+```shell
 alias kamal='docker run -it --rm -v "${PWD}:/workdir" -v "/run/host-services/ssh-auth.sock:/run/host-services/ssh-auth.sock" -e SSH_AUTH_SOCK="/run/host-services/ssh-auth.sock" -v /var/run/docker.sock:/var/run/docker.sock ghcr.io/basecamp/kamal:latest'
 ```
 
 On Linux, use:
 
-```sh
+```shell
 alias kamal='docker run -it --rm -v "${PWD}:/workdir" -v "${SSH_AUTH_SOCK}:/ssh-agent" -v /var/run/docker.sock:/var/run/docker.sock -e "SSH_AUTH_SOCK=/ssh-agent" ghcr.io/basecamp/kamal:latest'
 ```
 
@@ -45,7 +45,7 @@ Then edit your `.env` file to add your registry password as `KAMAL_REGISTRY_PASS
 
 Now you're ready to deploy to the servers:
 
-```
+```shell
 kamal setup
 ```
 

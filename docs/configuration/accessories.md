@@ -6,13 +6,13 @@ title: Accessories
 
 Accessories can be booted on a single host, a list of hosts, or on specific roles. The hosts do not need to be defined in the Kamal servers configuration.
 
-Accessories are managed separately from the main service — they are not updated when you deploy and they do not have zero-downtime deployments.
+Accessories are managed separately from the main service — they are not updated when you deploy, and they do not have zero-downtime deployments.
 
 Run `kamal accessory boot <accessory>` to boot an accessory. See `kamal accessory --help` for more information.
 
 ## [Configuring accessories](#configuring-accessories)
 
-First define the accessory in the `accessories`:
+First, define the accessory in the `accessories`:
 
 ```yaml
 accessories:
@@ -21,7 +21,7 @@ accessories:
 
 ## [Service name](#service-name)
 
-This is used in the service label and defaults to `<service>-<accessory>` where `<service>` is the main service name from the root configuration:
+This is used in the service label and defaults to `<service>-<accessory>`, where `<service>` is the main service name from the root configuration:
 
 ```yaml
     service: mysql
@@ -29,7 +29,7 @@ This is used in the service label and defaults to `<service>-<accessory>` where 
 
 ## [Image](#image)
 
-The Docker image to use, prefix with a registry if not using Docker hub:
+The Docker image to use, prefix it with a registry if not using Docker Hub:
 
 ```yaml
     image: mysql:8.0
@@ -37,7 +37,7 @@ The Docker image to use, prefix with a registry if not using Docker hub:
 
 ## [Accessory hosts](#accessory-hosts)
 
-Specify one  of `host`, `hosts` or `roles`:
+Specify one of `host`, `hosts`, or `roles`:
 
 ```yaml
     host: mysql-db1
@@ -50,7 +50,7 @@ Specify one  of `host`, `hosts` or `roles`:
 
 ## [Custom command](#custom-command)
 
-You can set a custom command to run in the container, if you do not want to use the default:
+You can set a custom command to run in the container if you do not want to use the default:
 
 ```yaml
     cmd: "bin/mysqld"
@@ -58,7 +58,7 @@ You can set a custom command to run in the container, if you do not want to use 
 
 ## [Port mappings](#port-mappings)
 
-See https://docs.docker.com/network/, especially note the warning about the security implications of exposing ports publicly.
+See https://docs.docker.com/network/, and especially note the warning about the security implications of exposing ports publicly.
 
 ```yaml
     port: "127.0.0.1:3306:3306"
@@ -92,7 +92,7 @@ See [Environment variables](../environment-variables) for more information:
 
 ## [Copying files](#copying-files)
 
-You can specify files to mount into the container. The format is `local:remote` where `local` is the path to the file on the local machine and `remote` is the path to the file in the container.
+You can specify files to mount into the container. The format is `local:remote`, where `local` is the path to the file on the local machine and `remote` is the path to the file in the container.
 
 They will be uploaded from the local repo to the host and then mounted.
 

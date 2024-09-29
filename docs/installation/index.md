@@ -10,7 +10,7 @@ If you have a Ruby environment available, you can install Kamal globally with:
 gem install kamal
 ```
 
-Otherwise, you can run a dockerized version via an alias (add this to your `~/.bashrc` or similar to simplify re-use).
+Otherwise, you can run a dockerized version via an alias (add this to your `~/.bashrc` or similar to simplify reuse).
 
 On macOS, use:
 
@@ -43,7 +43,7 @@ env:
     - RAILS_MASTER_KEY
 ```
 
-Set your `KAMAL_REGISTRY_PASSWORD` in your environment and edit your `.kamal/secrets` file to read it it (and your `RAILS_MASTER_KEY` for production with a Rails app).
+Set your `KAMAL_REGISTRY_PASSWORD` in your environment and edit your `.kamal/secrets` file to read it (and your `RAILS_MASTER_KEY` for production with a Rails app).
 
 ```yaml
 KAMAL_REGISTRY_PASSWORD=$KAMAL_REGISTRY_PASSWORD
@@ -58,15 +58,15 @@ kamal setup
 
 This will:
 
-1. Connect to the servers over SSH (using root by default, authenticated by your ssh key).
-2. Install Docker on any server that might be missing it (using get.docker.com): root access is needed via ssh for this.
+1. Connect to the servers over SSH (using root by default, authenticated by your SSH key).
+2. Install Docker on any server that might be missing it (using get.docker.com): root access is needed via SSH for this.
 3. Log into the registry both locally and remotely.
 4. Build the image using the standard Dockerfile in the root of the application.
 5. Push the image to the registry.
 6. Pull the image from the registry onto the servers.
 7. Ensure kamal-proxy is running and accepting traffic on ports 80 and 443.
 8. Start a new container with the version of the app that matches the current git version hash.
-9. Tell kamal-proxy to route traffic to the new container once it is responding with `200 OK` to `GET /up`
+9. Tell kamal-proxy to route traffic to the new container once it is responding with `200 OK` to `GET /up`.
 10. Stop the old container running the previous version of the app.
 11. Prune unused images and stopped containers to ensure servers don't fill up.
 

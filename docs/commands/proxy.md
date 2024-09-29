@@ -10,7 +10,7 @@ Kamal uses [kamal-proxy](https://github.com/basecamp/kamal-proxy) to proxy reque
 $ kamal proxy
 Commands:
   kamal proxy boot            # Boot proxy on servers
-  kamal proxy boot_config <set|get|reset>  # Mange kamal-proxy boot configuration
+  kamal proxy boot_config <set|get|reset>  # Manage kamal-proxy boot configuration
   kamal proxy details         # Show details about proxy container from servers
   kamal proxy help [COMMAND]  # Describe subcommands or one specific subcommand
   kamal proxy logs            # Show log lines from proxy on servers
@@ -29,9 +29,9 @@ You can also use [pre-proxy-reboot](../../hooks/pre-proxy-reboot) and [post-prox
 
 ## Boot configuration
 
-You can manage boot configuration for kamal-proxy with `kamal proxy boot_config`
+You can manage boot configuration for kamal-proxy with `kamal proxy boot_config`.
 
-```
+```bash
 $ kamal proxy boot_config --help
 Usage:
   kamal proxy boot_config <set|get|clear>
@@ -46,8 +46,8 @@ Options:
       [--docker-options=option=value option2=value2]  # Docker options to pass to the proxy container
 ```
 
-When set the config will be stored on the server the proxy runs on.
+When set, the config will be stored on the server the proxy runs on.
 
-If you are running more than one application on a single server, there is only one proxy and the boot config is shared, so you'll need to manage the it centrally.
+If you are running more than one application on a single server, there is only one proxy, and the boot config is shared, so you'll need to manage it centrally.
 
-The configuration will be loaded at boot time, when calling `kamal proxy boot` or `kamal proxy reboot`.
+The configuration will be loaded at boot time when calling `kamal proxy boot` or `kamal proxy reboot`.

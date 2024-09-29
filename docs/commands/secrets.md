@@ -12,13 +12,13 @@ Commands:
   kamal secrets help [COMMAND]                                              # Describe subcommands or one specific subcommand
 ```
 
-Use these to read secrets from common password managers (currently 1Password, LastPass and Bitwarden).
+Use these to read secrets from common password managers (currently 1Password, LastPass, and Bitwarden).
 
-The helpers will handle signing in, asking for passwords and efficiently fetching the secrets:
+The helpers will handle signing in, asking for passwords, and efficiently fetching the secrets:
 
 These are designed to be used with [command substitution](https://github.com/bkeepers/dotenv?tab=readme-ov-file#command-substitution) in `.kamal/secrets`
 
-```
+```shell
 # .kamal/secrets
 
 SECRETS=$(kamal secrets fetch ...)
@@ -29,9 +29,9 @@ DB_PASSWORD=$(kamal secrets extract DB_PASSWORD $SECRETS)
 
 ## 1Password
 
-Use the adaptor `1password`:
+Use the adapter `1password`:
 
-```
+```bash
 # Fetch from item `MyItem` in the vault `MyVault`
 kamal secrets fetch --adapter 1password --account myaccount --from MyVault/MyItem REGISTRY_PASSWORD DB_PASSWORD
 
@@ -42,7 +42,7 @@ kamal secrets fetch --adapter 1password --account myaccount --from MyVault/MyIte
 kamal secrets fetch --adapter 1password --account myaccount --from MyVault MyItem/REGISTRY_PASSWORD MyItem2/DB_PASSWORD
 
 # Fetch from multiple vaults
-kamal secrets fetch --adapter 1password --account myaccount  MyVault/MyItem/REGISTRY_PASSWORD MyVault2/MyItem2/DB_PASSWORD
+kamal secrets fetch --adapter 1password --account myaccount MyVault/MyItem/REGISTRY_PASSWORD MyVault2/MyItem2/DB_PASSWORD
 
 # All three of these will extract the secret
 kamal secrets extract REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
@@ -52,9 +52,9 @@ kamal secrets extract MyVault/MyItem/REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
 
 ## LastPass
 
-Use the adaptor `lastpass`:
+Use the adapter `lastpass`:
 
-```
+```bash
 # Fetch passwords
 kamal secrets fetch --adapter lastpass --account email@example.com REGISTRY_PASSWORD DB_PASSWORD
 
@@ -71,9 +71,9 @@ kamal secrets extract MyFolder/REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
 
 ## Bitwarden
 
-Use the adaptor `bitwarden`:
+Use the adapter `bitwarden`:
 
-```
+```bash
 # Fetch passwords
 kamal secrets fetch --adapter bitwarden --account email@example.com REGISTRY_PASSWORD DB_PASSWORD
 

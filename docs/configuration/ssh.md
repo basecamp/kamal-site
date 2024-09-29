@@ -4,9 +4,9 @@ title: SSH configuration
 
 # SSH configuration
 
-Kamal uses SSH to connect run commands on your hosts. By default it will attempt to connect to the root user on port 22.
+Kamal uses SSH to connect and run commands on your hosts. By default, it will attempt to connect to the root user on port 22.
 
-If you are using non-root user, you may need to bootstrap your servers manually, before using them with Kamal. On Ubuntu, you’d do:
+If you are using a non-root user, you may need to bootstrap your servers manually before using them with Kamal. On Ubuntu, you’d do:
 
 ```shell
 sudo apt update
@@ -49,7 +49,7 @@ Specified in the form <host> or <user>@<host>:
 
 ## [Proxy command](#proxy-command)
 
-A custom proxy command, required for older versions of SSH:
+A custom proxy command is required for older versions of SSH:
 
 ```yaml
   proxy_command: "ssh -W %h:%p user@proxy"
@@ -57,7 +57,7 @@ A custom proxy command, required for older versions of SSH:
 
 ## [Log level](#log-level)
 
-Defaults to `fatal`. Set this to debug if you are having SSH connection issues.
+Defaults to `fatal`. Set this to `debug` if you are having SSH connection issues.
 
 ```yaml
   log_level: debug
@@ -65,7 +65,7 @@ Defaults to `fatal`. Set this to debug if you are having SSH connection issues.
 
 ## [Keys only](#keys-only)
 
-Set to true to use only private keys from keys and key_data parameters, even if ssh-agent offers more identities. This option is intended for situations where ssh-agent offers many different identities or you have a need to overwrite all identities and force a single one.
+Set to `true` to use only private keys from the `keys` and `key_data` parameters, even if ssh-agent offers more identities. This option is intended for situations where ssh-agent offers many different identities or you need to overwrite all identities and force a single one.
 
 ```yaml
   keys_only: false
@@ -73,7 +73,7 @@ Set to true to use only private keys from keys and key_data parameters, even if 
 
 ## [Keys](#keys)
 
-An array of file names of private keys to use for publickey and hostbased authentication:
+An array of file names of private keys to use for public key and host-based authentication:
 
 ```yaml
   keys: [ "~/.ssh/id.pem" ]

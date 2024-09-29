@@ -10,7 +10,7 @@ To deploy new versions of the app, see `kamal deploy` and `kamal rollback`.
 
 You can use `kamal app exec` to [run commands on servers](../running-commands-on-servers).
 
-```
+```bash
 $ kamal app
 Commands:
   kamal app boot              # Boot app on servers (or reboot app if already running)

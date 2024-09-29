@@ -4,9 +4,9 @@ title: Registry
 
 # Registry
 
-The default registry is Docker Hub, but you can change it using registry/server:
+The default registry is Docker Hub, but you can change it using `registry/server`:
 
-A reference to secret (in this case DOCKER_REGISTRY_TOKEN) will look up the secret in the local environment.
+A reference to a secret (in this case, `DOCKER_REGISTRY_TOKEN`) will look up the secret in the local environment.
 
 ```yaml
 registry:
@@ -19,7 +19,7 @@ registry:
 
 ## [Using AWS ECR as the container registry](#using-aws-ecr-as-the-container-registry)
 
-You will need to have the aws CLI installed locally for this to work. AWS ECR’s access token is only valid for 12hrs. In order to not have to manually regenerate the token every time, you can use ERB in the deploy.yml file to shell out to the aws cli command, and obtain the token:
+You will need to have the AWS CLI installed locally for this to work. AWS ECR’s access token is only valid for 12 hours. In order to avoid having to manually regenerate the token every time, you can use ERB in the `deploy.yml` file to shell out to the AWS CLI command and obtain the token:
 
 ```yaml
 registry:
@@ -30,17 +30,17 @@ registry:
 
 ## [Using GCP Artifact Registry as the container registry](#using-gcp-artifact-registry-as-the-container-registry)
 
-To sign into Artifact Registry, you would need to [create a service account](https://cloud.google.com/iam/docs/service-accounts-create#creating) and [set up roles and permissions](https://cloud.google.com/artifact-registry/docs/access-control#permissions). Normally, assigning a roles/artifactregistry.writer role should be sufficient.
+To sign into Artifact Registry, you need to [create a service account](https://cloud.google.com/iam/docs/service-accounts-create#creating) and [set up roles and permissions](https://cloud.google.com/artifact-registry/docs/access-control#permissions). Normally, assigning the `roles/artifactregistry.writer` role should be sufficient.
 
 Once the service account is ready, you need to generate and download a JSON key and base64 encode it:
 
 ```shell
-base64 -i /path/to/key.json | tr -d "\\n")
+base64 -i /path/to/key.json | tr -d "\\n"
 ```
 
-You'll then need to set the KAMAL_REGISTRY_PASSWORD secret to that value.
+You'll then need to set the `KAMAL_REGISTRY_PASSWORD` secret to that value.
 
-Use the env variable as password along with _json_key_base64 as username. Here’s the final configuration:
+Use the environment variable as the password along with `_json_key_base64` as the username. Here’s the final configuration:
 
 ```yaml
 registry:
