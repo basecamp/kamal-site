@@ -9,7 +9,8 @@ Build and deploy your app to all servers. By default it will build the currently
 Kamal will use the Traefik proxy to seamlessly move requests from the old version of the app to new without downtime.
 
 The deployment process is:
-1. Login into the docker registry locally and on all servers
+
+1. Login into the Docker registry locally and on all servers
 2. Build the app image, push it to the registry and pull it onto the servers
 3. Ensure Traefik is booted
 4. Check the image boots on one server

@@ -31,7 +31,7 @@ Enables multiarch builds, defaults to `true`:
 
 The build configuration for local builds, only used if multiarch is enabled (the default).
 
-If there is no remote configuration, by default we build for amd64 and arm64. If you only want to build for one architecture, you can specify it here. The docker socket is optional and uses the default docker host socket when not specified:
+If there is no remote configuration, by default we build for amd64 and arm64. If you only want to build for one architecture, you can specify it here. The Docker socket is optional and uses the default Docker host socket when not specified:
 
 ```yaml
   local:
