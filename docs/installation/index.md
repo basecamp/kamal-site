@@ -65,7 +65,7 @@ This will:
 5. Push the image to the registry.
 6. Pull the image from the registry onto the servers.
 7. Ensure kamal-proxy is running and accepting traffic on ports 80 and 443.
-8. Start a new container with the version of the app that matches the current git version hash.
+8. Start a new container with the version of the app that matches the current Git version hash.
 9. Tell kamal-proxy to route traffic to the new container once it is responding with `200 OK` to `GET /up`.
 10. Stop the old container running the previous version of the app.
 11. Prune unused images and stopped containers to ensure servers don't fill up.

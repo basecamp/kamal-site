@@ -60,7 +60,7 @@ This will:
 7. Push the ENV variables from .env onto the servers.
 8. Ensure Traefik is running and accepting traffic on port 80.
 9. Ensure your app responds with `200 OK` to `GET /up` (you must have curl installed inside your app image!).
-10. Start a new container with the version of the app that matches the current git version hash.
+10. Start a new container with the version of the app that matches the current Git version hash.
 11. Stop the old container running the previous version of the app.
 12. Prune unused images and stopped containers to ensure servers don't fill up.
 

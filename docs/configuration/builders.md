@@ -60,7 +60,7 @@ The image is only used for registry cache and is not compatible with the Docker 
 
 ## [Build context](#build-context)
 
-If this is not set, then a local git clone of the repo is used. This ensures a clean build with no uncommitted changes.
+If this is not set, then a local Git clone of the repo is used. This ensures a clean build with no uncommitted changes.
 
 To use the local checkout instead, you can set the context to `.`, or a path to another directory.
 

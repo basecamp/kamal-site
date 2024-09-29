@@ -62,7 +62,7 @@ The type must be either 'gha' or 'registry'. The image is only used for registry
 
 ## [Build context](#build-context)
 
-If this is not set, then a local git clone of the repo is used. This ensures a clean build with no uncommitted changes.
+If this is not set, then a local Git clone of the repo is used. This ensures a clean build with no uncommitted changes.
 
 To use the local checkout instead you can set the context to `.`, or a path to another directory:
 

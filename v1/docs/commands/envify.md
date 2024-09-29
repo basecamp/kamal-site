@@ -23,7 +23,7 @@ MYSQL_ROOT_PASSWORD=<%= `op read "op://Vault/My App/MYSQL_ROOT_PASSWORD" -n --se
 <% else raise ArgumentError, "Session token missing" end %>
 ```
 
-This template can safely be checked into git. Then everyone deploying the app can run `kamal envify` when they setup the app for the first time or passwords change to get the correct `.env` file.
+This template can safely be checked into Git. Then everyone deploying the app can run `kamal envify` when they setup the app for the first time or passwords change to get the correct `.env` file.
 
 If you need separate env variables for different destinations, you can set them with `.env.destination.erb` for the template, which will generate `.env.staging` when run with `kamal envify -d staging`.
 
