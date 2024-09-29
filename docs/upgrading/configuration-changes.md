@@ -60,6 +60,13 @@ The `traefik` configuration is no longer valid. Instead you can configure kamal-
 
 If you were using custom Traefik labels or args, see the proxy configuration whether you can convert them.
 
+Be aware that by default kamal-proxy forwards traffic to the container port 80, this is because we assume your container is running Thruster, and it listens on the port 80. If you are running a different service or port, you can configure the app_port setting:
+
+```yaml
+proxy:
+  app_port: 3000
+```
+
 kamal-proxy supports common requirements such as buffering, max request/response sizes, and forwarding headers, but it is not the full breadth of everything Traefik can do.
 
 If you don't see something you need, you can raise an issue and we'll look into it, but we don't promise to support everything — you might need to run Traefik or another proxy elsewhere in your stack to achieve what you want.
