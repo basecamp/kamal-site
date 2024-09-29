@@ -6,7 +6,7 @@ title: SSHKit
 
 [SSHKit](https://github.com/capistrano/sshkit) is the SSH toolkit used by Kamal.
 
-The default settings should be sufficient for most use cases, but when connecting to a large number of hosts you may need to adjust.
+The default settings should be sufficient for most use cases, but when connecting to a large number of hosts, you may need to adjust.
 
 ## [SSHKit options](#sshkit-options)
 
@@ -18,7 +18,7 @@ sshkit:
 
 ## [Max concurrent starts](#max-concurrent-starts)
 
-Creating SSH connections concurrently can be an issue when deploying to many servers. By default Kamal will limit concurrent connection starts to 30 at a time.
+Creating SSH connections concurrently can be an issue when deploying to many servers. By default, Kamal will limit concurrent connection starts to 30 at a time.
 
 ```yaml
   max_concurrent_starts: 10
@@ -26,7 +26,7 @@ Creating SSH connections concurrently can be an issue when deploying to many ser
 
 ## [Pool idle timeout](#pool-idle-timeout)
 
-Kamal sets a long idle timeout of 900 seconds on connections to try to avoid re-connection storms after an idle period, like building an image or waiting for CI.
+Kamal sets a long idle timeout of 900 seconds on connections to try to avoid re-connection storms after an idle period, such as building an image or waiting for CI.
 
 ```yaml
   pool_idle_timeout: 300

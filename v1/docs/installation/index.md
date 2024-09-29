@@ -6,7 +6,7 @@ title: Installation
 
 If you have a Ruby environment available, you can install Kamal globally with:
 
-```sh
+```shell
 gem install kamal
 ```
 
@@ -14,13 +14,13 @@ Otherwise, you can run a dockerized version via an alias (add this to your `~/.b
 
 On macOS, use:
 
-```sh
+```shell
 alias kamal='docker run -it --rm -v "${PWD}:/workdir" -v "/run/host-services/ssh-auth.sock:/run/host-services/ssh-auth.sock" -e SSH_AUTH_SOCK="/run/host-services/ssh-auth.sock" -v /var/run/docker.sock:/var/run/docker.sock ghcr.io/basecamp/kamal:latest'
 ```
 
 On Linux, use:
 
-```sh
+```shell
 alias kamal='docker run -it --rm -v "${PWD}:/workdir" -v "${SSH_AUTH_SOCK}:/ssh-agent" -v /var/run/docker.sock:/var/run/docker.sock -e "SSH_AUTH_SOCK=/ssh-agent" ghcr.io/basecamp/kamal:latest'
 ```
 
@@ -45,7 +45,7 @@ Then edit your `.env` file to add your registry password as `KAMAL_REGISTRY_PASS
 
 Now you're ready to deploy to the servers:
 
-```
+```shell
 kamal setup
 ```
 
@@ -60,7 +60,7 @@ This will:
 7. Push the ENV variables from .env onto the servers.
 8. Ensure Traefik is running and accepting traffic on port 80.
 9. Ensure your app responds with `200 OK` to `GET /up` (you must have curl installed inside your app image!).
-10. Start a new container with the version of the app that matches the current git version hash.
+10. Start a new container with the version of the app that matches the current Git version hash.
 11. Stop the old container running the previous version of the app.
 12. Prune unused images and stopped containers to ensure servers don't fill up.
 

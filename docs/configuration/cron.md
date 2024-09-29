@@ -15,4 +15,4 @@ servers:
       bash -c "cat config/crontab | crontab - && cron -f"
 ```
 
-This assumes the Cron settings are stored in `config/crontab`.
+This assumes that the Cron settings are stored in `config/crontab`.

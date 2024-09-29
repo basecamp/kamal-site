@@ -4,7 +4,7 @@ title: Audit
 
 # kamal audit
 
-Show the latest commands to have been run on each server.
+Show the latest commands that have been run on each server.
 
 ```bash
 $ kamal audit

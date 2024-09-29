@@ -6,7 +6,7 @@ title: Help
 
 Displays help messages. Run `kamal help [command]` for details on a specific command.
 
-```
+```bash
 $ kamal help
   kamal accessory           # Manage accessories (db/redis/search)
   kamal app                 # Manage application

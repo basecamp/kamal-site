@@ -10,7 +10,7 @@ Environment variables can be set directory in the Kamal configuration or for loa
 
 Environment variables can be set directly in the configuration file.
 
-These are passed to the docker run command when deploying.
+These are passed to the Docker run command when deploying.
 
 ```yaml
 env:

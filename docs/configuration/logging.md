@@ -10,7 +10,7 @@ Set these to control the Docker logging driver and options.
 
 These go under the logging key in the configuration file.
 
-This can be specified in the root level or for a specific role.
+This can be specified at the root level or for a specific role.
 
 ```yaml
 logging:

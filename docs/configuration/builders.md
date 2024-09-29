@@ -29,7 +29,7 @@ Allowed values are `amd64` and `arm64`:
 
 ## [Remote](#remote)
 
-The connection string for a remote builder. If supplied Kamal will use this for builds that do not match the local architecture of the deployment host.
+The connection string for a remote builder. If supplied, Kamal will use this for builds that do not match the local architecture of the deployment host.
 
 ```yaml
   remote: ssh://docker@docker-builder
@@ -49,7 +49,7 @@ Defaults to true:
 
 The type must be either 'gha' or 'registry'.
 
-The image is only used for registry cache. Not compatible with the docker driver:
+The image is only used for registry cache and is not compatible with the Docker driver:
 
 ```yaml
   cache:
@@ -60,9 +60,9 @@ The image is only used for registry cache. Not compatible with the docker driver
 
 ## [Build context](#build-context)
 
-If this is not set, then a local git clone of the repo is used. This ensures a clean build with no uncommitted changes.
+If this is not set, then a local Git clone of the repo is used. This ensures a clean build with no uncommitted changes.
 
-To use the local checkout instead you can set the context to `.`, or a path to another directory.
+To use the local checkout instead, you can set the context to `.`, or a path to another directory.
 
 ```yaml
   context: .
@@ -117,7 +117,7 @@ Values are read from .kamal/secrets.
 COPY Gemfile Gemfile.lock ./
 
 # Install dependencies, including private repositories via access token
-# Then remove bundle cache with exposed GITHUB_TOKEN)
+# Then remove bundle cache with exposed GITHUB_TOKEN
 RUN --mount=type=secret,id=GITHUB_TOKEN \
   BUNDLE_GITHUB__COM=x-access-token:$(cat /run/secrets/GITHUB_TOKEN) \
   bundle install && \

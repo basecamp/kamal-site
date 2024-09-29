@@ -10,11 +10,11 @@ If you are using destinations, secrets will be read from `.kamal/secrets.<DESTIN
 
 ## [Interpolating secrets](#interpolating-secrets)
 
-The `kamal envify` and `kamal env` commands have been removed and secrets no longer have a separate lifecycle.
+The `kamal envify` and `kamal env` commands have been removed, and secrets no longer have a separate lifecycle.
 
-If you were generating secrets with `kamal envify` you can instead use dotenv's [command](https://github.com/bkeepers/dotenv?tab=readme-ov-file#command-substitution) and [variable](https://github.com/bkeepers/dotenv?tab=readme-ov-file#variable-substitution) substitution.
+If you were generating secrets with `kamal envify`, you can instead use dotenv's [command](https://github.com/bkeepers/dotenv?tab=readme-ov-file#command-substitution) and [variable](https://github.com/bkeepers/dotenv?tab=readme-ov-file#variable-substitution) substitution.
 
-The substitution will be performed on demand when running kamal commands that needs them.
+The substitution will be performed on demand when running Kamal commands that need them.
 
 ```
 # .kamal/secrets
@@ -23,7 +23,7 @@ SECRET_FROM_ENV=$SECRET_FROM_ENV
 SECRET_FROM_COMMAND=$(op read ...)
 ```
 
-See [here](../../configuration/environment-variables#using-kamal-secrets) for more details
+See [here](../../configuration/environment-variables#using-kamal-secrets) for more details.
 
 ## [Environment variables in deploy.yml](#environment-variables-in-deployyml)
 

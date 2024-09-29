@@ -8,8 +8,8 @@ title: Network changes
 
 Using the default `bridge` network, application containers are assigned IP addresses, but they are not stable across restarts.
 
-So instead we will create and use a custom network called `kamal`.
+So instead, we will create and use a custom network called `kamal`.
 
-If you have custom requirements for your network, you can create the `kamal` network yourself before deploying with Kamal, or use a docker-setup hook to configure the network when running `kamal setup`.
+If you have custom requirements for your network, you can create the `kamal` network yourself before deploying with Kamal, or use a `docker-setup` hook to configure the network when running `kamal setup`.
 
 Accessories will also run from within the `kamal` network.

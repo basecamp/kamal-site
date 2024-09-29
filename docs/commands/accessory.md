@@ -10,7 +10,7 @@ They are not proxied, so rebooting will have a small period of downtime. You can
 
 Run `kamal accessory` to view and manage your accessories.
 
-```
+```bash
 $ kamal accessory
 Commands:
   kamal accessory boot [NAME]        # Boot new accessory service on host (use NAME=all to boot all accessories)
@@ -29,7 +29,7 @@ To update an accessory, update the image in your config and run `kamal accessory
 
 Example:
 
-```
+```bash
 $ kamal accessory boot all
 Running the pre-connect hook...
   INFO [bd04b11b] Running /usr/bin/env .kamal/hooks/pre-connect on localhost
