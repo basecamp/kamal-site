@@ -97,6 +97,7 @@ Your application image can also be built using [cloud native buildpacks](https:/
 
 ``` yaml
   pack:
+    arch: amd64
     builder: heroku/builder:24
     buildpacks:
       - heroku/ruby
