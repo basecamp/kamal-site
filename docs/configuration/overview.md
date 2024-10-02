@@ -1,4 +1,6 @@
 ---
+# This file has been generated from the Kamal source, do not edit directly.
+# Find the source of this file at lib/kamal/configuration/docs/configuration.yml in the Kamal repository.
 title: Kamal Configuration
 ---
 
@@ -8,17 +10,21 @@ Configuration is read from the `config/deploy.yml`.
 
 ## [Destinations](#destinations)
 
-When running commands, you can specify a destination with the `-d` flag, e.g., `kamal deploy -d staging`.
+When running commands, you can specify a destination with the `-d` flag,
+e.g., `kamal deploy -d staging`.
 
-In this case, the configuration will also be read from `config/deploy.staging.yml` and merged with the base configuration.
+In this case, the configuration will also be read from `config/deploy.staging.yml`
+and merged with the base configuration.
 
 ## [Extensions](#extensions)
 
 Kamal will not accept unrecognized keys in the configuration file.
 
-However, you might want to declare a configuration block using YAML anchors and aliases to avoid repetition.
+However, you might want to declare a configuration block using YAML anchors
+and aliases to avoid repetition.
 
-You can prefix a configuration section with `x-` to indicate that it is an extension. Kamal will ignore the extension and not raise an error.
+You can prefix a configuration section with `x-` to indicate that it is an
+extension. Kamal will ignore the extension and not raise an error.
 
 ## [The service name](#the-service-name)
 
@@ -85,9 +91,14 @@ env:
 
 Used for asset bridging across deployments, default to `nil`.
 
-If there are changes to CSS or JS files, we may get requests for the old versions on the new container, and vice versa.
+If there are changes to CSS or JS files, we may get requests
+for the old versions on the new container, and vice versa.
 
-To avoid 404s, we can specify an asset path. Kamal will replace that path in the container with a mapped volume containing both sets of files. This requires that file names change when the contents change (e.g., by including a hash of the contents in the name).
+To avoid 404s, we can specify an asset path.
+Kamal will replace that path in the container with a mapped
+volume containing both sets of files.
+This requires that file names change when the contents change
+(e.g., by including a hash of the contents in the name).
 
 To configure this, set the path to the assets:
 
@@ -97,7 +108,8 @@ asset_path: /path/to/assets
 
 ## [Hooks path](#hooks-path)
 
-Path to hooks, defaults to `.kamal/hooks`. See [Hooks](/docs/hooks) for more information:
+Path to hooks, defaults to `.kamal/hooks`.
+See [Hooks](/docs/hooks) for more information:
 
 ```yaml
 hooks_path: /user_home/kamal/hooks
@@ -167,6 +179,14 @@ How long to wait for a container to drain, default 30:
 
 ```yaml
 drain_timeout: 10
+```
+
+## [Run directory](#run-directory)
+
+Directory to store kamal runtime files in on the host, default `.kamal`:
+
+```yaml
+run_directory: /etc/kamal
 ```
 
 ## [SSH options](#ssh-options)

@@ -1,10 +1,13 @@
 ---
+# This file has been generated from the Kamal source, do not edit directly.
+# Find the source of this file at lib/kamal/configuration/docs/env.yml in the Kamal repository.
 title: Environment variables
 ---
 
 # Environment variables
 
-Environment variables can be set directly in the Kamal configuration or read from `.kamal/secrets`.
+Environment variables can be set directly in the Kamal configuration or
+read from `.kamal/secrets`.
 
 ## [Reading environment variables from the configuration](#reading-environment-variables-from-the-configuration)
 
@@ -22,11 +25,13 @@ env:
 
 Kamal uses dotenv to automatically load environment variables set in the `.kamal/secrets` file.
 
-If you are using destinations, secrets will instead be read from `.kamal/secrets.<DESTINATION>` if it exists.
+If you are using destinations, secrets will instead be read from `.kamal/secrets.<DESTINATION>` if
+it exists.
 
 Common secrets across all destinations can be set in `.kamal/secrets-common`.
 
-This file can be used to set variables like `KAMAL_REGISTRY_PASSWORD` or database passwords. You can use variable or command substitution in the secrets file.
+This file can be used to set variables like `KAMAL_REGISTRY_PASSWORD` or database passwords.
+You can use variable or command substitution in the secrets file.
 
 ```shell
 KAMAL_REGISTRY_PASSWORD=$KAMAL_REGISTRY_PASSWORD
@@ -44,9 +49,11 @@ DB_PASSWORD=$(kamal secrets extract DB_PASSWORD $SECRETS)
 
 If you store secrets directly in `.kamal/secrets`, ensure that it is not checked into version control.
 
-To pass the secrets, you should list them under the `secret` key. When you do this, the other variables need to be moved under the `clear` key.
+To pass the secrets, you should list them under the `secret` key. When you do this, the
+other variables need to be moved under the `clear` key.
 
-Unlike clear values, secrets are not passed directly to the container but are stored in an env file on the host:
+Unlike clear values, secrets are not passed directly to the container
+but are stored in an env file on the host:
 
 ```yaml
 env:
@@ -58,7 +65,8 @@ env:
 
 ## [Tags](#tags)
 
-Tags are used to add extra env variables to specific hosts. See [Servers](../servers) for how to tag hosts.
+Tags are used to add extra env variables to specific hosts.
+See [Servers](../servers) for how to tag hosts.
 
 Tags are only allowed in the top-level env configuration (i.e., not under a role-specific env).
 

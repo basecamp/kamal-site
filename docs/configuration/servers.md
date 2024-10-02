@@ -1,4 +1,6 @@
 ---
+# This file has been generated from the Kamal source, do not edit directly.
+# Find the source of this file at lib/kamal/configuration/docs/servers.yml in the Kamal repository.
 title: Servers
 ---
 
@@ -6,7 +8,8 @@ title: Servers
 
 Servers are split into different roles, with each role having its own configuration.
 
-For simpler deployments, though, where all servers are identical, you can just specify a list of servers. They will be implicitly assigned to the `web` role.
+For simpler deployments, though, where all servers are identical, you can just specify a list of servers.
+They will be implicitly assigned to the `web` role.
 
 ```yaml
 servers:

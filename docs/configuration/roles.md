@@ -1,12 +1,16 @@
 ---
+# This file has been generated from the Kamal source, do not edit directly.
+# Find the source of this file at lib/kamal/configuration/docs/role.yml in the Kamal repository.
 title: Roles
 ---
 
 # Roles
 
-Roles are used to configure different types of servers in the deployment. The most common use for this is to run web servers and job servers.
+Roles are used to configure different types of servers in the deployment.
+The most common use for this is to run web servers and job servers.
 
-Kamal expects there to be a `web` role, unless you set a different `primary_role` in the root configuration.
+Kamal expects there to be a `web` role, unless you set a different `primary_role`
+in the root configuration.
 
 ## [Role configuration](#role-configuration)
 
@@ -35,11 +39,13 @@ When there are other options to set, the list of hosts goes under the `hosts` ke
 
 By default, only the primary role uses a proxy.
 
-For other roles, you can set it to `proxy: true` to enable it and inherit the root proxy configuration or provide a map of options to override the root configuration.
+For other roles, you can set it to `proxy: true` to enable it and inherit the root proxy
+configuration or provide a map of options to override the root configuration.
 
 For the primary role, you can set `proxy: false` to disable the proxy.
 
-You can also set a custom `cmd` to run in the container and overwrite other settings from the root configuration.
+You can also set a custom `cmd` to run in the container and overwrite other settings
+from the root configuration.
 
 ```yaml
   workers:
