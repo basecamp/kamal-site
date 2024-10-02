@@ -1,4 +1,6 @@
 ---
+# This file has been generated from the Kamal source, do not edit directly.
+# Find the source of this file at lib/kamal/configuration/docs/builder.yml in the Kamal repository.
 title: Builder
 ---
 
@@ -29,7 +31,8 @@ Allowed values are `amd64` and `arm64`:
 
 ## [Remote](#remote)
 
-The connection string for a remote builder. If supplied, Kamal will use this for builds that do not match the local architecture of the deployment host.
+The connection string for a remote builder. If supplied, Kamal will use this
+for builds that do not match the local architecture of the deployment host.
 
 ```yaml
   remote: ssh://docker@docker-builder
@@ -37,7 +40,8 @@ The connection string for a remote builder. If supplied, Kamal will use this for
 
 ## [Local](#local)
 
-If set to false, Kamal will always use the remote builder even when building the local architecture.
+If set to false, Kamal will always use the remote builder even when building
+the local architecture.
 
 Defaults to true:
 
@@ -60,7 +64,8 @@ The image is only used for registry cache and is not compatible with the Docker 
 
 ## [Build context](#build-context)
 
-If this is not set, then a local Git clone of the repo is used. This ensures a clean build with no uncommitted changes.
+If this is not set, then a local Git clone of the repo is used.
+This ensures a clean build with no uncommitted changes.
 
 To use the local checkout instead, you can set the context to `.`, or a path to another directory.
 
@@ -102,7 +107,7 @@ FROM ruby:$RUBY_VERSION-slim as base
 
 ## [Build secrets](#build-secrets)
 
-Values are read from .kamal/secrets.
+Values are read from `.kamal/secrets`:
 
 ```yaml
   secrets:

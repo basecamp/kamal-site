@@ -1,4 +1,6 @@
 ---
+# This file has been generated from the Kamal source, do not edit directly.
+# Find the source of this file at lib/kamal/configuration/docs/alias.yml in the Kamal repository.
 title: Aliases
 ---
 
