@@ -37,3 +37,25 @@ Options:
   -H, [--skip-hooks]                                 # Don't run hooks
                                                      # Default: false
 ```
+
+# FAQ
+
+## Skip building an deploy some public docker image
+
+See [this Github issue](https://github.com/basecamp/kamal/issues/497)
+
+In order to use pre build images, you have to add a `service` label with the name of kamal service.
+
+For example, a `deploy.yml` file starting with:
+
+```yaml
+# Name of your application. Used to uniquely configure containers.
+service: name-of-service
+
+# Name of the container image.
+image: some/image
+
+...
+```
+
+will require the label `label=service=name-of-service`.
