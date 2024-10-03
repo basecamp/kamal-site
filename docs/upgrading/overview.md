@@ -56,6 +56,10 @@ $ kamal config -d beta
 
 Follow the steps [here](../secrets-changes).
 
+### Verify container port
+
+The default app port was [changed from 3000 to 80](https://kamal-deploy.org/docs/upgrading/configuration-changes/#traefik-to-proxy), you'll need to either specify your `app_port` or update your `EXPOSE` port if not using port 80.
+
 ## [In-place upgrades](#in-place-upgrades)
 
 **Warning: Test this in a non-production environment first, if possible.**
