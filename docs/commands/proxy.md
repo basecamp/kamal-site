@@ -19,6 +19,8 @@ Commands:
   kamal proxy restart         # Restart existing proxy container on servers
   kamal proxy start           # Start existing proxy container on servers
   kamal proxy stop            # Stop existing proxy container on servers
+  kamal proxy pause_app       # Pause existing app on servers
+  kamal proxy resume_app      # Resume existing app on servers
 ```
 
 When you want to upgrade kamal-proxy, you can call `kamal proxy reboot`. This is going to cause a small outage on each server and will prompt for confirmation.
@@ -26,6 +28,8 @@ When you want to upgrade kamal-proxy, you can call `kamal proxy reboot`. This is
 You can use a rolling reboot with `kamal proxy reboot --rolling` to avoid restarting on all servers simultaneously.
 
 You can also use [pre-proxy-reboot](../../hooks/pre-proxy-reboot) and [post-proxy-reboot](../../hooks/post-proxy-reboot) hooks to remove and add the servers to upstream load balancers as you reboot them.
+
+You can pause your app doing `kamal proxy pause_app` (eg: if you want to enter in maintenance mode), you can then resume the proxy of the app with `kamal proxy resume_app`
 
 ## Boot configuration
 
