@@ -2,6 +2,7 @@
 {% assign description = page.description | default: site.description | markdownify | strip_html | strip_newlines %}
 {% assign image = page.image | default: site.image | absolute_url %}
 {% assign url = page.url | absolute_url %}
+{% assign cache = site.time | date: '%s' %}
 
   <head>
 
@@ -27,13 +28,13 @@
     <meta name="twitter:card" content="summary_large_image">
 
     <link rel="canonical" href="{{ url }}">
-    <link rel="icon" href="{{ '/assets/images/favicon.svg' }}">
-    <link rel="mask-icon" href="{{ '/assets/images/mask-icon.svg' }}" color="#0A82F5">
-    <link rel="apple-touch-icon" href="{{ '/assets/images/apple-touch-icon.png' }}">
-    <link rel="stylesheet" href="{{ '/assets/css/style-v2.css' }}">
+    <link rel="icon" href="/assets/images/favicon.svg">
+    <link rel="mask-icon" href="/assets/images/mask-icon.svg" color="#0A82F5">
+    <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+    <link rel="stylesheet" href="/assets/css/style.css?{{ cache }}">
 
-    <script src="{{ '/assets/js/lunr.min.js' }}"></script>
-    <script src="{{ '/assets/js/script.js' }}" type="module"></script>
+    <script src="/assets/js/lunr.min.js"></script>
+    <script src="/assets/js/script.js?{{ cache }}" type="module"></script>
 
     <script defer data-domain="kamal-deploy.org" src="https://plausible.io/js/script.js"></script>
 
