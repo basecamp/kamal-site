@@ -29,6 +29,8 @@ DB_PASSWORD=$(kamal secrets extract DB_PASSWORD $SECRETS)
 
 ## 1Password
 
+First, install and configure [the 1Password CLI](https://developer.1password.com/docs/cli/get-started/).
+
 Use the adapter `1password`:
 
 ```bash
