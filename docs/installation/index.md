@@ -10,7 +10,7 @@ If you have a Ruby environment available, you can install Kamal globally with:
 gem install kamal
 ```
 
-Otherwise, you can run a dockerized version via an alias (add this to your `~/.bashrc` or similar to simplify reuse).
+Otherwise, you can run a dockerized version via an alias (add this to your `~/.bashrc`, `~/.zshrc` or similar to simplify reuse).
 
 On macOS, use:
 
