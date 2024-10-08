@@ -10,6 +10,7 @@ Commands:
   kamal secrets extract                                                     # Extract a single secret from the results of a fetch call
   kamal secrets fetch [SECRETS...] --account=ACCOUNT -a, --adapter=ADAPTER  # Fetch secrets from a vault
   kamal secrets help [COMMAND]                                              # Describe subcommands or one specific subcommand
+  kamal secrets print                                                       # Print the secrets (for debugging)
 ```
 
 Use these to read secrets from common password managers (currently 1Password, LastPass, and Bitwarden).
