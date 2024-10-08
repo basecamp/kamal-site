@@ -8,7 +8,7 @@ Displays help messages. Run `kamal help [command]` for details on a specific com
 
 ```bash
 $ kamal help
-  kamal accessory           # Manage accessories (db/redis/search)
+  kamal accessory           # Manage accessories (db/valkey/search)
   kamal app                 # Manage application
   kamal audit               # Show audit log from servers
   kamal build               # Build application image

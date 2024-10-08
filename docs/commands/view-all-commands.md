@@ -9,7 +9,7 @@ You can view all of the commands by running `kamal --help`.
 ```bash
 $ kamal --help
 Commands:
-  kamal accessory           # Manage accessories (db/redis/search)
+  kamal accessory           # Manage accessories (db/valkey/search)
   kamal app                 # Manage application
   kamal audit               # Show audit log from servers
   kamal build               # Build application image
