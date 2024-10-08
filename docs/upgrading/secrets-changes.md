@@ -14,6 +14,8 @@ The `kamal envify` and `kamal env` commands have been removed, and secrets no lo
 
 If you were generating secrets with `kamal envify`, you can instead use dotenv's [command](https://github.com/bkeepers/dotenv?tab=readme-ov-file#command-substitution) and [variable](https://github.com/bkeepers/dotenv?tab=readme-ov-file#variable-substitution) substitution.
 
+To load the secrets from `.env`/`.env.rb`, now you must prefix every Kamal command with `dotenv`, ex: `dotenv kamal deploy`.
+
 The substitution will be performed on demand when running Kamal commands that need them.
 
 ```
