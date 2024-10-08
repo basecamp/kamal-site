@@ -64,7 +64,7 @@ You can set a custom command to run in the container if you do not want to use t
 
 ## [Port mappings](#port-mappings)
 
-See https://docs.docker.com/network/, and especially note the warning about the security
+See [https://docs.docker.com/network/](https://docs.docker.com/network/), and especially note the warning about the security
 implications of exposing ports publicly.
 
 ```yaml
