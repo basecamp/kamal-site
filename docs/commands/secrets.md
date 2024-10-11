@@ -55,6 +55,8 @@ kamal secrets extract MyVault/MyItem/REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
 
 ## LastPass
 
+First, install and configure [the LastPass CLI](https://github.com/lastpass/lastpass-cli).
+
 Use the adapter `lastpass`:
 
 ```bash
@@ -73,6 +75,8 @@ kamal secrets extract MyFolder/REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
 ```
 
 ## Bitwarden
+
+First, install and configure [the Bitwarden CLI](https://bitwarden.com/help/cli/).
 
 Use the adapter `bitwarden`:
 
