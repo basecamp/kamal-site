@@ -90,3 +90,22 @@ kamal secrets fetch --adapter bitwarden --account email@example.com MyItem/REGIS
 kamal secrets extract REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
 kamal secrets extract MyItem/REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
 ```
+
+## Doppler
+
+First, install and configure [the Doppler CLI](https://docs.doppler.com/docs/install-cli).
+
+Use the adapter `doppler`:
+
+```bash
+# Fetch passwords
+kamal secrets fetch --adapter doppler --account my-project/prd REGISTRY_PASSWORD DB_PASSWORD
+
+# Extract the secret
+kamal secrets extract REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
+kamal secrets extract DB_PASSWORD <SECRETS-FETCH-OUTPUT>
+```
+
+Doppler organizes secrets in "projects" (like `my-awesome-project`) and "configs" (like `prod`, `stg`, etc), use the pattern `project/config` when defining the `--account` option.
+
+Doppler does not have a concept of folders, so using `--from` option or `FOLDER/SECRET` pattern is not supported and will raise an error.
