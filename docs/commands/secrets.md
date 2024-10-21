@@ -94,3 +94,26 @@ kamal secrets fetch --adapter bitwarden --account email@example.com MyItem/REGIS
 kamal secrets extract REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
 kamal secrets extract MyItem/REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
 ```
+
+## AWS Secrets Manager
+
+First, install and configure [the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
+
+Use the adapter `aws_secretsmanager`:
+
+```bash
+# Fetch passwords
+kamal secrets fetch --adapter aws_secretsmanager --account default REGISTRY_PASSWORD DB_PASSWORD
+
+# Fetch passwords from an item
+kamal secrets fetch --adapter bitwarden --account default --from myapp/ REGISTRY_PASSWORD DB_PASSWORD
+
+# Fetch passwords from multiple items
+kamal secrets fetch --adapter bitwarden --account default myapp/REGISTRY_PASSWORD myapp/DB_PASSWORD
+
+# Extract the secret
+kamal secrets extract REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
+kamal secrets extract MyItem/REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
+```
+
+**Note:** The `--account` option should be set to your AWS CLI profile name, which is typically `default`. Ensure that your AWS CLI is configured with the necessary permissions to access AWS Secrets Manager.
