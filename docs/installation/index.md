@@ -24,6 +24,14 @@ On Linux, use:
 alias kamal='docker run -it --rm -v "${PWD}:/workdir" -v "${SSH_AUTH_SOCK}:/ssh-agent" -v /var/run/docker.sock:/var/run/docker.sock -e "SSH_AUTH_SOCK=/ssh-agent" ghcr.io/basecamp/kamal:latest'
 ```
 
+> [!IMPORTANT]
+> Podman is not fully supported, as it lacks `buildx inspect`, however you can still use a remote builder, to which kamal will install docker proper with `buildx`.
+
+For podman, use:
+```sh
+alias kamal='docker run -it --rm -v "${PWD}:/workdir" -v "${SSH_AUTH_SOCK}:/ssh-agent" -v /var/run/podman/podman.sock:/var/run/docker.sock -e "SSH_AUTH_SOCK=/ssh-agent" ghcr.io/basecamp/kamal:latest'
+```
+
 Then, inside your app directory, run `kamal init`. Now edit the new file `config/deploy.yml`. It could look as simple as this:
 
 ```yaml
