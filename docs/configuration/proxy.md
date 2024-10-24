@@ -67,6 +67,8 @@ Defaults to `false`:
   ssl: true
 ```
 
+If you set `ssl` to `true`, `kamal-proxy` will stop forwarding headers to your app, unless you explicitly set `forward_headers: true`, as documented in [Forward Headers](#forward-headers).
+
 ## [Response timeout](#response-timeout)
 
 How long to wait for requests to complete before timing out, defaults to 30 seconds:
