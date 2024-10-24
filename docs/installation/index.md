@@ -25,7 +25,7 @@ alias kamal='docker run -it --rm -v "${PWD}:/workdir" -v "${SSH_AUTH_SOCK}:/ssh-
 ```
 
 > [!IMPORTANT]
-> Podman is not fully supported, as it lacks `buildx inspect`, however you can still use a remote builder, to which kamal will install docker proper with `buildx`.
+> Podman is not fully supported, as it lacks `buildx inspect`, however you can still use a [remote builder](/docs/configuration/builders/#remote), to which kamal will install docker proper with `buildx`.
 
 For podman, use:
 ```sh
