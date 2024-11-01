@@ -132,3 +132,13 @@ They are not created or copied before mounting:
     volumes:
       - /path/to/mysql-logs:/var/log/mysql
 ```
+
+## [Network](#network)
+
+The network the accessory will be attached to.
+
+Defaults to kamal:
+
+```yaml
+    network: custom
+```

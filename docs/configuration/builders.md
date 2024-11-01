@@ -144,3 +144,12 @@ The build driver to use, defaults to `docker-container`:
 ```yaml
   driver: docker
 ```
+
+## [Provenance](#provenance)
+
+It is used to configure provenance attestations for the build result.
+The value can also be a boolean to enable or disable provenance attestations.
+
+```yaml
+  provenance: mode=max
+```
