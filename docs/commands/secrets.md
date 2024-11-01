@@ -53,6 +53,57 @@ kamal secrets extract MyItem/REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
 kamal secrets extract MyVault/MyItem/REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
 ```
 
+## Doppler
+
+First, install and configure [the Doppler CLI](https://docs.doppler.com/docs/install-cli).
+
+Make sure you've either logged in with `doppler login` or have a `DOPPLER_TOKEN` in the environment.
+
+Use the adapter `doppler`:
+
+```bash
+# Fetch passwords (must have a `DOPPLER_TOKEN` service token set to use this without --from)
+kamal secrets fetch --adapter doppler --account ignored REGISTRY_PASSWORD DB_PASSWORD
+
+# Fetch all secrets (must have a `DOPPLER_TOKEN` service token set to use this without --from)
+kamal secrets fetch --adapter doppler --account ignored all
+
+# Fetch passwords from a specific project/config
+kamal secrets fetch --adapter doppler --account ignored --from example-project/dev REGISTRY_PASSWORD DB_PASSWORD
+
+# Fetch all secrets from a specific project/config
+kamal secrets fetch --adapter doppler --account ignored --from example-project/dev all
+
+# Extract a secret
+kamal secrets extract REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
+```
+
+Typical usage inside your `.kamal/secrets` would look something like this:
+
+```bash
+SECRETS=$(kamal secrets fetch --adapter doppler --account ignored --from example-project/dev all)
+KAMAL_REGISTRY_PASSWORD=$(kamal secrets extract REGISTRY_PASSWORD $SECRETS)
+KAMAL_REGISTRY_USER=$(kamal secrets extract REGISTRY_USER $SECRETS)
+HOST=$(kamal secrets extract HOST $SECRETS)
+PORT=$(kamal secrets extract PORT $SECRETS)
+```
+
+After setting that up, you would access those secrets in your `deploy.yml` like this:
+
+```yaml
+# Credentials for your image host.
+registry:
+  username:
+    - KAMAL_REGISTRY_USER
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+env:
+  secret:
+    - HOST
+    - PORT
+```
+
 ## LastPass
 
 First, install and configure [the LastPass CLI](https://github.com/lastpass/lastpass-cli).
