@@ -99,17 +99,17 @@ kamal secrets extract MyItem/REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
 
 First, install and configure [the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
 
-Use the adapter `aws_secretsmanager`:
+Use the adapter `aws_secrets_manager`:
 
 ```bash
 # Fetch passwords
-kamal secrets fetch --adapter aws_secretsmanager --account default REGISTRY_PASSWORD DB_PASSWORD
+kamal secrets fetch --adapter aws_secrets_manager --account default REGISTRY_PASSWORD DB_PASSWORD
 
 # Fetch passwords from an item
-kamal secrets fetch --adapter bitwarden --account default --from myapp/ REGISTRY_PASSWORD DB_PASSWORD
+kamal secrets fetch --adapter aws_secrets_manager --account default --from myapp/ REGISTRY_PASSWORD DB_PASSWORD
 
 # Fetch passwords from multiple items
-kamal secrets fetch --adapter bitwarden --account default myapp/REGISTRY_PASSWORD myapp/DB_PASSWORD
+kamal secrets fetch --adapter aws_secrets_manager --account default myapp/REGISTRY_PASSWORD myapp/DB_PASSWORD
 
 # Extract the secret
 kamal secrets extract REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
