@@ -32,7 +32,7 @@ These use cases were unsupported and error-prone, though, and we wanted to provi
 
 ### Hard to understand errors
 
-Traefik has its own domain language — Routers, Services, Endpoints. So if it failed, the errors would be in that language and disconnected from what Kamal was doing. This made it tricky to diagnose failures.
+Traefik has its own domain language — Routers, Services, EntryPoints. So if it failed, the errors would be in that language and disconnected from what Kamal was doing. This made it tricky to diagnose failures.
 
 ### Other options
 
