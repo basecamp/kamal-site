@@ -99,13 +99,16 @@ Use the adapter `doppler`:
 
 ```bash
 # Fetch passwords
-kamal secrets fetch --adapter doppler --account my-project/prd REGISTRY_PASSWORD DB_PASSWORD
+kamal secrets fetch --adapter doppler --from my-project/prd REGISTRY_PASSWORD DB_PASSWORD
+
+# The project/config pattern is also supported in this way
+kamal secrets fetch --adapter doppler my-project/prd/REGISTRY_PASSWORD my-project/prd/DB_PASSWORD
 
 # Extract the secret
 kamal secrets extract REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
 kamal secrets extract DB_PASSWORD <SECRETS-FETCH-OUTPUT>
 ```
 
-Doppler organizes secrets in "projects" (like `my-awesome-project`) and "configs" (like `prod`, `stg`, etc), use the pattern `project/config` when defining the `--account` option.
+Doppler organizes secrets in "projects" (like `my-awesome-project`) and "configs" (like `prod`, `stg`, etc), use the pattern `project/config` when defining the `--from` option.
 
-Doppler does not have a concept of folders, so using `--from` option or `FOLDER/SECRET` pattern is not supported and will raise an error.
+The doppler adapter does not use the `--account` option, if given it will be ignored.
