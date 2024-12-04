@@ -11,6 +11,8 @@
       url: /docs/configuration/accessories/
     - title: "Aliases"
       url: /docs/configuration/aliases/
+    - title: "Anchors"
+      url: /docs/configuration/anchors/
     - title: "Booting"
       url: /docs/configuration/booting/
     - title: "Builders"
