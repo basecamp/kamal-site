@@ -16,6 +16,7 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - README.md
+  - bin
 
 sass:
   style: compressed
