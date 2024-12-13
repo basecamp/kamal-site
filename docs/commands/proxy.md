@@ -45,6 +45,7 @@ Options:
                                                       # Default: 443
       [--log-max-size=LOG_MAX_SIZE]                   # Max size of proxy logs
                                                       # Default: 10m
+      [--docker-options=option=value option2=value2]  # Docker options to pass to the proxy container
 ```
 
 When set, the config will be stored on the server the proxy runs on.

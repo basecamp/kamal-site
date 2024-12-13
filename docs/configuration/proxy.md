@@ -61,10 +61,26 @@ This requires that we are deploying to one server and the host option is set.
 The host value must point to the server we are deploying to, and port 443 must be
 open for the Let's Encrypt challenge to succeed.
 
+If you set `ssl` to `true`, `kamal-proxy` will stop forwarding headers to your app,
+unless you explicitly set `forward_headers: true`
+
 Defaults to `false`:
 
 ```yaml
   ssl: true
+```
+
+## [Forward headers](#forward-headers)
+
+Whether to forward the `X-Forwarded-For` and `X-Forwarded-Proto` headers.
+
+If you are behind a trusted proxy, you can set this to `true` to forward the headers.
+
+By default, kamal-proxy will not forward the headers if the `ssl` option is set to `true`, and
+will forward them if it is set to `false`.
+
+```yaml
+  forward_headers: true
 ```
 
 ## [Response timeout](#response-timeout)
@@ -122,17 +138,4 @@ By default, `Cache-Control`, `Last-Modified`, and `User-Agent` request headers a
     response_headers:
       - X-Request-ID
       - X-Request-Start
-```
-
-## [Forward headers](#forward-headers)
-
-Whether to forward the `X-Forwarded-For` and `X-Forwarded-Proto` headers.
-
-If you are behind a trusted proxy, you can set this to `true` to forward the headers.
-
-By default, kamal-proxy will not forward the headers if the `ssl` option is set to `true`, and
-will forward them if it is set to `false`.
-
-```yaml
-  forward_headers: true
 ```

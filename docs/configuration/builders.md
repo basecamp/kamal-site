@@ -153,3 +153,12 @@ The value can also be a boolean to enable or disable provenance attestations.
 ```yaml
   provenance: mode=max
 ```
+
+## [SBOM (Software Bill of Materials)](#sbom-(software-bill-of-materials))
+
+It is used to configure SBOM generation for the build result.
+The value can also be a boolean to enable or disable SBOM generation.
+
+```yaml
+  sbom: true
+```
