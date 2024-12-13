@@ -43,6 +43,8 @@ Options:
                                                       # Default: 80
       [--https-port=N]                                # HTTPS port to publish on the host
                                                       # Default: 443
+      [--log-max-size=LOG_MAX_SIZE]                   # Max size of proxy logs
+                                                      # Default: 10m
       [--docker-options=option=value option2=value2]  # Docker options to pass to the proxy container
 ```
 

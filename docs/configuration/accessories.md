@@ -64,8 +64,8 @@ You can set a custom command to run in the container if you do not want to use t
 
 ## [Port mappings](#port-mappings)
 
-See https://docs.docker.com/network/, and especially note the warning about the security
-implications of exposing ports publicly.
+See [https://docs.docker.com/network/](https://docs.docker.com/network/), and
+especially note the warning about the security implications of exposing ports publicly.
 
 ```yaml
     port: "127.0.0.1:3306:3306"
@@ -131,4 +131,23 @@ They are not created or copied before mounting:
 ```yaml
     volumes:
       - /path/to/mysql-logs:/var/log/mysql
+```
+
+## [Network](#network)
+
+The network the accessory will be attached to.
+
+Defaults to kamal:
+
+```yaml
+    network: custom
+```
+
+## [Proxy](#proxy)
+
+You can run your accessory behind the Kamal proxy. See [Proxy](../proxy) for more information.
+
+```yaml
+    proxy:
+      ...
 ```

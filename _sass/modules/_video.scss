@@ -38,7 +38,7 @@
         transition: opacity var(--transition-slow);
       }
 
-      span {
+      &:after {
         backdrop-filter: blur(5px);
         -webkit-backdrop-filter: blur(5px);
         background: url('../images/play.svg') center center / 0.65em auto no-repeat rgba(var(--rgb-white), 0.8);
@@ -47,8 +47,10 @@
           0 20px 30px -20px rgba(var(--rgb-black), 0.3),
           0 10px 20px -10px rgba(var(--rgb-black), 0.5)
         ;
+        content: '';
         display: inline-flex;
         height: 2.2em;
+        pointer-events: none;
         position: relative;
         transition:
           background-color var(--transition-slow),
@@ -81,7 +83,7 @@
           opacity: 0.9;
         }
 
-        span {
+        &:after {
           background-color: var(--color-white);
           transform: scale(1.04);
         }

@@ -140,6 +140,13 @@ video {
   width: 100%;
 }
 
+video::cue {
+  font-family: var(--font-family);
+  font-size: var(--font-size-small);
+  font-weight: 500;
+  line-height: 1;
+}
+
 code {
   background: var(--color-base-dark);
   border-radius: 0.15em;
