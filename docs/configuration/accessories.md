@@ -145,6 +145,7 @@ Defaults to kamal:
 
 ## [Proxy](#proxy)
 
+You can run your accessory behind the Kamal proxy. See [Proxy](../proxy) for more information.
 
 ```yaml
     proxy:
