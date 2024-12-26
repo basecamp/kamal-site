@@ -11,8 +11,7 @@ A reference to secret (in this case DOCKER_REGISTRY_TOKEN) will look up the secr
 ```yaml
 registry:
   server: registry.digitalocean.com
-  username:
-    - DOCKER_REGISTRY_TOKEN
+  username: registry-user-name
   password:
     - DOCKER_REGISTRY_TOKEN
 ```
