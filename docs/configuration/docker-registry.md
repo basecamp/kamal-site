@@ -12,14 +12,14 @@ By default, Docker Hub creates public repositories. To avoid making your images 
 set up a private repository before deploying, or change the default repository privacy
 settings to private in your [Docker Hub settings](https://hub.docker.com/repository-settings/default-privacy).
 
-A reference to a secret (in this case, `DOCKER_REGISTRY_TOKEN`) will look up the secret
+A reference to a secret (in this case, `DOCKER_REGISTRY_USERNAME` and `DOCKER_REGISTRY_TOKEN`) will look up the secret
 in the local environment:
 
 ```yaml
 registry:
   server: registry.digitalocean.com
   username:
-    - DOCKER_REGISTRY_TOKEN
+    - DOCKER_REGISTRY_USERNAME
   password:
     - DOCKER_REGISTRY_TOKEN
 ```
