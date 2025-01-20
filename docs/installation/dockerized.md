@@ -20,15 +20,17 @@ alias kamal='docker run -it --rm -v "${PWD}:/workdir" -v "${SSH_AUTH_SOCK}:/ssh-
 
 When using the docker alias, Kamal commands are run in the container and not directly on your host, so there are limitations.
 
+To avoid these limitations, [install Docker with Ruby](..).
+
 ### Agent forwarding only
 
 The alias forwards the SSH agent into the container and avoids injecting your private keys. If you need the full SSH config in the container you can add `-v "$HOME/.ssh:/root/.ssh"`, but note that this exposes your private keys into the container.
 
-### Secrets
+### Secrets
 
 You won't be able to use the Kamal secret adapters as the secret manager command line tools will not be available in the container.
 
-### Environment variables
+### Environment variables
 
 Environment variables from your host will not be available, unless you alter the command to inject them by adding something like `-e KAMAL_REGISTRY_PASSWORD=$KAMAL_REGISTRY_PASSWORD`.
 
