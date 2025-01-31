@@ -20,7 +20,7 @@ alias kamal='docker run -it --rm -v "${PWD}:/workdir" -v "${SSH_AUTH_SOCK}:/ssh-
 
 When using the docker alias, Kamal commands are run in the container and not directly on your host, so there are limitations.
 
-To avoid these limitations, [install Docker with Ruby](..).
+To avoid these limitations, [install Kamal with Ruby](..).
 
 ### Agent forwarding only
 
