@@ -35,10 +35,31 @@ where `<service>` is the main service name from the root configuration:
 
 ## [Image](#image)
 
-The Docker image to use, prefix it with a registry if not using Docker Hub:
+The Docker image to use.
+Prefix it with its server when using root level registry different from Docker Hub.
+Define registry directly or via anchors when it differs from root level registry.
 
 ```yaml
     image: mysql:8.0
+```
+
+## [Registry](#registry)
+
+By default accessories use Docker Hub registry.
+You can specify different registry per accessory with this option.
+Don't prefix image with this registry server.
+Use anchors if you need to set the same specific registry for several accessories.
+
+```yml
+registry:
+  <<: *specific-registry
+```
+
+See [Docker Registry](../docker-registry) for more information:
+
+```yaml
+    registry:
+      ...
 ```
 
 ## [Accessory hosts](#accessory-hosts)
@@ -64,8 +85,8 @@ You can set a custom command to run in the container if you do not want to use t
 
 ## [Port mappings](#port-mappings)
 
-See [https://docs.docker.com/network/](https://docs.docker.com/network/), and especially note the warning about the security
-implications of exposing ports publicly.
+See [https://docs.docker.com/network/](https://docs.docker.com/network/), and
+especially note the warning about the security implications of exposing ports publicly.
 
 ```yaml
     port: "127.0.0.1:3306:3306"
@@ -141,4 +162,13 @@ Defaults to kamal:
 
 ```yaml
     network: custom
+```
+
+## [Proxy](#proxy)
+
+You can run your accessory behind the Kamal proxy. See [Proxy](../proxy) for more information
+
+```yaml
+    proxy:
+      ...
 ```

@@ -108,3 +108,48 @@ kamal secrets fetch --adapter bitwarden-sm
 # Extract the secret
 kamal secrets extract REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
 ```
+
+## AWS Secrets Manager
+
+First, install and configure [the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
+
+Use the adapter `aws_secrets_manager`:
+
+```bash
+# Fetch passwords
+kamal secrets fetch --adapter aws_secrets_manager --account default REGISTRY_PASSWORD DB_PASSWORD
+
+# Fetch passwords from an item
+kamal secrets fetch --adapter aws_secrets_manager --account default --from myapp/ REGISTRY_PASSWORD DB_PASSWORD
+
+# Fetch passwords from multiple items
+kamal secrets fetch --adapter aws_secrets_manager --account default myapp/REGISTRY_PASSWORD myapp/DB_PASSWORD
+
+# Extract the secret
+kamal secrets extract REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
+kamal secrets extract MyItem/REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
+```
+
+**Note:** The `--account` option should be set to your AWS CLI profile name, which is typically `default`. Ensure that your AWS CLI is configured with the necessary permissions to access AWS Secrets Manager.
+
+## Doppler
+
+First, install and configure [the Doppler CLI](https://docs.doppler.com/docs/install-cli).
+
+Use the adapter `doppler`:
+
+```bash
+# Fetch passwords
+kamal secrets fetch --adapter doppler --from my-project/prd REGISTRY_PASSWORD DB_PASSWORD
+
+# The project/config pattern is also supported in this way
+kamal secrets fetch --adapter doppler my-project/prd/REGISTRY_PASSWORD my-project/prd/DB_PASSWORD
+
+# Extract the secret
+kamal secrets extract REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
+kamal secrets extract DB_PASSWORD <SECRETS-FETCH-OUTPUT>
+```
+
+Doppler organizes secrets in "projects" (like `my-awesome-project`) and "configs" (like `prod`, `stg`, etc), use the pattern `project/config` when defining the `--from` option.
+
+The doppler adapter does not use the `--account` option, if given it will be ignored.

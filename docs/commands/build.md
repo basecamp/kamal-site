@@ -13,12 +13,16 @@ $ kamal build
 Commands:
   kamal build create          # Create a build setup
   kamal build deliver         # Build app and push app image to registry then pull image on servers
+  kamal build dev             # Build using the working directory, tag it as dirty, and push to local image store.
   kamal build details         # Show build setup
   kamal build help [COMMAND]  # Describe subcommands or one specific subcommand
   kamal build pull            # Pull app image from registry onto servers
   kamal build push            # Build and push app image to registry
   kamal build remove          # Remove build setup
 ```
+
+The `build dev` and `build push` commands also support an `--output` option which specifies where the image should be pushed. `build push` defaults to "registry", and `build dev` defaults to "docker" which is the local image store. Any exported type supported by the `docker buildx build` option [`--output`](https://docs.docker.com/reference/cli/docker/buildx/build/#output) is allowed.
+
 
 Examples:
 

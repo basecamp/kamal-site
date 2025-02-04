@@ -18,7 +18,7 @@ By defining an alias, like this:
 
 ```yaml
 aliases:
-  console: app exec --reuse -i "bin/rails console"
+  console: app exec -i --reuse "bin/rails console"
 ```
 
 You can now open the console with:
