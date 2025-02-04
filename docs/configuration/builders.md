@@ -145,6 +145,13 @@ The build driver to use, defaults to `docker-container`:
   driver: docker
 ```
 
+
+If you want to use Docker Build Cloud (https://www.docker.com/products/build-cloud/), you can set the driver to:
+
+```yaml
+  driver: cloud org-name/builder-name
+```
+
 ## [Provenance](#provenance)
 
 It is used to configure provenance attestations for the build result.
