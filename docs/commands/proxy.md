@@ -32,11 +32,13 @@ You can also use [pre-proxy-reboot](../../hooks/pre-proxy-reboot) and [post-prox
 You can manage boot configuration for kamal-proxy with `kamal proxy boot_config`.
 
 ```bash
-$ kamal proxy boot_config --help
-Usage:
-  kamal proxy boot_config <set|get|clear>
+$ kamal proxy boot_config
+Commands:
+  kamal proxy boot_config set [OPTIONS]
+  kamal proxy boot_config get
+  kamal proxy boot_config reset
 
-Options:
+Options for 'set':
       [--publish], [--no-publish], [--skip-publish]   # Publish the proxy ports on the host
                                                       # Default: true
       [--http-port=N]                                 # HTTP port to publish on the host
