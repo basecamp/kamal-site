@@ -95,6 +95,20 @@ kamal secrets extract REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
 kamal secrets extract MyItem/REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
 ```
 
+## Bitwarden Secrets Manager
+
+First, install and configure [the Bitwarden Secrets Manager CLI](https://bitwarden.com/help/secrets-manager-cli/#download-and-install).
+
+Use the adapter 'bitwarden-sm':
+
+```bash
+# Fetch all secrets that the machine account has access to
+kamal secrets fetch --adapter bitwarden-sm
+
+# Extract the secret
+kamal secrets extract REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
+```
+
 ## AWS Secrets Manager
 
 First, install and configure [the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
