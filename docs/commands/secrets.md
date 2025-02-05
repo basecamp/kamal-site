@@ -153,3 +153,49 @@ kamal secrets extract DB_PASSWORD <SECRETS-FETCH-OUTPUT>
 Doppler organizes secrets in "projects" (like `my-awesome-project`) and "configs" (like `prod`, `stg`, etc), use the pattern `project/config` when defining the `--from` option.
 
 The doppler adapter does not use the `--account` option, if given it will be ignored.
+
+## GCP Secret Manager
+
+First, install and configure the [gcloud CLI](https://cloud.google.com/sdk/gcloud/reference/secrets).
+
+The `--account` flag selects an account configured in `gcloud`, and the `--from` flag controls which GCP project is used. The string `default` can be used with the `--account` and `--from` flags, to use `gcloud`'s default credentials and project, respectively.
+
+Use the adapter `gcp`:
+
+```bash
+# The following commands will all `my-secret` from the default project using the default
+# credentials, and illustrate the use of default project, credentials, and adapter alias:
+kamal secrets fetch --adapter=gcp --account=default my-secret
+kamal secrets fetch --adapter=gcp_secret_manager --account=default my-secret
+kamal secrets fetch --adapter=gcp --account=default default/my-secret
+kamal secrets fetch --adapter=gcp --account=default default/my-secret/latest
+kamal secrets fetch --adapter=gcp --account=default --from=default my-secret/latest
+
+# Fetch `my-secret` and `another-secret` from the project `my-project`
+kamal secrets fetch --adapter=gcp \
+  --account=default \
+  --from=my-project \
+  my-secret another-secret
+
+# Fetch from multiple projects, using default to refer to the default project
+kamal secrets fetch --adapter=gcp \
+  --account=default \
+  default/my-secret my-project/another-secret
+
+# Fetch version 123 of the secret `my-secret` in the default project (the default behavior is to
+# fetch `latest`)
+kamal secrets fetch --adapter=gcp \
+  --account=default \
+  default/my-secret/123
+
+# Fetch a secret using the `user@example.com` credentials
+kamal secrets fetch --adapter=gcp \
+  --account=user@example.com \
+  my-secret
+
+# Fetch a secret as `user@example.com`, impersonating ´service-account@example.com` with
+# `delegate@example.com` as a delegate
+kamal secrets fetch --adapter=gcp \
+  --account="user@example.com|delegate@example.com,service-account@example.com" \
+  my-secret
+```
