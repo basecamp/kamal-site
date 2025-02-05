@@ -32,6 +32,8 @@ The available hooks are:
 - [pre-build](../pre-build)
 - [pre-deploy](../pre-deploy)
 - [post-deploy](../post-deploy)
+- [pre-app-boot](../pre-app-boot)
+- [post-app-boot](../post-app-boot)
 - [pre-proxy-reboot](../pre-proxy-reboot)
 - [post-proxy-reboot](../post-proxy-reboot)
 
