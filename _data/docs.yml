@@ -107,6 +107,10 @@
       url: /docs/hooks/pre-deploy/
     - title: "post-deploy"
       url: /docs/hooks/post-deploy/
+    - title: "pre-app-boot"
+      url: /docs/hooks/pre-app-boot/
+    - title: "post-app-boot"
+      url: /docs/hooks/post-app-boot/
     - title: "pre-proxy-reboot"
       url: /docs/hooks/pre-proxy-reboot/
     - title: "post-proxy-reboot"
