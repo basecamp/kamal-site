@@ -103,7 +103,10 @@ Use the adapter 'bitwarden-sm':
 
 ```bash
 # Fetch all secrets that the machine account has access to
-kamal secrets fetch --adapter bitwarden-sm
+kamal secrets fetch --adapter bitwarden-sm all
+
+# Fetch secrets from a project
+kamal secrets fetch --adapter bitwarden-sm MyProjectID/all
 
 # Extract the secret
 kamal secrets extract REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
