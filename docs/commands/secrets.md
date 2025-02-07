@@ -156,3 +156,60 @@ kamal secrets extract DB_PASSWORD <SECRETS-FETCH-OUTPUT>
 Doppler organizes secrets in "projects" (like `my-awesome-project`) and "configs" (like `prod`, `stg`, etc), use the pattern `project/config` when defining the `--from` option.
 
 The doppler adapter does not use the `--account` option, if given it will be ignored.
+
+## GCP Secret Manager
+
+First, install and configure the [gcloud CLI](https://cloud.google.com/sdk/gcloud/reference/secrets).
+
+The `--account` flag selects an account configured in `gcloud`, and the `--from` flag specifies the **GCP project ID** to be used. The string `default` can be used with the `--account` and `--from` flags to use `gcloud`'s default credentials and project, respectively.
+
+Use the adapter `gcp`:
+
+```bash
+# Fetch a secret with an explicit project name, credentials, and secret version:
+kamal secrets fetch --adapter=gcp --account=default --from=default my-secret/latest
+
+# The project name can be added as a prefix to the secret name instead of using --from:
+kamal secrets fetch --adapter=gcp --account=default default/my-secret/latest
+
+# The 'latest' version is used by default, so it can be omitted as well:
+kamal secrets fetch --adapter=gcp --account=default default/my-secret
+
+# If the default project is used, the prefix can also be left out entirely, leading to the simplest
+# way to fetch a secret using the default project and credentials, and the latest version of the
+# secret:
+kamal secrets fetch --adapter=gcp --account=default my-secret
+
+# Multiple secrets can be fetched at the same time.
+# Fetch `my-secret` and `another-secret` from the project `my-project`:
+kamal secrets fetch --adapter=gcp \
+  --account=default \
+  --from=my-project \
+  my-secret another-secret
+
+# Secrets can be fetched from multiple projects at the same time.
+# Fetch from multiple projects, using default to refer to the default project:
+kamal secrets fetch --adapter=gcp \
+  --account=default \
+  default/my-secret my-project/another-secret
+
+# Specific secret versions can be fetched.
+# Fetch version 123 of the secret `my-secret` in the default project (the default behavior is to
+# fetch `latest`)
+kamal secrets fetch --adapter=gcp \
+  --account=default \
+  default/my-secret/123
+
+# Credentials other than the default can also be used.
+# Fetch a secret using the `user@example.com` credentials:
+kamal secrets fetch --adapter=gcp \
+  --account=user@example.com \
+  my-secret
+
+# Service account impersonation and delegation chains are available.
+# Fetch a secret as `user@example.com`, impersonating `service-account@example.com` with
+# `delegate@example.com` as a delegate
+kamal secrets fetch --adapter=gcp \
+  --account="user@example.com|delegate@example.com,service-account@example.com" \
+  my-secret
+```
