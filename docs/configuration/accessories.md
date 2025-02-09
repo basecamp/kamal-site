@@ -141,7 +141,7 @@ before being mounted:
 
 ```yaml
     directories:
-      - mysql-logs:/var/log/mysql
+      - /path/to/mysql-logs:/var/log/mysql
 ```
 
 ## [Volumes](#volumes)
@@ -151,7 +151,7 @@ They are not created or copied before mounting:
 
 ```yaml
     volumes:
-      - /path/to/mysql-logs:/var/log/mysql
+      - mysql-logs:/var/log/mysql
 ```
 
 ## [Network](#network)
