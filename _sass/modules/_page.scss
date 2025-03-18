@@ -431,4 +431,14 @@
 
   }
 
+  @media (prefers-color-scheme: dark) {
+    .color-schemable img {
+      filter: invert(100%);
+    }
+
+    article .highlight {
+      background: var(--color-base);
+    }
+  }
+
 }

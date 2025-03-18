@@ -49,3 +49,19 @@
   --transition-slow: 0.3s ease;
 
 }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --rgb-base: 4, 6, 8;
+    --rgb-base-dark: 3, 19, 34;
+    --rgb-base-darker: 5, 63, 118;
+    --rgb-base-darkest: var(--rgb-base-darker);
+    --rgb-grey: 236, 239, 244;
+    --rgb-grey-light: 241, 244, 249;
+    --rgb-blue: 65, 146, 223;
+    --rgb-blue-light: 121, 179, 233;
+    --color-base-dark: var(--color-base);
+    --color-black: rgb(var(--rgb-white));
+    --color-white: rgb(var(--rgb-base-dark));
+  }
+}
