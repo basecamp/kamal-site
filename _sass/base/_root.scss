@@ -50,7 +50,8 @@
 
 }
 
-@media (prefers-color-scheme: dark) {
+@media(prefers-color-scheme: dark) {
+
   :root {
     --rgb-base: 4, 6, 8;
     --rgb-base-dark: 3, 19, 34;
@@ -64,4 +65,5 @@
     --color-black: rgb(var(--rgb-white));
     --color-white: rgb(var(--rgb-base-dark));
   }
+
 }

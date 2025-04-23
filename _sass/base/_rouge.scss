@@ -66,8 +66,10 @@
 
 }
 
-@media (prefers-color-scheme: dark) {
+@media(prefers-color-scheme: dark) {
+
   .highlight {
+
     background-color: #122b3b;
 
     .gl { color: #dee5e7; background-color: #4e5d62; }
@@ -113,5 +115,7 @@
     .py { color: #a8e1fe; }
     .na { color: #a8e1fe; }
     .nv, .vc, .vg, .vi { color: #a8e1fe; }
+
   }
+
 }
