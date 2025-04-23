@@ -211,6 +211,11 @@
 
     }
 
+    figure {
+      border-radius: 0.2em;
+      overflow: hidden;
+    }
+
     nav {
 
       --flow-space: 4.1em;
@@ -425,6 +430,22 @@
 
       article {
         flex: 7;
+      }
+
+    }
+
+  }
+
+  @media(prefers-color-scheme: dark) {
+
+    article {
+
+      figure img {
+        filter: invert(100%);
+      }
+
+      .highlight {
+        background: var(--color-base);
       }
 
     }

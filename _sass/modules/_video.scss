@@ -84,7 +84,7 @@
         }
 
         &:after {
-          background-color: var(--color-white);
+          background-color: rgba(var(--rgb-white), 0.95);
           transform: scale(1.04);
         }
 

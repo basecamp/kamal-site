@@ -65,3 +65,57 @@
   .il  { color: #646e78; } /* Literal.Number.Integer.Long */
 
 }
+
+@media(prefers-color-scheme: dark) {
+
+  .highlight {
+
+    background-color: #122b3b;
+
+    .gl { color: #dee5e7; background-color: #4e5d62; }
+    .gp { color: #a8e1fe; }
+    .c, .cd, .cm, .c1, .cs { color: #6c8b9f; font-style: italic; }
+    .cp { color: #b2fd6d; font-style: italic; }
+    .err { color: #fefeec; background-color: #c00; }
+    .gr { color: #c00; font-style: italic; }
+    .k, .kd, .kv { color: #f6dd62; }
+    .o, .ow { color: #4df4ff; }
+    .p, .pi { color: #4df4ff; }
+    .gd { color: #c00; }
+    .gi { color: #b2fd6d; }
+    .ge { font-style: italic; }
+    .gt { color: #dee5e7; background-color: #4e5d62; }
+    .kc { color: #f696db; }
+    .kn { color: #ffb000; }
+    .kp { color: #ffb000; }
+    .kr { color: #ffb000; }
+    .gh { color: #ffb000; }
+    .gu { color: #ffb000; }
+    .kt { color: #b2fd6d; }
+    .no { color: #b2fd6d; }
+    .nc { color: #b2fd6d; }
+    .nd { color: #b2fd6d; }
+    .nn { color: #b2fd6d; }
+    .bp { color: #b2fd6d; }
+    .ne { color: #b2fd6d; }
+    .nl { color: #ffb000; }
+    .nt { color: #ffb000; }
+    .m, .mf, .mh, .mi, .il, .mo, .mb, .mx { color: #f696db; }
+    .ld { color: #f696db; }
+    .ss { color: #f696db; }
+    .s, .sb, .sd, .s2, .sh, .sx, .sr, .s1 { color: #fff0a6; }
+    .se { color: #4df4ff; }
+    .sc { color: #4df4ff; }
+    .si { color: #4df4ff; }
+    .nb {font-weight: bold; }
+    .ni { color: #999; }
+    .w { color: #bbb; }
+    .go { color: #bbb; }
+    .nf { color: #a8e1fe; }
+    .py { color: #a8e1fe; }
+    .na { color: #a8e1fe; }
+    .nv, .vc, .vg, .vi { color: #a8e1fe; }
+
+  }
+
+}
