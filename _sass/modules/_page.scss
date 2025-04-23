@@ -438,12 +438,16 @@
 
   @media(prefers-color-scheme: dark) {
 
-    article figure img {
-      filter: invert(100%);
-    }
+    article {
 
-    article .highlight {
-      background: var(--color-base);
+      figure img {
+        filter: invert(100%);
+      }
+
+      .highlight {
+        background: var(--color-base);
+      }
+
     }
 
   }
