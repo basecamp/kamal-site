@@ -213,3 +213,37 @@ kamal secrets fetch --adapter=gcp \
   --account="user@example.com|delegate@example.com,service-account@example.com" \
   my-secret
 ```
+
+## Passbolt
+
+First, install and configure the [Passbolt CLI](https://github.com/passbolt/go-passbolt-cli).
+
+Passbolt organizes secrets in folders (like `coolfolder`) and these folders can be nested (like `coolfolder/prod`, `coolfolder/stg`, etc). You can access secrets in these folders in two ways:
+
+1. Using the `--from` option to specify the folder path `--from coolfolder`
+2. Prefixing the secret names with the folder path `coolfolder/REGISTRY_PASSWORD`
+
+Use the adapter `passbolt`:
+
+```bash
+# Fetch passwords from root (no folder)
+kamal secrets fetch --adapter passbolt REGISTRY_PASSWORD DB_PASSWORD
+
+# Fetch passwords from a folder using --from
+kamal secrets fetch --adapter passbolt --from coolfolder REGISTRY_PASSWORD DB_PASSWORD
+
+# Fetch passwords from a nested folder using --from
+kamal secrets fetch --adapter passbolt --from coolfolder/subfolder REGISTRY_PASSWORD DB_PASSWORD
+
+# Fetch passwords by prefixing the folder path to the secret name
+kamal secrets fetch --adapter passbolt coolfolder/REGISTRY_PASSWORD coolfolder/DB_PASSWORD
+
+# Fetch passwords from multiple folders
+kamal secrets fetch --adapter passbolt coolfolder/REGISTRY_PASSWORD otherfolder/DB_PASSWORD
+
+# Extract the secret values
+kamal secrets extract REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
+kamal secrets extract DB_PASSWORD <SECRETS-FETCH-OUTPUT>
+```
+
+The passbolt adapter does not use the `--account` option, if given it will be ignored.
