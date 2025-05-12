@@ -6,6 +6,14 @@ title: Registry
 
 Log in and out of the Docker registry on your servers.
 
+```bash
+$ kamal registry
+Commands:
+  kamal registry help [COMMAND]  # Describe subcommands or one specific subcommand
+  kamal registry login           # Log in to registry locally and remotely
+  kamal registry logout          # Log out of registry locally and remotely
+```
+
 Examples:
 
 ```bash

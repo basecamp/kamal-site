@@ -18,7 +18,7 @@ Commands:
   kamal details             # Show details about all containers
   kamal docs [SECTION]      # Show Kamal configuration documentation
   kamal help [COMMAND]      # Describe available commands or one specific command
-  kamal init                # Create config stub in config/deploy.yml and env stub in .env
+  kamal init                # Create config stub in config/deploy.yml and secrets stub in .kamal
   kamal lock                # Manage the deploy lock
   kamal proxy               # Manage kamal-proxy
   kamal prune               # Prune old application images and containers

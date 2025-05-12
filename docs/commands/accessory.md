@@ -13,16 +13,17 @@ Run `kamal accessory` to view and manage your accessories.
 ```bash
 $ kamal accessory
 Commands:
-  kamal accessory boot [NAME]        # Boot new accessory service on host (use NAME=all to boot all accessories)
-  kamal accessory details [NAME]     # Show details about accessory on host (use NAME=all to show all accessories)
-  kamal accessory exec [NAME] [CMD]  # Execute a custom command on servers (use --help to show options)
-  kamal accessory help [COMMAND]     # Describe subcommands or one specific subcommand
-  kamal accessory logs [NAME]        # Show log lines from accessory on host (use --help to show options)
-  kamal accessory reboot [NAME]      # Reboot existing accessory on host (stop container, remove container, start new container; use NAME=all to boot all accessories)
-  kamal accessory remove [NAME]      # Remove accessory container, image and data directory from host (use NAME=all to remove all accessories)
-  kamal accessory restart [NAME]     # Restart existing accessory container on host
-  kamal accessory start [NAME]       # Start existing accessory container on host
-  kamal accessory stop [NAME]        # Stop existing accessory container on host
+  kamal accessory boot [NAME]           # Boot new accessory service on host (use NAME=all to boot all accessories)
+  kamal accessory details [NAME]        # Show details about accessory on host (use NAME=all to show all accessories)
+  kamal accessory exec [NAME] [CMD...]  # Execute a custom command on servers within the accessory container (use --help to show options)
+  kamal accessory help [COMMAND]        # Describe subcommands or one specific subcommand
+  kamal accessory logs [NAME]           # Show log lines from accessory on host (use --help to show options)
+  kamal accessory reboot [NAME]         # Reboot existing accessory on host (stop container, remove container, start new container; use NAME=all to boot all accessories)
+  kamal accessory remove [NAME]         # Remove accessory container, image and data directory from host (use NAME=all to remove all accessories)
+  kamal accessory restart [NAME]        # Restart existing accessory container on host
+  kamal accessory start [NAME]          # Start existing accessory container on host
+  kamal accessory stop [NAME]           # Stop existing accessory container on host
+  kamal accessory upgrade               # Upgrade accessories from Kamal 1.x to 2.0 (restart them in 'kamal' network)
 ```
 
 To update an accessory, update the image in your config and run `kamal accessory reboot [NAME]`.

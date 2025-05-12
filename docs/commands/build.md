@@ -13,8 +13,8 @@ $ kamal build
 Commands:
   kamal build create          # Create a build setup
   kamal build deliver         # Build app and push app image to registry then pull image on servers
-  kamal build dev             # Build using the working directory, tag it as dirty, and push to local image store.
   kamal build details         # Show build setup
+  kamal build dev             # Build using the working directory, tag it as dirty, and push to local image store.
   kamal build help [COMMAND]  # Describe subcommands or one specific subcommand
   kamal build pull            # Pull app image from registry onto servers
   kamal build push            # Build and push app image to registry
