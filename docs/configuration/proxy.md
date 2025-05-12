@@ -70,6 +70,16 @@ Defaults to `false`:
   ssl: true
 ```
 
+## [SSL redirect](#ssl-redirect)
+
+By default, kamal-proxy will redirect all HTTP requests to HTTPS when SSL is enabled.
+If you prefer that HTTP traffic is passed through to your application (along with
+HTTPS traffic), you can disable this redirect by setting `ssl_redirect: false`:
+
+```yaml
+  ssl_redirect: false
+```
+
 ## [Forward headers](#forward-headers)
 
 Whether to forward the `X-Forwarded-For` and `X-Forwarded-Proto` headers.

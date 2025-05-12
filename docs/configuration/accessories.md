@@ -64,7 +64,7 @@ See [Docker Registry](../docker-registry) for more information:
 
 ## [Accessory hosts](#accessory-hosts)
 
-Specify one of `host`, `hosts`, or `roles`:
+Specify one of `host`, `hosts`, `roles`, or `tags`:
 
 ```yaml
     host: mysql-db1
@@ -73,6 +73,10 @@ Specify one of `host`, `hosts`, or `roles`:
       - mysql-db2
     roles:
       - mysql
+    tag: writer
+    tags:
+      - writer
+      - reader
 ```
 
 ## [Custom command](#custom-command)

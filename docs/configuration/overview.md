@@ -115,6 +115,15 @@ See [Hooks](/docs/hooks) for more information:
 hooks_path: /user_home/kamal/hooks
 ```
 
+## [Error pages](#error-pages)
+
+A directory relative to the app root to find error pages for the proxy to serve.
+Any files in the format 4xx.html or 5xx.html will be copied to the hosts.
+
+```yaml
+error_pages_path: public
+```
+
 ## [Require destinations](#require-destinations)
 
 Whether deployments require a destination to be specified, defaults to `false`:
