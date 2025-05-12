@@ -64,13 +64,14 @@ See [Docker Registry](../docker-registry) for more information:
 
 ## [Accessory hosts](#accessory-hosts)
 
-Specify one of `host`, `hosts`, `roles`, or `tags`:
+Specify one of `host`, `hosts`, `role`, `roles`, `tag` or `tags`:
 
 ```yaml
     host: mysql-db1
     hosts:
       - mysql-db1
       - mysql-db2
+    role: mysql
     roles:
       - mysql
     tag: writer
