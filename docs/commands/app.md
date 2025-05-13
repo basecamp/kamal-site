@@ -28,3 +28,22 @@ Commands:
   kamal app stop              # Stop app container on servers
   kamal app version           # Show app version currently running on servers
 ```
+
+## [Maintenance Mode](#maintenance-mode)
+
+You can set your application to maintenance mode, by running `kamal app maintenance`.
+
+When in maintenance mode, kamal-proxy will intercept requests and return a 503 responses.
+
+There is a built in HTML template for the error page. You can customise the error message
+via the --message option:
+
+```shell
+$ kamal app maintenance --message "Scheduled maintenance window from ..."
+```
+
+You can also provide custom error pages by setting the [`error_pages_path`](../../configuration/overview#error-pages) configuration option.
+
+## [Live Mode](#live-mode)
+
+You can set your application back to live mode, by running `kamal app live`.
