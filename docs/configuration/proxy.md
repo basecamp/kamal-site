@@ -16,11 +16,6 @@ options that are set when deploying the application, not when booting the proxy.
 They are application-specific, so they are not shared when multiple applications
 run on the same proxy.
 
-The proxy is enabled by default on the primary role but can be disabled by
-setting `proxy: false`.
-
-It is disabled by default on all other roles but can be enabled by setting
-`proxy: true` or providing a proxy configuration.
 
 ```yaml
 proxy:
@@ -148,4 +143,31 @@ By default, `Cache-Control`, `Last-Modified`, and `User-Agent` request headers a
     response_headers:
       - X-Request-ID
       - X-Request-Start
+```
+
+## [Enabling/disabling the proxy on roles](#enabling/disabling-the-proxy-on-roles)
+
+The proxy is enabled by default on the primary role but can be disabled by
+setting `proxy: false` in the primary role's configuration.
+
+```yaml
+servers:
+  web:
+    hosts:
+     - ...
+    proxy: false
+```
+
+It is disabled by default on all other roles but can be enabled by setting
+`proxy: true` or providing a proxy configuration for that role.
+
+```yaml
+servers:
+  web:
+    hosts:
+     - ...
+  web2:
+    hosts:
+     - ...
+    proxy: true
 ```
