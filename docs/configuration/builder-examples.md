@@ -93,7 +93,7 @@ builder:
 
 ## [Building without a Dockerfile locally](#building-without-a-dockerfile-locally)
 
-Your application image can also be built using [cloud native buildpacks](https://buildpacks.io/) instead of using a `Dockerfile` and the default `docker build` process. This example uses Heroku's [ruby](https://github.com/heroku/heroku-buildpack-ruby) and [Procfile](https://github.com/heroku/buildpacks-procfile) buildpack to build your final image. 
+Your application image can also be built using [cloud native buildpacks](https://buildpacks.io/) instead of using a `Dockerfile` and the default `docker build` process. This example uses Heroku's [ruby](https://github.com/heroku/heroku-buildpack-ruby) and [Procfile](https://github.com/heroku/buildpacks-procfile) buildpacks to build your final image. 
 
 ``` yaml
   pack:
@@ -103,7 +103,7 @@ Your application image can also be built using [cloud native buildpacks](https:/
       - heroku/procfile
 ```
 
-To provide any additional customizations to you can add a [project descriptor file](https://buildpacks.io/docs/for-app-developers/how-to/build-inputs/use-project-toml/)(project.toml) in the root of your application.
+To provide any additional customizations you can add a [project descriptor file](https://buildpacks.io/docs/for-app-developers/how-to/build-inputs/use-project-toml/) (`project.toml`) in the root of your application.
 
 ### [GHA cache configuration](#gha-cache-configuration)
 
