@@ -70,15 +70,16 @@ Defaults to `false`:
 In some cases, using Let's Encrypt for automatic certificate management is not an
 option, for example if you are running from host than one host. Or you may already
 have SSL certificates issued by a different Certificate Authority (CA).
-Kamal supports loading custom SSL certificates
-directly from secrets.
+Kamal supports loading custom SSL certificates directly from secrets.
 
 Examples:
+```
   ssl: true              # Enable SSL with Let's Encrypt
   ssl: false             # Disable SSL
   ssl:                   # Enable custom SSL
     certificate_pem: CERTIFICATE_PEM
     private_key_pem: PRIVATE_KEY_PEM
+```
 
 ### Notes
 - If the certificate or key is missing or invalid, kamal-proxy will fail to start.
