@@ -49,6 +49,22 @@ Defaults to true:
   local: true
 ```
 
+## [Buildpack configuration](#buildpack-configuration)
+
+The build configuration for using pack to build a Cloud Native Buildpack image.
+
+For additional buildpack customization options you can create a project descriptor
+file(project.toml) that the Pack CLI will automatically use.
+See https://buildpacks.io/docs/for-app-developers/how-to/build-inputs/use-project-toml/ for more information.
+
+```yaml
+  pack:
+    builder: heroku/builder:24
+    buildpacks:
+      - heroku/ruby
+      - heroku/procfile
+```
+
 ## [Builder cache](#builder-cache)
 
 The type must be either 'gha' or 'registry'.
