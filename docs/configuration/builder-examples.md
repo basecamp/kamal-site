@@ -91,6 +91,20 @@ builder:
     options: mode=max,image-manifest=true,oci-mediatypes=true
 ```
 
+## [Building without a Dockerfile locally](#building-without-a-dockerfile-locally)
+
+Your application image can also be built using [cloud native buildpacks](https://buildpacks.io/) instead of using a `Dockerfile` and the default `docker build` process. This example uses Heroku's [ruby](https://github.com/heroku/heroku-buildpack-ruby) and [Procfile](https://github.com/heroku/buildpacks-procfile) buildpacks to build your final image. 
+
+``` yaml
+  pack:
+    builder: heroku/builder:24
+    buildpacks:
+      - heroku/ruby
+      - heroku/procfile
+```
+
+To provide any additional customizations you can add a [project descriptor file](https://buildpacks.io/docs/for-app-developers/how-to/build-inputs/use-project-toml/) (`project.toml`) in the root of your application.
+
 ### [GHA cache configuration](#gha-cache-configuration)
 
 To make it work on the GitHub action workflow, you need to set up the buildx and expose [authentication configuration for the cache](https://docs.docker.com/build/cache/backends/gha/#authentication).
