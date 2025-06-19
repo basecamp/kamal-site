@@ -68,7 +68,7 @@ Defaults to `false`:
 ## [Custom SSL certificate](#custom-ssl-certificate)
 
 In some cases, using Let's Encrypt for automatic certificate management is not an
-option, for example if you are running from host than one host.
+option, for example if you are running from more than one host.
 
 Or you may already have SSL certificates issued by a different Certificate Authority (CA).
 
