@@ -112,6 +112,8 @@ kamal secrets fetch --adapter bitwarden-sm MyProjectID/all
 kamal secrets extract REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
 ```
 
+**Note:** If your vault is located in the EU, you can add the argument `--server-url=https://vault.bitwarden.eu` to any of these commands.
+
 ## AWS Secrets Manager
 
 First, install and configure [the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
