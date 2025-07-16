@@ -18,8 +18,7 @@ in the local environment:
 ```yaml
 registry:
   server: registry.digitalocean.com
-  username:
-    - DOCKER_REGISTRY_TOKEN
+  username: registry-user-name
   password:
     - DOCKER_REGISTRY_TOKEN
 ```
