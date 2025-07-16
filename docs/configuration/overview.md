@@ -28,10 +28,12 @@ extension. Kamal will ignore the extension and not raise an error.
 
 ## [The service name](#the-service-name)
 
-This is a required value. It is used as the container name prefix.
+This is a required value. It is used as the container name prefix. Use hyphens instead of underscores to avoid URI parser errors.
 
 ```yaml
-service: myapp
+service: myapp ✅
+service: my-app ✅
+service: my_app ❌
 ```
 
 ## [The Docker image name](#the-docker-image-name)
