@@ -190,14 +190,6 @@ How long to wait for a container to drain, default 30:
 drain_timeout: 10
 ```
 
-## [Run directory](#run-directory)
-
-Directory to store kamal runtime files in on the host, default `.kamal`:
-
-```yaml
-run_directory: /etc/kamal
-```
-
 ## [SSH options](#ssh-options)
 
 See [SSH](../ssh):
