@@ -14,7 +14,7 @@ The deployment process is:
 2. Build the app image, push it to the registry, and pull it onto the servers.
 3. Ensure kamal-proxy is running and accepting traffic on ports 80 and 443.
 4. Start a new container with the version of the app that matches the current Git version hash.
-5. Tell kamal-proxy to route traffic to the new container once it is responding with `200 OK` to `GET /up`.
+5. Tell kamal-proxy to route traffic to the new container once it is responding with `200 OK` to `GET /up` on port 80.
 6. Stop the old container running the previous version of the app.
 7. Prune unused images and stopped containers to ensure servers don't fill up.
 
