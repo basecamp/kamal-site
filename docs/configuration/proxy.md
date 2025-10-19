@@ -120,13 +120,29 @@ How long to wait for requests to complete before timing out, defaults to 30 seco
 
 For applications that split their traffic to different services based on the request path,
 you can use path-based routing to mount services under different path prefixes.
+Usage sample: path_prefix: '/api'
+
+You can also specify multiple paths in two ways.
+
+When using path_prefix you can supply multiple routes separated by commas.
 
 ```yaml
-  path_prefix: '/api'
+  path_prefix: "/api,/oauth_callback"
+```
+
+You can also specify paths as a list of paths, the configuration will be
+rolled together into a comma separated string.
+
+```yaml
+  path_prefixes:
+    - "/api"
+    - "/oauth_callback"
 ```
 
 By default, the path prefix will be stripped from the request before it is forwarded upstream.
+
 So in the example above, a request to /api/users/123 will be forwarded to web-1 as /users/123.
+
 To instead forward the request with the original path (including the prefix),
 specify --strip-path-prefix=false
 
