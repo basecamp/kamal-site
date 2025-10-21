@@ -30,6 +30,8 @@
       flex-direction: column;
       position: sticky;
       top: var(--space-large);
+      height: 100vh;
+      overflow-y: auto;
     }
 
     form.search {
