@@ -10,9 +10,10 @@ Log in and out of the Docker registry on your servers.
 $ kamal registry
 Commands:
   kamal registry help [COMMAND]  # Describe subcommands or one specific subcommand
-  kamal registry login           # Log in to registry locally and remotely
-  kamal registry logout          # Log out of registry locally and remotely
-```
+  kamal registry login           # Log in to remote registry locally and remotely
+  kamal registry logout          # Log out of remote registry locally and remotely
+  kamal registry remove          # Remove local registry or log out of remote registry locally and remotely
+  kamal registry setup           # Setup local registry or log in to remote registry locally and remotely```
 
 Examples:
 
