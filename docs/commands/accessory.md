@@ -31,7 +31,7 @@ To update an accessory, update the image in your config and run `kamal accessory
 Example:
 
 ```bash
-$ kamal accessory boot all
+$ kamal accessory reboot all
 Running the pre-connect hook...
   INFO [bd04b11b] Running /usr/bin/env .kamal/hooks/pre-connect on localhost
   INFO [bd04b11b] Finished in 0.003 seconds with exit status 0 (successful).
