@@ -102,5 +102,5 @@ Set to true to load the default OpenSSH config files (~/.ssh/config,
 (or array of paths) to load specific configuration. Defaults to true.
 
 ```yaml
-  config: true
+  config: [ "~/.ssh/myconfig" ]
 ```

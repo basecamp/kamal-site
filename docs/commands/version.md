@@ -8,5 +8,5 @@ Returns the version of Kamal you have installed.
 
 ```bash
 $ kamal version
-2.8.2
+2.9.0
 ```
