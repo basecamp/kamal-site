@@ -36,3 +36,14 @@ re-connection storms after an idle period, such as building an image or waiting 
 ```yaml
   pool_idle_timeout: 300
 ```
+
+## [DNS retry settings](#dns-retry-settings)
+
+Some resolvers (mDNSResponder, systemd-resolved, Tailscale) can drop lookups during
+bursts of concurrent SSH starts. Kamal will retry DNS failures automatically.
+
+Number of retries after the initial attempt. Set to 0 to disable.
+
+```yaml
+  dns_retries: 3
+```

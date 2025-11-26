@@ -115,6 +115,15 @@ See [Hooks](/docs/hooks) for more information:
 hooks_path: /user_home/kamal/hooks
 ```
 
+## [Secrets path](#secrets-path)
+
+Path to secrets, defaults to `.kamal/secrets`.
+Kamal will look for `<secrets_path>-common` and `<secrets_path>` (or `<secrets_path>.<destination>` when using destinations):
+
+```yaml
+secrets_path: /user_home/kamal/secrets
+```
+
 ## [Error pages](#error-pages)
 
 A directory relative to the app root to find error pages for the proxy to serve.
