@@ -247,3 +247,25 @@ kamal secrets extract DB_PASSWORD <SECRETS-FETCH-OUTPUT>
 ```
 
 The passbolt adapter does not use the `--account` option, if given it will be ignored.
+
+## Proton Pass
+
+First, install and configure [the Proton Pass CLI](https://protonpass.github.io/pass-cli/).
+
+Use the adapter `proton-pass`:
+
+```bash
+# Fetch passwords from an item in a vault
+kamal secrets fetch --adapter proton-pass --from MyVault REGISTRY_PASSWORD
+
+# Fetch specific fields from an item in a vault
+kamal secrets fetch --adapter proton-pass --from MyVault MyItem/REGISTRY_PASSWORD MyItem/DB_PASSWORD
+
+# Fetch from multiple vaults
+kamal secrets fetch --adapter proton-pass MyVault/MyItem/REGISTRY_PASSWORD MyVaul2/DB_PASSWORD
+
+# Extract the secret
+kamal secrets extract REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
+kamal secrets extract MyItem/REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
+kamal secrets extract MyVault/MyItem/REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
+```
