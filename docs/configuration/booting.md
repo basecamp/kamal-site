@@ -10,22 +10,30 @@ When deploying to large numbers of hosts, you might prefer not to restart your s
 
 Kamal’s default is to boot new containers on all hosts in parallel. However, you can control this with the boot configuration.
 
-## [Fixed group sizes](#fixed-group-sizes)
-
-Here, we boot 2 hosts at a time with a 10-second gap between each group:
 
 ```yaml
 boot:
-  limit: 2
+```
+
+## [The number or percentage of hosts to boot at a time.](#the-number-or-percentage-of-hosts-to-boot-at-a-time.)
+This can be an integer (e.g., 3) or a percentage string (e.g., 25%).
+
+```yaml
+  limit: 25%
+```
+
+## [The number of seconds to wait between booting each group of hosts.](#the-number-of-seconds-to-wait-between-booting-each-group-of-hosts.)
+
+```yaml
   wait: 10
 ```
 
-## [Percentage of hosts](#percentage-of-hosts)
+## [Whether to boot roles in parallel on a host.](#whether-to-boot-roles-in-parallel-on-a-host.)
 
-Here, we boot 25% of the hosts at a time with a 2-second gap between each group:
+If a host has multiple roles, control whether they are booted in parallel or sequentially on that host.
+
+Defaults to false.
 
 ```yaml
-boot:
-  limit: 25%
-  wait: 2
+  parallel_roles: true
 ```
