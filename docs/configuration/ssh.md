@@ -88,11 +88,18 @@ and host-based authentication:
 
 ## [Key data](#key-data)
 
-An array of strings, with each element of the array being
-a raw private key in PEM format.
+An array of strings, with each element of the array being a secret name.
 
 ```yaml
-  key_data: [ "-----BEGIN OPENSSH PRIVATE KEY-----" ]
+  key_data:
+    - SSH_PRIVATE_KEY
+```
+
+You can also provide raw private key in PEM format, but this is deprecated.
+
+```yaml
+  key_data:
+    - "-----BEGIN OPENSSH PRIVATE KEY----- ..."
 ```
 
 ## [Config](#config)

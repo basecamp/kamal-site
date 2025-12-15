@@ -100,7 +100,10 @@ volume containing both sets of files.
 This requires that file names change when the contents change
 (e.g., by including a hash of the contents in the name).
 
-To configure this, set the path to the assets:
+To configure this, set the path to the assets.
+
+You can also specify mount options after a colon, such as `ro` for read-only
+or `z`/`Z` for SELinux labels
 
 ```yaml
 asset_path: /path/to/assets

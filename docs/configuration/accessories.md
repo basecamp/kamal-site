@@ -126,27 +126,67 @@ See [Environment variables](../environment-variables) for more information:
 ## [Copying files](#copying-files)
 
 You can specify files to mount into the container.
-The format is `local:remote`, where `local` is the path to the file on the local machine
-and `remote` is the path to the file in the container.
 
 They will be uploaded from the local repo to the host and then mounted.
-
 ERB files will be evaluated before being copied.
+
+You can use the string format: `local:remote` or `local:remote:options`
+where the options can be `ro` for read-only or `z`/`Z` for SELinux labels
 
 ```yaml
     files:
       - config/my.cnf.erb:/etc/mysql/my.cnf
-      - config/myoptions.cnf:/etc/mysql/myoptions.cnf
+      - config/myoptions.cnf:/etc/mysql/myoptions.cnf:ro
+      - config/certs:/etc/mysql/certs:ro,Z
+```
+
+
+Or you can use the hash format for custom mode and ownership.
+
+Note: Setting `owner` requires root access:
+
+```yaml
+    files:
+      - local: config/secret.key
+        remote: /etc/mysql/secret.key
+        mode: "0600"
+        owner: "mysql:mysql"
+      - local: config/ca-cert.pem
+        remote: /etc/mysql/certs/ca-cert.pem
+        mode: "0644"
+        owner: "1000:1000"
+        options: "Z"
 ```
 
 ## [Directories](#directories)
 
 You can specify directories to mount into the container. They will be created on the host
-before being mounted:
+before being mounted.
+
+You can use the string format: `local:remote` or `local:remote:options`
+where the options can be `ro` for read-only or `z`/`Z` for SELinux labels
 
 ```yaml
     directories:
       - mysql-logs:/var/log/mysql
+      - mysql-data:/var/lib/mysql:z
+```
+
+
+Or you can use the hash format for custom mode and ownership.
+
+Note: Setting `owner` requires root access:
+
+```yaml
+    directories:
+      - local: mysql-data
+        remote: /var/lib/mysql
+        mode: "0750"
+        owner: "mysql:mysql"
+      - local: mysql-logs
+        remote: /var/log/mysql
+        mode: "0755"
+        options: "z"
 ```
 
 ## [Volumes](#volumes)
