@@ -31,6 +31,8 @@ You can also use [pre-proxy-reboot](../../hooks/pre-proxy-reboot) and [post-prox
 
 You can manage boot configuration for kamal-proxy with `kamal proxy boot_config`.
 
+**Note:** Using `kamal proxy boot_config` has been deprecated. You should use the [proxy run configuration](../../configuration/proxy#run-configuration) instead.
+
 ```bash
 $ kamal proxy boot_config
 Commands:
