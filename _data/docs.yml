@@ -25,6 +25,8 @@
       url: /docs/configuration/docker-registry/
     - title: "Environment variables"
       url: /docs/configuration/environment-variables/
+    - title: "External commands"
+      url: /docs/configuration/external-commands/
     - title: "Logging"
       url: /docs/configuration/logging/
     - title: "Proxy"
@@ -97,6 +99,8 @@
   sections:
     - title: "Overview"
       url: /docs/hooks/overview/
+    - title: "pre-configure"
+      url: /docs/hooks/pre-configure/
     - title: "docker-setup"
       url: /docs/hooks/docker-setup/
     - title: "pre-connect"

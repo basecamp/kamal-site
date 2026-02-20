@@ -24,9 +24,13 @@ If the script returns a non-zero exit code, the command will be aborted.
 - `KAMAL_SUBCOMMAND` — _Optional:_ The subcommand we are running
 - `KAMAL_DESTINATION` — _Optional:_ Destination, e.g., "staging"
 - `KAMAL_ROLE` — _Optional:_ Role targeted, e.g., "web"
+- `KAMAL_OUTPUT` — Path to the hook output file (see [Hook output](#hook-output) below)
+
+**Note:** The [pre-configure](../pre-configure) hook runs before configuration is created. Only `KAMAL_DESTINATION` and `KAMAL_OUTPUT` are available to that hook; the other variables listed above are set for all subsequent hooks.
 
 The available hooks are:
 
+- [pre-configure](../pre-configure)
 - [docker-setup](../docker-setup)
 - [pre-connect](../pre-connect)
 - [pre-build](../pre-build)
@@ -37,6 +41,43 @@ The available hooks are:
 - [pre-proxy-reboot](../pre-proxy-reboot)
 - [post-proxy-reboot](../post-proxy-reboot)
 
-You can pass `--skip_hooks` to avoid running the hooks.
+You can pass `--skip-hooks` to avoid running the hooks.
 
 **Note:** The hook filename must be the hook name without any extension. For example, the [pre-deploy](../pre-deploy) hook should be named "pre-deploy" (without any file extension such as .sh or .rb).
+
+## Hook output
+
+Hooks can pass data back to Kamal by writing `KEY=VALUE` lines (dotenv format) to the file at `$KAMAL_OUTPUT`:
+
+```bash
+#!/bin/bash
+echo "DEPLOY_SLOT=beta2" >> "$KAMAL_OUTPUT"
+echo "KAMAL_MESSAGE=Claimed beta slot 2" >> "$KAMAL_OUTPUT"
+```
+
+This is similar to GitHub Actions' `$GITHUB_OUTPUT`. Hooks that don't write to this file behave identically to before.
+
+### Special keys
+
+- `KAMAL_DESTINATION` — When written by the [pre-configure](../pre-configure) hook, sets or rewrites the deployment destination.
+- `KAMAL_MESSAGE` — Printed to the user after the hook completes, regardless of verbosity settings.
+
+### Accumulation across hooks
+
+Hook outputs accumulate across the deploy lifecycle. A `pre-deploy` hook that writes `DEPLOY_ID=123` makes `$DEPLOY_ID` available in the environment of subsequent hooks like `post-deploy`.
+
+### Precedence
+
+Hook outputs have the lowest precedence. They cannot override Kamal's built-in environment variables (`KAMAL_RECORDED_AT`, `KAMAL_VERSION`, etc.) or secrets.
+
+## Hook PATH
+
+When hooks execute, `.kamal/bin` is prepended to `$PATH` (if the directory exists). This means hooks can call project-local scripts by name without a full path:
+
+```bash
+#!/bin/bash
+# .kamal/hooks/post-deploy — calls .kamal/bin/notify directly
+notify "Deployed $KAMAL_SERVICE_VERSION to $KAMAL_DESTINATION"
+```
+
+The PATH is restored after each hook completes. See [External commands](/docs/configuration/external-commands/#hooks-and-kamalbin) for more on `.kamal/bin`.
