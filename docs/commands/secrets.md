@@ -247,3 +247,33 @@ kamal secrets extract DB_PASSWORD <SECRETS-FETCH-OUTPUT>
 ```
 
 The passbolt adapter does not use the `--account` option, if given it will be ignored.
+
+## Phase
+
+First, install and configure [the Phase CLI](https://docs.phase.dev/cli/install).
+
+The `--account` flag specifies the Phase app name, and the `--from` flag specifies the environment and optional path in the format `environment/path`.
+
+Use the adapter `phase`:
+
+```bash
+# Fetch secrets from production environment
+kamal secrets fetch --adapter phase --account myapp --from production REGISTRY_PASSWORD DB_PASSWORD
+
+# Fetch secrets from a specific path within an environment
+kamal secrets fetch --adapter phase --account myapp --from production/backend REGISTRY_PASSWORD DB_PASSWORD
+
+# Fetch secrets from a nested path
+kamal secrets fetch --adapter phase --account myapp --from staging/api/payments STRIPE_KEY STRIPE_SECRET
+
+# Fetch all secrets from an environment
+kamal secrets fetch --adapter phase --account myapp --from production
+
+# Extract the secret values
+kamal secrets extract REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
+kamal secrets extract DB_PASSWORD <SECRETS-FETCH-OUTPUT>
+```
+
+Phase organizes secrets in "apps" and "environments" (like `production`, `staging`, `development`). Secrets can be organized in paths within environments (like `/backend`, `/api/payments`).
+
+The `--from` option uses the pattern `environment/path`. If no path is specified, secrets are fetched from the root of the environment.
