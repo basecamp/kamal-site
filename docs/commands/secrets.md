@@ -119,10 +119,10 @@ First, install and configure [the AWS CLI](https://docs.aws.amazon.com/cli/lates
 Use the adapter `aws_secrets_manager`:
 
 ```bash
-# Fetch a secret string from "myapp"
+# Fetch a secret string from "myapp" that contains "REGISTRY_PASSWORD"
 kamal secrets fetch --adapter aws_secrets_manager --account default myapp
 
-# Both of these will fetch a secret string from "myapp/staging"
+# Both of these will fetch a secret string from "myapp/staging" that contains "REGISTRY_PASSWORD"
 kamal secrets fetch --adapter aws_secrets_manager --account default myapp/staging
 kamal secrets fetch --adapter aws_secrets_manager --account default --from myapp staging
 
