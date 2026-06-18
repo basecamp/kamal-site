@@ -119,18 +119,17 @@ First, install and configure [the AWS CLI](https://docs.aws.amazon.com/cli/lates
 Use the adapter `aws_secrets_manager`:
 
 ```bash
-# Fetch passwords
-kamal secrets fetch --adapter aws_secrets_manager --account default REGISTRY_PASSWORD DB_PASSWORD
+# Fetch a secret string from "myapp" that contains "REGISTRY_PASSWORD"
+kamal secrets fetch --adapter aws_secrets_manager --account default myapp
 
-# Fetch passwords from an item
-kamal secrets fetch --adapter aws_secrets_manager --account default --from myapp/ REGISTRY_PASSWORD DB_PASSWORD
+# Both of these will fetch a secret string from "myapp/staging" that contains "REGISTRY_PASSWORD"
+kamal secrets fetch --adapter aws_secrets_manager --account default myapp/staging
+kamal secrets fetch --adapter aws_secrets_manager --account default --from myapp staging
 
-# Fetch passwords from multiple items
-kamal secrets fetch --adapter aws_secrets_manager --account default myapp/REGISTRY_PASSWORD myapp/DB_PASSWORD
-
-# Extract the secret
+# All three of these will extract the secret
 kamal secrets extract REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
-kamal secrets extract MyItem/REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
+kamal secrets extract myapp/REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
+kamal secrets extract myapp/staging/REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
 ```
 
 **Note:** The `--account` option should be set to your AWS CLI profile name, which is typically `default`. Ensure that your AWS CLI is configured with the necessary permissions to access AWS Secrets Manager.
