@@ -37,3 +37,10 @@ Each alias is named and can only contain lowercase letters, numbers, dashes, and
 aliases:
   uname: app exec -p -q -r web "uname -a"
 ```
+
+
+Aliases can include a destination with the `-d` flag:
+
+```yaml
+  staging_deploy: deploy -d staging
+```

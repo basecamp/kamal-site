@@ -27,6 +27,8 @@
       url: /docs/configuration/environment-variables/
     - title: "Logging"
       url: /docs/configuration/logging/
+    - title: "Output"
+      url: /docs/configuration/output/
     - title: "Proxy"
       url: /docs/configuration/proxy/
     - title: "Roles"

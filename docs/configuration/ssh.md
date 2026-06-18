@@ -111,3 +111,14 @@ Set to true to load the default OpenSSH config files (~/.ssh/config,
 ```yaml
   config: [ "~/.ssh/myconfig" ]
 ```
+
+## [Forward agent](#forward-agent)
+
+Whether to forward the local SSH agent to the remote host. Defaults to
+true (sshkit's default). Set to false when connecting through a jump
+host or tunnel that does not support agent forwarding (for example,
+Cloudflare Access for Infrastructure with SSH).
+
+```yaml
+  forward_agent: false
+```
