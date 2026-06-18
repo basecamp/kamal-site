@@ -53,6 +53,7 @@ from the root configuration.
       - 172.1.0.3
       - 172.1.0.4: experiment1
     cmd: "bin/jobs"
+    stop_timeout: 30
     options:
       memory: 2g
       cpus: 4

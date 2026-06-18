@@ -82,3 +82,13 @@ Start a Rails console in a new container made from the most recent app image:
 ```bash
 kamal app exec -i 'bin/rails console'
 ```
+
+## [Get unmodified output](#get-unmodified-output)
+
+By default `exec` runs the command's output through SSHKit's capture, which strips leading and trailing whitespace — including trailing newlines and NUL bytes. That corrupts binary output such as a `tar` stream. Pass `--raw` to emit stdout exactly as produced. It also lowers the logging level so only the command's output is written.
+
+```bash
+kamal app exec --raw 'tar c -C /rails/storage .' > storage.tar
+```
+
+`--raw` can't be combined with `--interactive` or `--detach`.

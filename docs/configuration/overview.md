@@ -118,10 +118,38 @@ See [Hooks](/docs/hooks) for more information:
 hooks_path: /user_home/kamal/hooks
 ```
 
+## [Hook output](#hook-output)
+
+Hook output visibility. Can be set globally or per-hook.
+CLI flags (`-v`, `-q`) override these settings.
+
+- `:quiet` - hook output is hidden
+- `:verbose` - hook output is shown
+
+With no setting, hook output follows CLI verbosity flags.
+
+Note: Failed hooks always show output in the error message regardless of setting.
+
+Global setting for all hooks:
+
+```yaml
+hooks_output: :verbose
+```
+
+Or per-hook settings:
+
+```yaml
+hooks_output:
+  pre-deploy: :verbose
+  pre-build: :quiet
+```
+
 ## [Secrets path](#secrets-path)
 
 Path to secrets, defaults to `.kamal/secrets`.
-Kamal will look for `<secrets_path>-common` and `<secrets_path>` (or `<secrets_path>.<destination>` when using destinations):
+Kamal looks for `<secrets_path>-common` first and then `<secrets_path>`.
+When using destinations, it instead looks for `<secrets_path>-common` first and then
+`<secrets_path>.<destination>`. Later files override earlier ones.
 
 ```yaml
 secrets_path: /user_home/kamal/secrets
@@ -130,7 +158,8 @@ secrets_path: /user_home/kamal/secrets
 ## [Error pages](#error-pages)
 
 A directory relative to the app root to find error pages for the proxy to serve.
-Any files in the format 4xx.html or 5xx.html will be copied to the hosts.
+Name each page after the HTTP status code it serves, e.g. 404.html, 500.html,
+502.html, 503.html, and 504.html.
 
 ```yaml
 error_pages_path: public
@@ -202,6 +231,16 @@ How long to wait for a container to drain, default 30:
 drain_timeout: 10
 ```
 
+## [Stop timeout](#stop-timeout)
+
+How long to wait for a container to stop after SIGTERM, default is
+the drain_timeout for non-proxied roles and 10s (Docker default) for proxied roles.
+Can be overridden per role:
+
+```yaml
+stop_timeout: 30
+```
+
 ## [Run directory](#run-directory)
 
 Directory to store kamal runtime files in on the host, default `.kamal`:
@@ -270,6 +309,15 @@ Docker logging configuration, see [Logging](../logging):
 
 ```yaml
 logging:
+  ...
+```
+
+## [Output](#output)
+
+Configure output loggers (OTel, file), see [Output](../output):
+
+```yaml
+output:
   ...
 ```
 

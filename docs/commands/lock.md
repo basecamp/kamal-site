@@ -45,3 +45,22 @@ $ kamal lock status
   INFO [f5900cc8] Finished in 0.132 seconds with exit status 0 (successful).
 There is no deploy lock
 ```
+
+## [Waiting for the lock](#waiting-for-the-lock)
+
+Commands that take a lock automatically while they run (such as `kamal deploy`) fail immediately if the lock is already held. Pass `--lock-wait` to make them poll and retry until the lock is released instead:
+
+```bash
+$ kamal deploy --lock-wait
+```
+
+`--lock-wait` only waits on locks that another command took automatically while running. A lock set manually with `kamal lock acquire` is not waited on, and the command fails immediately with "Deploy lock held manually, not waiting".
+
+You can change the default timeout and polling interval:
+
+- `--lock-wait-timeout` — maximum seconds to wait before giving up (default `900`).
+- `--lock-wait-interval` — seconds between polls (default `15`).
+
+```bash
+$ kamal deploy --lock-wait --lock-wait-timeout 300 --lock-wait-interval 10
+```
