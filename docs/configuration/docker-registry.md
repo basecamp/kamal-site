@@ -6,7 +6,9 @@ title: Registry
 
 # Registry
 
-The default registry is Docker Hub, but you can change it using `registry/server`.
+The default registry will be created locally, but you can change it using `registry/server`.
+
+## [Using Docker Hub as the container registry](#using-docker-hub-as-the-container-registry)
 
 ## [Using a local container registry](#using-a-local-container-registry)
 
