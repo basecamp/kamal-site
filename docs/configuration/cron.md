@@ -15,4 +15,4 @@ servers:
       bash -c "(env && cat config/crontab) | crontab - && cron -f"
 ```
 
-This assumes that the Cron settings are stored in `config/crontab`. Cron does not automatically propagate environment variables, the example above copies them into the crontab.
+This assumes that the Cron settings are stored in `config/crontab` and cron executable is named `cron` (e.g. in Alpine it is named `crond`). Cron does not automatically propagate environment variables, the example above copies them into the crontab.
