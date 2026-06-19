@@ -134,6 +134,29 @@ kamal secrets extract myapp/staging/REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
 
 **Note:** The `--account` option should be set to your AWS CLI profile name, which is typically `default`. Ensure that your AWS CLI is configured with the necessary permissions to access AWS Secrets Manager.
 
+## AWS SSM Parameter Store
+
+First, install and configure [the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
+
+Use the adapter `aws_ssm_parameter_store`:
+
+```bash
+# Fetch passwords
+kamal secrets fetch --adapter aws_ssm_parameter_store --account default REGISTRY_PASSWORD DB_PASSWORD
+
+# Fetch passwords from an item
+kamal secrets fetch --adapter aws_ssm_parameter_store --account default --from /myapp REGISTRY_PASSWORD DB_PASSWORD
+
+# Fetch passwords from multiple items
+kamal secrets fetch --adapter aws_ssm_parameter_store --account default myapp/REGISTRY_PASSWORD myapp/DB_PASSWORD
+
+# Extract the secret
+kamal secrets extract REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
+kamal secrets extract MyItem/REGISTRY_PASSWORD <SECRETS-FETCH-OUTPUT>
+```
+
+**Note:** The `--account` option should be set to your AWS CLI profile name, which is typically `default`. Ensure that your AWS CLI is configured with the necessary permissions to access AWS SSM Parameter Store.
+
 ## Doppler
 
 First, install and configure [the Doppler CLI](https://docs.doppler.com/docs/install-cli).
