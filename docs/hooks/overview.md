@@ -37,6 +37,8 @@ The available hooks are:
 - [pre-proxy-reboot](../pre-proxy-reboot)
 - [post-proxy-reboot](../post-proxy-reboot)
 
-You can pass `--skip_hooks` to avoid running the hooks.
+You can pass `--skip-hooks` to avoid running the hooks.
 
 **Note:** The hook filename must be the hook name without any extension. For example, the [pre-deploy](../pre-deploy) hook should be named "pre-deploy" (without any file extension such as .sh or .rb).
+
+**Note:** Avoid running `kamal` commands from a [pre-connect](../pre-connect) hook. Since `pre-connect` runs before nearly every command, a nested `kamal` call will re-trigger it and recurse infinitely. See [pre-connect](../pre-connect) for details and how to guard against it.
