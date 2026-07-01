@@ -278,4 +278,4 @@ kamal secrets extract database/DB_PASSWORD <SECRETS-FETCH-OUTPUT>
 
 The sops adapter normalizes the decrypted file to JSON (regardless of whether the source file is YAML, JSON, or env), so nested structures are addressable with `/` and non-string values (numbers, booleans, lists) are returned as strings.
 
-The sops adapter does not use the `--account` option, if given it will be ignored.
+The sops adapter does not use the `--account` option; if given, it will be ignored.
