@@ -251,7 +251,7 @@ The passbolt adapter does not use the `--account` option, if given it will be ig
 
 First, install and configure [SOPS](https://github.com/getsops/sops).
 
-SOPS decrypts a single encrypted file and resolves its own decryption key (age, AWS/GCP KMS, Azure Key Vault, PGP, etc.) from its configuration and environment, so no `--account` is needed. Pass the encrypted file with the `--from` option and name the keys to fetch as positional arguments. Nested keys are flattened into `parent/child` paths, and passing no keys fetches every key in the file.
+SOPS decrypts a single encrypted file and resolves its own decryption key (age, AWS/GCP KMS, Azure Key Vault, PGP, etc.) from its configuration and environment. Pass the encrypted file with the `--from` option and name the keys to fetch as positional arguments. Nested keys are flattened into `parent/child` paths, and passing no keys fetches every key in the file.
 
 Use the adapter `sops`:
 
