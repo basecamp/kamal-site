@@ -247,11 +247,11 @@ kamal secrets extract DB_PASSWORD <SECRETS-FETCH-OUTPUT>
 
 The passbolt adapter does not use the `--account` option, if given it will be ignored.
 
-## sops
+## SOPS
 
-First, install and configure [sops](https://github.com/getsops/sops).
+First, install and configure [SOPS](https://github.com/getsops/sops).
 
-sops decrypts a single encrypted file and resolves its own decryption key (age, AWS/GCP KMS, Azure Key Vault, PGP, etc.) from its configuration and environment, so no `--account` is needed. Pass the encrypted file with the `--from` option and name the keys to fetch as positional arguments. Nested keys are flattened into `parent/child` paths, and passing no keys fetches every key in the file.
+SOPS decrypts a single encrypted file and resolves its own decryption key (age, AWS/GCP KMS, Azure Key Vault, PGP, etc.) from its configuration and environment, so no `--account` is needed. Pass the encrypted file with the `--from` option and name the keys to fetch as positional arguments. Nested keys are flattened into `parent/child` paths, and passing no keys fetches every key in the file.
 
 Use the adapter `sops`:
 
@@ -276,6 +276,6 @@ kamal secrets extract DB_PASSWORD <SECRETS-FETCH-OUTPUT>
 kamal secrets extract database/DB_PASSWORD <SECRETS-FETCH-OUTPUT>
 ```
 
-sops emits its decrypted output as JSON regardless of the source file format (YAML, JSON, or env), so nested structures are addressable with `/` and non-string values (numbers, booleans, lists) are returned as strings.
+The sops adapter normalizes the decrypted file to JSON (regardless of whether the source file is YAML, JSON, or env), so nested structures are addressable with `/` and non-string values (numbers, booleans, lists) are returned as strings.
 
 The sops adapter does not use the `--account` option, if given it will be ignored.
